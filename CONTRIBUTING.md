@@ -41,6 +41,32 @@ Exactly **one active step** at a time. A phase opens only after its **gate** is 
 | `develop` | Integration |
 | `feature/<module>` | Scoped work aligned to the active plan step |
 
+## Secrets
+
+Per `NFR-S-10` in [docs/05-quality.md](docs/05-quality.md):
+
+- **Never commit** `.env`, credentials, API keys, or passwords to Git
+- **Local only:** copy [`.env.example`](.env.example) to `.env` and fill in values on your machine
+- **Commit placeholders only:** `.env.example` holds commented keys with no real secrets
+- **Ignored by default:** `.env` and `.env.*` (except `.env.example`) — see [`.gitignore`](.gitignore)
+
+## Code style
+
+[Laravel Pint](https://laravel.com/docs/pint) formats PHP. Run before committing application code (Phase III+):
+
+```bash
+composer format        # fix
+composer format:test   # check only
+```
+
+## Static analysis
+
+[Larastan](https://github.com/larastan/larastan) (PHPStan for Laravel) runs on PHP under `app/`:
+
+```bash
+composer analyse
+```
+
 ## Architecture
 
 Business rules belong in **use cases and domain services**, not in Blade views or Filament form classes. Public Livewire and Filament admin must invoke the same application layer.

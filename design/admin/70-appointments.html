@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>G3 Control Admin — Demandes RDV</title>
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600|manrope:600,700" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+    <div class="preview-banner">
+        Hi-fi step 70 · Admin UX · Queue + detail
+        <nav class="preview-nav">
+            <a href="70-login.html">Connexion</a>
+            <a href="70-dashboard.html">Tableau de bord</a>
+            <a href="70-appointments.html" class="is-active">Demandes</a>
+            <a href="70-tariff-publish.html">Tarifs</a>
+            <a href="70-content.html">Contenu FR/EN</a>
+        </nav>
+    </div>
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <div class="sidebar__brand">
+                <div class="sidebar__logo">G3 <span>Control</span></div>
+                <span class="sidebar__badge">Administration</span>
+            </div>
+            <nav class="sidebar__nav">
+                <div class="nav-group">
+                    <div class="nav-group__label">Opérations</div>
+                    <a href="70-dashboard.html" class="nav-item"><span class="nav-item__icon">◉</span> Tableau de bord</a>
+                    <a href="70-appointments.html" class="nav-item is-active"><span class="nav-item__icon">📋</span> Demandes RDV <span class="nav-item__badge">7</span></a>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">✉</span> Messages</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group__label">Centres</div>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">📍</span> Centres</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group__label">Catalogue</div>
+                    <a href="70-tariff-publish.html" class="nav-item"><span class="nav-item__icon">🏷</span> Tarifs</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group__label">Contenu</div>
+                    <a href="70-content.html" class="nav-item"><span class="nav-item__icon">📝</span> Pages &amp; blocs</a>
+                </div>
+            </nav>
+            <div class="sidebar__user">
+                <div class="sidebar__avatar">RO</div>
+                <div>
+                    <div class="sidebar__user-name">Réception Nomayos</div>
+                    <div class="sidebar__user-role">Reception Officer</div>
+                </div>
+            </div>
+        </aside>
+        <div class="main">
+            <header class="topbar">
+                <h1 class="topbar__title">Demandes de rendez-vous</h1>
+                <div class="topbar__search">
+                    <span class="topbar__search-icon">⌕</span>
+                    <input type="search" placeholder="Référence, plaque, téléphone…" value="G3-26-A8FD2">
+                </div>
+                <div class="topbar__actions">
+                    <button type="button" class="topbar__btn-icon" title="Notifications"><span>🔔</span></button>
+                </div>
+            </header>
+            <div class="content" style="padding:24px 32px">
+                <div class="card">
+                    <div class="filter-bar">
+                        <select aria-label="Statut">
+                            <option>Tous les statuts</option>
+                            <option selected>Reçue</option>
+                            <option>En traitement</option>
+                            <option>Confirmée</option>
+                        </select>
+                        <select aria-label="Centre">
+                            <option>Tous les centres</option>
+                            <option>École de Police</option>
+                            <option selected>Nomayos</option>
+                        </select>
+                        <select aria-label="Période">
+                            <option>Aujourd'hui</option>
+                            <option selected>7 derniers jours</option>
+                            <option>30 derniers jours</option>
+                        </select>
+                        <span style="margin-left:auto;font-size:13px;color:var(--g3-muted)">3 résultats</span>
+                    </div>
+                    <div class="detail-split">
+                        <div class="detail-split__list">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Référence</th>
+                                        <th>Demandeur</th>
+                                        <th>Centre</th>
+                                        <th>Statut</th>
+                                        <th>Reçue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="is-selected">
+                                        <td class="mono">G3-26-A8FD2</td>
+                                        <td>Jean M.</td>
+                                        <td>École de Police</td>
+                                        <td><span class="status status--received"><span class="status__dot"></span> Reçue</span></td>
+                                        <td>09:42</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mono">G3-26-B2K91</td>
+                                        <td>Marie T.</td>
+                                        <td>Nomayos</td>
+                                        <td><span class="status status--review"><span class="status__dot"></span> En traitement</span></td>
+                                        <td>Hier</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mono">G3-26-C7PL3</td>
+                                        <td>Paul N.</td>
+                                        <td>Nomayos</td>
+                                        <td><span class="status status--received"><span class="status__dot"></span> Reçue</span></td>
+                                        <td>Hier</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <aside class="detail-panel">
+                            <p class="detail-panel__ref">G3-26-A8FD2</p>
+                            <h2 class="detail-panel__title">Jean M. · Contrôle technique</h2>
+                            <div class="btn-group" style="margin-bottom:20px">
+                                <button type="button" class="btn btn-primary btn-sm">Confirmer</button>
+                                <button type="button" class="btn btn-secondary btn-sm">Proposer autre créneau</button>
+                                <button type="button" class="btn btn-danger btn-sm">Refuser</button>
+                            </div>
+
+                            <div class="detail-section">
+                                <h3>Informations demande</h3>
+                                <dl class="detail-dl">
+                                    <div><dt>Centre souhaité</dt><dd>École de Police</dd></div>
+                                    <div><dt>Date souhaitée</dt><dd>Samedi 6 sept. 2026 · matin</dd></div>
+                                    <div><dt>Plaque</dt><dd>CE-1234-AB</dd></div>
+                                    <div><dt>Téléphone</dt><dd>+237 687 00 51 6</dd></div>
+                                    <div><dt>E-mail</dt><dd>jean.m@example.com</dd></div>
+                                </dl>
+                            </div>
+
+                            <div class="detail-section">
+                                <h3>Notes internes · non visibles client</h3>
+                                <textarea rows="3" placeholder="Note pour l'équipe réception…" style="width:100%;border:1px solid var(--g3-border);border-radius:8px;padding:10px;font-family:inherit;font-size:13px"></textarea>
+                                <p class="form-field__hint" style="margin-top:8px">Séparées de la timeline publique · FR-AD-03</p>
+                            </div>
+
+                            <div class="detail-section">
+                                <h3>Timeline publique</h3>
+                                <div class="timeline" style="padding:0">
+                                    <div class="timeline__item">
+                                        <div class="timeline__dot timeline__dot--done">✓</div>
+                                        <div>
+                                            <div class="timeline__title">Demande reçue</div>
+                                            <div class="timeline__meta">4 sept. 2026 · 09:42 · Africa/Douala</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>G3 Control Admin — Connexion</title>
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600|manrope:600,700" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+    <div class="preview-banner">
+        Hi-fi step 70 · Admin UX · design/admin/
+        <nav class="preview-nav">
+            <a href="70-login.html" class="is-active">Connexion</a>
+            <a href="70-dashboard.html">Tableau de bord</a>
+            <a href="70-appointments.html">Demandes</a>
+            <a href="70-tariff-publish.html">Tarifs</a>
+            <a href="70-content.html">Contenu FR/EN</a>
+        </nav>
+    </div>
+    <div class="login-page">
+        <div class="login-brand">
+            <div class="login-brand__logo">G3 <span>Control</span></div>
+            <div class="login-brand__line" aria-hidden="true"></div>
+            <p class="login-brand__tagline">Administration des centres, demandes et tarifs officiels.</p>
+            <p class="login-brand__meta">Sécurité. Simplicité. Confiance. · Agrément N°0291</p>
+        </div>
+        <div class="login-form-panel">
+            <form class="login-form" action="70-dashboard.html">
+                <h1>Connexion</h1>
+                <p class="login-form__sub">Accès réservé au personnel G3 Control</p>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="email">Adresse e-mail</label>
+                        <input id="email" type="email" placeholder="admin@g3control.local" autocomplete="username">
+                    </div>
+                    <div class="form-field">
+                        <label for="password">Mot de passe</label>
+                        <input id="password" type="password" placeholder="••••••••" autocomplete="current-password">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;margin-top:24px;min-height:48px;font-size:15px">Se connecter</button>
+                <p class="form-field__hint" style="margin-top:20px;text-align:center">MFA requis en production · FR-AD-05</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

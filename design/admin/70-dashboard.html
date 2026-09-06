@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>G3 Control Admin — Tableau de bord</title>
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600|manrope:600,700" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+    <div class="preview-banner">
+        Hi-fi step 70 · Admin UX · Africa/Douala · <span id="clock">—</span>
+        <nav class="preview-nav">
+            <a href="70-login.html">Connexion</a>
+            <a href="70-dashboard.html" class="is-active">Tableau de bord</a>
+            <a href="70-appointments.html">Demandes</a>
+            <a href="70-tariff-publish.html">Tarifs</a>
+            <a href="70-content.html">Contenu FR/EN</a>
+        </nav>
+    </div>
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <div class="sidebar__brand">
+                <div class="sidebar__logo">G3 <span>Control</span></div>
+                <span class="sidebar__badge">Administration</span>
+            </div>
+            <nav class="sidebar__nav">
+                <div class="nav-group">
+                    <div class="nav-group__label">Opérations</div>
+                    <a href="70-dashboard.html" class="nav-item is-active"><span class="nav-item__icon">◉</span> Tableau de bord</a>
+                    <a href="70-appointments.html" class="nav-item"><span class="nav-item__icon">📋</span> Demandes RDV <span class="nav-item__badge">7</span></a>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">✉</span> Messages <span class="nav-item__badge">2</span></a>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">⚠</span> Alertes</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group__label">Centres</div>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">📍</span> Centres</a>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">🕐</span> Horaires</a>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">📅</span> Exceptions</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group__label">Catalogue</div>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">⚙</span> Services</a>
+                    <a href="70-tariff-publish.html" class="nav-item"><span class="nav-item__icon">🏷</span> Tarifs</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group__label">Contenu</div>
+                    <a href="70-content.html" class="nav-item"><span class="nav-item__icon">📝</span> Pages &amp; blocs</a>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">🖼</span> Médias</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group__label">Système</div>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">👤</span> Utilisateurs</a>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">⚙</span> Paramètres</a>
+                </div>
+            </nav>
+            <div class="sidebar__user">
+                <div class="sidebar__avatar">SA</div>
+                <div>
+                    <div class="sidebar__user-name">Super Admin</div>
+                    <div class="sidebar__user-role">Super Administrator</div>
+                </div>
+            </div>
+        </aside>
+        <div class="main">
+            <header class="topbar">
+                <h1 class="topbar__title">Tableau de bord</h1>
+                <div class="topbar__search">
+                    <span class="topbar__search-icon">⌕</span>
+                    <input type="search" placeholder="Référence, plaque, téléphone…">
+                </div>
+                <div class="topbar__actions">
+                    <button type="button" class="topbar__btn-icon" title="Notifications"><span>🔔</span><span class="dot"></span></button>
+                    <a href="../hifi/59-accueil.html" class="btn btn-secondary btn-sm">Voir le site</a>
+                </div>
+            </header>
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-header__row">
+                        <div>
+                            <p style="font-size:13px;color:var(--g3-muted)">Vendredi 4 septembre 2026 · Yaoundé</p>
+                            <div class="safety-line" aria-hidden="true"></div>
+                        </div>
+                        <div class="btn-group">
+                            <a href="70-appointments.html" class="btn btn-primary">Traiter les demandes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card stat-card--accent">
+                        <div class="stat-card__label">Nouvelles demandes</div>
+                        <div class="stat-card__value">7</div>
+                        <div class="stat-card__meta">3 École de Police · 4 Nomayos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">En traitement</div>
+                        <div class="stat-card__value">12</div>
+                        <div class="stat-card__meta">À confirmer ou modifier</div>
+                    </div>
+                    <div class="stat-card stat-card--success">
+                        <div class="stat-card__label">Centres ouverts</div>
+                        <div class="stat-card__value">2/2</div>
+                        <div class="stat-card__meta">Prochaines fermetures 19h / 20h</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Messages</div>
+                        <div class="stat-card__value">2</div>
+                        <div class="stat-card__meta">Non traités</div>
+                    </div>
+                </div>
+
+                <div class="grid-2-1">
+                    <div class="card">
+                        <div class="card__head">
+                            <h2>File des demandes · priorité</h2>
+                            <a href="70-appointments.html">Tout voir →</a>
+                        </div>
+                        <div class="card__body">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Référence</th>
+                                        <th>Demandeur</th>
+                                        <th>Centre</th>
+                                        <th>Statut</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="mono">G3-26-A8FD2</td>
+                                        <td>Jean M. · 687…516</td>
+                                        <td>École de Police</td>
+                                        <td><span class="status status--received"><span class="status__dot"></span> Reçue</span></td>
+                                        <td><a href="70-appointments.html" class="btn btn-secondary btn-sm">Ouvrir</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mono">G3-26-B2K91</td>
+                                        <td>Marie T. · 653…801</td>
+                                        <td>Nomayos</td>
+                                        <td><span class="status status--review"><span class="status__dot"></span> En traitement</span></td>
+                                        <td><a href="70-appointments.html" class="btn btn-secondary btn-sm">Ouvrir</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mono">G3-26-C7PL3</td>
+                                        <td>Paul N. · 692…143</td>
+                                        <td>Nomayos</td>
+                                        <td><span class="status status--received"><span class="status__dot"></span> Reçue</span></td>
+                                        <td><a href="70-appointments.html" class="btn btn-secondary btn-sm">Ouvrir</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__head"><h2>Statut des centres</h2></div>
+                        <div class="centre-status-grid">
+                            <div class="centre-status">
+                                <div class="centre-status__name">École de Police</div>
+                                <span class="status status--open"><span class="status__dot"></span> Ouvert</span>
+                                <div class="centre-status__hours">Fermeture 20:00 · Lun–Sam 07–20</div>
+                            </div>
+                            <div class="centre-status">
+                                <div class="centre-status__name">Nomayos</div>
+                                <span class="status status--open"><span class="status__dot"></span> Ouvert</span>
+                                <div class="centre-status__hours">Fermeture 19:00 · Lun–Sam 07–19</div>
+                            </div>
+                        </div>
+                        <div class="card__body--padded" style="border-top:1px solid var(--g3-border);padding-top:16px">
+                            <p style="font-size:12px;font-weight:600;color:var(--g3-muted);margin-bottom:8px">PROCHAINE EXCEPTION</p>
+                            <p style="font-size:13px">Aucune · jours fériés ouverts</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-1-1" style="margin-top:24px">
+                    <div class="card">
+                        <div class="card__head"><h2>Tarif en vigueur</h2><a href="70-tariff-publish.html">Gérer →</a></div>
+                        <div class="card__body--padded">
+                            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                                <span class="status status--published"><span class="status__dot"></span> Publié</span>
+                                <span style="font-size:13px;color:var(--g3-muted)">Version 2026-01 · effet 1 jan 2026</span>
+                            </div>
+                            <p style="font-size:14px">Matrice active · 24 lignes · visible sur le site public</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card__head"><h2>Activité récente</h2></div>
+                        <div class="timeline">
+                            <div class="timeline__item">
+                                <div class="timeline__dot timeline__dot--done">✓</div>
+                                <div>
+                                    <div class="timeline__title">Demande G3-26-A8FD2 reçue</div>
+                                    <div class="timeline__meta">Il y a 12 min · École de Police</div>
+                                </div>
+                            </div>
+                            <div class="timeline__item">
+                                <div class="timeline__dot">✓</div>
+                                <div>
+                                    <div class="timeline__title">Message contact · Tarifs</div>
+                                    <div class="timeline__meta">Il y a 1 h</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>document.getElementById('clock').textContent=new Date().toLocaleString('fr-FR',{timeZone:'Africa/Douala',hour:'2-digit',minute:'2-digit'});</script>
+</body>
+</html>

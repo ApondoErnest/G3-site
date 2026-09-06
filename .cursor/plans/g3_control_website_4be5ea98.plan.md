@@ -1,16 +1,16 @@
 ---
 name: G3 Control Website
-overview: Chronological delivery in PLAN.md — spec, environment, shell, design, DB design, backend design, DB build, backend build, admin, frontend, QA, Docker, production. Phase I complete. Step 12 active.
+overview: Chronological delivery in PLAN.md — Phases I–II complete. Phase III step 24 active (Laravel shell).
 todos:
   - id: phase-i
     content: "I Specification (1–11) — Gate 11 signed off 2026-09-03."
     status: completed
   - id: phase-ii
-    content: "II Environment (12–23) — workstation, Git. Step 12 active."
-    status: in_progress
+    content: "II Environment (12–23) — Gate 23 signed off 2026-09-03."
+    status: completed
   - id: phase-iii
-    content: "III Application shell (24–32) — empty Laravel. Locked."
-    status: pending
+    content: "III Application shell (24–32) — step 24 active."
+    status: in_progress
   - id: phase-iv
     content: "IV Experience design (33–71) — wireframes, hi-fi. Locked."
     status: pending
@@ -45,5 +45,5 @@ isProject: false
 
 Full chronological sequence: [PLAN.md](../../PLAN.md)
 
-**Active:** Step 12 · Phase II Environment  
-**Previous gate:** Gate 11 · Phase I complete (2026-09-03)
+**Active:** Step 24 · Phase III Application foundation  
+**Previous gate:** Gate 23 · Phase II complete (2026-09-03)

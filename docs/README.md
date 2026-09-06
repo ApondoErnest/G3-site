@@ -30,11 +30,25 @@ Read and approve in this order. Each document builds on the previous.
 
 | Step | Document | Layer |
 | ---: | --- | --- |
-| 33–71 | Design artefacts (IA, wireframes, hi-fi) | Experience design |
-| 73 | [`11-erd.md`](11-erd.md) | Database design |
-| 77–84 | Domain design notes (may extend `09-architecture.md`) | Backend design |
-| 86–97 | Migrations in repository | Database build |
-| 98–107 | PHP modules + Pest | Backend build |
+| 33–71 | [Design artefacts](../design/README.md) (IA, wireframes, hi-fi) · **Gate 71 ✓ 2026-09-05** | Experience design |
+| 72–76 | Database design · **Gate 76 ✓ 2026-09-05** · [index](11-gate-database-design.md) | Data model on paper |
+| 72 | [`11-conceptual-model.md`](11-conceptual-model.md) | Conceptual |
+| 73 | [`11-erd.md`](11-erd.md) | Logical ERD |
+| 74 | [`11-indexes-constraints.md`](11-indexes-constraints.md) | Indexes & FKs |
+| 75 | [`11-retention.md`](11-retention.md) | Retention |
+| 76 | [`11-gate-database-design.md`](11-gate-database-design.md) | Gate |
+| 77–85 | [Domain design](domain/README.md) · **Gate 85 ✓ 2026-09-05** | Backend design on paper |
+| 77 | [`12-domain-model.md`](12-domain-model.md) | Domain model |
+| 78 | [`12-use-cases.md`](12-use-cases.md) | Use-case catalogue |
+| 79 | [`12-availability-engine.md`](12-availability-engine.md) | Availability engine |
+| 80 | [`12-appointment-state-machine.md`](12-appointment-state-machine.md) | State machine |
+| 81 | [`12-tariff-engine.md`](12-tariff-engine.md) | Tariff engine |
+| 82 | [`12-domain-events.md`](12-domain-events.md) | Domain events |
+| 83 | [`12-cache-policy.md`](12-cache-policy.md) | Cache policy |
+| 84 | [`12-security-design.md`](12-security-design.md) | Security design |
+| 85 | [`12-gate-domain-design.md`](12-gate-domain-design.md) | Gate |
+| 86–97 | Migrations in repository · **Gate 97 ✓ 2026-09-05** · [`11-gate-schema-accepted.md`](11-gate-schema-accepted.md) | Database build |
+| 98–107 | PHP modules + Pest · **Gate 107 ✓ 2026-09-06** · [`12-gate-domain-accepted.md`](12-gate-domain-accepted.md) | Backend build |
 | 108–116 | Filament resources | Administration UI |
 | 117–129 | Blade / Livewire pages | Public frontend |
 | 151 | [`12-docker.md`](12-docker.md) | Containerisation |

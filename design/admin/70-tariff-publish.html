@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>G3 Control Admin — Publication tarif</title>
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600|manrope:600,700" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+    <div class="preview-banner">
+        Hi-fi step 70 · Admin UX · Tariff workflow draft → reviewed → published
+        <nav class="preview-nav">
+            <a href="70-login.html">Connexion</a>
+            <a href="70-dashboard.html">Tableau de bord</a>
+            <a href="70-appointments.html">Demandes</a>
+            <a href="70-tariff-publish.html" class="is-active">Tarifs</a>
+            <a href="70-content.html">Contenu FR/EN</a>
+        </nav>
+    </div>
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <div class="sidebar__brand">
+                <div class="sidebar__logo">G3 <span>Control</span></div>
+                <span class="sidebar__badge">Administration</span>
+            </div>
+            <nav class="sidebar__nav">
+                <div class="nav-group">
+                    <div class="nav-group__label">Catalogue</div>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">⚙</span> Services</a>
+                    <a href="70-tariff-publish.html" class="nav-item is-active"><span class="nav-item__icon">🏷</span> Tarifs</a>
+                </div>
+            </nav>
+            <div class="sidebar__user">
+                <div class="sidebar__avatar">OA</div>
+                <div>
+                    <div class="sidebar__user-name">Ops Admin</div>
+                    <div class="sidebar__user-role">Operations Administrator</div>
+                </div>
+            </div>
+        </aside>
+        <div class="main">
+            <header class="topbar">
+                <h1 class="topbar__title">Tarifs · Version 2026-02</h1>
+                <div class="topbar__actions" style="margin-left:auto">
+                    <span class="status status--review"><span class="status__dot"></span> En revue</span>
+                </div>
+            </header>
+            <div class="content">
+                <div class="publish-banner">
+                    <div>
+                        <h2>Prêt pour publication</h2>
+                        <p>24 lignes validées · entrée en vigueur 1 oct. 2026 · remplace version 2026-01</p>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="document.getElementById('publish-modal').style.display='flex'">Publier la version</button>
+                </div>
+
+                <div class="card" style="margin-bottom:24px">
+                    <div class="workflow">
+                        <div class="workflow__step">
+                            <div class="workflow__circle is-done">✓</div>
+                            <span class="workflow__label">Brouillon</span>
+                        </div>
+                        <div class="workflow__line is-done"></div>
+                        <div class="workflow__step">
+                            <div class="workflow__circle is-done">✓</div>
+                            <span class="workflow__label">Revu</span>
+                        </div>
+                        <div class="workflow__line is-done"></div>
+                        <div class="workflow__step">
+                            <div class="workflow__circle is-current">3</div>
+                            <span class="workflow__label">Publication</span>
+                        </div>
+                        <div class="workflow__line"></div>
+                        <div class="workflow__step">
+                            <div class="workflow__circle">4</div>
+                            <span class="workflow__label" style="color:var(--g3-muted)">Archivé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert--info">
+                    <span>ℹ</span>
+                    <div>BR-TARIFF-005 · Une seule version publiée à la fois. La publication archive automatiquement la version 2026-01 et met à jour le site public.</div>
+                </div>
+
+                <div class="grid-1-1">
+                    <div class="card">
+                        <div class="card__head"><h2>Aperçu des lignes</h2><a href="#">Modifier →</a></div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Catégorie</th>
+                                    <th>Prix (FCFA)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Contrôle technique véhicule léger</td><td>Véhicules légers</td><td class="mono">15 000</td></tr>
+                                <tr><td>Contrôle technique moto</td><td>Deux-roues</td><td class="mono">8 000</td></tr>
+                                <tr><td>Duplicata certificat</td><td>Administratif</td><td class="mono">5 000</td></tr>
+                                <tr><td colspan="3" style="text-align:center;color:var(--g3-muted)">… 21 autres lignes</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card">
+                        <div class="card__head"><h2>Historique</h2></div>
+                        <div class="timeline">
+                            <div class="timeline__item">
+                                <div class="timeline__dot timeline__dot--done">✓</div>
+                                <div>
+                                    <div class="timeline__title">Revu par Ops Admin</div>
+                                    <div class="timeline__meta">3 sept. 2026 · 14:20</div>
+                                </div>
+                            </div>
+                            <div class="timeline__item">
+                                <div class="timeline__dot timeline__dot--done">✓</div>
+                                <div>
+                                    <div class="timeline__title">Brouillon créé</div>
+                                    <div class="timeline__meta">1 sept. 2026 · 09:00</div>
+                                </div>
+                            </div>
+                            <div class="timeline__item">
+                                <div class="timeline__dot timeline__dot--done">✓</div>
+                                <div>
+                                    <div class="timeline__title">Version 2026-01 publiée</div>
+                                    <div class="timeline__meta">1 jan. 2026 · actuelle sur le site</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="publish-modal" class="modal-backdrop" style="display:flex">
+        <div class="modal" role="dialog" aria-labelledby="modal-title">
+            <div class="modal__head">
+                <h3 id="modal-title">Confirmer la publication</h3>
+            </div>
+            <div class="modal__body">
+                <p>La version <strong>2026-02</strong> deviendra le tarif officiel à partir du <strong>1 octobre 2026</strong>.</p>
+                <p style="margin-top:12px">La version 2026-01 sera archivée. Cette action est journalisée.</p>
+            </div>
+            <div class="modal__foot">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('publish-modal').style.display='none'">Annuler</button>
+                <button type="button" class="btn btn-success">Publier maintenant</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

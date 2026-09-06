@@ -1,0 +1,118 @@
+# Hi-fi specifications · steps 60–69
+
+Consolidated visual specs. Previews use [shared.css](shared.css). Wireframes: [desktop](../wireframes/README.md).
+
+| Step | Page | URL | Preview |
+| ---: | --- | --- | --- |
+| 60 | À propos | `/fr/a-propos` | [60-a-propos.html](60-a-propos.html) |
+| 61 | Nos centres | `/fr/centres` | [61-centres.html](61-centres.html) |
+| 62 | École de Police | `/fr/centres/ecole-de-police` | [62-centre-ecole-de-police.html](62-centre-ecole-de-police.html) |
+| 63 | Nomayos | `/fr/centres/nomayos` | [63-centre-nomayos.html](63-centre-nomayos.html) |
+| 64 | Services | `/fr/services` | [64-services.html](64-services.html) |
+| 65 | Visite technique | `/fr/visite-technique` | [65-visite-technique.html](65-visite-technique.html) |
+| 66 | Tarifs | `/fr/tarifs` | [66-tarifs.html](66-tarifs.html) |
+| 67 | Rendez-vous & Suivi | `/fr/rendez-vous` | [67-rendez-vous.html](67-rendez-vous.html) |
+| 68 | Sécurité routière | `/fr/securite-routiere` | [68-securite-routiere.html](68-securite-routiere.html) |
+| 69 | Contact | `/fr/contact` | [69-contact.html](69-contact.html) |
+
+All pages share chrome from step 59: sticky header, Safety Line sections, G3 tokens, compact footer. **Not production code.**
+
+---
+
+## 60 · À propos
+
+**Job:** Who is G3? · Wireframe [38](../wireframes/desktop/38-a-propos.md)
+
+| Zone | Hi-fi treatment |
+| --- | --- |
+| Hero | White `page-hero`, breadcrumb, H1 Manrope 2rem |
+| Mission | `split-2` · body muted · image placeholder |
+| Agrément | `band-soft` centred · FR-CO-02 |
+| Values | 3-column cards · slogan words |
+| Team | 4-col avatar grid · EMP if empty |
+| CTA | Deep blue band · centres / contact / RDV |
+
+---
+
+## 61 · Nos centres
+
+**Job:** Compare · pick centre · Wireframe [39](../wireframes/desktop/39-centres.md)
+
+| Zone | Hi-fi treatment |
+| --- | --- |
+| Live compare | `live-strip` two cards · open pills |
+| Map | `map-box` 320px lazy Leaflet |
+| Cards | `centre-card` + orange top line · full action row |
+| CTA | RDV primary |
+
+---
+
+## 62–63 · Centre detail
+
+**Job:** Visit this centre today · Wireframes [40](../wireframes/desktop/40-centre-ecole-de-police.md) / [41](../wireframes/desktop/41-centre-nomayos.md)
+
+Shared layout: split hero (deep blue + image), status/hours panels, contact line, map, gallery grid, services list, cross-link card. Locked hours/phones from [01-baseline](../../docs/01-baseline.md). Nomayos: no opening year (Q-03).
+
+---
+
+## 64 · Services
+
+**Job:** What G3 validates · Wireframe [42](../wireframes/desktop/42-services.md)
+
+| Zone | Hi-fi treatment |
+| --- | --- |
+| Filter | Select + search full width |
+| Cards | `service-card` with icon, centres tags, 3 actions |
+| Empty | Hidden unpublished FR-SV-04 |
+
+---
+
+## 65 · Visite technique
+
+**Job:** How inspection works · Wireframe [43](../wireframes/desktop/43-visite-technique.md)
+
+Video `video-box` 16:9 · journey component · split process · document/FAQ accordions · no MOT copy · CTA RDV + tarifs.
+
+---
+
+## 66 · Tarifs
+
+**Job:** Published cost only · Wireframe [44](../wireframes/desktop/44-tarifs.md)
+
+Desktop: `matrix` table · Mobile: `tariff-card` stack (hidden on desktop). Finder row · print/share secondary buttons · empty state FR-TA-09. Amounts grouped FCFA.
+
+---
+
+## 67 · Rendez-vous & Suivi
+
+**Job:** Request + track · Wireframe [45](../wireframes/desktop/45-rendez-vous.md)
+
+Tabs 50/50 · orange active indicator · step bar dots · centre radio cards with live pills · purpose notice · suivi panel: ref + phone/plate · vertical timeline · generic error alert BR-TRACK-003 · success copy *demande reçue* FR-AP-04.
+
+---
+
+## 68 · Sécurité routière
+
+**Job:** Evergreen safety · Wireframe [46](../wireframes/desktop/46-securite-routiere.md)
+
+`chip-nav` jump links · stacked `content-section` blocks per FR-CN-03 · rain/Cameroon emphasis · link to visite technique.
+
+---
+
+## 69 · Contact
+
+**Job:** Intent-first · Wireframe [47](../wireframes/desktop/47-contact.md)
+
+`intent-grid` 2×2 · selected = blue border + soft bg · form panel + coordinates sidebar · honeypot hidden in impl · FR-CT-01 intents.
+
+---
+
+## Exit criteria (steps 60–69)
+
+- [x] Hi-fi preview HTML for each public page (except home · step 59)
+- [x] Shared stylesheet extracted ([shared.css](shared.css))
+- [x] Design tokens and component states from steps 34–36 applied
+- [x] Wireframe structure preserved; no new routes or scope
+- [x] Previews cross-linked for stakeholder walkthrough
+
+**Next:** Step 70 — Admin UX.

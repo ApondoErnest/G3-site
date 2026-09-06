@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>G3 Control — Accueil · Hi-fi preview (step 59)</title>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600|manrope:600,700" rel="stylesheet">
+    <style>
+        :root {
+            --g3-blue-deep: #12315B;
+            --g3-blue-tech: #1769B0;
+            --g3-blue-bright: #1479CF;
+            --g3-orange: #F47A20;
+            --g3-orange-hover: #D9691A;
+            --g3-orange-tint: #FFF2E8;
+            --g3-blue-soft: #F1F6FB;
+            --g3-grey: #F6F7F9;
+            --g3-white: #FFFFFF;
+            --g3-charcoal: #202B37;
+            --g3-muted: #667085;
+            --g3-metallic: #92979D;
+            --g3-success: #168653;
+            --g3-success-tint: #E8F5EE;
+            --g3-border: #E4E7EC;
+            --font-display: 'Manrope', system-ui, sans-serif;
+            --font-sans: 'Inter', system-ui, sans-serif;
+            --container: 1200px;
+            --header-h: 72px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--g3-charcoal);
+            background: var(--g3-grey);
+        }
+        a { color: var(--g3-blue-tech); text-decoration: none; }
+        a:hover { color: var(--g3-blue-bright); }
+        a:focus-visible {
+            outline: 2px solid var(--g3-blue-tech);
+            outline-offset: 2px;
+        }
+        .preview-banner {
+            background: var(--g3-orange-tint);
+            border-bottom: 1px solid var(--g3-orange);
+            padding: 8px 16px;
+            font-size: 12px;
+            text-align: center;
+            color: var(--g3-charcoal);
+        }
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        .section { padding: 64px 0; }
+        .overline {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--g3-muted);
+        }
+        .safety-line {
+            display: block;
+            width: 64px;
+            height: 4px;
+            background: var(--g3-orange);
+            margin: 12px 0 16px;
+        }
+        .safety-line--hero { width: 96px; }
+        .safety-line--center { margin-left: auto; margin-right: auto; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 20px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background 150ms ease-out;
+        }
+        .btn-primary {
+            background: var(--g3-orange);
+            color: var(--g3-white);
+        }
+        .btn-primary:hover { background: var(--g3-orange-hover); }
+        .btn-secondary {
+            background: transparent;
+            color: var(--g3-blue-tech);
+            border: 1px solid var(--g3-blue-tech);
+        }
+        .btn-secondary:hover { background: var(--g3-blue-soft); }
+        .btn-secondary--inverse {
+            color: var(--g3-white);
+            border-color: var(--g3-white);
+        }
+        .btn-secondary--inverse:hover { background: rgba(255,255,255,0.1); }
+
+        /* Header */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: var(--header-h);
+            background: var(--g3-white);
+            border-bottom: 1px solid var(--g3-border);
+        }
+        .site-header__inner {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            gap: 24px;
+        }
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--g3-blue-deep);
+            flex-shrink: 0;
+        }
+        .logo span { color: var(--g3-orange); }
+        .nav {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            padding: 8px 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--g3-charcoal);
+            border-bottom: 2px solid transparent;
+        }
+        .nav a:hover { color: var(--g3-blue-tech); }
+        .nav a.is-active {
+            color: var(--g3-blue-tech);
+            border-bottom-color: var(--g3-orange);
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+        .locale { font-size: 14px; color: var(--g3-muted); }
+        .locale strong { color: var(--g3-charcoal); font-weight: 600; }
+        .menu-toggle { display: none; }
+
+        /* Hero */
+        .hero {
+            background: var(--g3-white);
+            padding: 0;
+        }
+        .hero__grid {
+            display: grid;
+            grid-template-columns: 55fr 45fr;
+            min-height: 520px;
+        }
+        .hero__content {
+            background: var(--g3-blue-deep);
+            padding: 64px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero__content .overline { color: var(--g3-metallic); }
+        .hero__title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--g3-white);
+            margin-bottom: 16px;
+        }
+        .hero__lead {
+            font-size: 1.125rem;
+            color: var(--g3-blue-soft);
+            margin-bottom: 32px;
+            max-width: 42ch;
+        }
+        .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+        .hero__media {
+            background: linear-gradient(135deg, var(--g3-blue-soft), var(--g3-border));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--g3-muted);
+            font-size: 14px;
+        }
+
+        /* Live strip */
+        .live-strip {
+            background: var(--g3-blue-soft);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: -32px;
+            position: relative;
+            z-index: 2;
+        }
+        .live-strip__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .live-card {
+            background: var(--g3-white);
+            border: 1px solid var(--g3-border);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .live-card__head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .live-card__name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+        .pill--open {
+            background: var(--g3-success-tint);
+            color: var(--g3-success);
+        }
+        .pill__dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .live-card__meta { font-size: 14px; color: var(--g3-muted); }
+
+        /* Action grid */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+        .action-tile {
+            background: var(--g3-white);
+            border: 1px solid var(--g3-border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(32,43,55,0.06);
+            transition: box-shadow 150ms, border-color 150ms;
+            color: inherit;
+        }
+        .action-tile:hover {
+            box-shadow: 0 4px 12px rgba(32,43,55,0.08);
+            border-color: var(--g3-blue-tech);
+        }
+        .action-tile__icon {
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 12px;
+            color: var(--g3-blue-tech);
+        }
+        .action-tile__label {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* Slogan */
+        .slogan { text-align: center; padding: 48px 0; }
+        .slogan__words {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--g3-blue-deep);
+            margin-bottom: 8px;
+        }
+        .slogan__agrement { font-size: 14px; color: var(--g3-muted); }
+
+        /* Journey */
+        .journey {
+            background: var(--g3-white);
+            border-radius: 16px;
+            padding: 40px;
+        }
+        .journey__track {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 32px;
+        }
+        .journey__track::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--g3-border);
+        }
+        .journey__step {
+            position: relative;
+            text-align: center;
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .journey__step::before {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            background: var(--g3-blue-tech);
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tariff */
+        .tariff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .panel {
+            background: var(--g3-white);
+            border-radius: 10px;
+            padding: 32px;
+            border: 1px solid var(--g3-border);
+        }
+        .panel h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .field-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+        .select {
+            flex: 1;
+            min-width: 140px;
+            height: 44px;
+            border: 1px solid var(--g3-border);
+            border-radius: 6px;
+            padding: 0 12px;
+            font-family: inherit;
+        }
+        .price-panel {
+            background: var(--g3-blue-soft);
+            border-radius: 10px;
+            padding: 32px;
+            text-align: center;
+        }
+        .price-panel__amount {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 8px 0;
+        }
+
+        /* Controls */
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+        .control-item { text-align: center; }
+        .control-item__icon {
+            width: 48px;
+            height: 48px;
+            background: var(--g3-blue-soft);
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--g3-blue-tech);
+            font-size: 12px;
+        }
+        .control-item__label { font-size: 14px; color: var(--g3-muted); }
+
+        /* Centre cards */
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+        .centre-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .centre-card {
+            background: var(--g3-white);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--g3-border);
+            box-shadow: 0 1px 2px rgba(32,43,55,0.06);
+        }
+        .centre-card__line { height: 3px; background: var(--g3-orange); }
+        .centre-card__img {
+            aspect-ratio: 4/3;
+            background: var(--g3-blue-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--g3-muted);
+            font-size: 13px;
+        }
+        .centre-card__body { padding: 20px; }
+        .centre-card__actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+        /* Trust */
+        .trust-band {
+            background: var(--g3-grey);
+            padding: 48px 0;
+        }
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .chip {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 8px 16px;
+            border: 1px solid var(--g3-border);
+            border-radius: 9999px;
+            background: var(--g3-white);
+        }
+
+        /* Road safety */
+        .road-grid {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 32px;
+            align-items: center;
+        }
+        .road-grid__img {
+            aspect-ratio: 4/3;
+            background: var(--g3-border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--g3-muted);
+            font-size: 13px;
+        }
+
+        /* CTA band */
+        .cta-band {
+            background: var(--g3-blue-deep);
+            color: var(--g3-white);
+            text-align: center;
+            padding: 64px 32px;
+        }
+        .cta-band h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .cta-band__actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--g3-blue-deep);
+            color: var(--g3-white);
+            padding: 48px 0;
+            font-size: 14px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 32px;
+        }
+        .site-footer a { color: var(--g3-white); }
+        .site-footer .muted { color: var(--g3-metallic); margin-top: 16px; }
+
+        @media (max-width: 1023px) {
+            .nav, .header-actions .btn-primary { display: none; }
+            .menu-toggle {
+                display: inline-flex;
+                margin-left: auto;
+                min-height: 44px;
+                padding: 0 16px;
+                background: var(--g3-blue-soft);
+                border: none;
+                border-radius: 8px;
+                font-weight: 600;
+            }
+            .hero__grid { grid-template-columns: 1fr; }
+            .hero__content { padding: 48px 24px; }
+            .hero__media { min-height: 220px; }
+            .action-grid { grid-template-columns: repeat(2, 1fr); }
+            .action-grid .action-tile:last-child { grid-column: 1 / -1; }
+            .live-strip__grid,
+            .tariff-grid,
+            .centre-grid,
+            .controls-grid { grid-template-columns: 1fr; }
+            .controls-grid { grid-template-columns: repeat(2, 1fr); }
+            .road-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .container { padding: 0 16px; }
+            .section { padding: 48px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-banner">Hi-fi preview · Phase IV step 59 · Not production code · <code>design/hifi/59-accueil.html</code></div>
+
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="#" class="logo">G3 <span>Control</span></a>
+            <nav class="nav" aria-label="Principale">
+                <a href="#" class="is-active">Accueil</a>
+                <a href="#">À propos</a>
+                <a href="#">Nos centres</a>
+                <a href="#">Services</a>
+                <a href="#">Visite technique</a>
+                <a href="#">Tarifs</a>
+                <a href="#">Sécurité routière</a>
+                <a href="#">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn btn-primary">Rendez-vous &amp; Suivi</a>
+                <span class="locale"><strong>FR</strong> | EN</span>
+                <button type="button" class="menu-toggle" aria-label="Menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero__grid">
+                <div class="hero__content">
+                    <p class="overline">Visite technique · Yaoundé</p>
+                    <span class="safety-line safety-line--hero" aria-hidden="true"></span>
+                    <h1 id="hero-title" class="hero__title">Visite technique à Yaoundé</h1>
+                    <p class="hero__lead">Deux centres. 7 jours sur 7. Une même exigence de sécurité.</p>
+                    <div class="hero__actions">
+                        <a href="#" class="btn btn-primary">Prendre rendez-vous</a>
+                        <a href="#" class="btn btn-secondary btn-secondary--inverse">Suivre ma demande</a>
+                    </div>
+                </div>
+                <div class="hero__media" role="img" aria-label="Photo du centre — placeholder">HERO 16:9 · Q-07</div>
+            </div>
+        </section>
+
+        <div class="container">
+            <section class="live-strip" aria-label="Statut des centres">
+                <div class="live-strip__grid">
+                    <a href="#" class="live-card">
+                        <div class="live-card__head">
+                            <span class="live-card__name">École de Police</span>
+                            <span class="pill pill--open"><span class="pill__dot"></span> Ouvert</span>
+                        </div>
+                        <p class="live-card__meta">Fermeture aujourd'hui à 20:00</p>
+                    </a>
+                    <a href="#" class="live-card">
+                        <div class="live-card__head">
+                            <span class="live-card__name">Nomayos</span>
+                            <span class="pill pill--open"><span class="pill__dot"></span> Ouvert</span>
+                        </div>
+                        <p class="live-card__meta">Fermeture aujourd'hui à 19:00</p>
+                    </a>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="action-grid">
+                    <a href="#" class="action-tile"><div class="action-tile__icon">📅</div><div class="action-tile__label">Rendez-vous</div></a>
+                    <a href="#" class="action-tile"><div class="action-tile__icon">🔍</div><div class="action-tile__label">Suivre ma demande</div></a>
+                    <a href="#" class="action-tile"><div class="action-tile__icon">🏷</div><div class="action-tile__label">Tarifs</div></a>
+                    <a href="#" class="action-tile"><div class="action-tile__icon">📍</div><div class="action-tile__label">Nos centres</div></a>
+                    <a href="#" class="action-tile"><div class="action-tile__icon">📋</div><div class="action-tile__label">Préparer ma visite</div></a>
+                </div>
+            </section>
+
+            <section class="slogan">
+                <p class="slogan__words">Sécurité. Simplicité. Confiance.</p>
+                <span class="safety-line safety-line--center" aria-hidden="true"></span>
+                <p class="slogan__agrement">Agrément N°0291 depuis 2020</p>
+            </section>
+
+            <section class="journey">
+                <p class="overline">Votre parcours</p>
+                <span class="safety-line" aria-hidden="true"></span>
+                <div class="journey__track">
+                    <span class="journey__step">Préparer</span>
+                    <span class="journey__step">Accueil</span>
+                    <span class="journey__step">Contrôle</span>
+                    <span class="journey__step">Validation</span>
+                    <span class="journey__step">Résultat</span>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="tariff-grid">
+                    <div class="panel">
+                        <p class="overline">Tarifs</p>
+                        <span class="safety-line" aria-hidden="true"></span>
+                        <h3>Trouver un tarif</h3>
+                        <div class="field-row">
+                            <select class="select" aria-label="Catégorie"><option>Catégorie</option></select>
+                            <select class="select" aria-label="Centre"><option>Centre</option></select>
+                            <button type="button" class="btn btn-secondary">Afficher</button>
+                        </div>
+                    </div>
+                    <div class="price-panel">
+                        <p class="overline">Exemple</p>
+                        <p class="price-panel__amount">25 000 FCFA</p>
+                        <p class="live-card__meta">Catégorie · validité</p>
+                        <a href="#" class="btn btn-primary" style="margin-top:16px">Demander un RDV</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <p class="overline">Contrôles G3</p>
+                <span class="safety-line" aria-hidden="true"></span>
+                <div class="controls-grid" style="margin-top:24px">
+                    <div class="control-item"><div class="control-item__icon">◉</div><div class="control-item__label">Freinage</div></div>
+                    <div class="control-item"><div class="control-item__icon">◉</div><div class="control-item__label">Pneumatiques</div></div>
+                    <div class="control-item"><div class="control-item__icon">◉</div><div class="control-item__label">Éclairage</div></div>
+                    <div class="control-item"><div class="control-item__icon">◉</div><div class="control-item__label">Visibilité</div></div>
+                    <div class="control-item"><div class="control-item__icon">◉</div><div class="control-item__label">Émissions</div></div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-head">
+                    <div>
+                        <p class="overline">Nos centres</p>
+                        <span class="safety-line" aria-hidden="true"></span>
+                    </div>
+                    <a href="#">Voir tous →</a>
+                </div>
+                <div class="centre-grid">
+                    <article class="centre-card">
+                        <div class="centre-card__line"></div>
+                        <div class="centre-card__img">4:3 · École de Police</div>
+                        <div class="centre-card__body">
+                            <div class="live-card__head"><span class="live-card__name">École de Police</span><span class="pill pill--open"><span class="pill__dot"></span> Ouvert</span></div>
+                            <p class="live-card__meta">Descente ancien Texaco, École de Police</p>
+                            <div class="centre-card__actions">
+                                <a href="#" class="btn btn-secondary">Appeler</a>
+                                <a href="#" class="btn btn-secondary">Itinéraire</a>
+                                <a href="#" class="btn btn-secondary">Détail</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="centre-card">
+                        <div class="centre-card__line"></div>
+                        <div class="centre-card__img">4:3 · Nomayos</div>
+                        <div class="centre-card__body">
+                            <div class="live-card__head"><span class="live-card__name">Nomayos</span><span class="pill pill--open"><span class="pill__dot"></span> Ouvert</span></div>
+                            <p class="live-card__meta">Carrefour Nomayos</p>
+                            <div class="centre-card__actions">
+                                <a href="#" class="btn btn-secondary">Appeler</a>
+                                <a href="#" class="btn btn-secondary">Itinéraire</a>
+                                <a href="#" class="btn btn-secondary">Détail</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <section class="trust-band">
+            <div class="container">
+                <div class="chips">
+                    <span class="chip">2 centres</span>
+                    <span class="chip">7j/7</span>
+                    <span class="chip">Jours fériés ouverts</span>
+                    <span class="chip">Agrément N°0291</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="container section">
+            <div class="road-grid">
+                <div class="road-grid__img" role="img" aria-label="Illustration pluie">IMG · pluie</div>
+                <div>
+                    <p class="overline">Sécurité routière</p>
+                    <span class="safety-line" aria-hidden="true"></span>
+                    <h3 style="font-family:var(--font-display);font-size:1.25rem;margin-bottom:12px">Conduire sous la pluie à Yaoundé</h3>
+                    <p style="color:var(--g3-muted);margin-bottom:16px">Conseils pratiques pour la saison des pluies au Cameroun.</p>
+                    <a href="#">Lire les conseils →</a>
+                </div>
+            </div>
+        </div>
+
+        <section class="cta-band">
+            <h2>Prêt pour votre visite technique ?</h2>
+            <span class="safety-line safety-line--center safety-line--hero" style="background:var(--g3-orange);width:48px" aria-hidden="true"></span>
+            <div class="cta-band__actions">
+                <a href="#" class="btn btn-primary">Prendre rendez-vous</a>
+                <a href="#" class="btn btn-secondary btn-secondary--inverse">Nous contacter</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <strong style="font-family:var(--font-display);font-size:1.125rem">G3 Control</strong>
+                <p class="muted">Agrément N°0291 · Sécurité. Simplicité. Confiance.</p>
+                <p class="muted">g3sarl1@gmail.com · BP 12775 Yaoundé</p>
+            </div>
+            <div>
+                <strong>Centres</strong><br>
+                <a href="#">École de Police</a><br>
+                <a href="#">Nomayos</a>
+            </div>
+            <div>
+                <strong>Liens utiles</strong><br>
+                <a href="#">Rendez-vous</a><br>
+                <a href="#">Suivre ma demande</a><br>
+                <a href="#">Tarifs</a><br>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

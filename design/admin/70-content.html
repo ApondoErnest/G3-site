@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>G3 Control Admin — Contenu FR/EN</title>
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600|manrope:600,700" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+    <div class="preview-banner">
+        Hi-fi step 70 · Admin UX · BR-LANG-001 · publish blocked until both locales complete
+        <nav class="preview-nav">
+            <a href="70-login.html">Connexion</a>
+            <a href="70-dashboard.html">Tableau de bord</a>
+            <a href="70-appointments.html">Demandes</a>
+            <a href="70-tariff-publish.html">Tarifs</a>
+            <a href="70-content.html" class="is-active">Contenu FR/EN</a>
+        </nav>
+    </div>
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <div class="sidebar__brand">
+                <div class="sidebar__logo">G3 <span>Control</span></div>
+                <span class="sidebar__badge">Administration</span>
+            </div>
+            <nav class="sidebar__nav">
+                <div class="nav-group">
+                    <div class="nav-group__label">Contenu</div>
+                    <a href="70-content.html" class="nav-item is-active"><span class="nav-item__icon">📝</span> Pages &amp; blocs</a>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">🖼</span> Médias</a>
+                    <a href="#" class="nav-item"><span class="nav-item__icon">❓</span> FAQ</a>
+                </div>
+            </nav>
+            <div class="sidebar__user">
+                <div class="sidebar__avatar">CE</div>
+                <div>
+                    <div class="sidebar__user-name">Content Editor</div>
+                    <div class="sidebar__user-role">Content Editor</div>
+                </div>
+            </div>
+        </aside>
+        <div class="main">
+            <header class="topbar">
+                <h1 class="topbar__title">Bloc · Hero Accueil</h1>
+                <div class="topbar__actions" style="margin-left:auto">
+                    <button type="button" class="btn btn-secondary btn-sm" disabled title="Compléter EN pour publier">Publier</button>
+                </div>
+            </header>
+            <div class="content">
+                <div class="alert alert--warning">
+                    <span>⚠</span>
+                    <div>
+                        <strong>Publication bloquée</strong> — la version anglaise est incomplète (BR-LANG-001).
+                        <div class="completion-bar" style="max-width:240px;margin-top:8px">
+                            <div class="completion-bar__fill" style="width:50%"></div>
+                        </div>
+                        <span style="font-size:12px;margin-top:4px;display:block">FR ✓ · EN en cours (1/2 champs requis)</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card__body--padded">
+                        <div class="lang-tabs" role="tablist">
+                            <button type="button" class="lang-tab is-active" role="tab" aria-selected="true">
+                                Français
+                                <span class="lang-tab__check" aria-label="Complet">✓</span>
+                            </button>
+                            <button type="button" class="lang-tab" role="tab" aria-selected="false">
+                                English
+                                <span class="lang-tab__pending" aria-label="Incomplet"></span>
+                            </button>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="hero-title">Titre principal</label>
+                                <input id="hero-title" type="text" value="Votre contrôle technique, en toute confiance">
+                            </div>
+                            <div class="form-field">
+                                <label for="hero-sub">Sous-titre</label>
+                                <textarea id="hero-sub">Centres agréés à Yaoundé · École de Police &amp; Nomayos · Agrément N°0291</textarea>
+                            </div>
+                            <div class="form-row-2">
+                                <div class="form-field">
+                                    <label for="hero-cta">Texte bouton principal</label>
+                                    <input id="hero-cta" type="text" value="Prendre rendez-vous">
+                                </div>
+                                <div class="form-field">
+                                    <label for="hero-cta2">Texte bouton secondaire</label>
+                                    <input id="hero-cta2" type="text" value="Voir les tarifs">
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="hero-image">Image hero</label>
+                                <select id="hero-image">
+                                    <option selected>hero-accueil-v2.jpg · 1920×800</option>
+                                    <option>hero-accueil-v1.jpg · archivé</option>
+                                </select>
+                                <p class="form-field__hint">Conforme aux guidelines média · step 35</p>
+                            </div>
+                        </div>
+
+                        <div class="btn-group" style="margin-top:28px;padding-top:24px;border-top:1px solid var(--g3-border)">
+                            <button type="button" class="btn btn-primary">Enregistrer le brouillon</button>
+                            <button type="button" class="btn btn-secondary">Basculer vers EN →</button>
+                            <a href="../hifi/59-accueil.html" class="btn btn-secondary">Aperçu public FR</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-1-1" style="margin-top:24px">
+                    <div class="card">
+                        <div class="card__head"><h2>Champs requis par locale</h2></div>
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Champ</th><th>FR</th><th>EN</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Titre principal</td><td><span class="status status--confirmed"><span class="status__dot"></span> OK</span></td><td><span class="status status--cancelled"><span class="status__dot"></span> Vide</span></td></tr>
+                                <tr><td>Sous-titre</td><td><span class="status status--confirmed"><span class="status__dot"></span> OK</span></td><td><span class="status status--cancelled"><span class="status__dot"></span> Vide</span></td></tr>
+                                <tr><td>CTA principal</td><td><span class="status status--confirmed"><span class="status__dot"></span> OK</span></td><td><span class="status status--review"><span class="status__dot"></span> Brouillon</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card">
+                        <div class="card__head"><h2>Règles éditoriales</h2></div>
+                        <div class="card__body--padded" style="font-size:13px;color:var(--g3-muted);line-height:1.6">
+                            <p>· Les filtres admin utilisent des <strong>codes</strong> ; l’UI affiche les libellés lang-file.</p>
+                            <p style="margin-top:8px">· Publication impossible tant que FR et EN ne sont pas complets.</p>
+                            <p style="margin-top:8px">· Le contenu publié alimente les pages publiques steps 59–69.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

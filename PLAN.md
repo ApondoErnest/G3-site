@@ -82,10 +82,10 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 | | |
 | --- | --- |
-| Active phase | **II — Environment** |
-| Complete | Steps 1–18 |
-| **Active step** | **19** — Initialise branches |
-| Pending | Steps 20–182 · Phases II–X (remainder) |
+| Active phase | **VI — Core implementation** |
+| Complete | Steps 1–107 |
+| **Active step** | **108** — Auth: five roles, MFA, policies |
+| Pending | Steps 108–182 · Phases VI–X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -133,12 +133,18 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 **Purpose:** Prepare the local workstation and repository standards.  
 **Opens:** Gate 11 · **Gate:** 23 · **Prohibited:** Laravel
 
+- [x] **12** · Install Git · Acceptance: `git --version` succeeds
+- [x] **13** · Install PHP · Acceptance: `php -v` succeeds · **8.5.6** (Homebrew; amended from 8.4 at owner request)
+- [x] **14** · Install Composer · Acceptance: `composer -V` succeeds
+- [x] **15** · Install Node · Acceptance: `node -v` succeeds · **v26.0.0**
+- [x] **16** · Install MySQL · Acceptance: local connection succeeds · **9.6.0** (Homebrew; amended from 8.4 at owner request)
+- [x] **17** · Install Mailpit · Acceptance: UI reachable locally · **v1.31.0** · http://127.0.0.1:8025
 - [x] **18** · **Gate — workstation verified** · Steps 12–17 complete on this machine · Verified 2026-09-03
-- [ ] **19** · ← active · Initialise branches · `main`, `develop`, `feature/*`
-- [ ] **20** · Secrets policy · `.env` excluded from version control
-- [ ] **21** · Configure Pint · Formatter runs on the repository
-- [ ] **22** · Configure Larastan · Static analysis runs on the repository
-- [ ] **23** · **Gate — repository standards** · Steps 19–22 complete
+- [x] **19** · Initialise branches · `main`, `develop`, `feature/*` · Initial commit `7342ddf`
+- [x] **20** · Secrets policy · `.env` excluded from version control · [`.gitignore`](.gitignore) · [`.env.example`](.env.example) · [CONTRIBUTING.md](CONTRIBUTING.md)
+- [x] **21** · Configure Pint · Formatter runs on the repository · **Pint 1.30.5** · `composer format:test` passes
+- [x] **22** · Configure Larastan · Static analysis runs on the repository · **Larastan 3.11** · `composer analyse` passes
+- [x] **23** · **Gate — repository standards** · Steps 19–22 complete · Verified 2026-09-03
 
 ---
 
@@ -147,15 +153,15 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 **Purpose:** Empty Laravel 13 shell with i18n, admin access, and test harness.  
 **Opens:** Gate 23 · **Gate:** 32 · **Prohibited:** Business modules
 
-- [ ] **24** · Create Laravel 13 application
-- [ ] **25** · Verify HTTP boot
-- [ ] **26** · Verify MySQL connectivity
-- [ ] **27** · Verify Vite build · `npm run build` succeeds
-- [ ] **28** · Install Filament 5 · `/admin` login works
-- [ ] **29** · Locale routing · `/fr/`, `/en/`, `/` → `/fr/accueil`
-- [ ] **30** · Time configuration · Africa/Douala display · UTC timestamps
-- [ ] **31** · Verify Pest · Test suite passes on empty app
-- [ ] **32** · **Gate — foundation accepted** · Steps 24–31 complete
+- [x] **24** · Create Laravel 13 project · Acceptance: `php artisan --version` succeeds · **13.30.1**
+- [x] **25** · Verify HTTP boot · Acceptance: `GET /` returns redirect · HTTP 200 on locale routes
+- [x] **26** · Verify MySQL connectivity · Acceptance: migrations run · DB `g3_control`
+- [x] **27** · Verify Vite build · `npm run build` succeeds · **Vite 8.2.2**
+- [x] **28** · Install Filament 5 · `/admin` login works · **Filament 5.7.8**
+- [x] **29** · Locale routing · `/fr/`, `/en/`, `/` → `/fr/accueil`
+- [x] **30** · Time configuration · Africa/Douala display · UTC timestamps · [`config/time.php`](config/time.php) · [`App\Support\Clock`](app/Support/Clock.php)
+- [x] **31** · Verify Pest · Test suite passes on empty app · **Pest 5.1.3** · 7 tests pass · `composer test`
+- [x] **32** · **Gate — foundation accepted** · Steps 24–31 complete · Verified 2026-09-04
 
 ---
 
@@ -164,45 +170,45 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 **Purpose:** Approved UX before schema or public implementation.  
 **Opens:** Gate 32 · **Gate:** 71 · **Prohibited:** Migrations · public page code
 
-- [ ] **33** · Information architecture · Sitemap, navigation, page jobs
-- [ ] **34** · Design system · Brand tokens, typography, Safety Line
-- [ ] **35** · Media guidelines · Photography and video rules
-- [ ] **36** · Component states · Default, hover, focus, error, disabled, empty
-- [ ] **37** · Desktop wireframe — Accueil
-- [ ] **38** · Desktop wireframe — À propos
-- [ ] **39** · Desktop wireframe — Nos centres
-- [ ] **40** · Desktop wireframe — École de Police
-- [ ] **41** · Desktop wireframe — Nomayos
-- [ ] **42** · Desktop wireframe — Services
-- [ ] **43** · Desktop wireframe — Visite technique
-- [ ] **44** · Desktop wireframe — Tarifs
-- [ ] **45** · Desktop wireframe — Rendez-vous & Suivi
-- [ ] **46** · Desktop wireframe — Sécurité routière
-- [ ] **47** · Desktop wireframe — Contact
-- [ ] **48** · Mobile wireframe — Accueil
-- [ ] **49** · Mobile wireframe — À propos
-- [ ] **50** · Mobile wireframe — Nos centres
-- [ ] **51** · Mobile wireframe — École de Police
-- [ ] **52** · Mobile wireframe — Nomayos
-- [ ] **53** · Mobile wireframe — Services
-- [ ] **54** · Mobile wireframe — Visite technique
-- [ ] **55** · Mobile wireframe — Tarifs
-- [ ] **56** · Mobile wireframe — Rendez-vous & Suivi
-- [ ] **57** · Mobile wireframe — Sécurité routière
-- [ ] **58** · Mobile wireframe — Contact
-- [ ] **59** · Hi-fi design — Accueil
-- [ ] **60** · Hi-fi design — À propos
-- [ ] **61** · Hi-fi design — Nos centres
-- [ ] **62** · Hi-fi design — École de Police
-- [ ] **63** · Hi-fi design — Nomayos
-- [ ] **64** · Hi-fi design — Services
-- [ ] **65** · Hi-fi design — Visite technique
-- [ ] **66** · Hi-fi design — Tarifs
-- [ ] **67** · Hi-fi design — Rendez-vous & Suivi
-- [ ] **68** · Hi-fi design — Sécurité routière
-- [ ] **69** · Hi-fi design — Contact
-- [ ] **70** · Admin UX · Dashboard, queues, tariff publish, FR/EN tabs
-- [ ] **71** · **Gate — experience design accepted** · Steps 33–70 complete
+- [x] **33** · Information architecture · Sitemap, navigation, page jobs · [`design/33-information-architecture.md`](design/33-information-architecture.md)
+- [x] **34** · Design system · Brand tokens, typography, Safety Line · [`design/34-design-system.md`](design/34-design-system.md)
+- [x] **35** · Media guidelines · Photography and video rules · [`design/35-media-guidelines.md`](design/35-media-guidelines.md)
+- [x] **36** · Component states · Default, hover, focus, error, disabled, empty · [`design/36-component-states.md`](design/36-component-states.md)
+- [x] **37** · Desktop wireframe — Accueil · [`design/wireframes/desktop/37-accueil.md`](design/wireframes/desktop/37-accueil.md)
+- [x] **38** · Desktop wireframe — À propos · [`design/wireframes/desktop/38-a-propos.md`](design/wireframes/desktop/38-a-propos.md)
+- [x] **39** · Desktop wireframe — Nos centres · [`design/wireframes/desktop/39-centres.md`](design/wireframes/desktop/39-centres.md)
+- [x] **40** · Desktop wireframe — École de Police · [`design/wireframes/desktop/40-centre-ecole-de-police.md`](design/wireframes/desktop/40-centre-ecole-de-police.md)
+- [x] **41** · Desktop wireframe — Nomayos · [`design/wireframes/desktop/41-centre-nomayos.md`](design/wireframes/desktop/41-centre-nomayos.md)
+- [x] **42** · Desktop wireframe — Services · [`design/wireframes/desktop/42-services.md`](design/wireframes/desktop/42-services.md)
+- [x] **43** · Desktop wireframe — Visite technique · [`design/wireframes/desktop/43-visite-technique.md`](design/wireframes/desktop/43-visite-technique.md)
+- [x] **44** · Desktop wireframe — Tarifs · [`design/wireframes/desktop/44-tarifs.md`](design/wireframes/desktop/44-tarifs.md)
+- [x] **45** · Desktop wireframe — Rendez-vous & Suivi · [`design/wireframes/desktop/45-rendez-vous.md`](design/wireframes/desktop/45-rendez-vous.md)
+- [x] **46** · Desktop wireframe — Sécurité routière · [`design/wireframes/desktop/46-securite-routiere.md`](design/wireframes/desktop/46-securite-routiere.md)
+- [x] **47** · Desktop wireframe — Contact · [`design/wireframes/desktop/47-contact.md`](design/wireframes/desktop/47-contact.md)
+- [x] **48** · Mobile wireframe — Accueil · [`design/wireframes/mobile/48-accueil.md`](design/wireframes/mobile/48-accueil.md)
+- [x] **49** · Mobile wireframe — À propos · [`design/wireframes/mobile/49-a-propos.md`](design/wireframes/mobile/49-a-propos.md)
+- [x] **50** · Mobile wireframe — Nos centres · [`design/wireframes/mobile/50-centres.md`](design/wireframes/mobile/50-centres.md)
+- [x] **51** · Mobile wireframe — École de Police · [`design/wireframes/mobile/51-centre-ecole-de-police.md`](design/wireframes/mobile/51-centre-ecole-de-police.md)
+- [x] **52** · Mobile wireframe — Nomayos · [`design/wireframes/mobile/52-centre-nomayos.md`](design/wireframes/mobile/52-centre-nomayos.md)
+- [x] **53** · Mobile wireframe — Services · [`design/wireframes/mobile/53-services.md`](design/wireframes/mobile/53-services.md)
+- [x] **54** · Mobile wireframe — Visite technique · [`design/wireframes/mobile/54-visite-technique.md`](design/wireframes/mobile/54-visite-technique.md)
+- [x] **55** · Mobile wireframe — Tarifs · [`design/wireframes/mobile/55-tarifs.md`](design/wireframes/mobile/55-tarifs.md)
+- [x] **56** · Mobile wireframe — Rendez-vous & Suivi · [`design/wireframes/mobile/56-rendez-vous.md`](design/wireframes/mobile/56-rendez-vous.md)
+- [x] **57** · Mobile wireframe — Sécurité routière · [`design/wireframes/mobile/57-securite-routiere.md`](design/wireframes/mobile/57-securite-routiere.md)
+- [x] **58** · Mobile wireframe — Contact · [`design/wireframes/mobile/58-contact.md`](design/wireframes/mobile/58-contact.md)
+- [x] **59** · Hi-fi design — Accueil · [`design/hifi/59-accueil.md`](design/hifi/59-accueil.md) · [preview](design/hifi/59-accueil.html)
+- [x] **60** · Hi-fi design — À propos · [preview](design/hifi/60-a-propos.html) · [specs](design/hifi/60-69-specs.md)
+- [x] **61** · Hi-fi design — Nos centres · [preview](design/hifi/61-centres.html)
+- [x] **62** · Hi-fi design — École de Police · [preview](design/hifi/62-centre-ecole-de-police.html)
+- [x] **63** · Hi-fi design — Nomayos · [preview](design/hifi/63-centre-nomayos.html)
+- [x] **64** · Hi-fi design — Services · [preview](design/hifi/64-services.html)
+- [x] **65** · Hi-fi design — Visite technique · [preview](design/hifi/65-visite-technique.html)
+- [x] **66** · Hi-fi design — Tarifs · [preview](design/hifi/66-tarifs.html)
+- [x] **67** · Hi-fi design — Rendez-vous & Suivi · [preview](design/hifi/67-rendez-vous.html)
+- [x] **68** · Hi-fi design — Sécurité routière · [preview](design/hifi/68-securite-routiere.html)
+- [x] **69** · Hi-fi design — Contact · [preview](design/hifi/69-contact.html)
+- [x] **70** · Admin UX · [spec](design/admin/70-admin-ux.md) · [dashboard](design/admin/70-dashboard.html) · [login](design/admin/70-login.html) · [appointments](design/admin/70-appointments.html) · [tariffs](design/admin/70-tariff-publish.html) · [content](design/admin/70-content.html)
+- [x] **71** · **Gate — experience design accepted** · Steps 33–70 complete · Verified 2026-09-05 · [`design/71-gate-experience-design.md`](design/71-gate-experience-design.md)
 
 ---
 
@@ -211,20 +217,20 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 **Purpose:** Approved data model and domain logic on paper.  
 **Opens:** Gate 71 · **Gates:** 76 (database) · 85 (domain)
 
-- [ ] **72** · Conceptual data model
-- [ ] **73** · Logical ERD → [`docs/11-erd.md`](docs/11-erd.md)
-- [ ] **74** · Indexes, constraints, foreign keys
-- [ ] **75** · Retention mapped to tables
-- [ ] **76** · **Gate — database design accepted**
-- [ ] **77** · Domain model · Entities, enums, codes per `docs/06`, `docs/09`
-- [ ] **78** · Use-case catalogue · Request, track, tariff, schedule, contact
-- [ ] **79** · Availability engine specification
-- [ ] **80** · Appointment state machine specification
-- [ ] **81** · Tariff engine specification
-- [ ] **82** · Domain events specification
-- [ ] **83** · Cache policy · Catalogues cacheable · tracking never cached
-- [ ] **84** · Security design · Policies, throttling, MFA, uploads
-- [ ] **85** · **Gate — domain design accepted**
+- [x] **72** · Conceptual data model · [`docs/11-conceptual-model.md`](docs/11-conceptual-model.md)
+- [x] **73** · Logical ERD → [`docs/11-erd.md`](docs/11-erd.md)
+- [x] **74** · Indexes, constraints, foreign keys · [`docs/11-indexes-constraints.md`](docs/11-indexes-constraints.md)
+- [x] **75** · Retention mapped to tables · [`docs/11-retention.md`](docs/11-retention.md)
+- [x] **76** · **Gate — database design accepted** · Steps 72–75 complete · Verified 2026-09-05 · [`docs/11-gate-database-design.md`](docs/11-gate-database-design.md)
+- [x] **77** · Domain model · [`docs/12-domain-model.md`](docs/12-domain-model.md)
+- [x] **78** · Use-case catalogue · [`docs/12-use-cases.md`](docs/12-use-cases.md)
+- [x] **79** · Availability engine specification · [`docs/12-availability-engine.md`](docs/12-availability-engine.md)
+- [x] **80** · Appointment state machine specification · [`docs/12-appointment-state-machine.md`](docs/12-appointment-state-machine.md)
+- [x] **81** · Tariff engine specification · [`docs/12-tariff-engine.md`](docs/12-tariff-engine.md)
+- [x] **82** · Domain events specification · [`docs/12-domain-events.md`](docs/12-domain-events.md)
+- [x] **83** · Cache policy · [`docs/12-cache-policy.md`](docs/12-cache-policy.md)
+- [x] **84** · Security design · [`docs/12-security-design.md`](docs/12-security-design.md)
+- [x] **85** · **Gate — domain design accepted** · Steps 77–84 complete · Verified 2026-09-05 · [`docs/12-gate-domain-design.md`](docs/12-gate-domain-design.md)
 
 ---
 
@@ -235,35 +241,35 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 ### Schema
 
-- [ ] **86** · Migration — company / settings + test
-- [ ] **87** · Migration — centres, phones, hours + test
-- [ ] **88** · Migration — schedule exceptions + test
-- [ ] **89** · Migration — catalogue + test
-- [ ] **90** · Migration — tariffs + test
-- [ ] **91** · Migration — appointments, history + test
-- [ ] **92** · Migration — internal notes · Separate from history
-- [ ] **93** · Migration — content + test
-- [ ] **94** · Migration — contact + test
-- [ ] **95** · Migration — media, identity, audit + test
-- [ ] **96** · Seed · Two centres and locked hours only · No invented prices or services
-- [ ] **97** · **Gate — schema accepted**
+- [x] **86** · Migration — company / settings + test · `spatie/laravel-settings` · [`CompanySettings`](app/Settings/CompanySettings.php)
+- [x] **87** · Migration — centres, phones, hours + test · [`2026_09_05_194500_create_centres_tables.php`](database/migrations/2026_09_05_194500_create_centres_tables.php)
+- [x] **88** · Migration — schedule exceptions + test · [`2026_09_05_200000_create_schedule_exceptions_table.php`](database/migrations/2026_09_05_200000_create_schedule_exceptions_table.php)
+- [x] **89** · Migration — catalogue + test · [`2026_09_05_201000_create_catalogue_tables.php`](database/migrations/2026_09_05_201000_create_catalogue_tables.php)
+- [x] **90** · Migration — tariffs + test · [`2026_09_05_202000_create_tariff_tables.php`](database/migrations/2026_09_05_202000_create_tariff_tables.php)
+- [x] **91** · Migration — appointments, history + test · [`2026_09_05_203000_create_appointment_tables.php`](database/migrations/2026_09_05_203000_create_appointment_tables.php)
+- [x] **92** · Migration — internal notes · Separate from history · [`2026_09_05_204000_create_appointment_internal_notes_table.php`](database/migrations/2026_09_05_204000_create_appointment_internal_notes_table.php)
+- [x] **93** · Migration — content + test · [`2026_09_05_205000_create_content_tables.php`](database/migrations/2026_09_05_205000_create_content_tables.php)
+- [x] **94** · Migration — contact + test · [`2026_09_05_206000_create_contact_tables.php`](database/migrations/2026_09_05_206000_create_contact_tables.php)
+- [x] **95** · Migration — media, identity, audit + test · `spatie/laravel-permission` · `spatie/laravel-medialibrary` · `spatie/laravel-activitylog` · [`207000_extend_users`](database/migrations/2026_09_05_207000_extend_users_for_admin_identity.php) · [`207100_admin_user_scopes`](database/migrations/2026_09_05_207100_create_admin_user_scopes_table.php)
+- [x] **96** · Seed · Two centres and locked hours only · No invented prices or services · [`BaselineCentresSeeder`](database/seeders/BaselineCentresSeeder.php)
+- [x] **97** · **Gate — schema accepted** · Steps 86–96 complete · Verified 2026-09-05 · [`docs/11-gate-schema-accepted.md`](docs/11-gate-schema-accepted.md)
 
 ### Domain
 
-- [ ] **98** · Module — company settings + Pest
-- [ ] **99** · Module — centres and availability + Pest
-- [ ] **100** · Module — catalogue + Pest
-- [ ] **101** · Module — tariffs + Pest
-- [ ] **102** · Module — appointments + Pest
-- [ ] **103** · Module — tracking + Pest
-- [ ] **104** · Module — content + Pest
-- [ ] **105** · Module — contact + Pest
-- [ ] **106** · Module — notification port + Pest · No direct SMTP from UI layers
-- [ ] **107** · **Gate — domain accepted** · Filament and Livewire share use cases
+- [x] **98** · Module — company settings + Pest · [`ResolvePublicCompanyProfile`](app/Actions/Company/ResolvePublicCompanyProfile.php) · [`UpdateCompanySettings`](app/Actions/Company/UpdateCompanySettings.php)
+- [x] **99** · Module — centres and availability + Pest · [`AvailabilityEngine`](app/Domain/Schedule/AvailabilityEngine.php) · [`ResolveCentreAvailability`](app/Actions/Schedule/ResolveCentreAvailability.php)
+- [x] **100** · Module — catalogue + Pest · [`ResolvePublishedServices`](app/Actions/Catalogue/ResolvePublishedServices.php) · [`Service::isAvailableAt`](app/Models/Catalogue/Service.php)
+- [x] **101** · Module — tariffs + Pest · [`TariffResolver`](app/Domain/Tariff/TariffResolver.php) · [`PublishTariffVersion`](app/Actions/Tariff/PublishTariffVersion.php)
+- [x] **102** · Module — appointments + Pest · [`AppointmentStateMachine`](app/Domain/Appointment/AppointmentStateMachine.php) · [`CreateAppointmentRequest`](app/Actions/Appointment/CreateAppointmentRequest.php)
+- [x] **103** · Module — tracking + Pest · [`TrackAppointment`](app/Actions/Appointment/TrackAppointment.php)
+- [x] **104** · Module — content + Pest · [`PublishContentBlock`](app/Actions/Content/PublishContentBlock.php) · [`ResolvePublishedContentBlocksForPage`](app/Actions/Content/ResolvePublishedContentBlocksForPage.php)
+- [x] **105** · Module — contact + Pest · [`SubmitContactMessage`](app/Actions/Contact/SubmitContactMessage.php) · [`ContactStateMachine`](app/Domain/Contact/ContactStateMachine.php)
+- [x] **106** · Module — notification port + Pest · [`NotificationPort`](app/Contracts/NotificationPort.php) · [`MailNotificationAdapter`](app/Infrastructure/Notifications/MailNotificationAdapter.php)
+- [x] **107** · **Gate — domain accepted** · Verified 2026-09-06 · [`docs/12-gate-domain-accepted.md`](docs/12-gate-domain-accepted.md)
 
 ### Administration
 
-- [ ] **108** · Auth · Five roles, MFA, policies · Forbidden URLs return 403
+- [ ] **108** · ← active · Auth · Five roles, MFA, policies · Forbidden URLs return 403
 - [ ] **109** · Dashboard · Requests, contacts, live centre status
 - [ ] **110** · Centre management · Hours, exceptions, alerts
 - [ ] **111** · Catalogue management

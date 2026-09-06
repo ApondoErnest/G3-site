@@ -13,18 +13,18 @@ A single Laravel application delivers the public website and the secure operatio
 
 | | |
 | --- | --- |
-| Phase | **II — Environment** |
-| Progress | Phase I complete (steps 1–11) |
-| Active step | **12** — Install Git |
-| Pending | Steps 13–182 · Phases II–X (remainder) |
+| Phase | **III — Application foundation** |
+| Progress | Phases I–II complete (steps 1–23) |
+| Active step | **31** — Verify Pest |
+| Pending | Steps 25–182 · Phases III–X |
 
 Delivery is **strictly sequential**: specification → environment → application shell → design → database design → backend design → database build → backend build → admin → public frontend → QA → Docker → production.
 
 | Milestone | Phase · Step | Status |
 | --- | --- | --- |
 | Specification | I · 11 | **Complete** |
-| Environment | II · 12 | **Active** |
-| Application shell | III · 24 | Locked |
+| Environment | II · 23 | **Complete** |
+| Application shell | III · 31 | **Active** |
 | Experience design | IV · 33 | Locked |
 | Database design | V · 72 | Locked |
 | Database build | VI · 86 | Locked |
