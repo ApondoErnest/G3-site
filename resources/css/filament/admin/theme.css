@@ -1,0 +1,1042 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+    --color-g3-blue-deep: #12315b;
+    --color-g3-blue-tech: #1769b0;
+    --color-g3-blue-soft: #f1f6fb;
+    --color-g3-orange: #f47a20;
+    --color-g3-orange-hover: #d9691a;
+    --color-g3-charcoal: #202b37;
+    --color-g3-muted: #667085;
+    --color-g3-border: #e4e7ec;
+}
+
+/* ── Login screen — light canvas, brand colour on the card ── */
+.g3-login-screen {
+    position: relative;
+    display: flex;
+    min-height: 100dvh;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgb(23 105 176 / 0.07), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 100% 100%, rgb(244 122 32 / 0.06), transparent 50%),
+        linear-gradient(180deg, #f6f7f9 0%, #eef2f7 100%);
+    overflow: hidden;
+}
+
+.g3-login-screen__pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgb(18 49 91 / 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(18 49 91 / 0.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 20%, transparent 75%);
+    pointer-events: none;
+}
+
+.g3-login-screen__orb {
+    display: none;
+}
+
+/* ── Login card ── */
+.g3-login-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 27rem;
+    background: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgb(18 49 91 / 0.08);
+    box-shadow:
+        0 1px 2px rgb(18 49 91 / 0.04),
+        0 8px 24px -4px rgb(18 49 91 / 0.1),
+        0 24px 48px -12px rgb(18 49 91 / 0.12);
+
+    /* Lock login UI to G3 light palette — blocks Filament dark tints on fields */
+    color-scheme: light;
+    --g3-white: #fff;
+    --g3-charcoal: #202b37;
+    --g3-muted: #667085;
+    --g3-border: #e4e7ec;
+    --g3-blue-tech: #1769b0;
+    --g3-blue-soft: #f1f6fb;
+    --g3-input-radius: 0.5rem;
+}
+
+.g3-login-card__header {
+    padding: 1.75rem 1.75rem 1.25rem;
+    text-align: center;
+    background: linear-gradient(165deg, #12315b 0%, #0f2847 100%);
+}
+
+.g3-login-card__logo {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.g3-login-card__logo span {
+    color: #f47a20;
+}
+
+.g3-login-card__line {
+    width: 3rem;
+    height: 3px;
+    margin: 1rem auto 0.875rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f47a20, #ff9a4d);
+}
+
+.g3-login-card__tagline {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.72);
+    letter-spacing: 0.01em;
+    line-height: 1.45;
+    max-width: 26ch;
+    margin-inline: auto;
+}
+
+.g3-login-card__safety-line {
+    height: 3px;
+    background: linear-gradient(90deg, #f47a20 0%, #ff9a4d 50%, #f47a20 100%);
+}
+
+.g3-login-card__body {
+    padding: 1.5rem 1.75rem 0.25rem;
+    background: #fff;
+}
+
+.g3-login-card__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem 0.5rem;
+    padding: 1rem 2rem 1.25rem;
+    background: #f8fafc;
+    border-top: 1px solid #eef2f6;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #98a2b3;
+}
+
+.g3-login-card__footer-sep {
+    color: #d0d5dd;
+}
+
+/* ── Filament simple page inside card ── */
+.g3-login-card__body .fi-simple-page {
+    --fi-simple-page-padding: 0;
+}
+
+.g3-login-card__body .fi-simple-header {
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.g3-login-card__body .fi-simple-header-heading {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #202b37;
+}
+
+.g3-login-card__body .fi-simple-header-subheading {
+    font-size: 0.8125rem;
+    color: #667085;
+    margin-top: 0.25rem;
+    line-height: 1.4;
+}
+
+/* ── G3 form fields (matches design/admin/admin.css .form-field) ── */
+.g3-login-card .fi-sc-form {
+    gap: 1.25rem;
+}
+
+.g3-login-card .fi-fo-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.g3-login-card .fi-fo-field-label-content {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--g3-charcoal);
+}
+
+.g3-login-card .fi-fo-field-label-required-mark {
+    display: none;
+}
+
+/* Neutralise Filament wrapper — one G3-styled box only */
+.g3-login-card .fi-fo-text-input.fi-input-wrp,
+.g3-login-card .fi-input-wrp {
+    --tw-shadow: 0 0 #0000 !important;
+    --tw-shadow-colored: 0 0 #0000 !important;
+    --tw-ring-offset-width: 0 !important;
+    --tw-ring-offset-color: transparent !important;
+    --tw-ring-color: transparent !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-width: 0 !important;
+
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+    border: 1px solid var(--g3-border) !important;
+    border-radius: var(--g3-input-radius);
+    background: var(--g3-white) !important;
+    box-shadow: none !important;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.g3-login-card .fi-input-wrp:hover {
+    border-color: #c8cdd4 !important;
+}
+
+.g3-login-card .fi-input-wrp:not(.fi-disabled):not(:has(.fi-ac-action:focus)):focus-within,
+.g3-login-card .fi-input-wrp:focus-within {
+    --tw-ring-width: 0 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    border-color: var(--g3-blue-tech) !important;
+    background: var(--g3-white) !important;
+    box-shadow: 0 0 0 3px rgb(23 105 176 / 0.12) !important;
+}
+
+.g3-login-card .fi-input-wrp-content-ctn {
+    flex: 1;
+    min-width: 0;
+}
+
+.g3-login-card input.fi-input {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--g3-charcoal);
+    background: var(--g3-white) !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+.g3-login-card input.fi-input::placeholder {
+    color: var(--g3-muted);
+}
+
+.g3-login-card input.fi-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background: var(--g3-white) !important;
+}
+
+.g3-login-card input.fi-input:-webkit-autofill,
+.g3-login-card input.fi-input:-webkit-autofill:hover,
+.g3-login-card input.fi-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--g3-charcoal) !important;
+    caret-color: var(--g3-charcoal);
+    box-shadow: 0 0 0 1000px var(--g3-white) inset !important;
+    transition: background-color 99999s ease-out;
+}
+
+.g3-login-card .fi-input-wrp-suffix {
+    padding-inline: 0.25rem 0.625rem;
+    background: var(--g3-white) !important;
+    border: none !important;
+}
+
+.g3-login-card .fi-input-wrp-suffix .fi-icon-btn {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--g3-muted);
+    border-radius: 0.375rem;
+}
+
+.g3-login-card .fi-input-wrp-suffix .fi-icon-btn:hover {
+    color: var(--g3-blue-tech);
+    background: var(--g3-blue-soft);
+}
+
+/* ── Submit button (G3 orange) ── */
+.g3-login-card .fi-sc-actions {
+    margin-top: 0.5rem;
+}
+
+.g3-login-card .fi-btn-primary {
+    min-height: 2.75rem;
+    border-radius: 0.625rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    background: #f47a20 !important;
+    border: none;
+    box-shadow: 0 1px 2px rgb(244 122 32 / 0.18);
+    transition: background 150ms ease, transform 120ms ease;
+}
+
+.g3-login-card .fi-btn-primary:hover {
+    background: #d9691a !important;
+}
+
+.g3-login-card .fi-btn-primary:active {
+    transform: translateY(1px);
+}
+
+.g3-login-card .fi-btn-primary:focus-visible {
+    outline: 2px solid var(--g3-blue-tech);
+    outline-offset: 2px;
+}
+
+.g3-login-card .fi-fo-checkbox {
+    display: none;
+}
+
+/* ── Panel chrome ── */
+.fi-sidebar {
+    background: linear-gradient(180deg, #12315b 0%, #0f2847 100%) !important;
+}
+
+.fi-sidebar-header {
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.fi-sidebar-nav-groups {
+    gap: 1.25rem;
+}
+
+.fi-sidebar-group-label {
+    color: rgb(255 255 255 / 0.45) !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    font-weight: 600;
+}
+
+.fi-sidebar-item-btn {
+    color: rgb(255 255 255 / 0.78) !important;
+    border-radius: 0.5rem;
+}
+
+.fi-sidebar-item-btn:hover {
+    background: rgb(255 255 255 / 0.08) !important;
+    color: #fff !important;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    background: rgb(255 255 255 / 0.12) !important;
+    color: #7ec8ff !important;
+    box-shadow: inset 3px 0 0 #f47a20;
+}
+
+.fi-sidebar-item-label,
+.fi-sidebar-item-icon {
+    color: inherit !important;
+}
+
+html:not(.dark) .fi-topbar {
+    background: #fff;
+    border-bottom: 1px solid #e4e7ec;
+}
+
+html:not(.dark) .fi-main {
+    background: #f6f7f9;
+}
+
+.fi-header-heading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: #1769b0;
+}
+
+.fi-header::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 3px;
+    background: #f47a20;
+    margin-top: 0.5rem;
+    border-radius: 999px;
+}
+
+.fi-header-subheading {
+    color: #667085 !important;
+    font-size: 0.8125rem !important;
+}
+
+/* ── Dashboard (step 109 · hi-fi admin) ── */
+.g3-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.g3-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+@media (max-width: 1280px) {
+    .g3-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .g3-stats-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.g3-stat-card {
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid #e4e7ec;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px rgb(18 49 91 / 0.04);
+}
+
+.g3-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #1769b0;
+}
+
+.g3-stat-card--accent::before {
+    background: #f47a20;
+}
+
+.g3-stat-card--success::before {
+    background: #168653;
+}
+
+.g3-stat-card__label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #667085;
+    margin-bottom: 0.5rem;
+}
+
+.g3-stat-card__value,
+.g3-stat-card .g3-stat-card__value,
+.g3-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #1769b0 !important;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.g3-stat-card__meta .g3-num {
+    font-family: var(--font-sans);
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: normal;
+}
+
+.g3-stat-card__meta {
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    color: #667085;
+    line-height: 1.4;
+}
+
+.g3-dashboard-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.g3-dashboard-grid--2-1 {
+    grid-template-columns: 2fr 1fr;
+}
+
+.g3-dashboard-grid--1-1 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+    .g3-dashboard-grid--2-1,
+    .g3-dashboard-grid--1-1 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.g3-panel {
+    background: #fff;
+    border: 1px solid #e4e7ec;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px rgb(18 49 91 / 0.04);
+    overflow: hidden;
+}
+
+.g3-panel__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1.125rem 1.5rem;
+    border-bottom: 1px solid #e4e7ec;
+}
+
+.g3-panel__head h2 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #202b37;
+}
+
+.g3-panel__hint {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #98a2b3;
+    white-space: nowrap;
+}
+
+.g3-panel__body--flush {
+    padding: 0;
+}
+
+.g3-panel__body--padded {
+    padding: 1.5rem;
+}
+
+.g3-panel__footer {
+    padding: 1rem 1.5rem 1.25rem;
+    border-top: 1px solid #e4e7ec;
+    background: #f8fafc;
+}
+
+.g3-panel__footer-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #667085;
+    margin-bottom: 0.375rem;
+}
+
+.g3-panel__footer-text {
+    font-size: 0.8125rem;
+    color: #344054;
+    line-height: 1.45;
+}
+
+.g3-empty {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #667085;
+}
+
+.g3-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+}
+
+.g3-data-table thead th {
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #667085;
+    background: #f6f7f9;
+    border-bottom: 1px solid #e4e7ec;
+}
+
+.g3-data-table tbody td {
+    padding: 0.875rem 1.5rem;
+    border-bottom: 1px solid #f0f2f5;
+    color: #344054;
+    vertical-align: middle;
+}
+
+.g3-data-table tbody tr:hover td {
+    background: #f8fafc;
+}
+
+.g3-data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.g3-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #12315b;
+}
+
+.g3-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.g3-status__dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.g3-status--received {
+    background: #f1f6fb;
+    color: #1769b0;
+}
+
+.g3-status--review {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.g3-status--confirmed,
+.g3-status--open,
+.g3-status--published {
+    background: #e8f5ee;
+    color: #168653;
+}
+
+.g3-status--closed,
+.g3-status--cancelled {
+    background: #f6f7f9;
+    color: #667085;
+}
+
+.g3-centre-status-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .g3-centre-status-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.g3-centre-status {
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e4e7ec;
+    background: linear-gradient(180deg, #f8fafc 0%, #f6f7f9 100%);
+}
+
+.g3-centre-status__name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #202b37;
+    margin-bottom: 0.5rem;
+}
+
+.g3-centre-status__hours {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #667085;
+    line-height: 1.45;
+}
+
+.g3-tariff-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.g3-tariff-summary__meta {
+    font-size: 0.8125rem;
+    color: #667085;
+}
+
+.g3-tariff-summary__detail {
+    font-size: 0.875rem;
+    color: #344054;
+    line-height: 1.45;
+}
+
+.g3-timeline {
+    padding: 1.5rem;
+}
+
+.g3-timeline__item {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    position: relative;
+}
+
+.g3-timeline__item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 0.6875rem;
+    top: 1.75rem;
+    bottom: 0;
+    width: 2px;
+    background: #e4e7ec;
+}
+
+.g3-timeline__dot {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 2px solid #e4e7ec;
+    background: #fff;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.g3-timeline__dot svg {
+    width: 0.75rem;
+    height: 0.75rem;
+}
+
+.g3-timeline__dot--done {
+    background: #168653;
+    border-color: #168653;
+}
+
+.g3-timeline__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #202b37;
+}
+
+.g3-timeline__meta {
+    margin-top: 0.125rem;
+    font-size: 0.75rem;
+    color: #667085;
+}
+
+.fi-section-header::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 3px;
+    background: #f47a20;
+    margin-top: 0.75rem;
+}
+
+.fi-btn-primary {
+    font-weight: 600;
+}
+
+.fi-simple-main-ctn {
+    background: transparent;
+}
+
+/* Force G3 field colours when Filament dark mode is active globally */
+html.dark .g3-login-card .fi-input-wrp,
+html.dark .g3-login-card input.fi-input,
+html.dark .g3-login-card .fi-input-wrp-suffix {
+    background: var(--g3-white) !important;
+    color: var(--g3-charcoal);
+    --tw-ring-width: 0 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+html.dark .g3-login-card .fi-input-wrp {
+    border-color: var(--g3-border) !important;
+}
+
+html.dark .g3-login-card .fi-input-wrp:focus-within {
+    border-color: var(--g3-blue-tech) !important;
+    box-shadow: 0 0 0 3px rgb(23 105 176 / 0.12) !important;
+}
+
+html.dark .g3-login-card .fi-simple-header-heading,
+html.dark .g3-login-card .fi-fo-field-label-content {
+    color: var(--g3-charcoal);
+}
+
+html.dark .g3-login-card__footer {
+    background: #f8fafc;
+    border-top-color: #eef2f6;
+    color: #98a2b3;
+}
+
+/* ── Admin locale switcher (FR | EN) ── */
+.g3-locale-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.125rem;
+    padding: 0.1875rem;
+    border-radius: 0.5rem;
+    background: rgb(18 49 91 / 0.06);
+    border: 1px solid rgb(18 49 91 / 0.08);
+}
+
+.g3-locale-switcher__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    padding: 0.3125rem 0.5rem;
+    border-radius: 0.375rem;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: #667085;
+    cursor: pointer;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.g3-locale-switcher__link:hover {
+    color: #1769b0;
+}
+
+.g3-locale-switcher__link--active {
+    background: #f1f6fb;
+    color: #1769b0;
+    box-shadow: 0 1px 2px rgb(18 49 91 / 0.08);
+}
+
+.g3-login-locale {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 2;
+}
+
+.fi-topbar-end .g3-locale-switcher {
+    margin-inline-end: 0.75rem;
+}
+
+.fi-user-menu + .g3-locale-switcher,
+.g3-locale-switcher + .fi-user-menu {
+    margin-inline-start: 0.5rem;
+}
+
+html:not(.dark) .fi-topbar-end .g3-locale-switcher {
+    background: rgb(18 49 91 / 0.06);
+    border-color: rgb(18 49 91 / 0.08);
+}
+
+html:not(.dark) .fi-topbar-end .g3-locale-switcher__link {
+    color: #667085;
+}
+
+html:not(.dark) .fi-topbar-end .g3-locale-switcher__link--active {
+    background: #f1f6fb;
+    color: #1769b0;
+}
+
+/* ── G3 admin highlights (active / selected / emphasis = blue) ── */
+.fi-body mark,
+.fi-body .fi-active:not(.fi-sidebar-item):not(.fi-sidebar-group) > .fi-topbar-item-btn,
+.fi-body [wire\:current] {
+    color: #1769b0;
+}
+
+.fi-body ::selection {
+    background: rgb(23 105 176 / 0.22);
+    color: inherit;
+}
+
+.fi-body a:not(.fi-btn):not(.g3-locale-switcher__link) {
+    color: #1769b0;
+}
+
+.fi-body a:not(.fi-btn):not(.g3-locale-switcher__link):hover {
+    color: #1479cf;
+}
+
+/* ── Dark mode · panel chrome + dashboard ── */
+html.dark .fi-topbar {
+    background: #1a2332;
+    border-bottom-color: rgb(255 255 255 / 0.08);
+}
+
+html.dark .fi-main {
+    background: #111827;
+}
+
+html.dark .fi-header-heading {
+    color: #4da3e8;
+}
+
+html.dark .fi-header-subheading {
+    color: #94a3b8 !important;
+}
+
+html.dark .fi-topbar-end .g3-locale-switcher,
+html.dark .g3-login-locale .g3-locale-switcher {
+    background: rgb(255 255 255 / 0.06);
+    border-color: rgb(255 255 255 / 0.1);
+}
+
+html.dark .fi-topbar-end .g3-locale-switcher__link,
+html.dark .g3-login-locale .g3-locale-switcher__link {
+    color: rgb(255 255 255 / 0.62);
+}
+
+html.dark .fi-topbar-end .g3-locale-switcher__link:hover,
+html.dark .g3-login-locale .g3-locale-switcher__link:hover {
+    color: #7ec8ff;
+}
+
+html.dark .fi-topbar-end .g3-locale-switcher__link--active,
+html.dark .g3-login-locale .g3-locale-switcher__link--active {
+    background: rgb(23 105 176 / 0.28);
+    color: #7ec8ff;
+    box-shadow: inset 0 0 0 1px rgb(77 163 232 / 0.35);
+}
+
+html.dark .g3-stat-card,
+html.dark .g3-panel {
+    background: #1a2332;
+    border-color: rgb(255 255 255 / 0.08);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.2);
+}
+
+html.dark .g3-stat-card__label,
+html.dark .g3-stat-card__meta,
+html.dark .g3-panel__hint,
+html.dark .g3-empty,
+html.dark .g3-centre-status__hours,
+html.dark .g3-tariff-summary__meta,
+html.dark .g3-timeline__meta,
+html.dark .g3-panel__footer-label {
+    color: #94a3b8;
+}
+
+html.dark .g3-stat-card__value,
+html.dark .g3-stat-card .g3-stat-card__value,
+.dark .g3-stat-card__value,
+.dark .g3-stat-card .g3-stat-card__value,
+html.dark .g3-num,
+.dark .g3-num {
+    color: #4da3e8 !important;
+}
+
+html.dark .g3-panel__head h2,
+html.dark .g3-centre-status__name,
+html.dark .g3-tariff-summary__detail,
+html.dark .g3-timeline__title,
+html.dark .g3-panel__footer-text {
+    color: #f1f5f9;
+}
+
+html.dark .g3-panel__head,
+html.dark .g3-panel__footer {
+    border-color: rgb(255 255 255 / 0.08);
+}
+
+html.dark .g3-panel__footer {
+    background: rgb(255 255 255 / 0.03);
+}
+
+html.dark .g3-data-table thead th {
+    background: rgb(255 255 255 / 0.04);
+    border-color: rgb(255 255 255 / 0.08);
+    color: #94a3b8;
+}
+
+html.dark .g3-data-table tbody td {
+    border-color: rgb(255 255 255 / 0.05);
+    color: #cbd5e1;
+}
+
+html.dark .g3-data-table tbody tr:hover td {
+    background: rgb(23 105 176 / 0.08);
+}
+
+html.dark .g3-mono {
+    color: #7ec8ff;
+}
+
+html.dark .g3-centre-status {
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.04) 0%, rgb(255 255 255 / 0.02) 100%);
+    border-color: rgb(255 255 255 / 0.08);
+}
+
+html.dark .g3-status--received {
+    background: rgb(23 105 176 / 0.18);
+    color: #7ec8ff;
+}
+
+html.dark .g3-status--review {
+    background: rgb(180 83 9 / 0.18);
+    color: #fbbf24;
+}
+
+html.dark .g3-status--confirmed,
+html.dark .g3-status--open,
+html.dark .g3-status--published {
+    background: rgb(22 134 83 / 0.18);
+    color: #6ee7a8;
+}
+
+html.dark .g3-status--closed,
+html.dark .g3-status--cancelled {
+    background: rgb(255 255 255 / 0.06);
+    color: #94a3b8;
+}
+
+html.dark .g3-timeline__item:not(:last-child)::before {
+    background: rgb(255 255 255 / 0.1);
+}
+
+html.dark .g3-timeline__dot {
+    background: #1a2332;
+    border-color: rgb(255 255 255 / 0.14);
+}
+
+html.dark .fi-body mark {
+    background: rgb(23 105 176 / 0.28);
+    color: #7ec8ff;
+}
+
+html.dark .fi-body ::selection {
+    background: rgb(23 105 176 / 0.38);
+    color: #f1f5f9;
+}
+
+html.dark .fi-body a:not(.fi-btn):not(.g3-locale-switcher__link) {
+    color: #7ec8ff;
+}

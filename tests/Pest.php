@@ -7,8 +7,10 @@ use App\Domain\Enums\Locale;
 use App\Domain\Enums\PreferredChannel;
 use App\Domain\Enums\PreferredPeriod;
 use App\Models\Centre\Centre;
+use App\Models\User;
 use App\Support\Clock;
 use Carbon\CarbonImmutable;
+use Database\Seeders\AdminRolesSeeder;
 use Database\Seeders\BaselineCentresSeeder;
 use Tests\TestCase;
 
@@ -429,4 +431,19 @@ function submitContactPayload(array $overrides = []): SubmitContactMessageData
         honeypot: $overrides['honeypot'] ?? '',
         rateLimitKey: $overrides['rateLimitKey'] ?? 'test-contact-client',
     );
+}
+
+function seedAdminRoles(): void
+{
+    (new AdminRolesSeeder)->run();
+}
+
+function createAdminUser(string $role = 'super_admin', array $overrides = []): User
+{
+    seedAdminRoles();
+
+    $user = User::factory()->create($overrides);
+    $user->assignRole($role);
+
+    return $user;
 }

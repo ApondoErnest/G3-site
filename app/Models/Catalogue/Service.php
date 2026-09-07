@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogue;
 
+use App\Domain\Enums\Locale;
 use App\Models\Centre\Centre;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -55,6 +56,13 @@ class Service extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('sort_order');
+    }
+
+    public function translatedTitle(Locale $locale): string
+    {
+        $title = $this->title ?? [];
+
+        return $title[$locale->value] ?? $title['fr'] ?? $title['en'] ?? $this->code;
     }
 
     public function isAvailableAt(Centre $centre, VehicleCategory $category): bool

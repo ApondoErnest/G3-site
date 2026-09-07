@@ -15,6 +15,11 @@ final class CacheKeys
         return "schedule:centre:{$centreId}";
     }
 
+    public static function alertsActive(): string
+    {
+        return 'alerts:active';
+    }
+
     public static function catalogueServices(): string
     {
         return 'catalogue:services:published';

@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogue;
 
+use App\Domain\Enums\Locale;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -38,6 +39,13 @@ class VehicleCategory extends Model
     public function requiredDocuments(): HasMany
     {
         return $this->hasMany(RequiredDocument::class)->orderBy('sort_order');
+    }
+
+    public function translatedLabel(Locale $locale): string
+    {
+        $label = $this->label ?? [];
+
+        return $label[$locale->value] ?? $label['fr'] ?? $label['en'] ?? $this->code;
     }
 
     public function scopePublished($query)

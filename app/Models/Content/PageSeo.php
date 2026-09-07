@@ -47,4 +47,20 @@ class PageSeo extends Model
     {
         return $this->seo_description[$locale->value] ?? $this->seo_description['fr'] ?? '';
     }
+
+    public function getKey(): string
+    {
+        $page = $this->getAttribute('page');
+
+        if ($page instanceof ContentPage) {
+            return $page->value;
+        }
+
+        return (string) $page;
+    }
+
+    public function getRouteKey(): string
+    {
+        return $this->getKey();
+    }
 }

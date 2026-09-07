@@ -2,6 +2,7 @@
 
 namespace App\Models\Catalogue;
 
+use App\Domain\Enums\Locale;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -32,6 +33,13 @@ class RequiredDocument extends Model
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function translatedLabel(Locale $locale): string
+    {
+        $label = $this->label ?? [];
+
+        return $label[$locale->value] ?? $label['fr'] ?? $label['en'] ?? '';
     }
 
     public function scopeForBooking($query, int $serviceId, int $vehicleCategoryId)

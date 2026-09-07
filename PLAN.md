@@ -83,9 +83,9 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 | | |
 | --- | --- |
 | Active phase | **VI — Core implementation** |
-| Complete | Steps 1–107 |
-| **Active step** | **108** — Auth: five roles, MFA, policies |
-| Pending | Steps 108–182 · Phases VI–X |
+| Complete | Steps 1–116 |
+| **Active step** | **117** — Application shell |
+| Pending | Steps 117–182 · Phases VII–X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -269,15 +269,15 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 ### Administration
 
-- [ ] **108** · ← active · Auth · Five roles, MFA, policies · Forbidden URLs return 403
-- [ ] **109** · Dashboard · Requests, contacts, live centre status
-- [ ] **110** · Centre management · Hours, exceptions, alerts
-- [ ] **111** · Catalogue management
-- [ ] **112** · Tariff management · Draft → reviewed → published → archived
-- [ ] **113** · Appointment management · Illegal transitions rejected
-- [ ] **114** · Content and media · FR/EN tabs · No raw JSON editing
-- [ ] **115** · Audit log
-- [ ] **116** · **Gate — administration accepted**
+- [x] **108** · Auth · Five roles, MFA, policies · [`AdminPanelProvider`](app/Providers/Filament/AdminPanelProvider.php) · [`AuthServiceProvider`](app/Providers/AuthServiceProvider.php)
+- [x] **109** · Dashboard · [`ResolveDashboardData`](app/Actions/Admin/ResolveDashboardData.php) · [`dashboard.blade.php`](resources/views/filament/pages/dashboard.blade.php)
+- [x] **110** · Centre management · Hours, exceptions, alerts
+- [x] **111** · Catalogue management
+- [x] **112** · Tariff management · Draft → reviewed → published → archived
+- [x] **113** · Appointment management · Illegal transitions rejected
+- [x] **114** · Content and media · FR/EN tabs · No raw JSON editing
+- [x] **115** · Audit log
+- [x] **116** · **Gate — administration accepted** · Verified 2026-09-07 · [`docs/10-gate-administration-accepted.md`](docs/10-gate-administration-accepted.md)
 
 ---
 
@@ -286,7 +286,7 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 **Purpose:** Ship each public URL against approved design and live data.  
 **Opens:** Gate 116 · **Gate:** 129 · One page per step
 
-- [ ] **117** · Application shell · Navigation, footer, locale switch
+- [ ] **117** · ← active · Application shell · Navigation, footer, locale switch
 - [ ] **118** · Accueil
 - [ ] **119** · À propos
 - [ ] **120** · Nos centres

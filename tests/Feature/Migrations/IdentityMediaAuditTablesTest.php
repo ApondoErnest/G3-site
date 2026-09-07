@@ -9,8 +9,8 @@ uses(RefreshDatabase::class);
 test('users table has admin identity columns per docs/11-erd.md', function () {
     expect(Schema::hasColumns('users', [
         'is_active',
-        'mfa_secret',
-        'mfa_confirmed_at',
+        'app_authentication_secret',
+        'app_authentication_recovery_codes',
     ]))->toBeTrue();
 });
 
@@ -106,8 +106,8 @@ function insertIdentityUser(): int
         'email' => 'manager-'.uniqid().'@example.com',
         'password' => bcrypt('secret'),
         'is_active' => true,
-        'mfa_secret' => null,
-        'mfa_confirmed_at' => null,
+        'app_authentication_secret' => null,
+        'app_authentication_recovery_codes' => null,
         'created_at' => now(),
         'updated_at' => now(),
     ]);
