@@ -18,10 +18,10 @@ Interactive state specs for the **public site** (wireframes 37–58, hi-fi 59–
 
 | Token | Hex | Use |
 | --- | --- | --- |
-| `--g3-error` | `#C62828` | Error text, borders, icons — **confirmed** (was suggestion in step 34) |
-| `--g3-error-tint` | `#FCEAEA` | Error field background, inline alert background |
-| `--g3-error-border` | `#E57373` | Error input border (AA contrast on white) |
-| `--g3-disabled-bg` | `#F6F7F9` | Disabled control fill |
+| `--g3-error` | `#D92D20` | Error text, borders, icons (alert red) |
+| `--g3-error-tint` | `#FEF3F2` | Error field background, inline alert background |
+| `--g3-error-border` | `#FDA29B` | Error input border (AA contrast on white) |
+| `--g3-disabled-bg` | `#F8FAFC` | Disabled control fill |
 | `--g3-disabled-text` | `#92979D` | Disabled label and value |
 | `--g3-disabled-border` | `#E4E7EC` | Disabled border |
 
@@ -37,7 +37,7 @@ All other tokens: [34-design-system.md](34-design-system.md).
 | **Disabled** | `cursor: not-allowed`; no hover change; excluded from tab order |
 | **Error copy** | Label + message below field; icon optional; never colour alone (NFR-A-05) |
 | **Motion** | State transitions 150ms; honour `prefers-reduced-motion` |
-| **Orange** | Never used for error — errors are red; orange stays accent/CTA |
+| **Orange** | Never used for error or default input borders — bands, current step, micro accents only |
 
 ### 1.3 State legend (wireframes)
 
@@ -54,36 +54,36 @@ All other tokens: [34-design-system.md](34-design-system.md).
 
 ## 2. Buttons
 
-### 2.1 Primary (Safety orange CTA)
+### 2.1 Primary (Royal blue CTA)
 
-| State | Background | Text | Border | Other |
+| State | Background | Text | Border / accent | Other |
 | --- | --- | --- | --- | --- |
-| **DEF** | `--g3-orange` | white | none | min-height 44px, `radius-md`, Inter 600 |
-| **HOV** | `#D9691A`* | white | none | ~8% darken |
-| **FOC** | `--g3-orange` | white | none | 2px `--g3-focus` ring, 2px offset |
+| **DEF** | `--g3-royal` | white | optional 3px bottom `--g3-orange` | min-height 44px, `radius-md`, Inter 600 |
+| **HOV** | `#124F96`* | white | same | ~8% darken |
+| **FOC** | `--g3-royal` | white | — | 2px `--g3-focus` ring, 2px offset |
 | **ERR** | — | — | — | Use inline alert above form; button stays DEF until submit attempted |
 | **DIS** | `--g3-disabled-bg` | `--g3-disabled-text` | `--g3-disabled-border` 1px | no shadow |
 
-\*Computed hover; implement as `#D9691A` or filter — match visually in hi-fi.
+\*Computed hover for `#145DAA`.
 
-**Labels:** “Envoyer la demande”, “Suivre ma demande”, “Rendez-vous & Suivi” (header).
+**Labels:** “Prendre rendez-vous”, “Envoyer la demande”, “Rendez-vous & Suivi” (header).
 
 ### 2.2 Secondary (outline)
 
 | State | Background | Text | Border |
 | --- | --- | --- | --- |
-| **DEF** | white | `--g3-blue-tech` | 1px `--g3-blue-tech` |
-| **HOV** | `--g3-blue-soft` | `--g3-blue-bright` | 1px `--g3-blue-bright` |
-| **FOC** | white | `--g3-blue-tech` | 1px `--g3-blue-tech` + focus ring |
+| **DEF** | white | `--g3-royal` | 1px `--g3-royal` |
+| **HOV** | `--g3-blue-soft` | `--g3-blue-deep` | 1px `--g3-blue-deep` |
+| **FOC** | white | `--g3-royal` | 1px `--g3-royal` + focus ring |
 | **DIS** | `--g3-disabled-bg` | `--g3-disabled-text` | `--g3-disabled-border` |
 
 ### 2.3 Ghost / link button
 
 | State | Text | Decoration |
 | --- | --- | --- |
-| **DEF** | `--g3-blue-tech` | none |
-| **HOV** | `--g3-blue-bright` | underline |
-| **FOC** | `--g3-blue-tech` | underline + focus ring around padded hit area |
+| **DEF** | `--g3-royal` | none |
+| **HOV** | `--g3-blue-deep` | underline |
+| **FOC** | `--g3-royal` | underline + focus ring around padded hit area |
 | **DIS** | `--g3-disabled-text` | none |
 
 ---
@@ -95,9 +95,9 @@ All other tokens: [34-design-system.md](34-design-system.md).
 | State | Text | Indicator |
 | --- | --- | --- |
 | **DEF** | `--g3-charcoal` | none |
-| **HOV** | `--g3-blue-tech` | none |
-| **FOC** | `--g3-blue-tech` | focus ring on padded 44px block |
-| **Active** | `--g3-blue-tech` | 2px bottom `--g3-orange` (Safety Line segment) |
+| **HOV** | `--g3-royal` | none |
+| **FOC** | `--g3-royal` | focus ring on padded 44px block |
+| **Active** | `--g3-blue-deep` | 3px bottom `--g3-orange` (micro band) |
 | **DIS** | — | Not used in V1 public nav |
 
 ### 3.2 Utility CTA (header)
@@ -109,7 +109,7 @@ Uses **primary button** states (§2.1). On mobile menu panel, full-width primary
 | State | Style |
 | --- | --- |
 | **DEF** | Both locales visible; current = `--g3-charcoal` weight 600; other = `--g3-muted` weight 400 |
-| **HOV** | Non-current locale → `--g3-blue-tech` |
+| **HOV** | Non-current locale → `--g3-royal` |
 | **FOC** | Focus ring on the locale link being activated |
 | **DIS** | — | Not used |
 
@@ -120,7 +120,7 @@ Separator: `|` in `--g3-metallic`.
 | State | Icon | Background |
 | --- | --- | --- |
 | **DEF** | Lucide menu, `--g3-charcoal` | transparent |
-| **HOV** | `--g3-blue-tech` | `--g3-blue-soft` circle 44px |
+| **HOV** | `--g3-royal` | `--g3-blue-soft` circle 44px |
 | **FOC** | focus ring | |
 | **Open** | Lucide X | same as HOV — panel visible |
 
@@ -138,7 +138,7 @@ Form notice (suggestion): muted one-liner above submit — *Ces informations ser
 | --- | --- | --- | --- |
 | **DEF** | white | 1px `--g3-border` | `--g3-charcoal` |
 | **HOV** | white | 1px `--g3-metallic` | `--g3-charcoal` |
-| **FOC** | white | 1px `--g3-blue-tech` | `--g3-charcoal` + focus ring |
+| **FOC** | white | 1px `--g3-royal` | `--g3-charcoal` + focus ring + subtle blue halo |
 | **ERR** | `--g3-error-tint` | 1px `--g3-error-border` | `--g3-charcoal` + error message below |
 | **DIS** | `--g3-disabled-bg` | `--g3-disabled-border` | `--g3-disabled-text` |
 
@@ -157,9 +157,9 @@ Same border/focus/error/disabled as text input. Chevron Lucide `--g3-muted`. Dro
 | State | Control | Label |
 | --- | --- | --- |
 | **DEF** | 20px box, 1px `--g3-border` | `--g3-charcoal` |
-| **HOV** | border `--g3-blue-tech` | — |
+| **HOV** | border `--g3-royal` | — |
 | **FOC** | focus ring on box | — |
-| **Checked** | fill `--g3-blue-tech`, white check/dot | — |
+| **Checked** | fill `--g3-royal`, white check/dot | — |
 | **ERR** | border `--g3-error-border` | error message below group |
 | **DIS** | `--g3-disabled-bg`, muted mark | `--g3-disabled-text` |
 
@@ -178,7 +178,7 @@ Two tabs: **Demande** / **Request** · **Suivi** / **Track** ([33-information-ar
 | State | Style |
 | --- | --- |
 | **DEF (inactive tab)** | `--g3-muted` text; bottom border transparent |
-| **HOV** | `--g3-blue-tech` text |
+| **HOV** | `--g3-royal` text |
 | **FOC** | focus ring on tab button |
 | **Active tab** | `--g3-charcoal` text weight 600; 3px bottom `--g3-orange` |
 | **DIS** | — | Not used |
@@ -193,20 +193,34 @@ Tab panel switches content; URL query `?tab=suivi` / `?tab=track` syncs active t
 
 Only **DEF** — white, `shadow-sm`, `radius-md`. No hover change.
 
-### 6.2 Clickable card (centre, service, intent)
+### 6.2 Centre card (signature band pattern)
 
-| State | Shadow | Border | Transform |
-| --- | --- | --- | --- |
-| **DEF** | `shadow-sm` | 1px `--g3-border` or none | none |
-| **HOV** | `shadow-md` | 1px `--g3-blue-tech` | none (no scale — avoids CLS) |
-| **FOC** | `shadow-md` | 1px `--g3-blue-tech` | focus ring around card |
-| **DIS** | `shadow-sm` | `--g3-disabled-border` | opacity 0.7; no pointer |
+Default structure ([34-design-system.md](34-design-system.md) §3.2):
 
-Optional card-top Safety Line (3px orange) in all states except **DIS** (line → `--g3-disabled-border`).
+```text
+photo → white content → 3–4px orange band → royal blue footer (actions)
+```
 
-### 6.3 Contact intent tile
+| State | Shadow | Footer |
+| --- | --- | --- |
+| **DEF** | `shadow-sm` | Royal blue action row · white text/icons |
+| **HOV** | `shadow-md` | Same · optional slight royal darken on footer |
+| **FOC** | `shadow-md` | Focus ring around card; footer links get individual focus rings |
+| **DIS** | `shadow-sm` | Greyscale footer · opacity 0.7 |
 
-Clickable card pattern. **Selected** intent: border 2px `--g3-blue-tech`, background `--g3-blue-soft`, check icon `--g3-blue-tech` top-right.
+Do not use card-top orange only without royal footer — use the full **card band** pattern.
+
+### 6.3 Clickable card (service, generic)
+
+| State | Shadow | Border |
+| --- | --- | --- |
+| **DEF** | `shadow-sm` | 1px `--g3-border` or none |
+| **HOV** | `shadow-md` | 1px `--g3-royal` |
+| **FOC** | `shadow-md` | focus ring around card |
+
+### 6.4 Contact intent tile
+
+**Selected** intent: 3px top or left `--g3-orange` micro band + 2px `--g3-royal` border + `--g3-blue-soft` background + check icon `--g3-royal`.
 
 ---
 
@@ -226,22 +240,32 @@ Status is **never colour alone** (NFR-A-04):
 
 No **HOV** on read-only pills. **Closed is not red** — avoid alarm styling for normal overnight closure.
 
-### 7.2 Appointment tracking timeline
+### 7.2 Appointment request progress (step bar)
 
-Customer-safe statuses only (FR-TR-04). Each step: icon + label + date (muted).
-
-| Step state | Icon colour | Label |
+| Step state | Dot / line | Label |
 | --- | --- | --- |
-| **Completed** | `--g3-success` | `--g3-charcoal` |
-| **Current** | `--g3-blue-tech` | weight 600 |
-| **Upcoming** | `--g3-metallic` | `--g3-muted` |
-| **Cancelled** | `--g3-muted` | strikethrough optional on label |
+| **Completed** | `--g3-royal` fill | `--g3-charcoal` |
+| **Current** | `--g3-orange` fill | weight 600 |
+| **Future** | `--g3-border` / `--g3-metallic` | `--g3-muted` |
 
-### 7.3 Inline alerts
+### 7.3 Appointment tracking timeline
+
+Customer-safe statuses only (FR-TR-04). Functional colour over brand:
+
+| Status (code) | Colour | Notes |
+| --- | --- | --- |
+| `received`, `under_review` | `--g3-royal` | Neutral processing |
+| `modification_requested` | `--g3-orange` | Needs customer attention |
+| `confirmed`, `completed` | `--g3-success` | Positive outcome |
+| `cancelled` | `--g3-error` | Not normal closure styling |
+
+Each step: icon + label + date (muted). Never colour alone (NFR-A-04).
+
+### 7.4 Inline alerts
 
 | Variant | Background | Border-left | Icon |
 | --- | --- | --- | --- |
-| **Info** | `--g3-blue-soft` | 4px `--g3-blue-tech` | `info` |
+| **Info** | `--g3-blue-soft` | 4px `--g3-royal` | `info` |
 | **Success** | `#E8F5EE` | 4px `--g3-success` | `circle-check` |
 | **Error** | `--g3-error-tint` | 4px `--g3-error` | `circle-alert` |
 

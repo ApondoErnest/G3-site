@@ -34,7 +34,7 @@ All items below are **missing** until G3 ingests them ([08-content](../docs/08-c
 | Asset | Format | Use |
 | --- | --- | --- |
 | Logo — primary (colour) | SVG + PNG @2x | Header, footer, OG default |
-| Logo — reversed (white) | SVG + PNG @2x | Deep blue hero bands |
+| Logo — reversed (white) | SVG + PNG @2x | Royal blue trust bars, footer, road-safety sections |
 | Favicon | ICO + SVG | Browser tab |
 | Social share default | 1200×630 JPG/PNG | OG/Twitter when page has no hero |
 
@@ -97,7 +97,7 @@ For **École de Police** and **Nomayos**, each:
 
 ### 3.2 Composition
 
-- **Hero:** Subject centre-weighted; leave **safe title area** (lower third or left 40%) for Manrope headline on deep blue overlay ([34-design-system.md](34-design-system.md)).
+- **Hero:** Subject centre-weighted; leave **safe title area** (left 40% or lower third) for Manrope headline on **white editorial hero** — not a dark blue overlay ([34-design-system.md](34-design-system.md)). Real centre photography should read bright and clean like the physical environment.
 - **Cards:** Centre cards use 4:3 or 16:9 top image; faces optional — building/lane preferred for hub.
 - **Gallery:** Centre detail — 6–12 images max published; chronological or spatial order (exterior → reception → lane).
 - **Team:** Head-and-shoulders or half-body; neutral background; consistent crop ratio across members.

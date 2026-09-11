@@ -22,7 +22,7 @@ Visitors cannot, from one trustworthy place: see two centres open 7j/7 including
 
 Credibility, clear centres and process, transparent tariffs, appointment **requests** + tracking, road safety, admin so nobody edits Blade to change a phone number.
 
-Feel: technical, premium-editorial, G3 (Safety Line), not a generic automotive theme.
+Feel: technical, premium-editorial, G3 Signature Safety Bands (white · orange band · royal blue), not a generic dark-navy-and-orange automotive theme.
 
 ## Success (not “the site is online”)
 

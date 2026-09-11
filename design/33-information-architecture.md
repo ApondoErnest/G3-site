@@ -73,7 +73,7 @@ flowchart TD
 | --- | --- | --- |
 | **Brand** | Logo → home | Same target in both locales |
 | **Primary nav** | Accueil · À propos · Nos centres · Services · Visite technique · Tarifs · Sécurité routière · Contact | Seven items — centre detail pages are **not** top-level |
-| **Utility CTA** | Rendez-vous & Suivi | Visually distinct (Safety orange accent); always visible on desktop |
+| **Utility CTA** | Rendez-vous & Suivi | Royal blue button · white text · optional orange micro edge ([34-design-system.md](34-design-system.md)); always visible on desktop |
 | **Locale** | FR \| EN | Switches to the **equivalent page** in the other language (FR-LO-02); on appointment page, preserves active tab where possible |
 
 **Nos centres:** Nav label links to the centres hub. Centre detail pages are reached from the hub (cards, map, compare) — not from a persistent mega-menu in V1. Wireframes may show optional in-page sub-nav on the hub only.

@@ -1,14 +1,15 @@
-# 34 — Design system
+# 34 — Design system · G3 Signature Safety Bands
 
-| Delivery | Phase IV · step **34** |
+| Delivery | Phase IV · step **34** · **Revised** from real centre photography |
 | --- | --- |
-| Specs | [01-baseline](../docs/01-baseline.md) · [02-charter](../docs/02-charter.md) · [05-quality](../docs/05-quality.md) · [09-architecture](../docs/09-architecture.md) |
-| IA | [33-information-architecture.md](33-information-architecture.md) |
-| Next | Step 35 — Media guidelines |
+| Specs | [01-baseline](../docs/01-baseline.md) · [02-charter](../docs/02-charter.md) · [05-quality](../docs/05-quality.md) |
+| Next | [36-component-states.md](36-component-states.md) |
 
-Visual foundation for wireframes (37–58), hi-fi (59–69), and public implementation (117–129). **No application CSS in this step** — tokens are defined here for consistent design artefacts; Tailwind theme wiring happens in Phase VII.
+Visual foundation for wireframes (37–58), hi-fi (59–69), and public implementation (117–129). **No application CSS in this step** — tokens defined here; Tailwind wiring in Phase VII.
 
-**Feel:** technical, premium-editorial, distinctly G3 — not a generic automotive template ([02-charter](../docs/02-charter.md)).
+**Supersedes:** the earlier model that treated blue and orange as co-equal brand colours. G3’s physical identity is **white above → thin orange safety band → royal blue below**. The website digitises that rhythm.
+
+**Feel:** bright, clean, controlled, authoritative — aligned with *Sécurité. Simplicité. Confiance.*
 
 ---
 
@@ -16,292 +17,243 @@ Visual foundation for wireframes (37–58), hi-fi (59–69), and public implemen
 
 | Principle | Application |
 | --- | --- |
-| **Accuracy before decoration** | Live data (hours, prices, status) is visually primary; marketing chrome is secondary. |
-| **Safety Line signature** | Orange accent line marks G3-owned sections — recognisable without logo overload. |
-| **Editorial clarity** | Generous whitespace, strong hierarchy, short action paths ([33-information-architecture.md](33-information-architecture.md)). |
-| **Mobile first** | Layouts work at ~320px on a normal Cameroon connection (NFR-P-01, NFR-D-02). |
-| **Bilingual tolerance** | Components accommodate ~30% longer English without breaking (NFR-B-03). |
-| **Accessible by default** | WCAG 2.2 AA intent; orange never carries meaning alone (NFR-A-01, NFR-A-04). |
+| **White for clarity** | Dominant canvas — pages feel bright like the centres, not a saturated blue/orange site |
+| **Orange for attention** | Thin bands and micro accents only — strong because controlled |
+| **Royal blue for confidence** | Grounding fields, CTAs, institutional sections, footer |
+| **Accuracy before decoration** | Live data (hours, prices, status) is visually primary |
+| **Editorial clarity** | Generous whitespace, strong hierarchy ([33-information-architecture.md](33-information-architecture.md)) |
+| **Mobile first** | ~320px on a normal Cameroon connection (NFR-P-01) |
+| **Accessible by default** | WCAG 2.2 AA intent; status never colour alone (NFR-A-04) |
 
-**Avoid:** stock garage imagery tropes, neon racing palettes, gradient-heavy SaaS kits, Flux/Laravel UI as the public chrome ([09-architecture](../docs/09-architecture.md)).
+**Avoid:** large orange heroes · orange cards everywhere · 50/50 blue/orange layouts · orange body text · orange prices · orange form borders · dark-blue heroes (contradicts real centres) · stock garage / MOT tropes · Flux as public chrome.
 
 ---
 
 ## 2. Colour tokens
 
-Source of truth for hex values: [01-baseline](../docs/01-baseline.md). Semantic names below are for design and implementation.
+Hex source of truth: [01-baseline](../docs/01-baseline.md).
 
-### 2.1 Brand palette
+### 2.1 Palette
 
 | Token | CSS variable | Hex | Role |
 | --- | --- | --- | --- |
-| Deep blue | `--g3-blue-deep` | `#12315B` | Header/footer backgrounds, hero overlays, primary headings on light |
-| Technical blue | `--g3-blue-tech` | `#1769B0` | Primary buttons, links, icon default, focus ring |
-| Bright blue | `--g3-blue-bright` | `#1479CF` | Hover/active links, chart accents, secondary emphasis |
-| Safety orange | `--g3-orange` | `#F47A20` | **Safety Line**, primary CTA, key highlights |
-| Orange tint | `--g3-orange-tint` | `#FFF2E8` | Soft highlight backgrounds, alert/info panels |
-| White | `--g3-white` | `#FFFFFF` | Page surface, cards |
-| Soft blue | `--g3-blue-soft` | `#F1F6FB` | Alternate section background |
-| Grey | `--g3-grey` | `#F6F7F9` | Page canvas, subtle borders |
-| Metallic | `--g3-metallic` | `#92979D` | Disabled icons, decorative rules |
-| Charcoal | `--g3-charcoal` | `#202B37` | Body text, H1–H3 on light |
-| Muted | `--g3-muted` | `#667085` | Secondary text, captions, meta |
-| Success | `--g3-success` | `#168653` | Open now, confirmed states |
+| Pure white | `--g3-white` | `#FFFFFF` | Main backgrounds, nav, cards, forms, editorial areas |
+| Clean wall white | `--g3-wall` | `#F8FAFC` | Soft page canvas alternative |
+| G3 Royal Blue | `--g3-royal` | `#145DAA` | Main saturated brand · CTAs · section footers · trust bars · road-safety hero |
+| Deep Inspection Blue | `--g3-blue-deep` | `#0B2F5B` | Headings · high-contrast buttons · nav text · footer base · formal typography |
+| Soft Royal Blue | `--g3-blue-soft` | `#EEF5FC` | Light tinted sections · tariff finder background |
+| G3 Safety Orange | `--g3-orange` | `#F47721` | **Signature band** · 3–8px lines · progress current step · micro accents |
+| Soft orange | `--g3-orange-tint` | `#FFF2E8` | Subtle orange wash — sparingly |
+| Charcoal | `--g3-charcoal` | `#1F2937` | Body text on white |
+| Cool grey | `--g3-muted` | `#667085` | Secondary text, captions |
+| Concrete grey | `--g3-border` | `#E5E7EB` | Borders, dividers |
+| Metal grey | `--g3-metallic` | `#92979D` | Equipment visuals, disabled icons |
+| Success green | `--g3-success` | `#168653` | Open · confirmed · completed |
+| Alert red | `--g3-error` | `#D92D20` | Real errors only |
+| Safety yellow | `--g3-caution` | `#F4C430` | Technical caution only |
 
 ### 2.2 Semantic aliases
 
 | Semantic | Maps to | Usage |
 | --- | --- | --- |
-| `--g3-surface-page` | `--g3-grey` | Default page background |
-| `--g3-surface-card` | `--g3-white` | Cards, modals, form panels |
-| `--g3-surface-alt` | `--g3-blue-soft` | Band sections (journey, proof) |
-| `--g3-text-primary` | `--g3-charcoal` | Body copy, labels |
-| `--g3-text-secondary` | `--g3-muted` | Help text, timestamps |
-| `--g3-text-inverse` | `--g3-white` | Text on deep blue |
-| `--g3-border` | `#E4E7EC`* | Dividers, input borders |
-| `--g3-border-strong` | `--g3-metallic` | Table headers, card outlines |
-| `--g3-focus` | `--g3-blue-tech` | Keyboard focus ring (NFR-A-03) |
-| `--g3-error` | `#C62828` | Form errors, alert borders — see [36-component-states.md](36-component-states.md) |
+| `--g3-surface-page` | `--g3-white` or `--g3-wall` | Page background |
+| `--g3-surface-card` | `--g3-white` | Cards, modals, forms |
+| `--g3-surface-brand` | `--g3-royal` | Trust bars, card footers, road-safety fields |
+| `--g3-text-primary` | `--g3-charcoal` | Body |
+| `--g3-text-heading` | `--g3-blue-deep` | H1–H3 on light backgrounds |
+| `--g3-text-inverse` | `--g3-white` | Text on royal/deep blue |
+| `--g3-focus` | `--g3-royal` | Focus ring + input focus border |
+| `--g3-text-link` | `--g3-royal` | Inline links |
 
-\*Derived neutrals for UI chrome; not brand colours.
-
-### 2.3 Usage balance
-
-Target composition on marketing pages ([01-baseline](../docs/01-baseline.md)):
+### 2.3 Visual distribution
 
 | Family | Share | Notes |
 | --- | ---: | --- |
-| White + grey + soft blue | 60–65% | Air and readability |
-| Blues | 20–25% | Structure, trust, navigation |
-| Orange | 5–8% | Safety Line + one primary CTA per viewport — **never body text** (NFR-A-04) |
+| White / off-white | ~60% | Dominant — cleanliness and transparency |
+| Royal + deep blues | ~28% | Authority and grounding |
+| Orange | ~5% | Bands and accents only |
+| Grey + functional | ~7% | Structure, borders, status colours |
 
 ### 2.4 Colour rules
 
-- **Orange is accent only** — Safety Line, primary CTA fill, icon emphasis, active tab indicator. Not paragraphs, not links, not form labels.
-- **Status is not colour alone** — open/closed, appointment status: icon + label + colour (NFR-A-04).
-- **Contrast** — charcoal on white and white on deep blue meet AA for normal text; muted text only for non-essential meta.
-- **Dark sections** — deep blue bands with white text; Safety Line stays orange for brand continuity.
+- **Orange is never a large background.** Use as 3–8px bands, selected-state lines, current step, small labels, hover details.
+- **Primary CTA fill is Royal Blue**, white text — not orange. Optional 3–4px orange edge on primary CTA only.
+- **Prices** in deep blue or charcoal — never orange. Orange marks *official* or *active selection*, not monetary amounts.
+- **Functional colours override brand** for appointment/tracking status (see [36-component-states.md](36-component-states.md)).
+- **Deep Inspection Blue ≠ Royal Blue** — deep for typography/contrast; royal for brand fields.
 
 ---
 
-## 3. Typography
+## 3. G3 Signature Safety Bands
 
-### 3.1 Typefaces
-
-| Role | Family | Weights loaded | Fallback |
-| --- | --- | --- | --- |
-| **Display / headings** | **Manrope** | 600, 700 | system-ui, sans-serif |
-| **Body / UI** | **Inter** | 400, 500, 600 | system-ui, sans-serif |
-
-Subset only — no full family download (NFR-P-05). Implementation: self-hosted woff2 via Vite; no Google Fonts CDN in production.
-
-**Note:** Laravel’s default shell currently uses Instrument Sans; replace with Manrope/Inter when public templates are built (Phase VII).
-
-### 3.2 Type scale
-
-Base size **16px** (`1rem`) on mobile; root unchanged on desktop.
-
-| Token | Font | Size / line | Weight | Use |
-| --- | --- | --- | --- | --- |
-| `display-xl` | Manrope | 2.5rem / 1.15 | 700 | Hero headline (one per page) |
-| `display-lg` | Manrope | 2rem / 1.2 | 700 | Page H1 |
-| `heading-lg` | Manrope | 1.5rem / 1.25 | 600 | Section H2 |
-| `heading-md` | Manrope | 1.25rem / 1.3 | 600 | Card titles, H3 |
-| `heading-sm` | Manrope | 1.125rem / 1.35 | 600 | Subsections, widget titles |
-| `body-lg` | Inter | 1.125rem / 1.6 | 400 | Lead paragraphs |
-| `body` | Inter | 1rem / 1.6 | 400 | Default body |
-| `body-sm` | Inter | 0.875rem / 1.5 | 400 | Meta, captions, footer |
-| `label` | Inter | 0.875rem / 1.4 | 500 | Form labels, nav items |
-| `button` | Inter | 0.9375rem / 1.2 | 600 | Buttons, tabs |
-| `overline` | Inter | 0.75rem / 1.4 | 600 | Eyebrows, trust chips — uppercase, +0.04em tracking |
-
-### 3.3 Typography rules
-
-- One `display-xl` or `display-lg` per page — no competing heroes.
-- Manrope for headings only; Inter for everything else (including button text).
-- Maximum line length **~65ch** for long prose (road safety, visite technique).
-- **English overflow:** allow heading line-breaks; avoid fixed-width labels in nav; test FR/EN pairs on the same wireframe (NFR-B-03).
-- Agrément and slogans use `body-sm` or `overline` — never larger than the page H1.
-- Currency amounts: Inter `heading-md` tabular figures; suffix `FCFA` in `body-sm`.
-
----
-
-## 4. Safety Line
-
-The **Safety Line** is G3’s signature motif — the visual shorthand for “Sécurité” in the brand. It separates G3 from generic automotive themes ([02-charter](../docs/02-charter.md)).
-
-### 4.1 Definition
-
-| Property | Value |
-| --- | --- |
-| Colour | Safety orange `#F47A20` (`--g3-orange`) |
-| Default thickness | **4px** |
-| Default length | **64px** (short accent) |
-| Cap | Square (no rounded caps) |
-| Orientation | Horizontal by default |
-
-### 4.2 Variants
-
-| Variant | Spec | When |
-| --- | --- | --- |
-| **Accent** | 64×4px, left-aligned | Below section eyebrows, above H2 |
-| **Hero** | 96×4px, left-aligned | Hero content block, below headline or slogan |
-| **Full bleed** | 100% width × 3px | Between major page bands (use sparingly — max 2 per page) |
-| **Card top** | 100% width × 3px | Top edge of centre/tariff cards |
-| **CTA anchor** | 48×4px, centred above primary button | Appointment landing, homepage closing CTA |
-| **Vertical** | 4px wide × 32px | Optional pull-quote or timeline marker — rare |
-
-### 4.3 Placement rules
-
-**Use on:** section intros, hero, centre cards, tariff matrix header, road-safety article sections, confirmation screens.
-
-**Do not use on:** body paragraphs, inline links, form fields, every list item, Filament admin (admin uses Filament chrome — step 70).
-
-**Pairing:** Safety Line often appears with an **overline** label (e.g. “Nos centres”, “Tarifs officiels”) in muted or technical blue — line sits between overline and heading.
-
-### 4.4 Examples (wireframe intent)
+The recurring digital composition translated from centre walls:
 
 ```text
-[overline · NOS CENTRES]
-━━━━━━━━━━━━━━━          ← Safety Line accent (64px)
-Trouver un centre         ← heading-lg Manrope
+WHITE CONTENT
+WHITE CONTENT
+━━━━━━━━━━━━  ← orange band (3–8px)
+████████████  ← royal blue base
 ```
+
+Use at different scales — not literally on every small block.
+
+### 3.1 Full band
+
+White section → **5–7px orange horizontal rule** → **royal blue field** (white text).
+
+**Use:** homepage hero transition · centres section intro · road-safety entry · final CTA · footer transition.
+
+### 3.2 Card band
 
 ```text
-┌─────────────────────────────── card ───
-│━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ card top
-│  École de Police          [Ouvert]
-│  ...
+┌──────────────────────────┐
+│  photo / white content   │
+├──────────────────────────┤  ← 3–4px orange
+│  ROYAL BLUE FOOTER       │  actions: itinerary · call · RDV
+└──────────────────────────┘
 ```
 
----
+**Use:** centre cards · service cards · tariff summary · contact centre cards. **Signature component** — strongest link to physical G3 architecture.
 
-## 5. Spacing and layout
+### 3.3 Micro band
 
-4px base grid.
+Short **3–4px orange line** under section heading or active nav/filter/tab — then deep blue or charcoal heading text.
 
-| Token | Value | Typical use |
-| --- | --- | --- |
-| `--g3-space-1` | 4px | Tight icon gap |
-| `--g3-space-2` | 8px | Inline spacing |
-| `--g3-space-3` | 12px | Compact padding |
-| `--g3-space-4` | 16px | Default component padding |
-| `--g3-space-5` | 20px | Card padding (mobile) |
-| `--g3-space-6` | 24px | Section gap (mobile) |
-| `--g3-space-8` | 32px | Card padding (desktop) |
-| `--g3-space-10` | 40px | Between components |
-| `--g3-space-12` | 48px | Section padding (mobile) |
-| `--g3-space-16` | 64px | Section padding (desktop) |
-| `--g3-space-20` | 80px | Hero vertical padding |
-| `--g3-space-24` | 96px | Major band separation |
+**Use:** section intros · active navigation · selected filters · tariff page hero rule.
 
-### Layout
+### 3.4 Deprecated patterns
 
-| Breakpoint | Width | Container |
-| --- | --- | --- |
-| Mobile | 320px–639px | 16px horizontal margin |
-| Tablet | 640px–1023px | max-width 720px, 24px margin |
-| Desktop | 1024px+ | max-width **1200px**, centred, 32px margin |
-
-12-column grid on desktop; 4-column on mobile. Gutters: 24px desktop, 16px mobile.
+Do **not** use: full-bleed dark-blue heroes · orange primary buttons · card-top orange as the only card brand element without blue footer · alternating orange sections.
 
 ---
 
-## 6. Radius, shadow, border
+## 4. Page patterns (colour rhythm)
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `--g3-radius-sm` | 6px | Inputs, chips |
-| `--g3-radius-md` | 10px | Buttons, cards |
-| `--g3-radius-lg` | 16px | Modals, hero media |
-| `--g3-radius-full` | 9999px | Status pills, avatar |
+### 4.1 Header
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `--g3-shadow-sm` | `0 1px 2px rgba(32,43,55,0.06)` | Cards at rest |
-| `--g3-shadow-md` | `0 4px 12px rgba(32,43,55,0.08)` | Dropdowns, sticky header |
-| `--g3-shadow-lg` | `0 12px 32px rgba(32,43,55,0.12)` | Modals |
+Almost entirely **white**.
 
-Borders: 1px solid `--g3-border` default; 2px `--g3-focus` on focus-visible (offset 2px).
-
----
-
-## 7. Icons
-
-| Rule | Detail |
+| Zone | Treatment |
 | --- | --- |
-| Library | **Lucide** (~2px stroke) public site ([01-baseline](../docs/01-baseline.md), [09-architecture](../docs/09-architecture.md)) |
-| Default colour | Technical blue `#1769B0` |
-| Emphasis | Safety orange for CTA-accompanying icons only |
-| Size | 20px inline · 24px buttons · 32px feature tiles |
-| Touch target | Minimum **44×44px** interactive area (NFR-A-08) |
-| Custom | Bench/tester SVGs for equipment sections — match 2px stroke weight |
+| Utility strip | Thin **royal blue** bar · white text · Yaoundé · hours · phone · FR \| EN |
+| Main nav | White background · deep blue / royal logo and links |
+| Active nav item | Short **orange underline** (micro band) |
+| CTA “Rendez-vous & Suivi” | **Royal blue** button · white text · optional orange 3px bottom edge |
 
-Filament admin uses native Filament/Heroicons — not Lucide — per step 70.
+### 4.2 Homepage (conceptual rhythm)
+
+| Zone | Background |
+| --- | --- |
+| 01 Hero | White editorial · real photo · deep blue headline · royal blue primary CTA |
+| — | Orange band |
+| — | Royal blue trust strip (2 centres · 7j/7 · agrément) |
+| 02 Quick actions | White cards · royal blue icons · orange micro accents |
+| 03 Slogan values | Soft blue or white · three editorial columns — not saturated boxes |
+| 04 Journey | White · royal blue timeline · orange current step |
+| 05 Tariff finder | Soft royal `#EEF5FC` · white navigator · royal tabs · orange active indicator |
+| 06 Controls | White + photo · royal content panel · orange labels |
+| 07 Centres | White · **card band** centre cards |
+| 08 Team / proof | White or light grey · real staff photos |
+| 09 Road safety | **Full royal blue field** · white text · orange headline accent |
+| 10 Final CTA | White upper · orange divider · royal lower action bar |
+| 11 Footer | Royal blue body · **4px orange top line** · deep blue copyright strip |
+
+### 4.3 Other pages (summary)
+
+| Page | Direction |
+| --- | --- |
+| **Tarifs** | Mostly white · prices in deep blue/charcoal · selected tab royal + white · orange = active/official marker |
+| **Rendez-vous** | Progress: completed royal · **current orange** · future grey |
+| **À propos** | White hero + photo · orange line · royal authority panel (agrément) · white editorial sections |
+| **Visite technique** | White clarity · royal side panels for equipment/process · orange caution on counter-visit |
+| **Sécurité routière** | Royal dominates · white/orange bridge · orange as safety marker only |
+| **Contact** | White · intent cards white with royal icons · selected = orange line + royal border · centre cards use **card band** |
 
 ---
 
-## 8. Core components (visual spec)
+## 5. Typography
 
-Detailed states in [36-component-states.md](36-component-states.md). Baseline appearance:
+Unchanged from prior spec — Manrope (600, 700) for display; Inter (400, 500, 600) for body/UI. Subset only (NFR-P-05).
+
+| Token | Use |
+| --- | --- |
+| `display-xl` / `display-lg` | Hero and page H1 — colour `--g3-blue-deep` on white heroes |
+| `body` | `--g3-charcoal` on white |
+| `overline` | Eyebrows e.g. “VISITE TECHNIQUE AUTOMOBILE” — optional `--g3-orange` on white heroes |
+
+Currency: Inter tabular figures · deep blue · never orange.
+
+Full scale: see prior revision §3.2 in git history if needed; values unchanged.
+
+---
+
+## 6. Spacing, radius, shadow, icons
+
+4px grid · container max **1200px** · breakpoints 320 / 640 / 1024 — unchanged.
+
+| Icons | Rule |
+| --- | --- |
+| Library | Lucide ~2px stroke |
+| Default | `--g3-royal` |
+| On royal blue fields | white |
+| Orange | Band accents and current-step markers only — not default icon fill |
+
+---
+
+## 7. Core components
+
+States in [36-component-states.md](36-component-states.md).
 
 | Component | Spec |
 | --- | --- |
-| **Primary button** | Safety orange fill, white text, `radius-md`, min-height 44px; hover darken ~8%; focus ring |
-| **Secondary button** | White fill, 1px `--g3-blue-tech` border, tech blue text |
-| **Ghost / link** | Tech blue text, underline on hover; no orange |
-| **Header** | White or deep blue variant; sticky on scroll; shadow-sm when scrolled |
-| **Nav link** | Inter `label`; active = tech blue text + optional 2px bottom Safety Line |
-| **Utility CTA** | Primary button styling; label “Rendez-vous & Suivi” |
-| **Card** | White surface, `radius-md`, `shadow-sm`, optional card-top Safety Line |
-| **Live status pill** | Success green + label “Ouvert actuellement” / icon; closed = muted + charcoal — not red |
-| **Form field** | 44px height, `radius-sm`, border `--g3-border`; states in [36-component-states.md](36-component-states.md) |
+| **Primary button** | `--g3-royal` fill · white text · 44px min-height · optional 3px orange bottom edge |
+| **Secondary button** | White · 1px `--g3-royal` border · royal text |
+| **Header** | White sticky · utility strip royal · shadow-sm on scroll |
+| **Nav active** | Royal or deep text · **orange underline** micro band |
+| **Centre card** | Photo → white body → **card band** footer (signature) |
+| **Live status pill** | Green open · grey closed · never red for normal closure |
+| **Form field** | White · concrete border · **royal focus** + subtle blue halo · errors red · required marker orange optional |
 
 ---
 
-## 9. Motion
-
-| Rule | Detail |
-| --- | --- |
-| Duration | 150–200ms UI feedback; 300ms panel open |
-| Easing | `ease-out` enter, `ease-in` exit |
-| Respect | `prefers-reduced-motion: reduce` — disable non-essential transitions |
-| Prohibited | Homepage hero video autoplay (NFR-P-04); parallax; page transition animations |
-
----
-
-## 10. Tailwind mapping (implementation reference)
-
-For Phase VII — wireframes reference token names only.
+## 8. Tailwind mapping (Phase VII)
 
 ```css
 @theme {
     --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-    --color-g3-blue-deep: #12315B;
-    --color-g3-blue-tech: #1769B0;
-    --color-g3-blue-bright: #1479CF;
-    --color-g3-orange: #F47A20;
+    --color-g3-white: #FFFFFF;
+    --color-g3-wall: #F8FAFC;
+    --color-g3-royal: #145DAA;
+    --color-g3-blue-deep: #0B2F5B;
+    --color-g3-blue-soft: #EEF5FC;
+    --color-g3-orange: #F47721;
     --color-g3-orange-tint: #FFF2E8;
-    --color-g3-blue-soft: #F1F6FB;
-    --color-g3-grey: #F6F7F9;
-    --color-g3-charcoal: #202B37;
+    --color-g3-charcoal: #1F2937;
     --color-g3-muted: #667085;
+    --color-g3-border: #E5E7EB;
+    --color-g3-metallic: #92979D;
     --color-g3-success: #168653;
+    --color-g3-error: #D92D20;
+    --color-g3-caution: #F4C430;
 }
 ```
 
-Utility classes (illustrative): `font-display`, `text-g3-charcoal`, `bg-g3-orange`, `border-g3-border`.
+---
+
+## 9. Artefact alignment note
+
+Wireframes (37–58) and hi-fi (59–69) created before this revision may show dark-blue heroes or orange primary CTAs. **Interpret them through this document** — white heroes, royal CTAs, and band system take precedence. Refresh hi-fi colours on next design pass; structure and IA remain valid.
 
 ---
 
-## 11. Exit criteria (step 34)
+## 10. Exit criteria (step 34)
 
-- [x] Brand colour tokens documented with semantic roles and usage rules
-- [x] Typography scale defined (Manrope + Inter)
-- [x] Safety Line motif specified with variants and placement rules
-- [x] Spacing, layout, radius, shadow, and icon rules aligned with NFRs
-- [x] Traceability to baseline and charter
+- [x] G3 Signature Safety Bands documented (full · card · micro)
+- [x] Revised palette aligned with [01-baseline](../docs/01-baseline.md)
+- [x] Homepage and page colour rhythm specified
+- [x] Deprecated co-equal blue/orange patterns removed
+- [x] Component and Tailwind token mapping updated
 
-**Next:** Step 37 — Desktop wireframe · Accueil.
+**Next:** Step 35 — Media guidelines (hero safe areas on white, not dark overlay).

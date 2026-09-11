@@ -58,9 +58,9 @@ Admin screens from [10-admin.md](../docs/10-admin.md):
 
 | Criterion | Reference | Verified |
 | --- | --- | --- |
-| G3 colour tokens (blue deep, tech, orange) | [34-design-system.md](34-design-system.md) | ✓ |
+| G3 Signature Safety Bands palette | [34-design-system.md](34-design-system.md) · [01-baseline](../docs/01-baseline.md) | ✓ revised |
 | Manrope headings · Inter body | [34-design-system.md](34-design-system.md) | ✓ |
-| Safety Line accent | [34-design-system.md](34-design-system.md) | ✓ |
+| Full · card · micro band system | [34-design-system.md](34-design-system.md) | ✓ revised |
 | Component states (hover, focus, error, empty) | [36-component-states.md](36-component-states.md) | ✓ |
 | Media placeholders and rules | [35-media-guidelines.md](35-media-guidelines.md) | ✓ |
 | FR default · EN parity pattern | [33-information-architecture.md](33-information-architecture.md) | ✓ |

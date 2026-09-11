@@ -15,7 +15,9 @@ Consolidated visual specs. Previews use [shared.css](shared.css). Wireframes: [d
 | 68 | Sécurité routière | `/fr/securite-routiere` | [68-securite-routiere.html](68-securite-routiere.html) |
 | 69 | Contact | `/fr/contact` | [69-contact.html](69-contact.html) |
 
-All pages share chrome from step 59: sticky header, Safety Line sections, G3 tokens, compact footer. **Not production code.**
+All pages share chrome from step 59: sticky white header, G3 Signature Safety Bands, compact footer. **Not production code.**
+
+**Colour revision (2026-09):** HTML previews may still show pre-revision dark-blue heroes or orange CTAs. Apply [34-design-system.md](../34-design-system.md) — white heroes, royal blue CTAs, orange bands only — when implementing Phase VII.
 
 ---
 

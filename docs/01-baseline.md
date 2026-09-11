@@ -38,22 +38,30 @@ Phones stored E.164, shown nationally. Currency XAF (`25 000 FCFA`). Wall-clock 
 
 ## Brand
 
-| Token | Hex |
-| --- | --- |
-| Deep blue | `#12315B` |
-| Technical blue | `#1769B0` |
-| Bright blue | `#1479CF` |
-| Safety orange | `#F47A20` |
-| Orange tint | `#FFF2E8` |
-| White | `#FFFFFF` |
-| Soft blue | `#F1F6FB` |
-| Grey | `#F6F7F9` |
-| Metallic | `#92979D` |
-| Charcoal | `#202B37` |
-| Muted | `#667085` |
-| Success | `#168653` |
+**Visual system:** G3 Signature Safety Bands — white above · thin orange band · royal blue below (from real centre architecture).
 
-~60–65% white, 20–25% blue, 5–8% orange. Manrope / Inter. Lucide ~2px, blue default, orange for emphasis. Orange is not body text.
+| Role | Token | Hex |
+| --- | --- | --- |
+| Main canvas | Pure white | `#FFFFFF` |
+| Soft background | Clean wall white | `#F8FAFC` |
+| Main brand field | G3 Royal Blue | `#145DAA` |
+| Dark authority | Deep Inspection Blue | `#0B2F5B` |
+| Light tint | Soft Royal Blue | `#EEF5FC` |
+| Signature band | G3 Safety Orange | `#F47721` |
+| Orange tint | Soft orange | `#FFF2E8` |
+| Main text | Charcoal | `#1F2937` |
+| Secondary text | Cool grey | `#667085` |
+| Borders | Concrete grey | `#E5E7EB` |
+| Equipment / support | Metal grey | `#92979D` |
+| Success | Success green | `#168653` |
+| Error | Alert red | `#D92D20` |
+| Caution | Safety yellow | `#F4C430` |
+
+**Ratio (visual guideline):** white/off-white ~60% · royal/deep blues ~28% · orange ~5% · grey/functional ~7%.
+
+Orange is a **controlled band and accent** (3–8px lines, progress, micro highlights) — not a large background, not body text, not prices.
+
+Manrope / Inter. Lucide ~2px. Default icon colour: G3 Royal Blue.
 
 ## Open (do not invent)
 

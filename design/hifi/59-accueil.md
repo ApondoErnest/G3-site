@@ -9,6 +9,8 @@
 
 Pixel-level visual specification for the homepage. Static HTML preview uses self-contained CSS — **not** production Blade/Tailwind (Phase VII).
 
+**Colour revision:** Structure below remains valid. Apply [34-design-system.md](../34-design-system.md) **G3 Signature Safety Bands** — white editorial hero (not `#12315B` split), royal blue primary CTA (not orange fill), orange **band** + royal trust strip after hero. Replace legacy hex references with tokens from [01-baseline.md](../../docs/01-baseline.md).
+
 ---
 
 ## 1. Page canvas

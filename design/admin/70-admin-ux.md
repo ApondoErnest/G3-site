@@ -18,7 +18,7 @@ Open [`70-dashboard.html`](70-dashboard.html) for the full walkthrough. **Not pr
 
 ## 1 · Design intent
 
-The admin experience mirrors G3 Control’s public brand — deep blue authority, orange action, Safety Line accent — while optimising for **daily operational work**: triage appointments, publish tariffs, edit bilingual content.
+The admin experience mirrors G3 Control’s public brand — **G3 Signature Safety Bands** (white clarity, royal blue authority, controlled orange accents) — while optimising for **daily operational work**: triage appointments, publish tariffs, edit bilingual content.
 
 | Principle | Application |
 | --- | --- |
@@ -28,7 +28,7 @@ The admin experience mirrors G3 Control’s public brand — deep blue authority
 | Trust & audit | Confirm dialogs for publish; timeline vs internal notes separated |
 | Filament alignment | Layout maps to Filament 5 sidebar + topbar + resource pages |
 
-**Filament primary colour (implementation):** G3 orange `#F47A20` — replace default Amber in `AdminPanelProvider.php` at step 108.
+**Filament primary colour (implementation):** G3 Royal Blue `#145DAA` — replace default Amber in `AdminPanelProvider.php` at step 108. Orange `#F47721` for accent bands and queue badges only.
 
 ---
 
@@ -75,11 +75,11 @@ Extends [34-design-system.md](../34-design-system.md):
 
 | Token | Admin use |
 | --- | --- |
-| `--g3-blue-deep` | Sidebar gradient, login brand panel |
-| `--g3-orange` | Primary buttons, active nav accent, stat card accent |
-| `--g3-blue-tech` | Links, focus rings, workflow current step |
-| `--g3-grey` | Page background, table header, centre status cards |
-| Safety Line | 48×3px orange under page headers |
+| `--g3-blue-deep` | Sidebar base, login brand panel, headings |
+| `--g3-royal` | Primary buttons, links, focus rings |
+| `--g3-orange` | Active nav inset, stat accent bands, queue badges — not large fills |
+| `--g3-wall` | Page background, table header |
+| Micro band | 48×3px orange under page headers |
 
 **Typography:** Manrope headings · Inter body · monospace for references (`G3-26-A8FD2`).
 

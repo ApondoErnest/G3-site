@@ -14,7 +14,7 @@ Read and approve in this order. Each document builds on the previous.
 
 | Step | Doc | Title | Role in the sequence |
 | ---: | ---: | --- | --- |
-| 1 | [01](01-baseline.md) | Baseline | Locked company, centres, brand |
+| 1 | [01](01-baseline.md) | Baseline | Locked company, centres, **G3 Signature Safety Bands** palette |
 | 2 | [02](02-charter.md) | Charter | Why the project exists; who decides |
 | 3 | [03](03-scope.md) | Scope | V1 pages, routes, exclusions, change control |
 | 4 | [04](04-requirements.md) | Requirements | `FR-*` functional specification |
@@ -30,7 +30,7 @@ Read and approve in this order. Each document builds on the previous.
 
 | Step | Document | Layer |
 | ---: | --- | --- |
-| 33–71 | [Design artefacts](../design/README.md) (IA, wireframes, hi-fi) · **Gate 71 ✓ 2026-09-05** | Experience design |
+| 33–71 | [Design artefacts](../design/README.md) (IA, wireframes, hi-fi) · **Gate 71 ✓** · colour system revised in [34-design-system.md](../design/34-design-system.md) | Experience design |
 | 72–76 | Database design · **Gate 76 ✓ 2026-09-05** · [index](11-gate-database-design.md) | Data model on paper |
 | 72 | [`11-conceptual-model.md`](11-conceptual-model.md) | Conceptual |
 | 73 | [`11-erd.md`](11-erd.md) | Logical ERD |
