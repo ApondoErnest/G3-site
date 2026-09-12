@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+uses(RefreshDatabase::class);
+
 test('root redirects to french home', function () {
     $this->get('/')
         ->assertRedirect('/fr/accueil');

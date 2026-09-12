@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\PublicNavigation;
 use Illuminate\View\View;
 
 class PageController extends Controller
@@ -11,6 +12,7 @@ class PageController extends Controller
         return view('pages.shell', [
             'page' => $page,
             'locale' => app()->getLocale(),
+            'pageTitle' => PublicNavigation::pageTitle($page),
         ]);
     }
 }

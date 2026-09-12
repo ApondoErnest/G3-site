@@ -83,9 +83,9 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 | | |
 | --- | --- |
 | Active phase | **VI — Core implementation** |
-| Complete | Steps 1–116 |
-| **Active step** | **117** — Application shell |
-| Pending | Steps 117–182 · Phases VII–X |
+| Complete | Steps 1–117 |
+| **Active step** | **118** — Accueil |
+| Pending | Steps 118–182 · Phases VII–X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -286,8 +286,8 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 **Purpose:** Ship each public URL against approved design and live data.  
 **Opens:** Gate 116 · **Gate:** 129 · One page per step
 
-- [ ] **117** · ← active · Application shell · Navigation, footer, locale switch
-- [ ] **118** · Accueil
+- [x] **117** · Application shell · Navigation, footer, locale switch
+- [ ] **118** · ← active · Accueil
 - [ ] **119** · À propos
 - [ ] **120** · Nos centres
 - [ ] **121** · École de Police
