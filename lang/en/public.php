@@ -28,6 +28,205 @@ return [
         'track' => 'Track my request',
     ],
 
+    'home' => [
+        'hero' => [
+            'overline' => 'Automobile technical inspection centre',
+            'title' => 'Safety starts with a rigorous inspection.',
+            'lead' => 'G3 Control welcomes you to its two Yaoundé centres for a professional, simple, and transparent technical inspection.',
+            'values_label' => 'G3 Control commitments',
+            'values' => [
+                'safety' => [
+                    'label' => 'Safety',
+                    'body' => 'Reliable checks for safer roads',
+                ],
+                'simplicity' => [
+                    'label' => 'Simplicity',
+                    'body' => 'A clear and quick process',
+                ],
+                'trust' => [
+                    'label' => 'Trust',
+                    'body' => 'A trusted partner since 2020',
+                ],
+            ],
+            'primary_cta' => 'Book an appointment',
+            'secondary_cta' => 'Find a centre',
+            'fees_cta' => 'View fees',
+            'live' => [
+                'label' => 'G3 Control centre status',
+                'title' => 'G3 LIVE',
+                'subtitle' => ':count centres in Yaoundé',
+                'link' => 'View centres',
+                'open_until' => 'Open until :time',
+                'opens_at' => 'Opens at :time',
+                'closed' => 'Closed today',
+            ],
+        ],
+        'start' => [
+            'title' => 'Your visit starts here.',
+            'subtitle' => 'Go directly to the service you need.',
+            'actions_label' => 'Quick access',
+            'actions' => [
+                'appointment' => 'Book an appointment',
+                'track' => 'Track my request',
+                'fees' => 'Find my fee',
+                'centre' => 'Choose my centre',
+                'prepare' => 'Prepare my visit',
+            ],
+            'journey_title' => 'A clear visit, from start to finish.',
+            'journey' => [
+                'prepare' => [
+                    'label' => 'Prepare',
+                    'body' => 'Documents, fee, and centre',
+                ],
+                'arrive' => [
+                    'label' => 'Arrive',
+                    'body' => 'Reception and identification',
+                ],
+                'inspect' => [
+                    'label' => 'Inspect',
+                    'body' => 'Technical lane inspection',
+                ],
+                'analyse' => [
+                    'label' => 'Analyse',
+                    'body' => 'Measurement and control validation',
+                ],
+                'leave' => [
+                    'label' => 'Leave informed',
+                    'body' => 'Result and guidance',
+                ],
+            ],
+        ],
+        'control' => [
+            'overline' => 'Technical inspection',
+            'title' => 'What G3 really checks.',
+            'lead' => 'Modern equipment and rigorous procedures for a complete evaluation of your vehicle.',
+            'tabs_label' => 'Items checked by G3 Control',
+            'learn_more' => 'Learn more',
+            'checks' => [
+                'braking' => [
+                    'label' => 'Braking',
+                    'body' => 'Evaluation of the efficiency and balance of the braking system using specialized equipment.',
+                ],
+                'suspension' => [
+                    'label' => 'Suspension',
+                    'body' => 'Checks of stability, shock absorbers, and components that support comfort and road handling.',
+                ],
+                'alignment' => [
+                    'label' => 'Side slip / Alignment',
+                    'body' => 'Directional behavior checks to detect alignment issues and limit tyre wear.',
+                ],
+                'lighting' => [
+                    'label' => 'Lighting',
+                    'body' => 'Checks of lights, intensity, and aim for dependable visibility.',
+                ],
+                'pollution' => [
+                    'label' => 'Pollution',
+                    'body' => 'Emissions measurement to confirm the environmental compliance of the vehicle.',
+                ],
+                'visual' => [
+                    'label' => 'Visual inspection',
+                    'body' => 'General inspection of safety components, bodywork, and mandatory equipment.',
+                ],
+            ],
+        ],
+        'equipment' => [
+            'title' => 'Our main equipment',
+            'controls_label' => 'Equipment navigation',
+            'previous' => 'Previous equipment',
+            'next' => 'Next equipment',
+            'items' => [
+                'brakes' => [
+                    'title' => 'Brake tester',
+                    'body' => 'Measures braking efficiency',
+                ],
+                'suspension' => [
+                    'title' => 'Suspension tester',
+                    'body' => 'Checks road-holding performance',
+                ],
+                'ripage' => [
+                    'title' => 'Side-slip plate',
+                    'body' => 'Verifies wheel alignment',
+                ],
+                'headlamp' => [
+                    'title' => 'Headlamp tester',
+                    'body' => 'Checks light beam orientation',
+                ],
+                'gas' => [
+                    'title' => 'Gas analyser',
+                    'body' => 'Measures pollutant emissions',
+                ],
+                'plays' => [
+                    'title' => 'Play detector',
+                    'body' => 'Checks mechanical play',
+                ],
+                'pit' => [
+                    'title' => 'Lift / inspection pit',
+                    'body' => 'Visual underbody inspection',
+                ],
+                'sonometre' => [
+                    'title' => 'Sound level meter',
+                    'body' => 'Measures noise level',
+                ],
+                'air_compressor' => [
+                    'title' => 'Air compressor',
+                    'body' => 'Supplies equipment with air',
+                ],
+                'opacimeter' => [
+                    'title' => 'Opacimeter',
+                    'body' => 'Measures smoke opacity',
+                ],
+            ],
+        ],
+        'centres' => [
+            'overline' => 'Our centres',
+            'title' => 'Two centres in Yaoundé. The same G3 standard.',
+            'status_open' => 'Open now',
+            'today' => 'Today: :hours',
+            'map_title' => 'Our two centres on the map',
+            'map_cta' => 'View on Google Maps',
+            'actions' => [
+                'directions' => 'Directions',
+                'call' => 'Call',
+                'details' => 'View centre',
+            ],
+            'items' => [
+                'ecole_de_police' => [
+                    'title' => 'G3 Control — École de Police',
+                    'address' => 'Former Texaco descent, École de Police, Yaoundé',
+                    'hours' => '07:00 – 20:00',
+                    'phone' => '687 187 516',
+                ],
+                'nomayos' => [
+                    'title' => 'G3 Control — Nomayos',
+                    'address' => 'Nomayos junction, Yaoundé',
+                    'hours' => '07:00 – 19:00',
+                    'phone' => '655 100 801 / 692 242 143',
+                ],
+            ],
+        ],
+        'road_safety' => [
+            'overline' => 'Road safety',
+            'title' => 'A safe vehicle helps make the road safer.',
+            'lead' => 'Technical inspection is an essential step, but safety also starts with the attention given to the vehicle every day.',
+            'cta' => 'Discover Road Safety',
+            'items_label' => 'Road-safety watch points',
+            'items' => [
+                'braking' => [
+                    'title' => 'Braking',
+                    'body' => 'Notice the signs you should not ignore',
+                ],
+                'tyres' => [
+                    'title' => 'Tyres',
+                    'body' => 'Grip, pressure and wear',
+                ],
+                'visibility' => [
+                    'title' => 'Visibility',
+                    'body' => 'Lights, glass and wipers',
+                ],
+            ],
+        ],
+    ],
+
     'utility' => [
         'tagline' => 'Technical inspection · Yaoundé',
         'centres_open' => '2 centres · 7 days',

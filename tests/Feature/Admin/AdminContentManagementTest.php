@@ -1,6 +1,5 @@
 <?php
 
-use App\Filament\Pages\AuditLog;
 use App\Filament\Pages\ManageMediaLibrary;
 use App\Filament\Resources\Content\ContentBlocks\ContentBlocks\ContentBlockResource;
 use App\Filament\Resources\Content\FaqEntries\FaqEntries\FaqEntryResource;

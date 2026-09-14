@@ -13,10 +13,10 @@ A single Laravel application delivers the public website and the secure operatio
 
 | | |
 | --- | --- |
-| Phase | **III — Application foundation** |
-| Progress | Phases I–II complete (steps 1–23) |
-| Active step | **31** — Verify Pest |
-| Pending | Steps 25–182 · Phases III–X |
+| Phase | **VII — Public experience** |
+| Progress | Steps 1–118 complete |
+| Active step | **119** — À propos |
+| Pending | Steps 119–182 · Phases VII–X |
 
 Delivery is **strictly sequential**: specification → environment → application shell → design → database design → backend design → database build → backend build → admin → public frontend → QA → Docker → production.
 
@@ -24,13 +24,13 @@ Delivery is **strictly sequential**: specification → environment → applicati
 | --- | --- | --- |
 | Specification | I · 11 | **Complete** |
 | Environment | II · 23 | **Complete** |
-| Application shell | III · 31 | **Active** |
-| Experience design | IV · 33 | Locked |
-| Database design | V · 72 | Locked |
-| Database build | VI · 86 | Locked |
-| Backend build | VI · 98 | Locked |
-| Administration UI | VI · 108 | Locked |
-| Public frontend | VII · 117 | Locked |
+| Application shell | III · 31 | **Complete** |
+| Experience design | IV · 71 | **Complete** |
+| Database design | V · 85 | **Complete** |
+| Database build | VI · 97 | **Complete** |
+| Backend build | VI · 107 | **Complete** |
+| Administration UI | VI · 116 | **Complete** |
+| Public frontend | VII · 117–129 | **Active** |
 | Quality assurance | VIII · 130 | Locked |
 | Containerisation | IX · 151 | Locked |
 | Production | X · 160 | Locked |
