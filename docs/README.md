@@ -50,7 +50,7 @@ Read and approve in this order. Each document builds on the previous.
 | 86–97 | Migrations in repository · **Gate 97 ✓ 2026-09-05** · [`11-gate-schema-accepted.md`](11-gate-schema-accepted.md) | Database build |
 | 98–107 | PHP modules + Pest · **Gate 107 ✓ 2026-09-06** · [`12-gate-domain-accepted.md`](12-gate-domain-accepted.md) | Backend build |
 | 108–116 | Filament resources | Administration UI |
-| 117–129 | Blade / Livewire pages · **Step 118 Accueil ✓** · active **119 À propos** | Public frontend |
+| 117–129 | Blade / Livewire pages · **Steps 118–119 Accueil + À propos ✓** · active **120 Nos centres** | Public frontend |
 | 151 | [`12-docker.md`](12-docker.md) | Containerisation |
 | 177 | [`13-launch.md`](13-launch.md) | Go-live checklist |
 

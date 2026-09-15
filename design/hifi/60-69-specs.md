@@ -34,6 +34,19 @@ All pages share chrome from step 59: sticky white header, G3 Signature Safety Ba
 | Team | 4-col avatar grid · EMP if empty |
 | CTA | Deep blue band · centres / contact / RDV |
 
+**Step 119 implementation note · 2026-09-15**
+
+Implemented as `resources/views/pages/about.blade.php` with supporting copy in `lang/fr/public.php` and `lang/en/public.php`, responsive styling in `resources/css/app.css`, and SVG/bitmap assets under `public/images/about/`.
+
+| Production section | Notes |
+| --- | --- |
+| Notre identité | 128px desktop inset, identity copy, vision card, G3 en bref card, and 2020 → Aujourd'hui timeline |
+| Exigence technique | Left image `technical-requirements.png`, right technical list with generated SVG icons |
+| Nos valeurs | Compact blue band with centred, blurred, scaled G3 logo background; cards are more transparent and use two columns on mobile |
+| L'équipe G3 | Text and values on the left, `technicians.png` on the right; the image is CSS-cropped/zoomed to show the team without editing the source file |
+
+Verification completed during Step 119: `vendor/bin/pint --dirty --format agent`, `npm run build`, and `php artisan test --compact tests/Feature/Public/PublicShellTest.php`. Later layout-only refinements were rechecked with `npm run build` and browser viewport inspection.
+
 ---
 
 ## 61 · Nos centres
