@@ -227,6 +227,130 @@ return [
         ],
     ],
 
+    'about' => [
+        'identity' => [
+            'overline' => 'Our identity',
+            'title' => 'A structured approach to technical inspection.',
+            'intro' => [
+                'G3 Control operates in the field of automobile technical inspection in Yaoundé. Through its École de Police and Nomayos centres, the company provides drivers with an organized environment for the technical evaluation of their vehicles.',
+                'Our approach combines structured procedures, specialized equipment, technical personnel, and visitor support. The objective is to make technical inspection rigorous in execution, clear in its process, and useful to road safety.',
+            ],
+            'cards_label' => 'G3 Control purpose and mission',
+            'purpose' => [
+                'title' => 'Purpose',
+                'subtitle' => 'Why we exist',
+                'body' => 'To make a lasting contribution to road safety in Cameroon by ensuring that every vehicle in circulation meets legal, technical, and safety requirements.',
+            ],
+            'mission' => [
+                'title' => 'Mission',
+                'subtitle' => 'What we do every day',
+                'body' => 'To deliver rigorous, fast, and transparent technical inspections in our École de Police and Nomayos centres, using specialized equipment and highly qualified personnel.',
+            ],
+            'vision' => [
+                'title' => 'Vision',
+                'subtitle' => 'Where we are going',
+                'body' => 'To become the reference technical inspection network in Yaoundé and Cameroon, recognized for its impartiality, modernized tools, and quality of welcome.',
+            ],
+            'brief' => [
+                'title' => 'G3 at a glance',
+                'items' => [
+                    'activity' => [
+                        'label' => 'Activity',
+                        'value' => 'Automobile technical inspection',
+                    ],
+                    'location' => [
+                        'label' => 'Location',
+                        'value' => 'Yaoundé, Cameroon',
+                    ],
+                    'centres' => [
+                        'label' => 'Operating centres',
+                        'value' => 'École de Police · Nomayos',
+                    ],
+                    'approval' => [
+                        'label' => 'Accreditation',
+                        'value' => 'N°0291',
+                    ],
+                    'opening' => [
+                        'label' => 'Opening',
+                        'value' => '7 days',
+                    ],
+                ],
+                'timeline' => [
+                    'approval' => [
+                        'year' => '2020',
+                        'title' => 'Accreditation N°0291',
+                        'body' => 'A major institutional milestone.',
+                    ],
+                    'today' => [
+                        'year' => 'Today',
+                        'title' => 'Two centres in Yaoundé',
+                        'body' => 'École de Police and Nomayos.',
+                    ],
+                ],
+            ],
+        ],
+        'requirements' => [
+            'overline' => 'Technical requirement',
+            'title' => 'Rigor is visible in the way inspection is carried out.',
+            'image_alt' => 'Technical inspection pit inside a G3 Control centre',
+            'items_label' => 'G3 Control technical requirements',
+            'items' => [
+                'procedures' => [
+                    'title' => 'Structured procedures',
+                    'body' => 'An organized technical process for every vehicle.',
+                ],
+                'equipment' => [
+                    'title' => 'Specialized equipment',
+                    'body' => 'Facilities adapted to the different inspection operations.',
+                ],
+                'team' => [
+                    'title' => 'Technical personnel',
+                    'body' => 'A team dedicated to the smooth running of operations.',
+                ],
+                'measures' => [
+                    'title' => 'Visual checks & measurements',
+                    'body' => 'An approach combining visual checks and instrumented measurements.',
+                ],
+            ],
+        ],
+        'values' => [
+            'overline' => 'Our values',
+            'title' => 'Concrete principles serving road safety.',
+            'motto' => 'Safety. Simplicity. Trust.',
+            'items_label' => 'G3 Control values',
+            'items' => [
+                'security' => [
+                    'title' => 'Safety',
+                    'body' => 'Absolute technical standards as a shared priority.',
+                ],
+                'simplicity' => [
+                    'title' => 'Simplicity',
+                    'body' => 'A smooth, clear driver journey with no wasted time.',
+                ],
+                'trust' => [
+                    'title' => 'Trust',
+                    'body' => 'Strict professional ethics and full transparency on the vehicle’s condition.',
+                ],
+                'rigor' => [
+                    'title' => 'Rigor',
+                    'body' => 'Rigorous respect for the procedures of Accreditation N°0291.',
+                ],
+            ],
+        ],
+        'team' => [
+            'overline' => 'The G3 team',
+            'title' => 'Technology does not replace human standards.',
+            'body' => 'Behind the equipment, inspection lanes, and procedures is a team that welcomes, supports, and carries out the operations needed for every technical inspection to run smoothly.',
+            'image_alt' => 'G3 Control technicians in a technical inspection centre',
+            'items_label' => 'G3 team qualities',
+            'items' => [
+                'welcome' => 'Welcome',
+                'rigor' => 'Rigor',
+                'responsibility' => 'Responsibility',
+            ],
+        ],
+    ],
+
     'utility' => [
         'tagline' => 'Technical inspection · Yaoundé',
         'centres_open' => '2 centres · 7 days',

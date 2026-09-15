@@ -452,6 +452,385 @@
         @apply inline-flex items-center gap-2 rounded-full border border-g3-border bg-white px-3 py-1 text-xs font-medium text-g3-blue-deep;
     }
 
+    .g3-about-identity {
+        @apply relative overflow-hidden bg-white px-4 py-8 sm:px-6 lg:px-8;
+    }
+
+    .g3-about-identity::after {
+        content: '';
+        @apply absolute inset-x-0 bottom-0 h-[6px] bg-g3-orange;
+    }
+
+    .g3-about-identity__inner {
+        @apply mx-auto grid items-start gap-8;
+        max-width: 110rem;
+        grid-template-columns: minmax(0, 1.58fr) minmax(28rem, 1fr);
+    }
+
+    .g3-about-identity__main,
+    .g3-about-identity__side {
+        @apply min-w-0;
+    }
+
+    .g3-about-identity__overline {
+        @apply mb-3 text-sm font-extrabold uppercase text-g3-orange;
+    }
+
+    .g3-about-identity h1 {
+        @apply max-w-4xl font-display text-5xl font-bold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-about-identity__intro {
+        @apply mt-5 max-w-5xl space-y-4 text-lg font-semibold leading-relaxed text-slate-500;
+    }
+
+    .g3-about-identity__cards {
+        @apply mt-10 grid gap-6;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .g3-about-identity__card,
+    .g3-about-identity__vision,
+    .g3-about-identity__brief {
+        @apply rounded-lg border border-g3-border bg-white shadow-sm;
+        box-shadow: 0 16px 42px rgb(15 48 91 / 8%);
+    }
+
+    .g3-about-identity__card {
+        @apply min-h-[17rem] p-7;
+    }
+
+    .g3-about-identity__card-head {
+        @apply flex items-center gap-5;
+    }
+
+    .g3-about-identity__card-icon {
+        @apply h-14 w-14 shrink-0;
+    }
+
+    .g3-about-identity__card h2 {
+        @apply font-display text-2xl font-bold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-about-identity__card-head p {
+        @apply mt-2 text-base font-extrabold leading-tight;
+    }
+
+    .g3-about-identity__card--orange .g3-about-identity__card-head p {
+        @apply text-g3-orange;
+    }
+
+    .g3-about-identity__card--blue .g3-about-identity__card-head p {
+        @apply text-g3-royal;
+    }
+
+    .g3-about-identity__card-body {
+        @apply mt-8 text-lg font-semibold leading-relaxed text-slate-500;
+    }
+
+    .g3-about-identity__side {
+        @apply grid gap-5;
+    }
+
+    .g3-about-identity__vision {
+        @apply grid gap-5 p-7;
+        grid-template-columns: 4.25rem minmax(0, 1fr);
+    }
+
+    .g3-about-identity__vision-icon {
+        @apply h-14 w-14;
+    }
+
+    .g3-about-identity__vision h2 {
+        @apply font-display text-2xl font-bold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-about-identity__vision-subtitle {
+        @apply mt-1 text-base font-extrabold leading-tight text-g3-royal;
+    }
+
+    .g3-about-identity__vision-body {
+        @apply mt-3 text-base font-semibold leading-relaxed text-slate-500;
+    }
+
+    .g3-about-identity__brief {
+        @apply p-7;
+    }
+
+    .g3-about-identity__brief > h2 {
+        @apply mb-6 font-display text-2xl font-extrabold uppercase leading-tight text-g3-royal;
+    }
+
+    .g3-about-identity__brief-list {
+        @apply grid gap-5;
+    }
+
+    .g3-about-identity__brief-list div {
+        @apply grid items-start gap-x-5;
+        grid-template-columns: 3.5rem minmax(0, 1fr);
+    }
+
+    .g3-about-identity__brief-list dt {
+        @apply contents;
+    }
+
+    .g3-about-identity__brief-list img {
+        @apply h-10 w-10;
+    }
+
+    .g3-about-identity__brief-list span {
+        @apply block font-display text-lg font-bold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-about-identity__brief-list dd {
+        @apply col-start-2 mt-1 text-base font-semibold leading-tight text-slate-500;
+    }
+
+    .g3-about-identity__timeline {
+        @apply mt-6;
+    }
+
+    .g3-about-identity__timeline-track {
+        @apply relative mb-3 h-4;
+    }
+
+    .g3-about-identity__timeline-track::before {
+        content: '';
+        @apply absolute left-0 right-0 top-1/2 h-px bg-slate-300;
+    }
+
+    .g3-about-identity__timeline-track::after {
+        content: '';
+        @apply absolute left-[63%] top-1/2 h-3 w-px -translate-y-1/2 bg-slate-300;
+    }
+
+    .g3-about-identity__timeline-track span {
+        @apply absolute top-1/2 z-10 h-3 w-3 -translate-y-1/2 rounded-full bg-g3-orange;
+        box-shadow: 0 0 0 4px rgb(244 119 33 / 12%);
+    }
+
+    .g3-about-identity__timeline-track span:first-child {
+        left: 13%;
+    }
+
+    .g3-about-identity__timeline-track span:last-child {
+        left: 63%;
+    }
+
+    .g3-about-identity__timeline-items {
+        @apply grid gap-6;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .g3-about-identity__timeline-items strong {
+        @apply block font-display text-3xl font-extrabold leading-none text-g3-royal;
+    }
+
+    .g3-about-identity__timeline-items span {
+        @apply mt-2 block text-sm font-extrabold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-about-identity__timeline-items p {
+        @apply mt-1 text-xs font-semibold leading-snug text-slate-500;
+    }
+
+    .g3-about-requirements {
+        @apply bg-white px-4 py-16 sm:px-6 lg:px-8;
+    }
+
+    .g3-about-requirements__inner {
+        @apply mx-auto grid items-center gap-20;
+        max-width: 110rem;
+        grid-template-columns: minmax(0, 1.08fr) minmax(28rem, 0.92fr);
+    }
+
+    .g3-about-requirements__image {
+        @apply overflow-hidden rounded-lg shadow-sm;
+        aspect-ratio: 1.48 / 1;
+        box-shadow: 0 18px 44px rgb(15 48 91 / 10%);
+    }
+
+    .g3-about-requirements__image img {
+        @apply h-full w-full object-cover;
+    }
+
+    .g3-about-requirements__content {
+        @apply min-w-0;
+    }
+
+    .g3-about-requirements__overline {
+        @apply mb-4 text-sm font-extrabold uppercase text-g3-orange;
+    }
+
+    .g3-about-requirements h2 {
+        @apply max-w-3xl font-display text-5xl font-bold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-about-requirements__list {
+        @apply mt-12 grid gap-9;
+    }
+
+    .g3-about-requirements__item {
+        @apply grid items-start gap-7;
+        grid-template-columns: 4.25rem minmax(0, 1fr);
+    }
+
+    .g3-about-requirements__item img {
+        @apply h-14 w-14;
+    }
+
+    .g3-about-requirements__item h3 {
+        @apply font-display text-2xl font-bold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-about-requirements__item p {
+        @apply mt-2 text-lg font-semibold leading-snug text-slate-500;
+    }
+
+    .g3-about-values {
+        @apply relative isolate overflow-hidden bg-g3-royal px-4 py-10 text-white sm:px-6 lg:px-8;
+        background-image: linear-gradient(135deg, rgb(0 82 158 / 86%), rgb(0 96 183 / 82%));
+    }
+
+    .g3-about-values::before {
+        content: '';
+        @apply absolute pointer-events-none -z-10;
+        width: min(96rem, 88vw);
+        aspect-ratio: 3 / 1;
+        left: 50%;
+        top: 50%;
+        background-image: var(--g3-about-values-logo);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        filter: blur(5px);
+        opacity: 0.24;
+        transform: translate(-50%, -50%) rotate(-2deg);
+    }
+
+    .g3-about-values::after {
+        content: '';
+        @apply absolute inset-0 -z-10 bg-g3-blue-deep/5;
+    }
+
+    .g3-about-values__inner {
+        @apply relative mx-auto;
+        max-width: 110rem;
+    }
+
+    .g3-about-values__header {
+        @apply flex items-start justify-between gap-10;
+    }
+
+    .g3-about-values__overline {
+        @apply mb-3 text-sm font-extrabold uppercase text-g3-orange;
+    }
+
+    .g3-about-values h2 {
+        @apply max-w-4xl font-display text-4xl font-bold leading-tight text-white;
+    }
+
+    .g3-about-values__motto {
+        @apply relative mt-2 shrink-0 pr-2 text-right text-xl font-bold text-white/75;
+    }
+
+    .g3-about-values__motto::after {
+        content: '';
+        @apply absolute right-0 -bottom-5 h-1 w-16 rounded-full bg-g3-orange;
+    }
+
+    .g3-about-values__grid {
+        @apply mt-7 grid gap-5;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .g3-about-values__card {
+        @apply min-h-56 rounded-lg border border-white/20 p-7 backdrop-blur-sm;
+        background-color: rgb(255 255 255 / 4%);
+        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 7%), 0 18px 42px rgb(0 28 70 / 12%);
+    }
+
+    .g3-about-values__card img {
+        @apply h-12 w-12;
+    }
+
+    .g3-about-values__card h3 {
+        @apply mt-5 font-display text-2xl font-bold leading-tight text-white;
+    }
+
+    .g3-about-values__card p {
+        @apply mt-3 text-lg font-semibold leading-snug text-white/75;
+    }
+
+    .g3-about-team {
+        @apply overflow-hidden bg-white px-4 py-14 text-g3-blue-deep sm:px-6 lg:px-8;
+        background-image: linear-gradient(135deg, rgb(0 92 174 / 8%), rgb(0 96 183 / 3%));
+    }
+
+    .g3-about-team__inner {
+        @apply mx-auto grid items-center gap-14;
+        max-width: 110rem;
+        grid-template-columns: minmax(0, 1fr) minmax(28rem, 0.85fr);
+    }
+
+    .g3-about-team__content {
+        @apply min-w-0;
+    }
+
+    .g3-about-team__overline {
+        @apply mb-4 text-sm font-extrabold uppercase text-g3-orange;
+    }
+
+    .g3-about-team h2 {
+        @apply max-w-4xl font-display text-5xl font-bold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-about-team__body {
+        @apply mt-7 max-w-5xl text-xl font-semibold leading-relaxed text-slate-600;
+    }
+
+    .g3-about-team__qualities {
+        @apply mt-12 grid gap-8;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .g3-about-team__quality {
+        @apply flex items-center gap-4 text-2xl font-bold text-g3-blue-deep;
+    }
+
+    .g3-about-team__quality span {
+        @apply flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-g3-royal/20 bg-g3-royal;
+    }
+
+    .g3-about-team__quality img {
+        @apply h-10 w-10;
+    }
+
+    .g3-about-team__image {
+        @apply relative justify-self-end overflow-hidden rounded-lg shadow-sm;
+        width: min(100%, 48rem);
+        min-height: 24rem;
+        aspect-ratio: 1.5 / 1;
+        box-shadow: 0 22px 56px rgb(0 21 58 / 22%);
+    }
+
+    .g3-about-team__image img {
+        @apply h-full w-full object-cover;
+        object-position: 80% center;
+        transform: scale(1);
+        transform-origin: 80% 52%;
+    }
+
+    @media (min-width: 1280px) {
+        .g3-about-identity__inner,
+        .g3-about-requirements__inner,
+        .g3-about-values__inner,
+        .g3-about-team__inner {
+            width: calc(100vw - 16rem);
+            max-width: none;
+        }
+    }
+
     .g3-home-hero {
         @apply relative isolate overflow-hidden bg-white;
         min-height: 640px;
@@ -1354,6 +1733,174 @@
 }
 
 @media (max-width: 1023px) {
+    .g3-about-identity {
+        @apply py-12;
+    }
+
+    .g3-about-identity__inner {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .g3-about-identity h1 {
+        @apply text-4xl;
+    }
+
+    .g3-about-identity__intro {
+        @apply mt-5 text-lg;
+    }
+
+    .g3-about-identity__cards {
+        @apply mt-10 gap-5;
+    }
+
+    .g3-about-identity__card {
+        @apply min-h-0 p-7;
+    }
+
+    .g3-about-identity__card h2,
+    .g3-about-identity__vision h2 {
+        @apply text-2xl;
+    }
+
+    .g3-about-identity__card-body {
+        @apply mt-8 text-base;
+    }
+
+    .g3-about-identity__side {
+        @apply gap-5;
+    }
+
+    .g3-about-identity__vision,
+    .g3-about-identity__brief {
+        @apply p-7;
+    }
+
+    .g3-about-identity__vision-body,
+    .g3-about-identity__vision-subtitle {
+        @apply text-base;
+    }
+
+    .g3-about-requirements {
+        @apply py-12;
+    }
+
+    .g3-about-requirements__inner {
+        @apply gap-10;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .g3-about-requirements h2 {
+        @apply text-4xl;
+    }
+
+    .g3-about-requirements__list {
+        @apply mt-9 gap-7;
+    }
+
+    .g3-about-requirements__item {
+        @apply gap-5;
+        grid-template-columns: 3.75rem minmax(0, 1fr);
+    }
+
+    .g3-about-requirements__item img {
+        @apply h-12 w-12;
+    }
+
+    .g3-about-requirements__item h3 {
+        @apply text-xl;
+    }
+
+    .g3-about-requirements__item p {
+        @apply text-base;
+    }
+
+    .g3-about-values {
+        @apply py-10;
+    }
+
+    .g3-about-values::before {
+        width: 72rem;
+        left: 50%;
+        top: 50%;
+        right: auto;
+        opacity: 0.22;
+    }
+
+    .g3-about-values__header {
+        @apply flex-col gap-5;
+    }
+
+    .g3-about-values h2 {
+        @apply text-3xl;
+    }
+
+    .g3-about-values__motto {
+        @apply mt-0 text-left text-lg;
+    }
+
+    .g3-about-values__motto::after {
+        @apply left-0 right-auto -bottom-5;
+    }
+
+    .g3-about-values__grid {
+        @apply mt-8 grid-cols-2 gap-4;
+    }
+
+    .g3-about-values__card {
+        @apply min-h-52 p-6;
+    }
+
+    .g3-about-values__card img {
+        @apply h-11 w-11;
+    }
+
+    .g3-about-values__card h3 {
+        @apply text-xl;
+    }
+
+    .g3-about-values__card p {
+        @apply text-sm;
+    }
+
+    .g3-about-team {
+        @apply py-12;
+    }
+
+    .g3-about-team__inner {
+        @apply gap-9;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .g3-about-team h2 {
+        @apply text-4xl;
+    }
+
+    .g3-about-team__body {
+        @apply mt-5 text-lg;
+    }
+
+    .g3-about-team__qualities {
+        @apply mt-8 gap-5;
+    }
+
+    .g3-about-team__quality {
+        @apply text-xl;
+    }
+
+    .g3-about-team__quality span {
+        @apply h-16 w-16;
+    }
+
+    .g3-about-team__quality img {
+        @apply h-8 w-8;
+    }
+
+    .g3-about-team__image {
+        @apply mx-auto w-full max-w-3xl;
+        min-height: 20rem;
+        aspect-ratio: 1.35 / 1;
+    }
+
     .g3-home-start {
         @apply py-12;
     }
@@ -1707,6 +2254,242 @@
 }
 
 @media (max-width: 639px) {
+    .g3-about-identity {
+        @apply px-4 py-10;
+    }
+
+    .g3-about-identity__overline {
+        @apply mb-2 text-xs;
+    }
+
+    .g3-about-identity h1 {
+        @apply text-3xl;
+    }
+
+    .g3-about-identity__intro {
+        @apply mt-4 space-y-4 text-base;
+        line-height: 1.5;
+    }
+
+    .g3-about-identity__cards {
+        @apply mt-8 grid-cols-1 gap-4;
+    }
+
+    .g3-about-identity__card,
+    .g3-about-identity__vision,
+    .g3-about-identity__brief {
+        @apply p-5;
+    }
+
+    .g3-about-identity__card-head {
+        @apply gap-4;
+    }
+
+    .g3-about-identity__card-icon,
+    .g3-about-identity__vision-icon {
+        @apply h-12 w-12;
+    }
+
+    .g3-about-identity__card h2,
+    .g3-about-identity__vision h2 {
+        @apply text-xl;
+    }
+
+    .g3-about-identity__card-head p {
+        @apply text-sm;
+    }
+
+    .g3-about-identity__card-body {
+        @apply mt-6 text-base;
+        line-height: 1.5;
+    }
+
+    .g3-about-identity__vision {
+        @apply gap-4;
+        grid-template-columns: 3.5rem minmax(0, 1fr);
+    }
+
+    .g3-about-identity__vision-body {
+        @apply mt-3 text-sm;
+        line-height: 1.5;
+    }
+
+    .g3-about-identity__brief > h2 {
+        @apply mb-6 text-xl;
+    }
+
+    .g3-about-identity__brief-list {
+        @apply gap-5;
+    }
+
+    .g3-about-identity__brief-list div {
+        @apply gap-x-4;
+        grid-template-columns: 2.75rem minmax(0, 1fr);
+    }
+
+    .g3-about-identity__brief-list img {
+        @apply h-9 w-9;
+    }
+
+    .g3-about-identity__brief-list span {
+        @apply text-base;
+    }
+
+    .g3-about-identity__brief-list dd {
+        @apply text-sm;
+    }
+
+    .g3-about-identity__timeline {
+        @apply mt-7;
+    }
+
+    .g3-about-identity__timeline-items {
+        @apply gap-5;
+    }
+
+    .g3-about-identity__timeline-items strong {
+        @apply text-2xl;
+    }
+
+    .g3-about-identity__timeline-items span {
+        @apply text-sm;
+    }
+
+    .g3-about-identity__timeline-items p {
+        @apply text-xs;
+    }
+
+    .g3-about-requirements {
+        @apply px-4 py-10;
+    }
+
+    .g3-about-requirements__inner {
+        @apply gap-8;
+    }
+
+    .g3-about-requirements__image {
+        aspect-ratio: 1.2 / 1;
+    }
+
+    .g3-about-requirements__overline {
+        @apply mb-2 text-xs;
+    }
+
+    .g3-about-requirements h2 {
+        @apply text-3xl;
+    }
+
+    .g3-about-requirements__list {
+        @apply mt-8 gap-6;
+    }
+
+    .g3-about-requirements__item {
+        @apply gap-4;
+        grid-template-columns: 3rem minmax(0, 1fr);
+    }
+
+    .g3-about-requirements__item img {
+        @apply h-10 w-10;
+    }
+
+    .g3-about-requirements__item h3 {
+        @apply text-lg;
+    }
+
+    .g3-about-requirements__item p {
+        @apply mt-1 text-sm;
+        line-height: 1.5;
+    }
+
+    .g3-about-values {
+        @apply px-4 py-8;
+    }
+
+    .g3-about-values::before {
+        width: 46rem;
+        left: 50%;
+        top: 50%;
+        right: auto;
+        opacity: 0.24;
+    }
+
+    .g3-about-values__overline {
+        @apply mb-2 text-xs;
+    }
+
+    .g3-about-values h2 {
+        @apply text-2xl;
+    }
+
+    .g3-about-values__motto {
+        @apply text-sm;
+    }
+
+    .g3-about-values__grid {
+        @apply mt-7 grid-cols-2 gap-3;
+    }
+
+    .g3-about-values__card {
+        @apply min-h-44 p-4;
+    }
+
+    .g3-about-values__card img {
+        @apply h-9 w-9;
+    }
+
+    .g3-about-values__card h3 {
+        @apply mt-3 text-lg;
+    }
+
+    .g3-about-values__card p {
+        @apply mt-2 text-xs;
+        line-height: 1.35;
+    }
+
+    .g3-about-team {
+        @apply px-4 py-10;
+    }
+
+    .g3-about-team__overline {
+        @apply mb-2 text-xs;
+    }
+
+    .g3-about-team h2 {
+        @apply text-3xl;
+    }
+
+    .g3-about-team__body {
+        @apply mt-4 text-base;
+        line-height: 1.55;
+    }
+
+    .g3-about-team__qualities {
+        @apply mt-7 grid-cols-3 gap-2;
+    }
+
+    .g3-about-team__quality {
+        @apply min-w-0 flex-col justify-start gap-2 text-center text-xs leading-tight;
+    }
+
+    .g3-about-team__quality span {
+        @apply h-10 w-10;
+    }
+
+    .g3-about-team__quality img {
+        @apply h-5 w-5;
+    }
+
+    .g3-about-team__image {
+        min-height: 18rem;
+        aspect-ratio: 1.08 / 1;
+    }
+
+    .g3-about-team__image img {
+        object-position: 82% center;
+        transform: scale(1);
+        transform-origin: 82% 52%;
+    }
+
     .g3-home-start {
         @apply px-4 py-10;
     }

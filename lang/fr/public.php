@@ -227,6 +227,130 @@ return [
         ],
     ],
 
+    'about' => [
+        'identity' => [
+            'overline' => 'Notre identité',
+            'title' => 'Une approche structurée du contrôle technique.',
+            'intro' => [
+                'G3 Control exerce dans le domaine de la visite technique automobile à Yaoundé. À travers ses centres d’École de Police et de Nomayos, l’entreprise met à disposition des usagers un environnement organisé pour l’évaluation technique de leurs véhicules.',
+                'Notre approche associe procédures structurées, équipements spécialisés, personnel technique et accompagnement du visiteur. L’objectif est de rendre la visite technique à la fois rigoureuse dans son exécution, claire dans son déroulement et utile à la sécurité routière.',
+            ],
+            'cards_label' => 'Raison d’être et mission de G3 Control',
+            'purpose' => [
+                'title' => 'Raison d’être',
+                'subtitle' => 'Pourquoi nous existons',
+                'body' => 'Contribuer durablement à la sécurité routière au Cameroun en s’assurant que chaque véhicule en circulation répond aux exigences techniques légales et sécuritaires.',
+            ],
+            'mission' => [
+                'title' => 'Mission',
+                'subtitle' => 'Ce que nous faisons au quotidien',
+                'body' => 'Délivrer des inspections techniques rigoureuses, rapides et transparentes dans nos centres d’École de Police et Nomayos, grâce à des équipements spécialisés et un personnel hautement qualifié.',
+            ],
+            'vision' => [
+                'title' => 'Vision',
+                'subtitle' => 'Où nous allons',
+                'body' => 'Être le réseau de référence du contrôle technique automobile à Yaoundé et au Cameroun, reconnu pour son impartialité, la modernisation de ses outils et la qualité de son accueil.',
+            ],
+            'brief' => [
+                'title' => 'G3 en bref',
+                'items' => [
+                    'activity' => [
+                        'label' => 'Activité',
+                        'value' => 'Visite technique automobile',
+                    ],
+                    'location' => [
+                        'label' => 'Implantation',
+                        'value' => 'Yaoundé, Cameroun',
+                    ],
+                    'centres' => [
+                        'label' => 'Centres opérationnels',
+                        'value' => 'École de Police · Nomayos',
+                    ],
+                    'approval' => [
+                        'label' => 'Agrément',
+                        'value' => 'N°0291',
+                    ],
+                    'opening' => [
+                        'label' => 'Ouverture',
+                        'value' => '7j/7',
+                    ],
+                ],
+                'timeline' => [
+                    'approval' => [
+                        'year' => '2020',
+                        'title' => 'Agrément N°0291',
+                        'body' => 'Une étape institutionnelle majeure.',
+                    ],
+                    'today' => [
+                        'year' => 'Aujourd’hui',
+                        'title' => 'Deux centres à Yaoundé',
+                        'body' => 'École de Police et Nomayos.',
+                    ],
+                ],
+            ],
+        ],
+        'requirements' => [
+            'overline' => 'Exigence technique',
+            'title' => 'La rigueur se voit dans la manière de contrôler.',
+            'image_alt' => 'Fosse d’inspection technique dans un centre G3 Control',
+            'items_label' => 'Exigences techniques G3 Control',
+            'items' => [
+                'procedures' => [
+                    'title' => 'Procédures structurées',
+                    'body' => 'Un parcours technique organisé pour chaque véhicule.',
+                ],
+                'equipment' => [
+                    'title' => 'Équipements spécialisés',
+                    'body' => 'Des installations adaptées aux différentes opérations de contrôle.',
+                ],
+                'team' => [
+                    'title' => 'Personnel technique',
+                    'body' => 'Une équipe dédiée au bon déroulement des opérations.',
+                ],
+                'measures' => [
+                    'title' => 'Contrôle visuel & mesures',
+                    'body' => 'Une approche combinant vérifications visuelles et mesures instrumentées.',
+                ],
+            ],
+        ],
+        'values' => [
+            'overline' => 'Nos valeurs',
+            'title' => 'Des principes concrets au service de la sécurité routière.',
+            'motto' => 'Sécurité. Simplicité. Confiance.',
+            'items_label' => 'Valeurs de G3 Control',
+            'items' => [
+                'security' => [
+                    'title' => 'Sécurité',
+                    'body' => 'L’exigence technique absolue comme priorité collective.',
+                ],
+                'simplicity' => [
+                    'title' => 'Simplicité',
+                    'body' => 'Un parcours automobiliste fluide, clair et sans perte de temps.',
+                ],
+                'trust' => [
+                    'title' => 'Confiance',
+                    'body' => 'Une déontologie stricte et une totale transparence sur l’état du véhicule.',
+                ],
+                'rigor' => [
+                    'title' => 'Rigueur',
+                    'body' => 'Le respect rigoureux des procédures de l’Agrément N°0291.',
+                ],
+            ],
+        ],
+        'team' => [
+            'overline' => 'L’équipe G3',
+            'title' => 'La technologie ne remplace pas l’exigence humaine.',
+            'body' => 'Derrière les équipements, les lignes de contrôle et les procédures se trouve une équipe qui accueille, accompagne et réalise les opérations nécessaires au bon déroulement de chaque visite technique.',
+            'image_alt' => 'Techniciens G3 Control dans un centre de visite technique',
+            'items_label' => 'Qualités de l’équipe G3',
+            'items' => [
+                'welcome' => 'Accueil',
+                'rigor' => 'Rigueur',
+                'responsibility' => 'Responsabilité',
+            ],
+        ],
+    ],
+
     'utility' => [
         'tagline' => 'Visite technique · Yaoundé',
         'centres_open' => '2 centres · 7j/7',

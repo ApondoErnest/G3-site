@@ -113,6 +113,46 @@ test('french home renders the road safety section', function () {
         ->assertSeeText(__('public.home.road_safety.cta', [], 'fr'));
 });
 
+test('french about renders the identity section', function () {
+    $response = $this->get('/fr/a-propos');
+
+    $response->assertOk()
+        ->assertSee('g3-about-identity', escape: false)
+        ->assertSee('images/about/icon-eye.svg', escape: false)
+        ->assertSee('images/about/icon-target.svg', escape: false)
+        ->assertSee('images/about/icon-briefcase.svg', escape: false)
+        ->assertSeeText(__('public.about.identity.title', [], 'fr'))
+        ->assertSeeText(__('public.about.identity.purpose.title', [], 'fr'))
+        ->assertSeeText(__('public.about.identity.mission.title', [], 'fr'))
+        ->assertSeeText(__('public.about.identity.vision.title', [], 'fr'))
+        ->assertSeeText(__('public.about.identity.brief.title', [], 'fr'))
+        ->assertSee('g3-about-requirements', escape: false)
+        ->assertSee('images/about/technical-requirements.png', escape: false)
+        ->assertSee('images/about/icon-procedure.svg', escape: false)
+        ->assertSee('images/about/icon-team.svg', escape: false)
+        ->assertSee('images/about/icon-measure.svg', escape: false)
+        ->assertSeeText(__('public.about.requirements.title', [], 'fr'))
+        ->assertSeeText(__('public.about.requirements.items.procedures.title', [], 'fr'))
+        ->assertSeeText(__('public.about.requirements.items.measures.title', [], 'fr'))
+        ->assertSee('g3-about-values', escape: false)
+        ->assertSee('images/reusable/site-logo.png', escape: false)
+        ->assertSee('images/about/icon-value-security.svg', escape: false)
+        ->assertSee('images/about/icon-value-simplicity.svg', escape: false)
+        ->assertSee('images/about/icon-value-trust.svg', escape: false)
+        ->assertSee('images/about/icon-value-rigor.svg', escape: false)
+        ->assertSeeText(__('public.about.values.title', [], 'fr'))
+        ->assertSeeText(__('public.about.values.motto', [], 'fr'))
+        ->assertSeeText(__('public.about.values.items.trust.title', [], 'fr'))
+        ->assertSee('g3-about-team', escape: false)
+        ->assertSee('images/about/technicians.png', escape: false)
+        ->assertSee('images/about/icon-team-welcome.svg', escape: false)
+        ->assertSee('images/about/icon-team-rigor.svg', escape: false)
+        ->assertSee('images/about/icon-team-responsibility.svg', escape: false)
+        ->assertSeeText(__('public.about.team.title', [], 'fr'))
+        ->assertSeeText(__('public.about.team.items.welcome', [], 'fr'))
+        ->assertSeeText(__('public.about.team.items.responsibility', [], 'fr'));
+});
+
 test('top strip renders public service details from baseline data', function () {
     seedBaselineCentres();
 
