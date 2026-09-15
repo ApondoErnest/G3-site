@@ -19,6 +19,83 @@ return [
         'nomayos' => 'Nomayos',
     ],
 
+    'centres_page' => [
+        'overline' => 'G3 Live',
+        'title' => 'Quel centre vous convient aujourd’hui ?',
+        'lead' => 'Sélectionnez un centre pour voir son état d’ouverture, ses horaires et obtenir votre itinéraire.',
+        'tabs_label' => 'Sélection du centre G3 Control',
+        'map' => [
+            'title' => 'Carte Google Maps des centres G3 Control à Yaoundé',
+            'markers_label' => 'Repères des centres G3 Control',
+            'show_all' => 'Voir les deux centres',
+            'open_google' => 'Ouvrir dans Google Maps',
+        ],
+        'status' => [
+            'open' => 'Ouvert actuellement',
+            'closes_today' => 'Ferme aujourd’hui à :time',
+        ],
+        'labels' => [
+            'address' => 'Adresse',
+            'phone' => 'Téléphone',
+            'hours' => 'Horaires',
+            'holiday' => 'Jours fériés',
+        ],
+        'hours' => [
+            'weekday' => 'Lundi – Samedi : :hours',
+            'sunday' => 'Dimanche : :hours',
+            'holidays' => 'Jours fériés : Ouvert',
+        ],
+        'actions' => [
+            'directions' => 'Itinéraire',
+            'call' => 'Appeler',
+            'details' => 'Voir le centre',
+            'choose' => 'Choisir ce centre',
+        ],
+        'standard' => [
+            'overline' => 'Le standard G3',
+            'title' => 'Deux implantations. Une seule exigence de contrôle.',
+            'items_label' => 'Les garanties du standard G3',
+            'items' => [
+                'approval' => [
+                    'title' => 'Agrément N°0291',
+                    'body' => 'G3 Control · depuis 2020',
+                ],
+                'procedures' => [
+                    'title' => 'Procédures structurées',
+                    'body' => '',
+                ],
+                'equipment' => [
+                    'title' => 'Équipements spécialisés',
+                    'body' => '',
+                ],
+                'team' => [
+                    'title' => 'Personnel dédié',
+                    'body' => '',
+                ],
+            ],
+        ],
+        'items' => [
+            'ecole_de_police' => [
+                'short_name' => 'École de Police',
+                'title' => 'G3 Control — École de Police',
+                'address' => 'Descente ancien Texaco, École de Police, Yaoundé',
+                'phone' => '687 187 516',
+                'weekday_hours' => '07h00 – 20h00',
+                'sunday_hours' => '07h00 – 15h00',
+                'image_alt' => 'Façade du centre G3 Control École de Police',
+            ],
+            'nomayos' => [
+                'short_name' => 'Nomayos',
+                'title' => 'G3 Control — Nomayos',
+                'address' => 'Carrefour Nomayos, Yaoundé',
+                'phone' => '655 100 801 / 692 242 143',
+                'weekday_hours' => '07h00 – 19h00',
+                'sunday_hours' => '07h00 – 15h00',
+                'image_alt' => 'Accueil du centre G3 Control Nomayos',
+            ],
+        ],
+    ],
+
     'pages' => [
         'appointment' => 'Rendez-vous & Suivi',
     ],

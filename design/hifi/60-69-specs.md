@@ -60,6 +60,20 @@ Verification completed during Step 119: `vendor/bin/pint --dirty --format agent`
 | Cards | `centre-card` + orange top line · full action row |
 | CTA | RDV primary |
 
+**Step 120 implementation note · 2026-09-15**
+
+Implemented as `resources/views/pages/centres.blade.php` with bilingual copy in `lang/fr/public.php` and `lang/en/public.php`, responsive styling in `resources/css/app.css`, selector behavior in `resources/js/app.js`, and centre assets under `public/images/centers/`.
+
+| Production section | Notes |
+| --- | --- |
+| G3 Live selector | Screenshot-led layout with copy on the left, a real Google Maps iframe, two branded overlay markers, and a centre detail panel on the right |
+| Centre detail tabs | École de Police active by default; tabs and map markers switch the visible centre card without navigation |
+| Centre actions | `Itinéraire`, `Voir le centre`, and `Choisir ce centre`; call action removed from the action row while phone remains clickable in details |
+| Mobile actions | Three action buttons fit on one row in the active centre card |
+| Le standard G3 | Compact transparent blue band with centred, zoomed G3 logo background and four generated SVG standard icons |
+
+Verification completed during Step 120: `vendor/bin/pint --dirty --format agent`, `npm run build`, `php artisan test --compact tests/Feature/Public/PublicShellTest.php`, and browser desktop/mobile inspection for overflow, selector state, map iframe, and compact standard band layout.
+
 ---
 
 ## 62–63 · Centre detail

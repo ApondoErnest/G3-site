@@ -62,6 +62,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.querySelectorAll('[data-centres-live]').forEach((section) => {
+        const tabs = Array.from(section.querySelectorAll('[data-centre-tab]'));
+        const panels = Array.from(section.querySelectorAll('[data-centre-panel]'));
+        const markers = Array.from(section.querySelectorAll('[data-centre-map-marker]'));
+
+        if (! tabs.length || ! panels.length) {
+            return;
+        }
+
+        const activateCentre = (target) => {
+            tabs.forEach((tab) => {
+                const isActive = tab.dataset.centreTarget === target;
+
+                tab.classList.toggle('g3-centres-live__tab--active', isActive);
+                tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            panels.forEach((panel) => {
+                panel.hidden = panel.dataset.centreKey !== target;
+            });
+
+            markers.forEach((marker) => {
+                const isActive = marker.dataset.centreTarget === target;
+
+                marker.classList.toggle('g3-centres-live__marker--active', isActive);
+                marker.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+        };
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => activateCentre(tab.dataset.centreTarget));
+
+            tab.addEventListener('keydown', (event) => {
+                const keyIndexMap = {
+                    ArrowDown: (index + 1) % tabs.length,
+                    ArrowRight: (index + 1) % tabs.length,
+                    ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+                    ArrowUp: (index - 1 + tabs.length) % tabs.length,
+                    End: tabs.length - 1,
+                    Home: 0,
+                };
+
+                if (! (event.key in keyIndexMap)) {
+                    return;
+                }
+
+                event.preventDefault();
+                tabs[keyIndexMap[event.key]].focus();
+                activateCentre(tabs[keyIndexMap[event.key]].dataset.centreTarget);
+            });
+        });
+
+        markers.forEach((marker) => {
+            marker.addEventListener('click', () => activateCentre(marker.dataset.centreTarget));
+        });
+    });
+
     document.querySelectorAll('[data-equipment-carousel]').forEach((carousel) => {
         const viewport = carousel.querySelector('[data-equipment-viewport]');
         const page = carousel.querySelector('[data-equipment-page]');

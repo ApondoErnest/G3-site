@@ -100,6 +100,40 @@ test('french home renders the centres section', function () {
         ->assertSeeText(__('public.home.centres.map_title', [], 'fr'));
 });
 
+test('french centres page renders the live selector section', function () {
+    $response = $this->get('/fr/centres');
+
+    $response->assertOk()
+        ->assertSee('g3-centres-live', escape: false)
+        ->assertSee('data-centres-live', escape: false)
+        ->assertSee('data-centre-tab', escape: false)
+        ->assertSee('data-centre-map-marker', escape: false)
+        ->assertSee('g3-centres-standard', escape: false)
+        ->assertSee('images/reusable/site-logo.png', escape: false)
+        ->assertSee('images/centers/ecole-de-police.png', escape: false)
+        ->assertSee('images/centers/nomayos.png', escape: false)
+        ->assertSee('images/centers/icon-standard-approval.svg', escape: false)
+        ->assertSee('images/centers/icon-standard-procedures.svg', escape: false)
+        ->assertSee('images/centers/icon-standard-equipment.svg', escape: false)
+        ->assertSee('images/centers/icon-standard-team.svg', escape: false)
+        ->assertSee('https://maps.google.com/maps?q=Yaound%C3%A9%2C%20Cameroon&amp;z=12&amp;output=embed', escape: false)
+        ->assertSee('destination=3.8786152,11.5116814', escape: false)
+        ->assertSee('destination=3.7902275,11.4439448', escape: false)
+        ->assertSee('href="tel:+237687187516"', escape: false)
+        ->assertSee('href="tel:+237653100801"', escape: false)
+        ->assertSee(PublicNavigation::pageUrl('centre_ecole_de_police', 'fr'), escape: false)
+        ->assertSee(PublicNavigation::pageUrl('centre_nomayos', 'fr'), escape: false)
+        ->assertSee(PublicNavigation::pageUrl('appointment', 'fr').'?centre=ecole-de-police', escape: false)
+        ->assertSeeText(__('public.centres_page.title', [], 'fr'))
+        ->assertSeeText(__('public.centres_page.items.ecole_de_police.title', [], 'fr'))
+        ->assertSeeText(__('public.centres_page.items.nomayos.title', [], 'fr'))
+        ->assertSeeText(__('public.centres_page.map.open_google', [], 'fr'))
+        ->assertSeeText(__('public.centres_page.standard.title', [], 'fr'))
+        ->assertSeeText(__('public.centres_page.standard.items.approval.title', [], 'fr'))
+        ->assertSeeText(__('public.centres_page.standard.items.equipment.title', [], 'fr'))
+        ->assertDontSeeText(__('public.centres_page.actions.call', [], 'fr'));
+});
+
 test('french home renders the road safety section', function () {
     $response = $this->get('/fr/accueil');
 
