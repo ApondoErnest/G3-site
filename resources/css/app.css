@@ -2646,6 +2646,499 @@
     }
 }
 
+@layer components {
+    .g3-centre-hero {
+        @apply overflow-hidden bg-white px-4 py-12 sm:px-6 lg:px-8;
+    }
+
+    .g3-centre-hero__inner {
+        @apply mx-auto grid w-full items-stretch gap-7;
+        max-width: 118rem;
+        grid-template-columns: minmax(0, 1.62fr) minmax(27rem, 0.88fr);
+    }
+
+    .g3-centre-hero__carousel,
+    .g3-centre-hero__panel {
+        @apply min-w-0 overflow-hidden rounded-lg border border-g3-border/80 bg-white shadow-sm;
+        box-shadow: 0 18px 48px rgb(11 47 91 / 10%);
+    }
+
+    .g3-centre-hero__carousel {
+        @apply relative isolate min-h-[39rem] bg-g3-blue-deep;
+    }
+
+    .g3-centre-hero__slides,
+    .g3-centre-hero__slide {
+        @apply absolute inset-0 h-full w-full;
+    }
+
+    .g3-centre-hero__slide {
+        @apply max-w-none object-cover opacity-0 transition-opacity duration-500;
+        object-position: center center;
+    }
+
+    .g3-centre-hero__slide--active {
+        @apply opacity-100;
+    }
+
+    .g3-centre-hero__carousel::after {
+        content: '';
+        @apply pointer-events-none absolute inset-x-0 bottom-0 z-10 h-1/2;
+        background: linear-gradient(180deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 62%));
+    }
+
+    .g3-centre-hero__image-copy {
+        @apply absolute bottom-7 left-7 z-20 flex max-w-xl flex-col gap-2 text-white;
+        text-shadow: 0 3px 16px rgb(0 0 0 / 52%);
+    }
+
+    .g3-centre-hero__image-copy strong {
+        @apply font-display text-2xl font-bold leading-tight;
+    }
+
+    .g3-centre-hero__image-copy span {
+        @apply inline-flex items-start gap-2 text-base font-semibold leading-snug text-white/88;
+    }
+
+    .g3-centre-hero__image-copy svg {
+        @apply mt-0.5 h-5 w-5 shrink-0;
+    }
+
+    .g3-centre-hero__carousel-controls {
+        @apply absolute bottom-7 right-7 z-30 flex items-center gap-5;
+    }
+
+    .g3-centre-hero__dots {
+        @apply flex items-center gap-2;
+    }
+
+    .g3-centre-hero__dot {
+        @apply h-3 w-3 rounded-full bg-white/55 transition hover:bg-white focus-visible:outline-white;
+    }
+
+    .g3-centre-hero__dot--active {
+        @apply w-7 bg-white;
+    }
+
+    .g3-centre-hero__arrows {
+        @apply flex items-center gap-2;
+    }
+
+    .g3-centre-hero__arrows button {
+        @apply inline-flex h-13 w-13 items-center justify-center rounded-full bg-white/28 text-white backdrop-blur transition hover:bg-white/40 focus-visible:outline-white;
+    }
+
+    .g3-centre-hero__arrows svg {
+        @apply h-7 w-7;
+    }
+
+    .g3-centre-hero__panel {
+        @apply px-7 py-6;
+    }
+
+    .g3-centre-hero__overline {
+        @apply text-sm font-extrabold uppercase text-g3-orange;
+    }
+
+    .g3-centre-hero__panel h1 {
+        @apply mt-2 font-display text-5xl font-bold leading-[1.04] text-g3-royal;
+    }
+
+    .g3-centre-hero__lead {
+        @apply mt-4 text-lg font-semibold leading-relaxed text-g3-muted;
+    }
+
+    .g3-centre-hero__status {
+        @apply mt-6 grid items-center gap-5 rounded-lg bg-emerald-50 px-5 py-4;
+        grid-template-columns: 3rem minmax(0, 1fr);
+    }
+
+    .g3-centre-hero__status-icon {
+        @apply flex h-11 w-11 items-center justify-center rounded-full bg-g3-success text-white;
+        box-shadow: 0 0 0 9px rgb(22 134 83 / 10%);
+    }
+
+    .g3-centre-hero__status-icon span {
+        @apply h-3 w-3 rounded-full bg-white;
+    }
+
+    .g3-centre-hero__status strong {
+        @apply block text-xl font-extrabold leading-tight text-g3-success;
+    }
+
+    .g3-centre-hero__status span:last-child {
+        @apply mt-1 inline-flex items-center gap-2 text-sm font-semibold leading-tight text-emerald-800/70;
+    }
+
+    .g3-centre-hero__status svg {
+        @apply h-4 w-4;
+    }
+
+    .g3-centre-hero__facts {
+        @apply mt-6 grid gap-x-6 gap-y-5;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .g3-centre-hero__fact {
+        @apply grid min-w-0 items-start gap-4;
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+
+    .g3-centre-hero__fact--wide {
+        grid-column: 1 / -1;
+    }
+
+    .g3-centre-hero__fact-icon {
+        @apply flex h-10 w-10 items-center justify-center text-g3-royal;
+    }
+
+    .g3-centre-hero__fact-icon svg {
+        @apply h-8 w-8;
+    }
+
+    .g3-centre-hero__fact strong {
+        @apply block text-base font-extrabold leading-tight text-g3-royal;
+    }
+
+    .g3-centre-hero__fact span {
+        @apply mt-1 block text-base font-semibold leading-snug text-slate-600;
+    }
+
+    .g3-centre-hero__fact dl {
+        @apply mt-2 grid gap-1.5;
+    }
+
+    .g3-centre-hero__fact dl div {
+        @apply grid gap-3;
+        grid-template-columns: minmax(7rem, 0.74fr) minmax(0, 1fr);
+    }
+
+    .g3-centre-hero__fact dt,
+    .g3-centre-hero__fact dd {
+        @apply text-base font-semibold leading-tight;
+    }
+
+    .g3-centre-hero__fact dt {
+        @apply text-slate-600;
+    }
+
+    .g3-centre-hero__fact dd {
+        @apply text-g3-royal;
+    }
+
+    .g3-centre-hero__appointment {
+        @apply mt-6 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-lg bg-g3-royal px-6 text-base font-extrabold text-white shadow-lg transition hover:bg-g3-blue-deep focus-visible:outline-g3-royal;
+        box-shadow: inset 0 -3px 0 0 var(--color-g3-orange), 0 15px 28px rgb(20 93 170 / 18%);
+    }
+
+    .g3-centre-hero__appointment svg {
+        @apply h-5 w-5;
+    }
+
+    .g3-centre-hero__approval {
+        @apply mt-5 flex items-center gap-4 border-t border-g3-border pt-5 text-sm font-bold text-g3-royal;
+    }
+
+    .g3-centre-hero__approval svg {
+        @apply h-9 w-9 shrink-0 text-g3-royal;
+    }
+
+    .g3-centre-prep {
+        @apply overflow-hidden bg-white px-4 py-8 sm:px-6 lg:px-8;
+    }
+
+    .g3-centre-prep__inner {
+        @apply mx-auto w-full;
+        max-width: 118rem;
+    }
+
+    .g3-centre-prep__header {
+        @apply max-w-5xl;
+    }
+
+    .g3-centre-prep__overline {
+        @apply text-sm font-extrabold uppercase text-g3-orange;
+    }
+
+    .g3-centre-prep__header h2 {
+        @apply mt-1 font-display text-4xl font-bold leading-tight text-g3-royal;
+    }
+
+    .g3-centre-prep__header p:last-child {
+        @apply mt-1 text-lg font-semibold leading-relaxed text-g3-muted;
+    }
+
+    .g3-centre-prep__cards {
+        @apply mt-6 grid gap-5;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .g3-centre-prep__card {
+        @apply grid min-h-48 min-w-0 items-start gap-5 rounded-lg border border-g3-border/70 bg-white px-7 py-6 shadow-sm;
+        grid-template-columns: 3.25rem minmax(0, 1fr);
+        box-shadow: 0 18px 44px rgb(11 47 91 / 8%);
+    }
+
+    .g3-centre-prep__icon {
+        @apply h-12 w-12 shrink-0;
+    }
+
+    .g3-centre-prep__card-copy {
+        @apply min-w-0;
+    }
+
+    .g3-centre-prep__card-copy h3 {
+        @apply font-display text-xl font-bold leading-tight text-g3-royal;
+    }
+
+    .g3-centre-prep__card-copy p {
+        @apply mt-3 text-base font-semibold leading-relaxed text-g3-muted;
+    }
+
+    .g3-centre-prep__link {
+        @apply mt-5 inline-flex items-center gap-3 text-base font-extrabold text-g3-royal transition hover:text-g3-orange focus-visible:outline-g3-royal;
+    }
+
+    .g3-centre-prep__link svg {
+        @apply h-5 w-5 shrink-0;
+    }
+
+    .g3-centre-prep__hours {
+        @apply mt-4 grid gap-3;
+    }
+
+    .g3-centre-prep__hours div {
+        @apply grid items-baseline gap-4;
+        grid-template-columns: minmax(8rem, 0.82fr) minmax(0, 1fr);
+    }
+
+    .g3-centre-prep__hours dt,
+    .g3-centre-prep__hours dd {
+        @apply text-base font-semibold leading-tight;
+    }
+
+    .g3-centre-prep__hours dt {
+        @apply text-g3-muted;
+    }
+
+    .g3-centre-prep__hours dd {
+        @apply whitespace-nowrap text-g3-royal;
+    }
+
+    @media (min-width: 1280px) {
+        .g3-centre-hero__inner {
+            width: calc(100vw - 8rem);
+            max-width: none;
+        }
+
+        .g3-centre-prep__inner {
+            width: max(66rem, calc(100vw - 28rem));
+            max-width: calc(100vw - 4rem);
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .g3-centre-hero {
+            @apply py-10;
+        }
+
+        .g3-centre-hero__inner {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .g3-centre-hero__carousel {
+            @apply min-h-[32rem];
+        }
+
+        .g3-centre-hero__panel h1 {
+            @apply text-4xl;
+        }
+
+        .g3-centre-prep {
+            @apply py-8;
+        }
+
+        .g3-centre-prep__header h2 {
+            @apply text-3xl;
+        }
+
+        .g3-centre-prep__cards {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+
+    @media (max-width: 639px) {
+        .g3-centre-hero {
+            @apply px-4 py-8;
+        }
+
+        .g3-centre-hero__inner {
+            @apply gap-4;
+        }
+
+        .g3-centre-hero__carousel {
+            min-height: 256px;
+            height: 256px;
+        }
+
+        .g3-centre-hero__image-copy {
+            @apply bottom-5 left-5 right-24 gap-1.5;
+        }
+
+        .g3-centre-hero__image-copy strong {
+            @apply text-lg;
+        }
+
+        .g3-centre-hero__image-copy span {
+            @apply text-xs;
+        }
+
+        .g3-centre-hero__image-copy svg {
+            @apply h-4 w-4;
+        }
+
+        .g3-centre-hero__carousel-controls {
+            @apply bottom-5 right-4 gap-3;
+        }
+
+        .g3-centre-hero__dots {
+            @apply hidden;
+        }
+
+        .g3-centre-hero__arrows button {
+            @apply h-10 w-10;
+        }
+
+        .g3-centre-hero__arrows svg {
+            @apply h-5 w-5;
+        }
+
+        .g3-centre-hero__panel {
+            @apply px-5 py-5;
+        }
+
+        .g3-centre-hero__overline {
+            @apply text-xs;
+        }
+
+        .g3-centre-hero__panel h1 {
+            @apply text-3xl;
+        }
+
+        .g3-centre-hero__lead {
+            @apply mt-3 text-base;
+            line-height: 1.5;
+        }
+
+        .g3-centre-hero__status {
+            @apply mt-5 gap-3 px-4 py-3;
+            grid-template-columns: 2.5rem minmax(0, 1fr);
+        }
+
+        .g3-centre-hero__status-icon {
+            @apply h-9 w-9;
+        }
+
+        .g3-centre-hero__status strong {
+            @apply text-base;
+        }
+
+        .g3-centre-hero__status span:last-child {
+            @apply text-xs;
+        }
+
+        .g3-centre-hero__facts {
+            @apply gap-4;
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .g3-centre-hero__fact {
+            @apply gap-3;
+            grid-template-columns: 2rem minmax(0, 1fr);
+        }
+
+        .g3-centre-hero__fact-icon {
+            @apply h-8 w-8;
+        }
+
+        .g3-centre-hero__fact-icon svg {
+            @apply h-6 w-6;
+        }
+
+        .g3-centre-hero__fact strong,
+        .g3-centre-hero__fact span,
+        .g3-centre-hero__fact dt,
+        .g3-centre-hero__fact dd {
+            @apply text-sm;
+        }
+
+        .g3-centre-hero__fact dl div {
+            grid-template-columns: minmax(6.5rem, 0.75fr) minmax(0, 1fr);
+        }
+
+        .g3-centre-hero__appointment {
+            @apply mt-5 min-h-12 text-sm;
+        }
+
+        .g3-centre-hero__approval {
+            @apply mt-4 gap-3 pt-4 text-xs;
+        }
+
+        .g3-centre-hero__approval svg {
+            @apply h-7 w-7;
+        }
+
+        .g3-centre-prep {
+            @apply px-4 py-6;
+        }
+
+        .g3-centre-prep__overline {
+            @apply text-xs;
+        }
+
+        .g3-centre-prep__header h2 {
+            @apply text-3xl;
+        }
+
+        .g3-centre-prep__header p:last-child {
+            @apply text-base;
+            line-height: 1.5;
+        }
+
+        .g3-centre-prep__cards {
+            @apply mt-6 gap-4;
+        }
+
+        .g3-centre-prep__card {
+            @apply min-h-0 gap-4 px-5 py-6;
+            grid-template-columns: 3rem minmax(0, 1fr);
+        }
+
+        .g3-centre-prep__icon {
+            @apply h-12 w-12;
+        }
+
+        .g3-centre-prep__card-copy h3 {
+            @apply text-xl;
+        }
+
+        .g3-centre-prep__card-copy p,
+        .g3-centre-prep__link,
+        .g3-centre-prep__hours dt,
+        .g3-centre-prep__hours dd {
+            @apply text-sm;
+        }
+
+        .g3-centre-prep__link {
+            @apply mt-5;
+        }
+
+        .g3-centre-prep__hours div {
+            grid-template-columns: minmax(6.75rem, 0.82fr) minmax(0, 1fr);
+        }
+    }
+}
+
 @media (max-width: 639px) {
     .g3-about-identity {
         @apply px-4 py-10;

@@ -119,6 +119,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.querySelectorAll('[data-centre-hero-carousel]').forEach((carousel) => {
+        const slides = Array.from(carousel.querySelectorAll('[data-centre-hero-slide]'));
+        const dots = Array.from(carousel.querySelectorAll('[data-centre-hero-dot]'));
+        const previousButton = carousel.querySelector('[data-centre-hero-prev]');
+        const nextButton = carousel.querySelector('[data-centre-hero-next]');
+
+        if (! slides.length || ! dots.length) {
+            return;
+        }
+
+        let activeIndex = 0;
+
+        const setSlide = (index) => {
+            activeIndex = (index + slides.length) % slides.length;
+
+            slides.forEach((slide, slideIndex) => {
+                const isActive = slideIndex === activeIndex;
+
+                slide.classList.toggle('g3-centre-hero__slide--active', isActive);
+                slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+            });
+
+            dots.forEach((dot, dotIndex) => {
+                const isActive = dotIndex === activeIndex;
+
+                dot.classList.toggle('g3-centre-hero__dot--active', isActive);
+                if (isActive) {
+                    dot.setAttribute('aria-current', 'true');
+                } else {
+                    dot.removeAttribute('aria-current');
+                }
+            });
+        };
+
+        previousButton?.addEventListener('click', () => setSlide(activeIndex - 1));
+        nextButton?.addEventListener('click', () => setSlide(activeIndex + 1));
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => setSlide(index));
+        });
+
+        carousel.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                setSlide(activeIndex - 1);
+            }
+
+            if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                setSlide(activeIndex + 1);
+            }
+        });
+    });
+
     document.querySelectorAll('[data-equipment-carousel]').forEach((carousel) => {
         const viewport = carousel.querySelector('[data-equipment-viewport]');
         const page = carousel.querySelector('[data-equipment-page]');
