@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" role="img" aria-label="Vehicles">
+  <path d="M16 35l5-14c.9-2.5 3.2-4 5.8-4h18.4c2.6 0 4.9 1.5 5.8 4l5 14" stroke="#145DAA" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M15 35h42a5 5 0 0 1 5 5v14H10V40a5 5 0 0 1 5-5Z" stroke="#145DAA" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M19 54v7M53 54v7M21 44h8M43 44h8" stroke="#145DAA" stroke-width="5" stroke-linecap="round"/>
+</svg>

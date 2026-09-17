@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" role="img" aria-label="Tariff">
+  <ellipse cx="28" cy="18" rx="16" ry="7" stroke="#145DAA" stroke-width="5"/>
+  <path d="M12 18v14c0 3.9 7.2 7 16 7s16-3.1 16-7V18M12 32v14c0 3.9 7.2 7 16 7 3.6 0 7-.5 9.6-1.5" stroke="#145DAA" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="47" cy="43" rx="15" ry="7" stroke="#145DAA" stroke-width="5"/>
+  <path d="M32 43v12c0 3.9 6.7 7 15 7s15-3.1 15-7V43" stroke="#145DAA" stroke-width="5" stroke-linecap="round"/>
+</svg>
