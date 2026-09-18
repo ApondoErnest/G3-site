@@ -50,7 +50,7 @@ Read and approve in this order. Each document builds on the previous.
 | 86–97 | Migrations in repository · **Gate 97 ✓ 2026-09-05** · [`11-gate-schema-accepted.md`](11-gate-schema-accepted.md) | Database build |
 | 98–107 | PHP modules + Pest · **Gate 107 ✓ 2026-09-06** · [`12-gate-domain-accepted.md`](12-gate-domain-accepted.md) | Backend build |
 | 108–116 | Filament resources | Administration UI |
-| 117–129 | Blade / Livewire pages · **Steps 118–122 Accueil + À propos + Nos centres + École de Police + Nomayos ✓** · active **123 Services** | Public frontend |
+| 117–129 | Blade / Livewire pages · **Steps 118–123 Accueil + À propos + Nos centres + École de Police + Nomayos + Services ✓** · active **124 Visite technique** | Public frontend |
 | 151 | [`12-docker.md`](12-docker.md) | Containerisation |
 | 177 | [`13-launch.md`](13-launch.md) | Go-live checklist |
 

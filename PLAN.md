@@ -83,9 +83,9 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 | | |
 | --- | --- |
 | Active phase | **VII — Public experience** |
-| Complete | Steps 1–122 |
-| **Active step** | **123** — Services |
-| Pending | Steps 123–182 · Phases VII–X |
+| Complete | Steps 1–123 |
+| **Active step** | **124** — Visite technique |
+| Pending | Steps 124–182 · Phases VII–X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -292,8 +292,8 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 - [x] **120** · Nos centres · Live centre selector, Google map, centre details, and G3 standard band
 - [x] **121** · École de Police · Centre hero carousel, centre facts, and preparation section
 - [x] **122** · Nomayos · Centre hero carousel, centre facts, and preparation section
-- [ ] **123** · ← active · Services
-- [ ] **124** · Visite technique
+- [x] **123** · Services · Compact service passport, editorial service portfolio, infrastructure proof block, and SVG service/proof icons
+- [ ] **124** · ← active · Visite technique
 - [ ] **125** · Tarifs
 - [ ] **126** · Rendez-vous & Suivi
 - [ ] **127** · Sécurité routière
