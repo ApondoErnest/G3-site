@@ -320,6 +320,76 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePreparation();
     });
 
+    document.querySelectorAll('[data-tariff-navigator]').forEach((section) => {
+        const profiles = Array.from(section.querySelectorAll('[data-tariff-profile]'));
+        const passports = Array.from(section.querySelectorAll('[data-tariff-passport]'));
+        const assistant = section.querySelector('[data-tariff-assistant]');
+        const assistantToggle = section.querySelector('[data-tariff-assistant-toggle]');
+        const assistantOptions = Array.from(section.querySelectorAll('[data-tariff-assistant-select]'));
+
+        if (! profiles.length || ! passports.length) {
+            return;
+        }
+
+        const activateTariff = (target) => {
+            profiles.forEach((profile) => {
+                const isActive = profile.dataset.tariffTarget === target;
+
+                profile.classList.toggle('g3-tariff-finder__profile--active', isActive);
+                profile.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                profile.tabIndex = isActive ? 0 : -1;
+            });
+
+            passports.forEach((passport) => {
+                passport.hidden = passport.dataset.tariffKey !== target;
+            });
+        };
+
+        profiles.forEach((profile, index) => {
+            profile.addEventListener('click', () => activateTariff(profile.dataset.tariffTarget));
+
+            profile.addEventListener('keydown', (event) => {
+                const keyIndexMap = {
+                    ArrowDown: (index + 1) % profiles.length,
+                    ArrowRight: (index + 1) % profiles.length,
+                    ArrowLeft: (index - 1 + profiles.length) % profiles.length,
+                    ArrowUp: (index - 1 + profiles.length) % profiles.length,
+                    End: profiles.length - 1,
+                    Home: 0,
+                };
+
+                if (! (event.key in keyIndexMap)) {
+                    return;
+                }
+
+                event.preventDefault();
+                profiles[keyIndexMap[event.key]].focus();
+                activateTariff(profiles[keyIndexMap[event.key]].dataset.tariffTarget);
+            });
+        });
+
+        assistantToggle?.addEventListener('click', () => {
+            if (! assistant) {
+                return;
+            }
+
+            const isHidden = assistant.hidden;
+
+            assistant.hidden = ! isHidden;
+            assistantToggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        });
+
+        assistantOptions.forEach((option) => {
+            option.addEventListener('click', () => {
+                activateTariff(option.dataset.tariffTarget);
+                assistant?.setAttribute('hidden', '');
+                assistantToggle?.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        activateTariff(profiles.find((profile) => profile.getAttribute('aria-selected') === 'true')?.dataset.tariffTarget ?? profiles[0].dataset.tariffTarget);
+    });
+
     document.querySelectorAll('[data-equipment-carousel]').forEach((carousel) => {
         const viewport = carousel.querySelector('[data-equipment-viewport]');
         const page = carousel.querySelector('[data-equipment-page]');

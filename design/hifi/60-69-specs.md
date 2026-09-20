@@ -110,6 +110,22 @@ Video `video-box` 16:9 · journey component · split process · document/FAQ acc
 
 Desktop: `matrix` table · Mobile: `tariff-card` stack (hidden on desktop). Finder row · print/share secondary buttons · empty state FR-TA-09. Amounts grouped FCFA.
 
+**Step 125 implementation note · 2026-09-20**
+
+Implemented as `resources/views/pages/fees.blade.php` with responsive styling in `resources/css/app.css`, tariff selector behavior in `resources/js/app.js`, official vehicle imagery and generated SVG icons under `public/images/tariffs/`.
+
+| Production section | Notes |
+| --- | --- |
+| Smart tariff navigator | Soft Royal Blue finder with customer-facing vehicle profiles, official category resolution, and two-card mobile profile grid |
+| Price passport | White tariff passport with official category, vehicle examples, FCFA amount, validity, G3 centres, tariff version, and Royal Blue appointment footer |
+| Category assistant | Lightweight “Je ne connais pas ma catégorie” helper that maps plain vehicle/use cues back to the active passport |
+| Tariff integrity | Compact Clean Wall White explanatory strip covering tariff variation, validity, and freshness; copy names MINT as tariff publisher and records the verified `01 juin 2022` update date |
+| Responsive refinements | Transparency strip height and typography reduced; no bottom orange separator in this section |
+
+Tariff values used for Step 125 are the currently implemented public-page seed values from the verified tariff source pass: A `4 900 FCFA`, B `17 900 FCFA`, B1 `15 500 FCFA`, C mini-bus `15 500 FCFA`, C grand bus `19 080 FCFA`, D poids lourd `26 235 FCFA`, and D autres engins `41 750 FCFA`. The production backend tariff tables remain the authoritative source when connected.
+
+Verification completed during Step 125: `vendor/bin/pint --dirty --format agent`, `npm run build`, `php artisan test --compact tests/Feature/Public/PublicShellTest.php tests/Feature/LocaleRoutingTest.php`, and browser desktop/mobile inspection for selector behavior, horizontal overflow, compact transparency strip layout, and console errors.
+
 ---
 
 ## 67 · Rendez-vous & Suivi
