@@ -6352,3 +6352,1190 @@
         @apply h-[3.75rem];
     }
 }
+
+@layer components {
+    .g3-appointment-hub {
+        @apply bg-g3-blue-soft px-4 py-8 sm:px-6 lg:px-8;
+        scroll-margin-top: 8rem;
+    }
+
+    .g3-appointment-hub__inner {
+        @apply mx-auto w-full;
+        max-width: 112rem;
+    }
+
+    .g3-appointment-hub__header {
+        @apply mx-auto max-w-6xl text-center;
+    }
+
+    .g3-appointment-hub__overline {
+        @apply font-display text-sm font-extrabold uppercase text-g3-orange;
+    }
+
+    .g3-appointment-hub__header h1 {
+        @apply mt-2 font-display text-6xl font-bold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-appointment-hub__header > p:last-of-type {
+        @apply mt-2 text-2xl font-semibold leading-relaxed text-g3-blue-deep/68;
+    }
+
+    .g3-appointment-hub__mode {
+        @apply mx-auto mt-8 grid max-w-[46rem] grid-cols-2 overflow-hidden rounded-full border border-g3-border bg-white p-1 shadow-sm;
+    }
+
+    .g3-appointment-hub__mode-button {
+        @apply relative inline-flex min-h-16 items-center justify-center gap-4 rounded-full px-5 font-display text-xl font-bold text-g3-blue-deep transition hover:bg-g3-blue-soft focus-visible:outline-g3-orange;
+    }
+
+    .g3-appointment-hub__mode-button img {
+        @apply h-8 w-8;
+    }
+
+    .g3-appointment-hub__mode-button--active {
+        @apply bg-g3-royal text-white shadow-md;
+        box-shadow: inset 0 -3px 0 var(--color-g3-orange), 0 14px 26px rgb(20 93 170 / 18%);
+    }
+
+    .g3-appointment-hub__mode-button--active img {
+        filter: brightness(0) invert(1);
+    }
+
+    .g3-appointment-hub__benefits {
+        @apply mx-auto mt-9 grid max-w-6xl gap-0;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .g3-appointment-hub__benefits article {
+        @apply grid items-center gap-5 px-8;
+        grid-template-columns: 3.5rem minmax(0, 1fr);
+    }
+
+    .g3-appointment-hub__benefits article + article {
+        @apply border-l border-g3-border;
+    }
+
+    .g3-appointment-hub__benefits img {
+        @apply h-12 w-12;
+    }
+
+    .g3-appointment-hub__benefits h2 {
+        @apply font-display text-lg font-bold leading-tight text-g3-royal;
+    }
+
+    .g3-appointment-hub__benefits p {
+        @apply mt-1 text-base font-semibold text-g3-blue-deep/60;
+    }
+
+    .g3-express-pass {
+        @apply mt-9 overflow-hidden rounded-xl bg-white p-8;
+        box-shadow: 0 28px 70px rgb(20 93 170 / 10%);
+    }
+
+    .g3-express-pass__head {
+        @apply flex items-start justify-between gap-8;
+    }
+
+    .g3-express-pass__head p,
+    .g3-tracking-pass__overline {
+        @apply font-display text-sm font-extrabold uppercase text-g3-royal;
+    }
+
+    .g3-express-pass__head h2,
+    .g3-tracking-pass h2 {
+        @apply mt-2 font-display text-4xl font-bold leading-tight text-g3-royal;
+    }
+
+    .g3-express-pass__head span,
+    .g3-tracking-pass > p {
+        @apply mt-1 block text-xl font-semibold leading-relaxed text-g3-blue-deep/62;
+    }
+
+    .g3-express-pass__badge {
+        @apply grid min-w-[18rem] items-center gap-x-4 rounded-lg bg-g3-blue-soft px-6 py-5 text-left;
+        grid-template-columns: 4rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__badge img {
+        @apply row-span-2 h-12 w-12;
+    }
+
+    .g3-express-pass__badge strong {
+        @apply font-display text-lg font-bold leading-tight text-g3-royal;
+    }
+
+    .g3-express-pass__badge span {
+        @apply mt-0 text-base font-bold leading-snug text-g3-royal;
+    }
+
+    .g3-express-pass__form {
+        @apply mt-7 grid gap-7;
+    }
+
+    .g3-express-pass__step {
+        @apply grid gap-4;
+    }
+
+    .g3-express-pass__step-head {
+        @apply grid items-start gap-4;
+        grid-template-columns: 3.5rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__step-head > span {
+        @apply flex h-11 w-11 items-center justify-center rounded-full bg-g3-royal font-display text-xl font-bold text-white;
+    }
+
+    .g3-express-pass__step-head h3 {
+        @apply font-display text-2xl font-bold leading-tight text-g3-royal;
+    }
+
+    .g3-express-pass__step-head p {
+        @apply mt-1 text-base font-semibold leading-relaxed text-g3-blue-deep/60;
+    }
+
+    .g3-express-pass__centres {
+        @apply grid gap-5;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .g3-express-pass__centre {
+        @apply relative grid min-h-[11rem] items-center gap-5 rounded-lg border-2 border-g3-border bg-white p-5 text-left transition hover:border-g3-royal/45 focus-visible:outline-g3-orange;
+        grid-template-columns: 11rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__centre--active {
+        @apply border-g3-royal;
+        box-shadow: 0 16px 34px rgb(20 93 170 / 9%);
+    }
+
+    .g3-express-pass__centre-photo {
+        @apply h-32 w-full rounded-md object-cover;
+    }
+
+    .g3-express-pass__centre-copy {
+        @apply grid gap-2 pr-7;
+    }
+
+    .g3-express-pass__centre-copy strong {
+        @apply font-display text-2xl font-bold leading-tight text-g3-blue-deep;
+    }
+
+    .g3-express-pass__centre-copy span {
+        @apply grid gap-2 text-base font-semibold leading-snug text-g3-blue-deep/62;
+        grid-template-columns: 1.5rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__centre-copy img {
+        @apply h-5 w-5;
+    }
+
+    .g3-express-pass__centre-check {
+        @apply absolute right-4 top-4 hidden h-10 w-10;
+    }
+
+    .g3-express-pass__centre--active .g3-express-pass__centre-check {
+        @apply block;
+    }
+
+    .g3-express-pass__service-row,
+    .g3-express-pass__grid,
+    .g3-tracking-pass__form {
+        @apply grid gap-5;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .g3-express-field {
+        @apply grid gap-2;
+    }
+
+    .g3-express-field > span:first-child,
+    .g3-express-period > span {
+        @apply font-display text-base font-bold text-g3-blue-deep;
+    }
+
+    .g3-express-field--wide {
+        @apply col-span-2;
+    }
+
+    .g3-express-field__control {
+        @apply grid min-h-16 overflow-hidden rounded-lg border border-g3-border bg-white;
+        grid-template-columns: 4rem minmax(0, 1fr) 3rem;
+    }
+
+    .g3-express-field__control--date {
+        grid-template-columns: 4rem minmax(0, 1fr);
+    }
+
+    .g3-express-field__control > img {
+        @apply m-auto h-7 w-7;
+    }
+
+    .g3-express-field__control > img:first-child {
+        @apply border-r border-g3-border pr-0;
+    }
+
+    .g3-express-field__control input,
+    .g3-express-field__control select {
+        @apply min-w-0 appearance-none bg-transparent px-4 font-display text-lg font-bold text-g3-blue-deep outline-none placeholder:text-g3-blue-deep/35;
+    }
+
+    .g3-appointment-date {
+        @apply relative;
+    }
+
+    .g3-appointment-date__trigger {
+        @apply flex min-w-0 items-center bg-transparent px-4 text-left font-display text-lg font-bold text-g3-blue-deep outline-none transition focus-visible:outline-g3-orange;
+    }
+
+    .g3-appointment-date__trigger span {
+        @apply min-w-0 truncate text-g3-blue-deep/42;
+    }
+
+    .g3-appointment-date__trigger--selected span {
+        @apply text-g3-blue-deep;
+    }
+
+    .g3-appointment-calendar {
+        @apply absolute left-0 right-0 top-[calc(100%+0.5rem)] z-30 rounded-lg border border-g3-border bg-white p-3;
+        box-shadow: 0 22px 50px rgb(20 93 170 / 18%);
+    }
+
+    .g3-appointment-calendar__head {
+        @apply grid items-center gap-2;
+        grid-template-columns: 2rem minmax(0, 1fr) 2rem;
+    }
+
+    .g3-appointment-calendar__head strong {
+        @apply text-center font-display text-sm font-bold capitalize text-g3-blue-deep;
+    }
+
+    .g3-appointment-calendar__head button {
+        @apply flex h-8 w-8 items-center justify-center rounded-full border border-g3-border bg-g3-blue-soft font-display text-xl font-bold leading-none text-g3-royal transition hover:border-g3-royal focus-visible:outline-g3-orange disabled:cursor-not-allowed disabled:opacity-35;
+    }
+
+    .g3-appointment-calendar__weekdays,
+    .g3-appointment-calendar__grid {
+        @apply mt-2 grid grid-cols-7 gap-1;
+    }
+
+    .g3-appointment-calendar__weekdays span {
+        @apply text-center font-display text-[0.625rem] font-bold uppercase text-g3-blue-deep/45;
+    }
+
+    .g3-appointment-calendar__blank,
+    .g3-appointment-calendar__day {
+        @apply min-h-8;
+    }
+
+    .g3-appointment-calendar__day {
+        @apply rounded-md text-center font-display text-xs font-bold text-g3-blue-deep transition hover:bg-g3-blue-soft focus-visible:outline-g3-orange disabled:cursor-not-allowed disabled:text-g3-blue-deep/22;
+    }
+
+    .g3-appointment-calendar__day--today {
+        @apply bg-g3-blue-soft text-g3-royal;
+    }
+
+    .g3-appointment-calendar__day--selected {
+        @apply bg-g3-royal text-white;
+        box-shadow: inset 0 -2px 0 var(--color-g3-orange);
+    }
+
+    .g3-express-pass__info {
+        @apply grid min-h-16 items-center gap-3 rounded-lg bg-g3-blue-soft px-5 py-4 text-base font-semibold leading-relaxed text-g3-blue-deep/62;
+        grid-template-columns: 2rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__info img {
+        @apply h-6 w-6;
+    }
+
+    .g3-express-pass__info--full {
+        @apply min-h-14;
+    }
+
+    .g3-express-period {
+        @apply grid gap-2;
+    }
+
+    .g3-express-period > div {
+        @apply grid gap-3;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .g3-express-period button {
+        @apply grid min-h-16 items-center justify-center gap-x-2 rounded-lg border border-g3-border bg-white px-3 text-center font-display text-sm font-bold text-g3-blue-deep transition hover:border-g3-royal focus-visible:outline-g3-orange;
+        grid-template-columns: 1.5rem minmax(0, max-content);
+    }
+
+    .g3-express-period button img {
+        @apply h-5 w-5;
+    }
+
+    .g3-express-period button span {
+        @apply col-start-2 text-xs text-g3-blue-deep/62;
+    }
+
+    .g3-express-period__active {
+        @apply border-g3-royal bg-g3-blue-soft text-g3-royal;
+        box-shadow: inset 0 -3px 0 var(--color-g3-orange);
+    }
+
+    .g3-express-summary {
+        @apply grid items-center gap-5 rounded-lg bg-g3-blue-soft px-7 py-5;
+        grid-template-columns: 4rem minmax(0, 1fr);
+    }
+
+    .g3-express-summary img {
+        @apply h-12 w-12;
+    }
+
+    .g3-express-summary h3 {
+        @apply font-display text-xl font-bold text-g3-royal;
+    }
+
+    .g3-express-summary p {
+        @apply mt-1 flex flex-wrap items-baseline gap-3 text-lg font-semibold text-g3-blue-deep/72;
+    }
+
+    .g3-express-summary p:last-child strong {
+        @apply font-display text-3xl text-g3-royal;
+    }
+
+    .g3-express-pass__submit,
+    .g3-tracking-pass__submit {
+        @apply inline-flex min-h-20 w-full items-center justify-center gap-6 rounded-lg bg-g3-royal px-6 text-center font-display text-2xl font-bold text-white transition hover:bg-g3-blue-deep focus-visible:outline-g3-orange;
+        box-shadow: inset 0 -3px 0 var(--color-g3-orange);
+    }
+
+    .g3-express-pass__submit img {
+        @apply h-8 w-8;
+        filter: brightness(0) invert(1);
+    }
+
+    .g3-express-pass__submit span:last-child,
+    .g3-tracking-pass__submit span:last-child {
+        @apply text-4xl leading-none transition;
+    }
+
+    .g3-express-pass__submit:hover span:last-child,
+    .g3-tracking-pass__submit:hover span:last-child {
+        @apply translate-x-1;
+    }
+
+    .g3-express-pass__secure,
+    .g3-tracking-pass__secure {
+        @apply flex items-center justify-center gap-3 text-center text-base font-semibold text-g3-blue-deep/62;
+    }
+
+    .g3-express-pass__secure img,
+    .g3-tracking-pass__secure img {
+        @apply h-6 w-6;
+    }
+
+    .g3-tracking-pass {
+        @apply grid gap-7;
+    }
+
+    .g3-tracking-pass__form {
+        @apply mt-2;
+    }
+
+    .g3-tracking-pass__submit {
+        @apply col-span-2 mt-1 min-h-18;
+    }
+
+    .g3-tracking-pass__divider {
+        @apply h-px bg-g3-border;
+    }
+
+    .g3-tracking-statuses {
+        @apply grid gap-4;
+    }
+
+    .g3-tracking-statuses h3 {
+        @apply font-display text-lg font-bold text-g3-blue-deep;
+    }
+
+    .g3-tracking-statuses > div {
+        @apply grid gap-5;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .g3-tracking-statuses__card {
+        @apply grid min-h-28 items-center gap-5 rounded-lg border px-7 py-5;
+        grid-template-columns: 4rem minmax(0, 1fr);
+    }
+
+    .g3-tracking-statuses__card img {
+        @apply h-12 w-12;
+    }
+
+    .g3-tracking-statuses__card h4 {
+        @apply font-display text-xl font-bold leading-tight;
+    }
+
+    .g3-tracking-statuses__card p {
+        @apply mt-1 text-base font-semibold leading-snug text-g3-blue-deep/62;
+    }
+
+    .g3-tracking-statuses__card--processing {
+        @apply border-g3-royal/30 bg-g3-blue-soft text-g3-royal;
+    }
+
+    .g3-tracking-statuses__card--confirmed {
+        @apply border-emerald-100 bg-emerald-50 text-emerald-700;
+    }
+
+    .g3-tracking-statuses__card--action {
+        @apply border-orange-100 bg-orange-50 text-g3-orange;
+    }
+}
+
+@media (min-width: 1280px) {
+    .g3-appointment-hub {
+        @apply py-6;
+    }
+
+    .g3-appointment-hub__inner {
+        width: calc(100vw - 45rem);
+    }
+
+    .g3-appointment-hub__header {
+        @apply max-w-4xl;
+    }
+
+    .g3-appointment-hub__header h1 {
+        @apply text-4xl;
+    }
+
+    .g3-appointment-hub__header > p:last-of-type {
+        @apply text-lg;
+    }
+
+    .g3-appointment-hub__mode {
+        @apply mt-5 max-w-[34rem];
+    }
+
+    .g3-appointment-hub__mode-button {
+        @apply min-h-12 gap-2 text-base;
+    }
+
+    .g3-appointment-hub__mode-button img {
+        @apply h-5 w-5;
+    }
+
+    .g3-appointment-hub__benefits {
+        @apply mt-5 max-w-4xl;
+    }
+
+    .g3-appointment-hub__benefits article {
+        @apply gap-3 px-4;
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+
+    .g3-appointment-hub__benefits img {
+        @apply h-8 w-8;
+    }
+
+    .g3-appointment-hub__benefits h2 {
+        @apply text-sm;
+    }
+
+    .g3-appointment-hub__benefits p {
+        @apply text-xs;
+    }
+
+    .g3-express-pass {
+        @apply mt-5 p-5;
+    }
+
+    .g3-express-pass__head {
+        @apply gap-4;
+    }
+
+    .g3-express-pass__head h2,
+    .g3-tracking-pass h2 {
+        @apply text-2xl;
+    }
+
+    .g3-express-pass__head span,
+    .g3-tracking-pass > p {
+        @apply text-base;
+    }
+
+    .g3-express-pass__badge {
+        @apply min-w-[12rem] gap-x-2 px-3 py-3;
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__badge img {
+        @apply h-8 w-8;
+    }
+
+    .g3-express-pass__badge strong {
+        @apply text-sm;
+    }
+
+    .g3-express-pass__badge span {
+        @apply text-xs;
+    }
+
+    .g3-express-pass__form,
+    .g3-tracking-pass {
+        @apply gap-3.5;
+    }
+
+    .g3-express-pass__form {
+        @apply mt-3.5;
+    }
+
+    .g3-express-pass__step {
+        @apply gap-2;
+    }
+
+    .g3-express-pass__step-head {
+        @apply gap-2.5;
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__step-head > span {
+        @apply h-8 w-8 text-base;
+    }
+
+    .g3-express-pass__step-head h3 {
+        @apply text-lg;
+    }
+
+    .g3-express-pass__step-head p {
+        @apply text-xs;
+    }
+
+    .g3-express-pass__centres,
+    .g3-express-pass__service-row,
+    .g3-express-pass__grid,
+    .g3-tracking-pass__form,
+    .g3-tracking-statuses > div {
+        @apply gap-3;
+    }
+
+    .g3-express-pass__centre {
+        @apply min-h-[6.75rem] gap-2.5 p-2.5;
+        grid-template-columns: 7.25rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__centre-photo {
+        @apply h-[4.75rem];
+    }
+
+    .g3-express-pass__centre-copy {
+        @apply gap-1 pr-4;
+    }
+
+    .g3-express-pass__centre-copy strong {
+        @apply text-base;
+    }
+
+    .g3-express-pass__centre-copy span {
+        @apply gap-1 text-xs;
+        grid-template-columns: 1rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__centre-copy img {
+        @apply h-3.5 w-3.5;
+    }
+
+    .g3-express-pass__centre-check {
+        @apply right-2 top-2 h-7 w-7;
+    }
+
+    .g3-express-field {
+        @apply gap-1;
+    }
+
+    .g3-express-field > span:first-child,
+    .g3-express-period > span {
+        @apply text-xs;
+    }
+
+    .g3-express-field__control {
+        @apply min-h-11;
+        grid-template-columns: 2.75rem minmax(0, 1fr) 2.25rem;
+    }
+
+    .g3-express-field__control--date {
+        grid-template-columns: 2.75rem minmax(0, 1fr);
+    }
+
+    .g3-express-field__control > img {
+        @apply h-4 w-4;
+    }
+
+    .g3-express-field__control input,
+    .g3-express-field__control select {
+        @apply px-2.5 text-sm;
+    }
+
+    .g3-appointment-date__trigger {
+        @apply px-2.5 text-sm;
+    }
+
+    .g3-appointment-calendar {
+        @apply p-2.5;
+    }
+
+    .g3-appointment-calendar__blank,
+    .g3-appointment-calendar__day {
+        @apply min-h-7;
+    }
+
+    .g3-express-pass__info {
+        @apply min-h-11 gap-2 px-3 py-2 text-xs;
+        grid-template-columns: 1.25rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__info img {
+        @apply h-4 w-4;
+    }
+
+    .g3-express-period button {
+        @apply min-h-11 px-2 text-xs;
+        grid-template-columns: 1rem minmax(0, max-content);
+    }
+
+    .g3-express-period button img {
+        @apply h-3.5 w-3.5;
+    }
+
+    .g3-express-summary {
+        @apply gap-3 px-4 py-2.5;
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+
+    .g3-express-summary img {
+        @apply h-8 w-8;
+    }
+
+    .g3-express-summary h3 {
+        @apply text-base;
+    }
+
+    .g3-express-summary p {
+        @apply gap-2 text-sm;
+    }
+
+    .g3-express-summary p:last-child strong {
+        @apply text-xl;
+    }
+
+    .g3-express-pass__submit,
+    .g3-tracking-pass__submit {
+        @apply min-h-12 gap-3 text-base;
+    }
+
+    .g3-express-pass__submit img {
+        @apply h-5 w-5;
+    }
+
+    .g3-express-pass__submit span:last-child,
+    .g3-tracking-pass__submit span:last-child {
+        @apply text-2xl;
+    }
+
+    .g3-express-pass__secure,
+    .g3-tracking-pass__secure {
+        @apply text-xs;
+    }
+
+    .g3-tracking-statuses {
+        @apply gap-2.5;
+    }
+
+    .g3-tracking-statuses__card {
+        @apply min-h-20 gap-2.5 px-3 py-3;
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+
+    .g3-tracking-statuses__card img {
+        @apply h-8 w-8;
+    }
+
+    .g3-tracking-statuses__card h4 {
+        @apply text-base;
+    }
+
+    .g3-tracking-statuses__card p {
+        @apply text-xs;
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1599px) {
+    .g3-appointment-hub__benefits,
+    .g3-express-pass__centres,
+    .g3-tracking-statuses > div {
+        grid-template-columns: 1fr;
+    }
+
+    .g3-appointment-hub__benefits article {
+        @apply border-l-0 border-t px-0 py-2;
+    }
+
+    .g3-appointment-hub__benefits article:first-child {
+        @apply border-t-0;
+    }
+
+    .g3-express-pass__head {
+        @apply grid;
+    }
+
+    .g3-express-pass__badge {
+        @apply w-full min-w-0;
+    }
+
+    .g3-express-period button {
+        @apply min-h-10 px-1.5;
+        grid-template-columns: minmax(0, 1fr);
+        font-size: 0.6875rem;
+        line-height: 1.1;
+    }
+
+    .g3-express-period button img {
+        @apply hidden;
+    }
+
+    .g3-express-period button span {
+        @apply col-start-1;
+        font-size: 0.625rem;
+    }
+}
+
+@media (max-width: 1279px) {
+    .g3-appointment-hub {
+        @apply py-7;
+    }
+
+    .g3-appointment-hub__header h1 {
+        @apply text-4xl;
+    }
+
+    .g3-appointment-hub__header > p:last-of-type {
+        @apply text-lg;
+    }
+
+    .g3-appointment-hub__mode {
+        @apply mt-6 max-w-[38rem];
+    }
+
+    .g3-appointment-hub__mode-button {
+        @apply min-h-12 gap-3 text-base;
+    }
+
+    .g3-appointment-hub__mode-button img {
+        @apply h-6 w-6;
+    }
+
+    .g3-appointment-hub__benefits {
+        @apply mt-6;
+    }
+
+    .g3-express-pass {
+        @apply mt-6 p-6;
+    }
+
+    .g3-express-pass__head h2,
+    .g3-tracking-pass h2 {
+        @apply text-3xl;
+    }
+
+    .g3-express-pass__head span,
+    .g3-tracking-pass > p {
+        @apply text-lg;
+    }
+
+    .g3-express-pass__form,
+    .g3-tracking-pass {
+        @apply gap-5;
+    }
+
+    .g3-express-pass__centre {
+        @apply min-h-[8rem] gap-3 p-3;
+        grid-template-columns: 8rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__centre-photo {
+        @apply h-24;
+    }
+
+    .g3-express-pass__centre-copy strong {
+        @apply text-lg;
+    }
+
+    .g3-express-pass__centre-copy span,
+    .g3-express-summary p {
+        @apply text-sm;
+    }
+
+    .g3-express-field__control {
+        @apply min-h-12;
+        grid-template-columns: 3rem minmax(0, 1fr) 2.5rem;
+    }
+
+    .g3-express-field__control--date {
+        grid-template-columns: 3rem minmax(0, 1fr);
+    }
+
+    .g3-express-field__control input,
+    .g3-express-field__control select {
+        @apply px-3 text-sm;
+    }
+
+    .g3-appointment-date__trigger {
+        @apply px-3 text-sm;
+    }
+
+    .g3-express-pass__submit,
+    .g3-tracking-pass__submit {
+        @apply min-h-14 text-lg;
+    }
+}
+
+@media (max-width: 1023px) {
+    .g3-appointment-hub__benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .g3-appointment-hub__benefits article {
+        @apply px-0 py-4;
+    }
+
+    .g3-appointment-hub__benefits article + article {
+        @apply border-l-0 border-t;
+    }
+
+    .g3-express-pass__head {
+        @apply grid;
+    }
+
+    .g3-express-pass__badge {
+        @apply w-full min-w-0;
+    }
+
+    .g3-express-pass__centres,
+    .g3-express-pass__service-row,
+    .g3-express-pass__grid,
+    .g3-tracking-pass__form,
+    .g3-tracking-statuses > div {
+        grid-template-columns: 1fr;
+    }
+
+    .g3-express-field--wide,
+    .g3-tracking-pass__submit {
+        @apply col-span-1;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .g3-appointment-hub__benefits {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .g3-appointment-hub__benefits article {
+        @apply gap-2 border-t-0 px-3 py-1;
+        grid-template-columns: 2.25rem minmax(0, 1fr);
+    }
+
+    .g3-appointment-hub__benefits article + article {
+        @apply border-l border-t-0;
+    }
+
+    .g3-appointment-hub__benefits img {
+        @apply h-8 w-8;
+    }
+
+    .g3-appointment-hub__benefits h2 {
+        @apply text-sm;
+    }
+
+    .g3-appointment-hub__benefits p {
+        @apply text-xs;
+    }
+
+    .g3-express-pass__centres,
+    .g3-express-pass__service-row,
+    .g3-express-pass__grid,
+    .g3-tracking-pass__form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .g3-express-field--wide,
+    .g3-tracking-pass__submit {
+        @apply col-span-2;
+    }
+
+    .g3-express-pass__centre {
+        @apply min-h-[6.75rem] gap-2.5 p-2.5;
+        grid-template-columns: 6.5rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__centre-photo {
+        @apply h-20;
+    }
+
+    .g3-express-pass__centre-copy strong {
+        @apply text-base;
+    }
+
+    .g3-express-pass__centre-copy span {
+        @apply text-xs;
+    }
+
+    .g3-tracking-statuses > div {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .g3-tracking-statuses__card {
+        @apply min-h-24 gap-3 px-3 py-3;
+        grid-template-columns: 2.75rem minmax(0, 1fr);
+    }
+
+    .g3-tracking-statuses__card img {
+        @apply h-9 w-9;
+    }
+}
+
+@media (max-width: 767px) {
+    .g3-appointment-hub {
+        @apply py-5;
+    }
+
+    .g3-appointment-hub__overline {
+        @apply text-xs;
+    }
+
+    .g3-appointment-hub__header h1 {
+        @apply text-2xl;
+    }
+
+    .g3-appointment-hub__header > p:last-of-type {
+        @apply text-sm;
+    }
+
+    .g3-appointment-hub__mode {
+        @apply mt-4 rounded-lg;
+    }
+
+    .g3-appointment-hub__mode-button {
+        @apply min-h-10 gap-1.5 rounded-md px-2 text-xs;
+    }
+
+    .g3-appointment-hub__mode-button img {
+        @apply h-4 w-4;
+    }
+
+    .g3-appointment-hub__benefits {
+        @apply mt-4;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .g3-appointment-hub__benefits article {
+        @apply block px-1 py-2 text-center;
+    }
+
+    .g3-appointment-hub__benefits article + article {
+        @apply border-l border-t-0;
+    }
+
+    .g3-appointment-hub__benefits img {
+        @apply mx-auto h-7 w-7;
+    }
+
+    .g3-appointment-hub__benefits h2 {
+        @apply mt-1 text-[0.6875rem];
+    }
+
+    .g3-appointment-hub__benefits p {
+        @apply hidden;
+    }
+
+    .g3-express-pass {
+        @apply mt-4 rounded-lg p-3;
+    }
+
+    .g3-express-pass__head h2,
+    .g3-tracking-pass h2 {
+        @apply text-xl;
+    }
+
+    .g3-express-pass__head span,
+    .g3-tracking-pass > p {
+        @apply text-sm;
+    }
+
+    .g3-express-pass__badge {
+        @apply grid-cols-[2.5rem_minmax(0,1fr)] px-3 py-3;
+    }
+
+    .g3-express-pass__badge img {
+        @apply h-8 w-8;
+    }
+
+    .g3-express-pass__badge strong,
+    .g3-express-pass__badge span,
+    .g3-express-pass__step-head p,
+    .g3-express-pass__info,
+    .g3-express-pass__secure,
+    .g3-tracking-pass__secure,
+    .g3-tracking-statuses__card p {
+        @apply text-xs;
+    }
+
+    .g3-express-pass__form {
+        @apply mt-4 gap-4;
+    }
+
+    .g3-express-pass__step-head {
+        @apply gap-2.5;
+        grid-template-columns: 2.25rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__step-head > span {
+        @apply h-8 w-8 text-sm;
+    }
+
+    .g3-express-pass__step-head h3 {
+        @apply text-lg;
+    }
+
+    .g3-express-pass__centre {
+        @apply min-h-[5.75rem] gap-2 p-2;
+        grid-template-columns: 5.75rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__centre-photo {
+        @apply h-16;
+    }
+
+    .g3-express-pass__centre-copy {
+        @apply gap-0.5 pr-3;
+    }
+
+    .g3-express-pass__centre-copy strong {
+        @apply text-sm;
+    }
+
+    .g3-express-pass__centre-copy span {
+        @apply gap-1 text-xs;
+        grid-template-columns: 1.1rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__centre-copy img {
+        @apply h-4 w-4;
+    }
+
+    .g3-express-pass__centre-check {
+        @apply right-2 top-2 h-7 w-7;
+    }
+
+    .g3-express-field > span:first-child,
+    .g3-express-period > span {
+        @apply text-xs;
+    }
+
+    .g3-express-field__control {
+        @apply min-h-11;
+        grid-template-columns: 2.75rem minmax(0, 1fr) 2.25rem;
+    }
+
+    .g3-express-field__control--date {
+        grid-template-columns: 2.75rem minmax(0, 1fr);
+    }
+
+    .g3-express-field__control > img {
+        @apply h-4 w-4;
+    }
+
+    .g3-express-field__control input,
+    .g3-express-field__control select {
+        @apply px-2.5 text-sm;
+    }
+
+    .g3-appointment-date__trigger {
+        @apply px-2.5 text-sm;
+    }
+
+    .g3-appointment-calendar {
+        @apply p-2.5;
+    }
+
+    .g3-appointment-calendar__head {
+        grid-template-columns: 1.75rem minmax(0, 1fr) 1.75rem;
+    }
+
+    .g3-appointment-calendar__head button {
+        @apply h-7 w-7 text-lg;
+    }
+
+    .g3-appointment-calendar__blank,
+    .g3-appointment-calendar__day {
+        @apply min-h-7;
+    }
+
+    .g3-express-period > div {
+        grid-template-columns: 1fr;
+    }
+
+    .g3-express-period button {
+        @apply min-h-10;
+    }
+
+    .g3-express-summary {
+        @apply gap-2.5 px-3 py-3;
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+
+    .g3-express-summary img,
+    .g3-tracking-statuses__card img {
+        @apply h-8 w-8;
+    }
+
+    .g3-express-summary h3,
+    .g3-tracking-statuses__card h4 {
+        @apply text-base;
+    }
+
+    .g3-express-summary p {
+        @apply gap-2 text-sm;
+    }
+
+    .g3-express-summary p:last-child strong {
+        @apply text-xl;
+    }
+
+    .g3-express-pass__submit,
+    .g3-tracking-pass__submit {
+        @apply min-h-12 gap-3 text-sm;
+    }
+
+    .g3-express-pass__submit img {
+        @apply h-6 w-6;
+    }
+
+    .g3-express-pass__submit span:last-child,
+    .g3-tracking-pass__submit span:last-child {
+        @apply text-2xl;
+    }
+
+    .g3-tracking-statuses__card {
+        @apply min-h-0 gap-2.5 px-3 py-3;
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 479px) {
+    .g3-express-pass__centre {
+        grid-template-columns: 5.75rem minmax(0, 1fr);
+    }
+
+    .g3-express-pass__centre-photo {
+        @apply h-16;
+    }
+}

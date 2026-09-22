@@ -187,6 +187,33 @@ test('french about renders the identity section', function () {
         ->assertSeeText(__('public.about.team.items.responsibility', [], 'fr'));
 });
 
+test('french appointment page renders express pass and tracking modes', function () {
+    $response = $this->get('/fr/rendez-vous');
+
+    $response->assertOk()
+        ->assertSee('g3-appointment-hub', escape: false)
+        ->assertSee('data-appointment-hub', escape: false)
+        ->assertSee('data-appointment-mode', escape: false)
+        ->assertSee('data-appointment-panel-key="booking"', escape: false)
+        ->assertSee('data-appointment-panel-key="tracking"', escape: false)
+        ->assertSee('images/appointment-and-tracking/ecole-de-police.png', escape: false)
+        ->assertSee('images/appointment-and-tracking/nomayos.png', escape: false)
+        ->assertSee('images/appointment-and-tracking/icon-calendar.svg', escape: false)
+        ->assertSee('images/appointment-and-tracking/icon-search.svg', escape: false)
+        ->assertSee('name="service"', escape: false)
+        ->assertSee('name="vehicle_category"', escape: false)
+        ->assertSee('data-appointment-date-picker', escape: false)
+        ->assertSee('data-appointment-calendar', escape: false)
+        ->assertSee('name="preferred_date"', escape: false)
+        ->assertDontSee('type="date"', escape: false)
+        ->assertSee('data-appointment-summary-tariff', escape: false)
+        ->assertSeeText('Votre visite technique, simplement.')
+        ->assertSeeText('Préparez votre rendez-vous')
+        ->assertSeeText('Contre-visite')
+        ->assertSeeText('Catégorie D — Poids lourd')
+        ->assertSeeText('Retrouvez l’état de votre demande en quelques secondes.');
+});
+
 test('top strip renders public service details from baseline data', function () {
     seedBaselineCentres();
 
