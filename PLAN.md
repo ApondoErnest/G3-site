@@ -83,9 +83,9 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 | | |
 | --- | --- |
 | Active phase | **VII — Public experience** |
-| Complete | Steps 1–126 |
-| **Active step** | **127** — Sécurité routière |
-| Pending | Steps 127–182 · Phases VII–X |
+| Complete | Steps 1–127 |
+| **Active step** | **128** — Contact |
+| Pending | Steps 128–182 · Phases VII–X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -296,8 +296,8 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 - [x] **124** · Visite technique · Interactive journey, control explorer, inspection-line proof, smart preparation, result paths, compact responsive layout, and SVG/media assets
 - [x] **125** · Tarifs · Smart tariff navigator, price passport, identification assistant, MINT tariff integrity strip, official vehicle imagery, and SVG tariff icons
 - [x] **126** · Rendez-vous & Suivi · G3 Express Pass booking panel, tracking panel, compact responsive layout, populated service/category selectors, tariff-aware summary, and themed custom date picker
-- [ ] **127** · ← active · Sécurité routière
-- [ ] **128** · Contact
+- [x] **127** · Sécurité routière · Contextual Bento Safety Hub, interactive 60-second reflex checklist, compact responsive layout, road-safety image/icon assets, and FR/EN route coverage
+- [ ] **128** · ← active · Contact
 - [ ] **129** · **Gate — public experience accepted**
 
 ---
