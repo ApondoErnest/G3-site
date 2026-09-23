@@ -134,6 +134,10 @@ Verification completed during Step 125: `vendor/bin/pint --dirty --format agent`
 
 Tabs 50/50 · orange active indicator · step bar dots · centre radio cards with live pills · purpose notice · suivi panel: ref + phone/plate · vertical timeline · generic error alert BR-TRACK-003 · success copy *demande reçue* FR-AP-04.
 
+Step 126 implementation note: `/fr/rendez-vous` is implemented in `resources/views/pages/appointment.blade.php` with supporting styles in `resources/css/app.css`, behavior in `resources/js/app.js`, and page assets under `public/images/appointment-and-tracking/`. The public page now contains the 360px desktop-inset appointment/tracking hero, G3 Express Pass booking panel, tracking lookup panel, populated service and vehicle-category selectors, centre cards for École de Police and Nomayos, tariff-aware selection summary, compact tablet/mobile layouts, and a custom G3-themed date picker instead of the browser-native calendar.
+
+Verification completed during Step 126: `npm run build`, `php artisan test --compact tests/Feature/Public/PublicShellTest.php tests/Feature/LocaleRoutingTest.php`, and browser inspection for populated selectors, themed calendar selection state, zero native date inputs, responsive compactness, and console errors.
+
 ---
 
 ## 68 · Sécurité routière

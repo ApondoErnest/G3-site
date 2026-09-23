@@ -147,6 +147,67 @@ test('french home renders the road safety section', function () {
         ->assertSeeText(__('public.home.road_safety.cta', [], 'fr'));
 });
 
+test('french road safety page renders the contextual guide and sixty-second reflex', function () {
+    $response = $this->get('/fr/securite-routiere');
+
+    $response->assertOk()
+        ->assertSee('g3-road-hub', escape: false)
+        ->assertSee('data-road-safety-hub', escape: false)
+        ->assertSee('data-road-safety-target="rain"', escape: false)
+        ->assertSee('data-road-safety-target="night"', escape: false)
+        ->assertSee('data-road-safety-context-panel="long-distance"', escape: false)
+        ->assertSee('images/road-safety/icon-grid.svg', escape: false)
+        ->assertSee('images/road-safety/essentials/1.png', escape: false)
+        ->assertSee('images/road-safety/rain/4.png', escape: false)
+        ->assertSee('images/road-safety/night/2.png', escape: false)
+        ->assertSee('images/road-safety/long-distance/4.png', escape: false)
+        ->assertSeeText('Freinage & adhérence')
+        ->assertSeeText('Réflexes sous la pluie')
+        ->assertSeeText('Fatigue & vigilance')
+        ->assertSeeText('Charge & stabilité')
+        ->assertDontSeeText('02 · Bento Safety Hub')
+        ->assertSee('g3-road-reflex', escape: false)
+        ->assertSee('data-road-reflex', escape: false)
+        ->assertSee('data-road-reflex-check', escape: false)
+        ->assertSee('images/road-safety/icon-tyre.svg', escape: false)
+        ->assertSeeText('Le réflexe 60 secondes')
+        ->assertSeeText('4 vérifications simples avant de démarrer.')
+        ->assertSeeText('Pneumatiques')
+        ->assertSeeText('4 points à vérifier')
+        ->assertSeeText('Rappel :')
+        ->assertDontSee('g3-road-hero', escape: false)
+        ->assertDontSee('data-road-safety-check', escape: false)
+        ->assertDontSee('g3-road-gateway', escape: false)
+        ->assertDontSeeText('Quatre vérifications rapides avant le départ.')
+        ->assertDontSeeText('Un doute sur l’état de votre véhicule ?');
+});
+
+test('english road safety page renders the translated guide', function () {
+    $response = $this->get('/en/road-safety');
+
+    $response->assertOk()
+        ->assertSee('g3-road-hub', escape: false)
+        ->assertSee('data-road-safety-target="long-distance"', escape: false)
+        ->assertSee('images/road-safety/long-distance/4.png', escape: false)
+        ->assertSeeText('Four essentials, adapted to your journey')
+        ->assertSeeText('All essentials')
+        ->assertSeeText('Rain')
+        ->assertSeeText('Night')
+        ->assertSeeText('Long journey')
+        ->assertDontSeeText('02 · Bento Safety Hub')
+        ->assertSee('g3-road-reflex', escape: false)
+        ->assertSee('data-road-reflex-check', escape: false)
+        ->assertSeeText('The 60-second reflex')
+        ->assertSeeText('4 simple checks before starting.')
+        ->assertSeeText('4 points to check')
+        ->assertSeeText('Reminder:')
+        ->assertDontSee('g3-road-hero', escape: false)
+        ->assertDontSee('data-road-safety-check', escape: false)
+        ->assertDontSee('g3-road-gateway', escape: false)
+        ->assertDontSeeText('Four quick checks before departure.')
+        ->assertDontSeeText('Unsure about your vehicle’s condition?');
+});
+
 test('french about renders the identity section', function () {
     $response = $this->get('/fr/a-propos');
 

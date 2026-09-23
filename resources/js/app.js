@@ -526,6 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const selectedValue = toIsoDate(date);
 
                 selectedDate = date;
+                picker.dataset.selectedDate = selectedValue;
                 valueInput.setAttribute('value', selectedValue);
                 valueInput.defaultValue = selectedValue;
 
@@ -753,6 +754,119 @@ document.addEventListener('DOMContentLoaded', () => {
 
         mobileQuery.addEventListener('change', refreshPageSize);
         tabletQuery.addEventListener('change', refreshPageSize);
+    });
+
+    document.querySelectorAll('[data-road-safety-hub]').forEach((section) => {
+        const tabs = Array.from(section.querySelectorAll('[data-road-safety-tab]'));
+        const panels = Array.from(section.querySelectorAll('[data-road-safety-context-panel]'));
+        const detailToggles = Array.from(section.querySelectorAll('[data-road-safety-details-toggle]'));
+
+        if (! tabs.length || ! panels.length) {
+            return;
+        }
+
+        const activateContext = (target) => {
+            tabs.forEach((tab) => {
+                const isActive = tab.dataset.roadSafetyTarget === target;
+
+                tab.classList.toggle('g3-road-tabs__button--active', isActive);
+                tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                tab.tabIndex = isActive ? 0 : -1;
+            });
+
+            panels.forEach((contextPanel) => {
+                contextPanel.hidden = contextPanel.dataset.roadSafetyContextPanel !== target;
+            });
+        };
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => activateContext(tab.dataset.roadSafetyTarget));
+
+            tab.addEventListener('keydown', (event) => {
+                const keyIndexMap = {
+                    ArrowDown: (index + 1) % tabs.length,
+                    ArrowRight: (index + 1) % tabs.length,
+                    ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+                    ArrowUp: (index - 1 + tabs.length) % tabs.length,
+                    End: tabs.length - 1,
+                    Home: 0,
+                };
+
+                if (! (event.key in keyIndexMap)) {
+                    return;
+                }
+
+                event.preventDefault();
+                tabs[keyIndexMap[event.key]].focus();
+                activateContext(tabs[keyIndexMap[event.key]].dataset.roadSafetyTarget);
+            });
+        });
+
+        detailToggles.forEach((toggle) => {
+            toggle.addEventListener('click', () => {
+                const card = toggle.closest('[data-road-safety-card]');
+                const details = card?.querySelector('[data-road-safety-details]');
+                const label = toggle.querySelector('span');
+
+                if (! card || ! details || ! label) {
+                    return;
+                }
+
+                const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+
+                details.hidden = isOpen;
+                toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+                card.classList.toggle('g3-road-card--open', ! isOpen);
+                label.textContent = isOpen
+                    ? (toggle.dataset.labelOpen ?? label.textContent)
+                    : (toggle.dataset.labelClose ?? label.textContent);
+            });
+        });
+
+        activateContext(tabs.find((tab) => tab.getAttribute('aria-selected') === 'true')?.dataset.roadSafetyTarget ?? tabs[0].dataset.roadSafetyTarget);
+    });
+
+    document.querySelectorAll('[data-road-reflex]').forEach((section) => {
+        const checks = Array.from(section.querySelectorAll('[data-road-reflex-check]'));
+        const status = section.querySelector('[data-road-reflex-status]');
+        const guidance = section.querySelector('[data-road-reflex-guidance]');
+
+        if (! checks.length || ! status || ! guidance) {
+            return;
+        }
+
+        const updateReflex = () => {
+            const checkedCount = checks.filter((check) => check.checked).length;
+            const isComplete = checkedCount === checks.length;
+
+            checks.forEach((check) => {
+                check.closest('[data-road-reflex-card]')?.classList.toggle('g3-road-reflex__card--checked', check.checked);
+            });
+
+            section.classList.toggle('g3-road-reflex--complete', isComplete);
+
+            if (checkedCount === 0) {
+                status.textContent = status.dataset.default ?? '';
+                guidance.textContent = guidance.dataset.default ?? '';
+
+                return;
+            }
+
+            const progressLabel = checkedCount === 1
+                ? (status.dataset.progressSingular ?? '')
+                : (status.dataset.progressPlural ?? '');
+
+            status.textContent = progressLabel.replace(':count', String(checkedCount));
+            guidance.textContent = isComplete
+                ? (guidance.dataset.complete ?? '')
+                : (guidance.dataset.default ?? '');
+        };
+
+        checks.forEach((check) => {
+            check.addEventListener('change', updateReflex);
+        });
+
+        updateReflex();
     });
 
     if (! toggles.length || ! panel) {
