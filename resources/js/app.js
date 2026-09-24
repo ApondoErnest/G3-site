@@ -119,6 +119,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.querySelectorAll('[data-contact-centres]').forEach((section) => {
+        const buttons = Array.from(section.querySelectorAll('[data-contact-view-button]'));
+
+        if (! buttons.length) {
+            return;
+        }
+
+        const activateView = (target) => {
+            section.dataset.contactView = target;
+
+            buttons.forEach((button) => {
+                const isActive = button.dataset.contactViewTarget === target;
+
+                button.classList.toggle('g3-contact-centres__switch-button--active', isActive);
+                button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+        };
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => activateView(button.dataset.contactViewTarget ?? 'map'));
+        });
+    });
+
+    document.querySelectorAll('[data-contact-message]').forEach((section) => {
+        const textarea = section.querySelector('[data-contact-message-text]');
+        const counter = section.querySelector('[data-contact-message-count]');
+
+        if (! textarea || ! counter) {
+            return;
+        }
+
+        const maxLength = Number(textarea.getAttribute('maxlength') ?? 1000);
+        const updateCounter = () => {
+            counter.textContent = `${textarea.value.length}/${maxLength}`;
+        };
+
+        textarea.addEventListener('input', updateCounter);
+        updateCounter();
+    });
+
     document.querySelectorAll('[data-centre-hero-carousel]').forEach((carousel) => {
         const slides = Array.from(carousel.querySelectorAll('[data-centre-hero-slide]'));
         const dots = Array.from(carousel.querySelectorAll('[data-centre-hero-dot]'));

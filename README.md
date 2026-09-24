@@ -14,9 +14,9 @@ A single Laravel application delivers the public website and the secure operatio
 | | |
 | --- | --- |
 | Phase | **VII — Public experience** |
-| Progress | Steps 1–127 complete |
-| Active step | **128** — Contact |
-| Pending | Steps 128–182 · Phases VII–X |
+| Progress | Steps 1–129 complete |
+| Active step | **130** — Data integration |
+| Pending | Steps 130–182 · Phases VIII–X |
 
 Delivery is **strictly sequential**: specification → environment → application shell → design → database design → backend design → database build → backend build → admin → public frontend → QA → Docker → production.
 
@@ -30,8 +30,8 @@ Delivery is **strictly sequential**: specification → environment → applicati
 | Database build | VI · 97 | **Complete** |
 | Backend build | VI · 107 | **Complete** |
 | Administration UI | VI · 116 | **Complete** |
-| Public frontend | VII · 117–129 | **Active** |
-| Quality assurance | VIII · 130 | Locked |
+| Public frontend | VII · 117–129 | **Complete** |
+| Quality assurance | VIII · 130 | **Active** |
 | Containerisation | IX · 151 | Locked |
 | Production | X · 160 | Locked |
 

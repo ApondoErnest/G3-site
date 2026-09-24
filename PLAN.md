@@ -83,9 +83,9 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 | | |
 | --- | --- |
 | Active phase | **VII — Public experience** |
-| Complete | Steps 1–127 |
-| **Active step** | **128** — Contact |
-| Pending | Steps 128–182 · Phases VII–X |
+| Complete | Steps 1–129 |
+| **Active step** | **130** — Data integration |
+| Pending | Steps 130–182 · Phases VIII–X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -297,8 +297,8 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 - [x] **125** · Tarifs · Smart tariff navigator, price passport, identification assistant, MINT tariff integrity strip, official vehicle imagery, and SVG tariff icons
 - [x] **126** · Rendez-vous & Suivi · G3 Express Pass booking panel, tracking panel, compact responsive layout, populated service/category selectors, tariff-aware summary, and themed custom date picker
 - [x] **127** · Sécurité routière · Contextual Bento Safety Hub, interactive 60-second reflex checklist, compact responsive layout, road-safety image/icon assets, and FR/EN route coverage
-- [ ] **128** · ← active · Contact
-- [ ] **129** · **Gate — public experience accepted**
+- [x] **128** · Contact · Live Google map embed with centre cards, visible map markers, write-to-us form section, compact responsive layout, contact image/icon assets, and FR/EN route coverage
+- [x] **129** · **Gate — public experience accepted** · Public pages 117–128 complete · Accepted 2026-09-24
 
 ---
 
@@ -309,7 +309,7 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 ### Integration & compliance
 
-- [ ] **130** · Data integration · No hardcoded hours, phones, or prices
+- [ ] **130** · ← active · Data integration · No hardcoded hours, phones, or prices
 - [ ] **131** · Localisation audit · FR/EN parity and glossary consistency
 - [ ] **132** · SEO · Canonical, hreflang, sitemap · `/admin` disallowed in robots
 - [ ] **133** · Accessibility review

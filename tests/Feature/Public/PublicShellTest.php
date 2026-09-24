@@ -208,6 +208,71 @@ test('english road safety page renders the translated guide', function () {
         ->assertDontSeeText('Unsure about your vehicle’s condition?');
 });
 
+test('french contact page renders the centres map section', function () {
+    $response = $this->get('/fr/contact');
+
+    $response->assertOk()
+        ->assertSee('g3-contact-centres', escape: false)
+        ->assertSee('data-contact-centres', escape: false)
+        ->assertSee('data-contact-view="map"', escape: false)
+        ->assertSee('data-contact-view-target="list"', escape: false)
+        ->assertSee('g3-contact-message', escape: false)
+        ->assertSee('data-contact-message-text', escape: false)
+        ->assertSee('images/contact/ecole-de-police.png', escape: false)
+        ->assertSee('images/contact/nomayos.png', escape: false)
+        ->assertSee('images/contact/icon-pin.svg', escape: false)
+        ->assertSee('images/contact/icon-phone.svg', escape: false)
+        ->assertSee('images/contact/icon-headset.svg', escape: false)
+        ->assertSee('images/contact/icon-send.svg', escape: false)
+        ->assertSee('https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&amp;ll=3.834421,11.477813&amp;z=12&amp;output=embed', escape: false)
+        ->assertSeeText('Deux centres à Yaoundé. Un accès direct à votre équipe.')
+        ->assertSeeText('Une question particulière ? Écrivez-nous.')
+        ->assertSeeText('Besoin d’un rendez-vous ?')
+        ->assertSeeText('Consulter les tarifs')
+        ->assertSeeText('Objet de votre demande')
+        ->assertSeeText('Envoyer mon message')
+        ->assertSeeText('Nous sommes à votre écoute')
+        ->assertSeeText('Agrément N°0291 depuis 2020')
+        ->assertSeeText('Carte')
+        ->assertSeeText('Liste')
+        ->assertSeeText('École de Police')
+        ->assertSeeText('Nomayos')
+        ->assertSeeText('Descente ancien Texaco, École de Police, Yaoundé')
+        ->assertSeeText('Carrefour Nomayos, Yaoundé')
+        ->assertDontSeeText('Page en construction')
+        ->assertDontSeeText('Appeler')
+        ->assertDontSeeText('Itinéraire');
+});
+
+test('english contact page renders the translated centres section', function () {
+    $response = $this->get('/en/contact');
+
+    $response->assertOk()
+        ->assertSee('g3-contact-centres', escape: false)
+        ->assertSee('data-contact-view-target="map"', escape: false)
+        ->assertSee('g3-contact-message', escape: false)
+        ->assertSee('data-contact-message-count', escape: false)
+        ->assertSee('images/contact/ecole-de-police.png', escape: false)
+        ->assertSee('images/contact/icon-map.svg', escape: false)
+        ->assertSee('images/contact/icon-document.svg', escape: false)
+        ->assertSee('images/contact/icon-mail.svg', escape: false)
+        ->assertSee('https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&amp;ll=3.834421,11.477813&amp;z=12&amp;output=embed', escape: false)
+        ->assertSeeText('Two centres in Yaoundé. Direct access to your team.')
+        ->assertSeeText('A specific question? Write to us.')
+        ->assertSeeText('Need an appointment?')
+        ->assertSeeText('View fees')
+        ->assertSeeText('Subject of your request')
+        ->assertSeeText('Send my message')
+        ->assertSeeText('We are listening')
+        ->assertSeeText('Map')
+        ->assertSeeText('List')
+        ->assertSeeText('Former Texaco descent, École de Police, Yaoundé')
+        ->assertSeeText('Nomayos junction, Yaoundé')
+        ->assertDontSeeText('Page under construction')
+        ->assertDontSeeText('Call')
+        ->assertDontSeeText('Directions');
+});
+
 test('french about renders the identity section', function () {
     $response = $this->get('/fr/a-propos');
 
