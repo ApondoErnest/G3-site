@@ -344,7 +344,7 @@
         <div class="g3-road-hub__inner">
             <header class="g3-road-section-header">
                 <div>
-                    <h2 id="road-hub-title">{{ $copy['hub']['title'] }}</h2>
+                    <h1 id="road-hub-title">{{ $copy['hub']['title'] }}</h1>
                 </div>
             </header>
 

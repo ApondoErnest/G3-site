@@ -9,7 +9,6 @@ use App\Models\Tariff\TariffVersion;
 use App\Support\CacheKeys;
 use App\Support\Clock;
 use Carbon\CarbonImmutable;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 final class TariffResolver
@@ -23,24 +22,38 @@ final class TariffResolver
         $asOfDate ??= Clock::nowDisplay();
         $dateKey = $asOfDate->toDateString();
 
+        /** @var array{id: int, label: string, effective_from: string, effective_until: string|null}|null $version */
         $version = Cache::remember(
             CacheKeys::tariffEffective($dateKey),
             CacheKeys::tariffTtlSeconds(),
-            fn () => $this->findEffectiveVersion($asOfDate),
+            function () use ($asOfDate): ?array {
+                $version = $this->findEffectiveVersion($asOfDate);
+
+                if ($version === null) {
+                    return null;
+                }
+
+                return [
+                    'id' => $version->id,
+                    'label' => $version->label,
+                    'effective_from' => $version->effective_from->toDateString(),
+                    'effective_until' => $version->effective_until?->toDateString(),
+                ];
+            },
         );
 
         if ($version === null) {
             return EffectiveTariffResult::empty();
         }
 
-        $items = $this->resolveItems($version, $centreId, $vehicleCategoryId, $serviceId);
+        $items = $this->resolveItems((int) $version['id'], $centreId, $vehicleCategoryId, $serviceId);
 
         return new EffectiveTariffResult(
             version: new EffectiveTariffVersionDto(
-                id: $version->id,
-                label: $version->label,
-                effectiveFrom: $version->effective_from->toDateString(),
-                effectiveUntil: $version->effective_until?->toDateString(),
+                id: $version['id'],
+                label: $version['label'],
+                effectiveFrom: $version['effective_from'],
+                effectiveUntil: $version['effective_until'],
             ),
             items: $items,
             isEmpty: $items === [],
@@ -81,45 +94,55 @@ final class TariffResolver
      * @return list<TariffLineDto>
      */
     private function resolveItems(
-        TariffVersion $version,
+        int $versionId,
         ?int $centreId,
         ?int $vehicleCategoryId,
         ?int $serviceId,
     ): array {
-        /** @var Collection<int, TariffItem> $items */
+        /** @var list<array{id: int, vehicle_category_id: int, service_id: int|null, amount_xaf: int, validity_notes: array{fr: string, en: string}|null, centre_ids: list<int>}> $items */
         $items = Cache::remember(
-            CacheKeys::tariffMatrix($version->id),
+            CacheKeys::tariffMatrix($versionId),
             CacheKeys::tariffTtlSeconds(),
             fn () => TariffItem::query()
-                ->where('tariff_version_id', $version->id)
+                ->where('tariff_version_id', $versionId)
                 ->with('centres:id')
                 ->orderBy('sort_order')
-                ->get(),
+                ->get()
+                ->map(fn (TariffItem $item): array => [
+                    'id' => $item->id,
+                    'vehicle_category_id' => $item->vehicle_category_id,
+                    'service_id' => $item->service_id,
+                    'amount_xaf' => $item->amount_xaf,
+                    'validity_notes' => $item->validity_notes,
+                    'centre_ids' => $item->centres->pluck('id')->all(),
+                ])
+                ->values()
+                ->all(),
         );
 
-        return $items
-            ->filter(function (TariffItem $item) use ($centreId, $vehicleCategoryId, $serviceId): bool {
-                if ($vehicleCategoryId !== null && $item->vehicle_category_id !== $vehicleCategoryId) {
+        return collect($items)
+            ->filter(function (array $item) use ($centreId, $vehicleCategoryId, $serviceId): bool {
+                if ($vehicleCategoryId !== null && $item['vehicle_category_id'] !== $vehicleCategoryId) {
                     return false;
                 }
 
-                if ($centreId !== null && ! $item->appliesAtCentre($centreId)) {
+                if ($centreId !== null && ! in_array($centreId, $item['centre_ids'], true)) {
                     return false;
                 }
 
-                if (! $item->appliesToService($serviceId)) {
+                if ($item['service_id'] !== null && ($serviceId === null || $item['service_id'] !== $serviceId)) {
                     return false;
                 }
 
                 return true;
             })
-            ->map(fn (TariffItem $item) => new TariffLineDto(
-                id: $item->id,
-                vehicleCategoryId: $item->vehicle_category_id,
-                serviceId: $item->service_id,
-                amount: new MoneyXaf($item->amount_xaf),
-                validityNotes: $item->validity_notes,
-                centreIds: $item->centres->pluck('id')->all(),
+            ->map(fn (array $item): TariffLineDto => new TariffLineDto(
+                id: $item['id'],
+                vehicleCategoryId: $item['vehicle_category_id'],
+                serviceId: $item['service_id'],
+                amount: new MoneyXaf($item['amount_xaf']),
+                validityNotes: $item['validity_notes'],
+                centreIds: $item['centre_ids'],
             ))
             ->values()
             ->all();

@@ -6,6 +6,7 @@ use App\Actions\Schedule\Data\DeleteScheduleExceptionData;
 use App\Models\Centre\Centre;
 use App\Models\Centre\ScheduleException;
 use App\Support\CacheKeys;
+use App\Support\PublicPageCache;
 use Illuminate\Support\Facades\Cache;
 
 final class DeleteScheduleException
@@ -27,6 +28,8 @@ final class DeleteScheduleException
         $centreId = $exception->centre_id;
 
         $exception->delete();
+
+        PublicPageCache::forgetLiveStatus();
 
         if ($wasGlobal) {
             Centre::query()->pluck('id')->each(

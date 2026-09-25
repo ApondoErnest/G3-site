@@ -22,7 +22,7 @@ final class CacheKeys
 
     public static function catalogueServices(): string
     {
-        return 'catalogue:services:published';
+        return 'catalogue:services:published:v2';
     }
 
     public static function catalogueCategories(): string
@@ -85,6 +85,26 @@ final class CacheKeys
     public static function pageSeo(string $page): string
     {
         return "content:seo:{$page}";
+    }
+
+    public static function publicCentres(string $locale): string
+    {
+        return "public:centres:v2:{$locale}";
+    }
+
+    public static function publicPhone(): string
+    {
+        return 'public:phone:primary';
+    }
+
+    public static function publicTariff(string $locale, string $date): string
+    {
+        return "public:tariff:{$locale}:{$date}";
+    }
+
+    public static function availabilityAll(string $minute): string
+    {
+        return "availability:all:v2:{$minute}";
     }
 
     public static function contentTtlSeconds(): int

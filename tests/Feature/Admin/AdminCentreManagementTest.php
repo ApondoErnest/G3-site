@@ -2,10 +2,12 @@
 
 use App\Filament\Pages\ManageCentreHours;
 use App\Filament\Resources\Centre\Centres\CentreResource;
+use App\Filament\Resources\Centre\Centres\Pages\CreateCentre;
 use App\Filament\Resources\Centre\OperationalAlerts\OperationalAlertResource;
 use App\Filament\Resources\Centre\OperationalAlerts\Pages\CreateOperationalAlert;
 use App\Filament\Resources\Centre\ScheduleExceptions\ScheduleExceptionResource;
 use App\Models\Centre\Centre;
+use App\Models\Centre\CentrePhone;
 use App\Models\Centre\OperationalAlert;
 use App\Models\Centre\ScheduleException;
 use App\Models\Identity\AdminUserScope;
@@ -47,6 +49,72 @@ test('operations admin can access centre management pages', function (): void {
         ->get(OperationalAlertResource::getUrl('index'))
         ->assertOk()
         ->assertSee(__('admin.alerts.navigation', locale: 'fr'));
+});
+
+test('english centre hours page shows opening times in am and pm', function (): void {
+    $user = createAdminUser('operations_admin');
+
+    $this->actingAs($user)
+        ->get('/admin/locale/en')
+        ->assertRedirect();
+
+    $this->actingAs($user)
+        ->get(ManageCentreHours::getUrl())
+        ->assertOk()
+        ->assertSee('7:00 AM')
+        ->assertSee('8:00 PM')
+        ->assertSee('7:00 PM')
+        ->assertSee('3:00 PM')
+        ->assertDontSee('07h00');
+
+    $this->actingAs($user)
+        ->get('/admin/locale/fr')
+        ->assertRedirect();
+
+    $this->actingAs($user)
+        ->get(ManageCentreHours::getUrl())
+        ->assertOk()
+        ->assertSee('07h00')
+        ->assertSee('20h00')
+        ->assertSee('19h00')
+        ->assertSee('15h00')
+        ->assertDontSee('7:00 AM');
+});
+
+test('operations admin can create a centre', function (): void {
+    $user = createAdminUser('operations_admin');
+
+    Livewire::actingAs($user)
+        ->test(CreateCentre::class)
+        ->fillForm([
+            'code' => 'bastos',
+            'name' => ['fr' => 'Bastos', 'en' => 'Bastos'],
+            'address' => ['fr' => 'Bastos, Yaoundé', 'en' => 'Bastos, Yaoundé'],
+            'landmark' => ['fr' => 'Carrefour Bastos', 'en' => 'Bastos junction'],
+            'email' => 'bastos@g3control.local',
+            'latitude' => 3.9,
+            'longitude' => 11.5,
+            'status' => 'active',
+            'sort_order' => 3,
+            'holiday_default_open' => true,
+            'seo_title' => ['fr' => 'Bastos', 'en' => 'Bastos'],
+        ])
+        ->call('create')
+        ->assertHasNoFormErrors();
+
+    $centre = Centre::query()->where('code', 'bastos')->first();
+
+    expect($centre)->not->toBeNull()
+        ->and($centre->name['fr'])->toBe('Bastos')
+        ->and($centre->weeklyHours()->count())->toBe(7);
+});
+
+test('centre manager cannot create a centre', function (): void {
+    $user = createAdminUser('centre_manager');
+
+    Livewire::actingAs($user)
+        ->test(CreateCentre::class)
+        ->assertForbidden();
 });
 
 test('centre manager can access scoped centres and hours but not alerts', function (): void {
@@ -187,4 +255,33 @@ test('centre and schedule exception policies respect role scopes FR-AD-03', func
 
     expect($ops->can('viewAny', OperationalAlert::class))->toBeTrue()
         ->and($ops->can('create', OperationalAlert::class))->toBeTrue();
+});
+
+test('centre phone policy is registered and respects centre scopes', function (): void {
+    $centres = Centre::query()->orderBy('sort_order')->get();
+    $assignedCentre = $centres[0];
+    $otherCentre = $centres[1];
+
+    $assignedPhone = CentrePhone::query()
+        ->where('centre_id', $assignedCentre->id)
+        ->firstOrFail();
+
+    $otherPhone = CentrePhone::query()
+        ->where('centre_id', $otherCentre->id)
+        ->firstOrFail();
+
+    $manager = createAdminUser('centre_manager');
+    AdminUserScope::query()->create([
+        'user_id' => $manager->id,
+        'centre_id' => $assignedCentre->id,
+        'created_at' => now(),
+    ]);
+
+    $ops = createAdminUser('operations_admin');
+
+    expect($ops->can('viewAny', CentrePhone::class))->toBeTrue()
+        ->and($ops->can('update', $assignedPhone))->toBeTrue()
+        ->and($manager->can('viewAny', CentrePhone::class))->toBeTrue()
+        ->and($manager->can('update', $assignedPhone))->toBeTrue()
+        ->and($manager->can('update', $otherPhone))->toBeFalse();
 });

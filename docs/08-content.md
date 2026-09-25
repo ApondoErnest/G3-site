@@ -31,9 +31,9 @@ Agrément **scope** is closed: company-wide.
 
 Slogan, agrément line, email, BP, proposition, hero FR (EN hero = suggestion until content owner signs).
 
-## Media (all missing until ingested)
+## Media
 
-Brand, both centres (hero/exterior/reception/lane), team, equipment, inspection stills, VT video+poster. Keep masters in `assets/source/`; site uses conversions.
+Logo, mark, and École de Police and Nomayos photographs are in the media library (step 146). Team portraits, equipment stills, road-safety pictures, and the visite technique video stay out until they are confirmed G3 assets (Q-07). Public pages still use the files in `public/images/`.
 
 ## Pages
 

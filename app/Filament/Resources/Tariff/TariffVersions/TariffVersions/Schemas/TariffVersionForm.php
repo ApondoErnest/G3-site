@@ -28,19 +28,22 @@ class TariffVersionForm
                             ->label(__('admin.tariffs.fields.label'))
                             ->required()
                             ->maxLength(64)
-                            ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record)),
+                            ->disabled(fn (?TariffVersion $record): bool => self::isIdentityLocked($record)),
                         DatePicker::make('effective_from')
                             ->label(__('admin.tariffs.fields.effective_from'))
                             ->required()
                             ->native(false)
-                            ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record)),
+                            ->disabled(fn (?TariffVersion $record): bool => self::isIdentityLocked($record)),
                         DatePicker::make('effective_until')
                             ->label(__('admin.tariffs.fields.effective_until'))
                             ->native(false)
-                            ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record)),
+                            ->disabled(fn (?TariffVersion $record): bool => self::isIdentityLocked($record)),
                     ])
                     ->columns(3),
                 Section::make(__('admin.tariffs.sections.items'))
+                    ->description(fn (?TariffVersion $record): ?string => $record?->status === TariffVersionStatus::Published
+                        ? __('admin.tariffs.hints.published_lines')
+                        : null)
                     ->schema([
                         Repeater::make('tariff_items')
                             ->label(__('admin.tariffs.sections.items'))
@@ -50,19 +53,19 @@ class TariffVersionForm
                                     ->options(fn (): array => self::vehicleCategoryOptions())
                                     ->required()
                                     ->searchable()
-                                    ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record)),
+                                    ->disabled(fn (?TariffVersion $record): bool => self::isArchived($record)),
                                 Select::make('service_id')
                                     ->label(__('admin.tariffs.fields.service'))
                                     ->options(fn (): array => self::serviceOptions())
                                     ->nullable()
                                     ->searchable()
-                                    ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record)),
+                                    ->disabled(fn (?TariffVersion $record): bool => self::isArchived($record)),
                                 TextInput::make('amount_xaf')
                                     ->label(__('admin.tariffs.fields.amount_xaf'))
                                     ->numeric()
                                     ->required()
                                     ->minValue(1)
-                                    ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record)),
+                                    ->disabled(fn (?TariffVersion $record): bool => self::isArchived($record)),
                                 Select::make('centres')
                                     ->label(__('admin.tariffs.fields.centres'))
                                     ->options(fn (): array => self::centreOptions())
@@ -70,36 +73,41 @@ class TariffVersionForm
                                     ->preload()
                                     ->searchable()
                                     ->required()
-                                    ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record)),
+                                    ->disabled(fn (?TariffVersion $record): bool => self::isArchived($record)),
                                 AdminForm::bilingualTextarea(
                                     'validity_notes',
                                     __('admin.tariffs.fields.validity_notes'),
                                 )
-                                    ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record)),
+                                    ->disabled(fn (?TariffVersion $record): bool => self::isArchived($record)),
                                 TextInput::make('sort_order')
                                     ->label(__('admin.tariffs.fields.sort_order'))
                                     ->numeric()
                                     ->required()
                                     ->default(1)
-                                    ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record)),
+                                    ->disabled(fn (?TariffVersion $record): bool => self::isArchived($record)),
                             ])
                             ->columns(2)
                             ->defaultItems(0)
                             ->addActionLabel(__('admin.tariffs.actions.add_item'))
-                            ->disabled(fn (?TariffVersion $record): bool => self::isLocked($record))
+                            ->disabled(fn (?TariffVersion $record): bool => self::isArchived($record))
                             ->hiddenOn('create'),
                     ])
                     ->hiddenOn('create'),
             ]);
     }
 
-    private static function isLocked(?TariffVersion $record): bool
+    private static function isIdentityLocked(?TariffVersion $record): bool
     {
         if ($record === null) {
             return false;
         }
 
         return in_array($record->status, [TariffVersionStatus::Published, TariffVersionStatus::Archived], true);
+    }
+
+    private static function isArchived(?TariffVersion $record): bool
+    {
+        return $record?->status === TariffVersionStatus::Archived;
     }
 
     /**

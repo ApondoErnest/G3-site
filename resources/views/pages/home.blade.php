@@ -205,31 +205,41 @@
         ],
     ];
 
-    $centreCards = [
-        [
-            'key' => 'ecole_de_police',
-            'title' => __('public.home.centres.items.ecole_de_police.title'),
-            'address' => __('public.home.centres.items.ecole_de_police.address'),
-            'hours' => __('public.home.centres.items.ecole_de_police.hours'),
-            'phone' => __('public.home.centres.items.ecole_de_police.phone'),
-            'phone_href' => '+237687187516',
+    $centreAssets = [
+        'ecole-de-police' => [
             'image' => 'ecole-de-police.png',
             'url' => PublicNavigation::pageUrl('centre_ecole_de_police', $locale),
         ],
-        [
-            'key' => 'nomayos',
-            'title' => __('public.home.centres.items.nomayos.title'),
-            'address' => __('public.home.centres.items.nomayos.address'),
-            'hours' => __('public.home.centres.items.nomayos.hours'),
-            'phone' => __('public.home.centres.items.nomayos.phone'),
-            'phone_href' => '+237653100801',
+        'nomayos' => [
             'image' => 'nomayos.png',
             'url' => PublicNavigation::pageUrl('centre_nomayos', $locale),
         ],
     ];
+    $centreCards = collect($publicCentres ?? [])
+        ->map(fn ($centre) => [
+            'key' => $centre->key,
+            'title' => 'G3 Control — '.$centre->shortName,
+            'address' => $centre->displayAddress,
+            'weekdayHours' => $centre->weekdayHours,
+            'sundayHours' => $centre->sundayHours,
+            'isOpen' => (bool) (($publicLiveStatus ?? [])[$centre->key]['isOpen'] ?? false),
+            'status' => ($publicLiveStatus ?? [])[$centre->key]['status'] ?? __('public.home.hero.live.closed'),
+            'phone' => $centre->phonesDisplayLine,
+            'phone_href' => $centre->primaryPhoneE164,
+            'image' => $centreAssets[$centre->key]['image'] ?? 'ecole-de-police.png',
+            'url' => $centreAssets[$centre->key]['url'] ?? PublicNavigation::pageUrl('centres', $locale),
+        ])
+        ->values()
+        ->all();
 
-    $centresGoogleMapsUrl = 'https://www.google.com/maps/dir/?api=1&origin=3.8786152,11.5116814&destination=3.7902275,11.4439448&travelmode=driving';
-    $centresGoogleMapsEmbedUrl = 'https://maps.google.com/maps?f=d&source=s_d&saddr=3.8786152,11.5116814&daddr=3.7902275,11.4439448&hl=fr&z=12&output=embed';
+    $firstCentre = collect($publicCentres ?? [])->first();
+    $lastCentre = collect($publicCentres ?? [])->last();
+    $centresGoogleMapsUrl = $firstCentre && $lastCentre
+        ? 'https://www.google.com/maps/dir/?api=1&origin='.$firstCentre->latitude.','.$firstCentre->longitude.'&destination='.$lastCentre->latitude.','.$lastCentre->longitude.'&travelmode=driving'
+        : 'https://www.google.com/maps/search/?api=1&query=G3%20Control%20Yaound%C3%A9';
+    $centresGoogleMapsEmbedUrl = $firstCentre && $lastCentre
+        ? 'https://maps.google.com/maps?f=d&source=s_d&saddr='.$firstCentre->latitude.','.$firstCentre->longitude.'&daddr='.$lastCentre->latitude.','.$lastCentre->longitude.'&hl='.$locale.'&z=12&output=embed'
+        : 'https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&z=12&output=embed';
 
     $roadSafetyItems = [
         [
@@ -262,8 +272,15 @@
                     alt=""
                     class="g3-home-hero__slide"
                     style="--slide-index: {{ $loop->index }}"
-                    @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif
+                    width="1971"
+                    height="798"
+                    @if ($loop->first) fetchpriority="high" @else loading="lazy" decoding="async" @endif
                 >
+                @if ($loop->first)
+                    @push('head')
+                        <link rel="preload" as="image" href="{{ asset('images/homepage/'.$slide) }}" fetchpriority="high">
+                    @endpush
+                @endif
             @endforeach
         </div>
 
@@ -336,7 +353,7 @@
 
                 <ul class="g3-home-hero__live-list">
                     @foreach ($heroCentres as $centre)
-                        <li>
+                        <li @class(['g3-home-hero__live-item--closed' => ! $centre['isOpen']])>
                             <span class="g3-home-hero__centre-name">
                                 <span class="g3-home-hero__centre-icon" aria-hidden="true"></span>
                                 {{ $centre['name'] }}
@@ -575,9 +592,12 @@
                                 loading="lazy"
                             >
 
-                            <span class="g3-home-centres__status">
+                            <span @class([
+                                'g3-home-centres__status',
+                                'g3-home-centres__status--closed' => ! $centre['isOpen'],
+                            ])>
                                 <span class="g3-home-centres__status-dot" aria-hidden="true"></span>
-                                {{ __('public.home.centres.status_open') }}
+                                {{ $centre['status'] }}
                             </span>
                         </div>
 
@@ -605,15 +625,21 @@
 
                                 <div>
                                     <dt>
-                                        <span class="sr-only">{{ __('public.home.centres.today', ['hours' => $centre['hours']]) }}</span>
+                                        <span class="sr-only">{{ __('public.home.centres.weekday') }} {{ $centre['weekdayHours'] }}. {{ __('public.home.centres.sunday') }} {{ $centre['sundayHours'] }}.</span>
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                             <circle cx="12" cy="12" r="8"/>
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2"/>
                                         </svg>
                                     </dt>
-                                    <dd>
-                                        <span>{{ __('public.home.centres.today', ['hours' => '']) }}</span>
-                                        <strong>{{ $centre['hours'] }}</strong>
+                                    <dd class="g3-home-centres__hours">
+                                        <p>
+                                            <span>{{ __('public.home.centres.weekday') }}</span>
+                                            <strong>{{ $centre['weekdayHours'] }}</strong>
+                                        </p>
+                                        <p>
+                                            <span>{{ __('public.home.centres.sunday') }}</span>
+                                            <strong>{{ $centre['sundayHours'] }}</strong>
+                                        </p>
                                     </dd>
                                 </div>
 

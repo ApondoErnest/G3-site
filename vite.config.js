@@ -15,9 +15,6 @@ export default defineConfig({
                 bunny('Manrope', {
                     weights: [600, 700],
                 }),
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
-                }),
             ],
         }),
         tailwindcss(),

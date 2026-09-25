@@ -6,6 +6,7 @@ use App\Actions\Schedule\Data\UpdateScheduleExceptionData;
 use App\Models\Centre\Centre;
 use App\Models\Centre\ScheduleException;
 use App\Support\CacheKeys;
+use App\Support\PublicPageCache;
 use Illuminate\Support\Facades\Cache;
 use InvalidArgumentException;
 
@@ -74,6 +75,8 @@ final class UpdateScheduleException
         bool $wasGlobal,
         ?int $previousCentreId,
     ): void {
+        PublicPageCache::forgetLiveStatus();
+
         if ($wasGlobal || $exception->applies_to_all_centres) {
             Centre::query()->pluck('id')->each(
                 fn (int $centreId) => Cache::forget(CacheKeys::scheduleCentre($centreId)),

@@ -56,7 +56,27 @@ test('super admin dashboard shows stats queue and centre status FR-AD-04', funct
         ->assertSee('Nomayos')
         ->assertSee('Tableau de bord')
         ->assertSee('Yaoundé')
-        ->assertSee('En traitement');
+        ->assertSee('En traitement')
+        ->assertSee('20:00')
+        ->assertDontSee('PM');
+});
+
+test('english admin dashboard shows centre times in am and pm', function (): void {
+    $user = createAdminUser('super_admin');
+
+    $this->actingAs($user)
+        ->get('/admin/locale/en')
+        ->assertRedirect();
+
+    $this->actingAs($user)
+        ->get('/admin')
+        ->assertOk()
+        ->assertSee('Closes 8:00 PM')
+        ->assertSee('Closes 7:00 PM')
+        ->assertSee('7:00 AM–8:00 PM')
+        ->assertSee('7:00 AM–7:00 PM')
+        ->assertDontSee('20:00')
+        ->assertDontSee('07:00');
 });
 
 test('dashboard queue lists priority appointment references', function (): void {

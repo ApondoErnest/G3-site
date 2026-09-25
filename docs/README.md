@@ -49,10 +49,10 @@ Read and approve in this order. Each document builds on the previous.
 | 85 | [`12-gate-domain-design.md`](12-gate-domain-design.md) | Gate |
 | 86–97 | Migrations in repository · **Gate 97 ✓ 2026-09-05** · [`11-gate-schema-accepted.md`](11-gate-schema-accepted.md) | Database build |
 | 98–107 | PHP modules + Pest · **Gate 107 ✓ 2026-09-06** · [`12-gate-domain-accepted.md`](12-gate-domain-accepted.md) | Backend build |
-| 108–116 | Filament resources | Administration UI |
+| 108–116 | Filament resources · **Gate 116 ✓ 2026-09-07** · [`10-gate-administration-accepted.md`](10-gate-administration-accepted.md) | Administration UI |
 | 117–129 | Blade / Livewire pages · **Steps 118–128 Accueil + À propos + Nos centres + École de Police + Nomayos + Services + Visite technique + Tarifs + Rendez-vous & Suivi + Sécurité routière + Contact ✓** · **Gate 129 ✓ 2026-09-24** | Public frontend |
-| 130–150 | Quality assurance · active **130 Data integration** | Integration, compliance, UAT |
-| 151 | [`12-docker.md`](12-docker.md) | Containerisation |
+| 130–150 | Quality assurance · **Steps 130–136 ✓** · **Step 137 Pest — live status ✓** · **Step 138 Pest — tariff lifecycle ✓** · **Step 139 Pest — appointment transitions ✓** · **Step 140 Pest — tracking privacy ✓** · **Step 141 Pest — Livewire request flow ✓** · **Step 142 Pest — Filament authorisation ✓** · **Gate 143 ✓ 2026-09-25** · **Step 144 French content load ✓** · **Step 145 English content load ✓** · **Step 146 Media ingestion ✓** · **Step 147 Factual audit ✓** · **Step 148 Local UAT ✓** · **Step 149 End-to-end validation ✓** · **Gate 150 ✓ 2026-09-25** · 368 tests, 3700 assertions | Integration, compliance, UAT |
+| 151–159 | Containerisation · active **151 Container architecture** → [`12-docker.md`](12-docker.md) | Docker after Gate 150 |
 | 177 | [`13-launch.md`](13-launch.md) | Go-live checklist |
 
 ---

@@ -8,6 +8,7 @@ final readonly class PublishedServiceEntry
      * @param  array{fr: string, en: string}  $title
      * @param  array{fr: string, en: string}|null  $summary
      * @param  list<int>  $centreIds
+     * @param  list<int>  $categoryIds
      */
     public function __construct(
         public int $id,
@@ -16,5 +17,6 @@ final readonly class PublishedServiceEntry
         public ?array $summary,
         public ?string $icon,
         public array $centreIds,
+        public array $categoryIds,
     ) {}
 }

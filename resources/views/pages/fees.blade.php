@@ -23,9 +23,8 @@
             ? 'Tarif applicable à la catégorie sélectionnée.'
             : 'Fee applicable to the selected category.',
         'version' => $isFrench ? 'Version tarifaire' : 'Tariff version',
-        'effective' => $isFrench
-            ? 'En vigueur depuis le 01 juin 2022'
-            : 'Effective since 01 June 2022',
+        'effective' => $publicTariffCatalogue->effectiveLine
+            ?? ($isFrench ? 'Aucune version tarifaire publiée' : 'No published tariff version'),
         'reference' => $isFrench
             ? 'Référence : tarifs homologués Ministère des Transports'
             : 'Reference: Ministry of Transport approved fees',
@@ -35,6 +34,19 @@
             ? 'Choisissez le cas le plus proche de votre véhicule pour afficher la catégorie officielle.'
             : 'Choose the closest case to your vehicle to display the official category.',
     ];
+    $tariffUnavailable = $isFrench ? 'Tarif non publié' : 'Fee not published';
+    $tariffLineFor = function (string $code) use ($publicTariffCatalogue) {
+        return collect($publicTariffCatalogue->lines)
+            ->first(fn ($line): bool => $line->categoryCode === $code);
+    };
+    $tariffAmountFor = function (string $code) use ($tariffLineFor, $tariffUnavailable): string {
+        return $tariffLineFor($code)?->amount ?? $tariffUnavailable;
+    };
+    $tariffValidityFor = function (string $code, string $fallback) use ($tariffLineFor): string {
+        $validity = $tariffLineFor($code)?->validity;
+
+        return filled($validity) ? $validity : $fallback;
+    };
 
     $profiles = [
         [
@@ -50,8 +62,8 @@
             'plain' => $isFrench
                 ? 'Pour les véhicules de tourisme à usage privé.'
                 : 'For private passenger vehicles.',
-            'amount' => '17 900 FCFA',
-            'validity' => $isFrench ? '12 mois' : '12 months',
+            'amount' => $tariffAmountFor('B'),
+            'validity' => $tariffValidityFor('B', $isFrench ? '12 mois' : '12 months'),
         ],
         [
             'id' => 'a',
@@ -66,8 +78,8 @@
             'plain' => $isFrench
                 ? 'Pour les véhicules exploités en taxi ou en auto-école.'
                 : 'For vehicles used as taxis or driving-school vehicles.',
-            'amount' => '4 900 FCFA',
-            'validity' => $isFrench ? '03 mois' : '03 months',
+            'amount' => $tariffAmountFor('A'),
+            'validity' => $tariffValidityFor('A', $isFrench ? '03 mois' : '03 months'),
         ],
         [
             'id' => 'b1',
@@ -82,8 +94,8 @@
             'plain' => $isFrench
                 ? 'Pour les utilitaires légers et pickups jusqu’à 3,5 T.'
                 : 'For light utility vehicles and pickups up to 3.5 T.',
-            'amount' => '15 500 FCFA',
-            'validity' => $isFrench ? '06 mois' : '06 months',
+            'amount' => $tariffAmountFor('B1'),
+            'validity' => $tariffValidityFor('B1', $isFrench ? '06 mois' : '06 months'),
         ],
         [
             'id' => 'c-mini',
@@ -98,8 +110,8 @@
             'plain' => $isFrench
                 ? 'Pour les mini-bus et petits véhicules de transport de personnes.'
                 : 'For minibuses and smaller passenger transport vehicles.',
-            'amount' => '15 500 FCFA',
-            'validity' => $isFrench ? '03 mois' : '03 months',
+            'amount' => $tariffAmountFor('C < 3,5T'),
+            'validity' => $tariffValidityFor('C < 3,5T', $isFrench ? '03 mois' : '03 months'),
         ],
         [
             'id' => 'c-bus',
@@ -114,8 +126,8 @@
             'plain' => $isFrench
                 ? 'Pour les grands véhicules de transport de personnes.'
                 : 'For large passenger transport vehicles.',
-            'amount' => '19 080 FCFA',
-            'validity' => $isFrench ? '03 mois' : '03 months',
+            'amount' => $tariffAmountFor('C'),
+            'validity' => $tariffValidityFor('C', $isFrench ? '03 mois' : '03 months'),
         ],
         [
             'id' => 'd-heavy',
@@ -130,8 +142,8 @@
             'plain' => $isFrench
                 ? 'Pour les camions et grands véhicules professionnels.'
                 : 'For trucks and large professional vehicles.',
-            'amount' => '26 235 FCFA',
-            'validity' => $isFrench ? '06 mois' : '06 months',
+            'amount' => $tariffAmountFor('D'),
+            'validity' => $tariffValidityFor('D', $isFrench ? '06 mois' : '06 months'),
         ],
         [
             'id' => 'd-other',
@@ -146,8 +158,8 @@
             'plain' => $isFrench
                 ? 'Pour les engins spéciaux à orienter selon la catégorie officielle.'
                 : 'For special machinery to classify by official category.',
-            'amount' => '41 750 FCFA',
-            'validity' => $isFrench ? '12 mois' : '12 months',
+            'amount' => $tariffAmountFor('D_OTHER'),
+            'validity' => $tariffValidityFor('D_OTHER', $isFrench ? '12 mois' : '12 months'),
         ],
     ];
 
@@ -211,8 +223,8 @@
                     ? 'Les tarifs affichés correspondent à la version actuellement publiée par le MINT.'
                     : 'The displayed fees correspond to the tariff version currently published by MINT.',
                 'note' => $isFrench
-                    ? 'Dernière mise à jour identifiée : 01 juin 2022.'
-                    : 'Last identified update: 01 June 2022.',
+                    ? ($publicTariffCatalogue->versionLabel ? 'Version publiée : '.$publicTariffCatalogue->versionLabel.'.' : 'Aucune version publiée.')
+                    : ($publicTariffCatalogue->versionLabel ? 'Published version: '.$publicTariffCatalogue->versionLabel.'.' : 'No published version.'),
             ],
         ],
     ];
@@ -320,8 +332,20 @@
                                     <div>
                                         <h3>{{ $copy['centres'] }}</h3>
                                         <ul>
-                                            <li><strong>École de Police</strong><span>{{ $copy['open'] }}</span></li>
-                                            <li><strong>Nomayos</strong><span>{{ $copy['open'] }}</span></li>
+                                            <li>
+                                                <strong>École de Police</strong>
+                                                <span @class([
+                                                    'g3-tariff-passport__centre-status',
+                                                    'g3-tariff-passport__centre-status--closed' => ! ($publicLiveStatus['ecole-de-police']['isOpen'] ?? true),
+                                                ])>{{ $publicLiveStatus['ecole-de-police']['status'] ?? $copy['open'] }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>Nomayos</strong>
+                                                <span @class([
+                                                    'g3-tariff-passport__centre-status',
+                                                    'g3-tariff-passport__centre-status--closed' => ! ($publicLiveStatus['nomayos']['isOpen'] ?? true),
+                                                ])>{{ $publicLiveStatus['nomayos']['status'] ?? $copy['open'] }}</span>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

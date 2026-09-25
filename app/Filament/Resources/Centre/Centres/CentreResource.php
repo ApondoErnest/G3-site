@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Centre\Centres;
 
+use App\Filament\Resources\Centre\Centres\Pages\CreateCentre;
 use App\Filament\Resources\Centre\Centres\Pages\EditCentre;
 use App\Filament\Resources\Centre\Centres\Pages\ListCentres;
 use App\Filament\Resources\Centre\Centres\RelationManagers\PhonesRelationManager;
@@ -90,11 +91,6 @@ class CentreResource extends Resource
         return $query;
     }
 
-    public static function canCreate(): bool
-    {
-        return false;
-    }
-
     public static function canDelete(Model $record): bool
     {
         return false;
@@ -111,6 +107,7 @@ class CentreResource extends Resource
     {
         return [
             'index' => ListCentres::route('/'),
+            'create' => CreateCentre::route('/create'),
             'edit' => EditCentre::route('/{record}/edit'),
         ];
     }

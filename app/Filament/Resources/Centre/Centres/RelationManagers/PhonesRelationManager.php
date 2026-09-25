@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Centre\Centres\RelationManagers;
 
+use App\Support\PublicPageCache;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -61,11 +62,20 @@ class PhonesRelationManager extends RelationManager
             ])
             ->defaultSort('sort_order')
             ->headerActions([
-                CreateAction::make(),
+                CreateAction::make()
+                    ->after(function (): void {
+                        PublicPageCache::forgetCentres();
+                    }),
             ])
             ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
+                EditAction::make()
+                    ->after(function (): void {
+                        PublicPageCache::forgetCentres();
+                    }),
+                DeleteAction::make()
+                    ->after(function (): void {
+                        PublicPageCache::forgetCentres();
+                    }),
             ]);
     }
 }

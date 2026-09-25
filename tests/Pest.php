@@ -179,6 +179,51 @@ function linkTariffItemToCentre(int $itemId, int $centreId): void
     ]);
 }
 
+function seedPublishedPublicTariffs(): void
+{
+    $versionId = insertTariffVersion([
+        'label' => 'Tarifs publics 2026',
+        'status' => 'published',
+        'effective_from' => '2026-01-01',
+        'published_at' => now(),
+    ]);
+    $centreIds = [
+        centreId('ecole-de-police'),
+        centreId('nomayos'),
+    ];
+    $tariffs = [
+        ['code' => 'B', 'label' => ['fr' => 'Véhicule de tourisme', 'en' => 'Passenger vehicle'], 'amount' => 17900, 'validity' => ['fr' => '12 mois', 'en' => '12 months']],
+        ['code' => 'A', 'label' => ['fr' => 'Taxi / Auto-école', 'en' => 'Taxi / Driving school'], 'amount' => 4900, 'validity' => ['fr' => '03 mois', 'en' => '03 months']],
+        ['code' => 'B1', 'label' => ['fr' => 'Pickup 3,5 T / Véhicule utilitaire léger', 'en' => '3.5 T pickup / Light utility vehicle'], 'amount' => 15500, 'validity' => ['fr' => '06 mois', 'en' => '06 months']],
+        ['code' => 'C < 3,5T', 'label' => ['fr' => 'Mini-bus', 'en' => 'Minibus'], 'amount' => 15500, 'validity' => ['fr' => '03 mois', 'en' => '03 months']],
+        ['code' => 'C', 'label' => ['fr' => 'Grand bus / Coaster', 'en' => 'Large bus / Coaster'], 'amount' => 19080, 'validity' => ['fr' => '03 mois', 'en' => '03 months']],
+        ['code' => 'D', 'label' => ['fr' => 'Poids lourd', 'en' => 'Heavy vehicle'], 'amount' => 26235, 'validity' => ['fr' => '06 mois', 'en' => '06 months']],
+        ['code' => 'D_OTHER', 'label' => ['fr' => 'Autres engins', 'en' => 'Other machinery'], 'amount' => 41750, 'validity' => ['fr' => '12 mois', 'en' => '12 months']],
+    ];
+
+    foreach ($tariffs as $index => $tariff) {
+        $categoryId = insertVehicleCategory([
+            'code' => $tariff['code'],
+            'label' => json_encode($tariff['label']),
+            'examples' => json_encode($tariff['label']),
+            'description' => json_encode($tariff['label']),
+            'sort_order' => $index + 1,
+            'is_published' => true,
+        ]);
+        $itemId = insertTariffItem([
+            'tariff_version_id' => $versionId,
+            'vehicle_category_id' => $categoryId,
+            'amount_xaf' => $tariff['amount'],
+            'validity_notes' => json_encode($tariff['validity']),
+            'sort_order' => $index + 1,
+        ]);
+
+        foreach ($centreIds as $centreId) {
+            linkTariffItemToCentre($itemId, $centreId);
+        }
+    }
+}
+
 /**
  * @return array{serviceId: int, categoryId: int}
  */

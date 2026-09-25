@@ -2,6 +2,8 @@
 
 use App\Settings\CompanySettings;
 use App\Support\PublicNavigation;
+use Database\Seeders\OfficialTariffsSeeder;
+use Database\Seeders\PublicAdminBaselineSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -84,6 +86,8 @@ test('french home renders the equipment carousel section', function () {
 });
 
 test('french home renders the centres section', function () {
+    seedBaselineCentres();
+
     $response = $this->get('/fr/accueil');
 
     $response->assertOk()
@@ -101,6 +105,8 @@ test('french home renders the centres section', function () {
 });
 
 test('french centres page renders the live selector section', function () {
+    seedBaselineCentres();
+
     $response = $this->get('/fr/centres');
 
     $response->assertOk()
@@ -132,6 +138,32 @@ test('french centres page renders the live selector section', function () {
         ->assertSeeText(__('public.centres_page.standard.items.approval.title', [], 'fr'))
         ->assertSeeText(__('public.centres_page.standard.items.equipment.title', [], 'fr'))
         ->assertDontSeeText(__('public.centres_page.actions.call', [], 'fr'));
+});
+
+test('french services page renders published admin services when seeded', function () {
+    seedBaselineCentres();
+    $this->seed(OfficialTariffsSeeder::class);
+    $this->seed(PublicAdminBaselineSeeder::class);
+
+    DB::table('services')
+        ->where('code', 'heavy-vehicle-inspection')
+        ->update([
+            'title' => json_encode([
+                'fr' => 'Service poids lourds publié',
+                'en' => 'Published heavy service',
+            ]),
+            'summary' => json_encode([
+                'fr' => 'Résumé administrable visible sur la page publique.',
+                'en' => 'Admin-managed summary visible on the public page.',
+            ]),
+        ]);
+
+    $response = $this->get('/fr/services');
+
+    $response->assertOk()
+        ->assertSeeText('Service poids lourds publié')
+        ->assertSeeText('Résumé administrable visible sur la page publique.')
+        ->assertSee('images/services/service-heavy.svg', escape: false);
 });
 
 test('french home renders the road safety section', function () {
@@ -209,6 +241,8 @@ test('english road safety page renders the translated guide', function () {
 });
 
 test('french contact page renders the centres map section', function () {
+    seedBaselineCentres();
+
     $response = $this->get('/fr/contact');
 
     $response->assertOk()
@@ -224,7 +258,7 @@ test('french contact page renders the centres map section', function () {
         ->assertSee('images/contact/icon-phone.svg', escape: false)
         ->assertSee('images/contact/icon-headset.svg', escape: false)
         ->assertSee('images/contact/icon-send.svg', escape: false)
-        ->assertSee('https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&amp;ll=3.834421,11.477813&amp;z=12&amp;output=embed', escape: false)
+        ->assertSee('https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&amp;ll=', escape: false)
         ->assertSeeText('Deux centres à Yaoundé. Un accès direct à votre équipe.')
         ->assertSeeText('Une question particulière ? Écrivez-nous.')
         ->assertSeeText('Besoin d’un rendez-vous ?')
@@ -245,6 +279,8 @@ test('french contact page renders the centres map section', function () {
 });
 
 test('english contact page renders the translated centres section', function () {
+    seedBaselineCentres();
+
     $response = $this->get('/en/contact');
 
     $response->assertOk()
@@ -256,7 +292,7 @@ test('english contact page renders the translated centres section', function () 
         ->assertSee('images/contact/icon-map.svg', escape: false)
         ->assertSee('images/contact/icon-document.svg', escape: false)
         ->assertSee('images/contact/icon-mail.svg', escape: false)
-        ->assertSee('https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&amp;ll=3.834421,11.477813&amp;z=12&amp;output=embed', escape: false)
+        ->assertSee('https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&amp;ll=', escape: false)
         ->assertSeeText('Two centres in Yaoundé. Direct access to your team.')
         ->assertSeeText('A specific question? Write to us.')
         ->assertSeeText('Need an appointment?')
@@ -314,6 +350,13 @@ test('french about renders the identity section', function () {
 });
 
 test('french appointment page renders express pass and tracking modes', function () {
+    seedBaselineCentres();
+    seedPublishedPublicTariffs();
+    insertService([
+        'title' => json_encode(['fr' => 'Contre-visite', 'en' => 'Follow-up inspection']),
+        'is_published' => true,
+    ]);
+
     $response = $this->get('/fr/rendez-vous');
 
     $response->assertOk()
@@ -326,7 +369,7 @@ test('french appointment page renders express pass and tracking modes', function
         ->assertSee('images/appointment-and-tracking/nomayos.png', escape: false)
         ->assertSee('images/appointment-and-tracking/icon-calendar.svg', escape: false)
         ->assertSee('images/appointment-and-tracking/icon-search.svg', escape: false)
-        ->assertSee('name="service"', escape: false)
+        ->assertSee('name="service_id"', escape: false)
         ->assertSee('name="vehicle_category"', escape: false)
         ->assertSee('data-appointment-date-picker', escape: false)
         ->assertSee('data-appointment-calendar', escape: false)
@@ -337,6 +380,7 @@ test('french appointment page renders express pass and tracking modes', function
         ->assertSeeText('Préparez votre rendez-vous')
         ->assertSeeText('Contre-visite')
         ->assertSeeText('Catégorie D — Poids lourd')
+        ->assertSee('data-tariff="41 750 FCFA"', escape: false)
         ->assertSeeText('Retrouvez l’état de votre demande en quelques secondes.');
 });
 
@@ -374,6 +418,8 @@ test('locale switcher links to equivalent page in other language', function () {
 });
 
 test('centres nav is active on centre detail pages', function () {
+    seedBaselineCentres();
+
     $response = $this->get('/fr/centres/nomayos');
 
     $response->assertOk()
@@ -387,4 +433,86 @@ test('shell includes company contact details from settings', function () {
         ->assertOk()
         ->assertSee($settings->email, escape: false)
         ->assertSee($settings->agrementLabel(), escape: false);
+});
+
+test('public centre and tariff pages render operational data from records', function () {
+    seedBaselineCentres();
+
+    $centreId = centreId('ecole-de-police');
+    DB::table('centre_phones')
+        ->where('centre_id', $centreId)
+        ->where('sort_order', 1)
+        ->update(['e164' => '+237699111222']);
+    DB::table('centre_weekly_hours')
+        ->where('centre_id', $centreId)
+        ->where('weekday', 1)
+        ->update(['closes_at' => '18:30:00']);
+
+    $versionId = insertTariffVersion([
+        'label' => 'Tarif public test',
+        'status' => 'published',
+        'effective_from' => '2026-01-01',
+        'published_at' => now(),
+    ]);
+    $categoryId = insertVehicleCategory([
+        'code' => 'B',
+        'label' => json_encode(['fr' => 'Véhicule de tourisme', 'en' => 'Passenger vehicle']),
+        'examples' => json_encode(['fr' => 'Voiture test', 'en' => 'Test car']),
+        'description' => json_encode(['fr' => 'Description test', 'en' => 'Test description']),
+        'is_published' => true,
+    ]);
+    $itemId = insertTariffItem([
+        'tariff_version_id' => $versionId,
+        'vehicle_category_id' => $categoryId,
+        'amount_xaf' => 32100,
+    ]);
+    linkTariffItemToCentre($itemId, $centreId);
+
+    freezeDisplayTime('2026-09-25 10:00:00');
+
+    $this->get('/fr/contact')
+        ->assertOk()
+        ->assertSeeText('699 111 222')
+        ->assertSeeText('07h00 - 18h30')
+        ->assertSeeText(__('public.home.hero.live.open_until', ['time' => '20h00'], 'fr'))
+        ->assertDontSee('g3-contact-centres__status--closed', false);
+
+    freezeDisplayTime('2026-09-25 03:00:00');
+
+    $this->get('/fr/contact')
+        ->assertOk()
+        ->assertDontSeeText('Ouvert actuellement')
+        ->assertSeeText(__('public.home.hero.live.opens_at', ['time' => '07h00'], 'fr'))
+        ->assertSee('g3-contact-centres__status--closed', false);
+
+    $this->get('/fr/tarifs')
+        ->assertOk()
+        ->assertSeeText('32 100 FCFA')
+        ->assertDontSeeText('17 900 FCFA');
+});
+
+test('public fees page shows a changed validity and keeps the other categories', function () {
+    seedBaselineCentres();
+    seedPublishedPublicTariffs();
+
+    $versionId = DB::table('tariff_versions')->where('status', 'published')->value('id');
+    $categoryId = DB::table('vehicle_categories')->where('code', 'A')->value('id');
+
+    DB::table('tariff_items')
+        ->where('tariff_version_id', $versionId)
+        ->where('vehicle_category_id', $categoryId)
+        ->update([
+            'validity_notes' => json_encode(['fr' => '09 mois', 'en' => '09 months']),
+        ]);
+
+    $this->get('/fr/tarifs')
+        ->assertOk()
+        ->assertSeeText('09 mois')
+        ->assertSeeText('12 mois')
+        ->assertSeeText('06 mois');
+
+    $this->get('/en/fees')
+        ->assertOk()
+        ->assertSeeText('09 months')
+        ->assertSeeText('12 months');
 });

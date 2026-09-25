@@ -31,7 +31,7 @@ final class UpdateAppointmentPreferredTime
             $data->preferredPeriod,
         )) {
             throw ValidationException::withMessages([
-                'preferredDate' => ['The preferred time is outside this centre\'s opening hours.'],
+                'preferred_date' => [__('public.security.appointment_outside_hours')],
             ]);
         }
 

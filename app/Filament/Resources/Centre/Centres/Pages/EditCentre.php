@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Centre\Centres\Pages;
 
 use App\Filament\Resources\Centre\Centres\CentreResource;
+use App\Support\PublicPageCache;
 use Filament\Resources\Pages\EditRecord;
 
 class EditCentre extends EditRecord
@@ -12,5 +13,10 @@ class EditCentre extends EditRecord
     protected function getHeaderActions(): array
     {
         return [];
+    }
+
+    protected function afterSave(): void
+    {
+        PublicPageCache::forgetCentres();
     }
 }

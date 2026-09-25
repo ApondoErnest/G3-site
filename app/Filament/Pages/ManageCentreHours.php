@@ -11,11 +11,13 @@ use App\Models\Centre\CentreWeeklyHours;
 use App\Models\User;
 use App\Support\AdminLocale;
 use App\Support\CentreAccess;
+use App\Support\Clock;
+use App\Support\DisplayTime;
 use BackedEnum;
+use Carbon\CarbonImmutable;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
 use Filament\Pages\Concerns\CanUseDatabaseTransactions;
@@ -123,14 +125,18 @@ class ManageCentreHours extends Page
                                 Toggle::make('is_open')
                                     ->label(__('admin.hours.fields.is_open'))
                                     ->live(),
-                                TimePicker::make('opens_at')
+                                Select::make('opens_at')
                                     ->label(__('admin.hours.fields.opens_at'))
-                                    ->seconds(false)
+                                    ->options(self::timeOptions())
+                                    ->searchable()
+                                    ->native(false)
                                     ->visible(fn (Get $get): bool => (bool) $get('is_open'))
                                     ->required(fn (Get $get): bool => (bool) $get('is_open')),
-                                TimePicker::make('closes_at')
+                                Select::make('closes_at')
                                     ->label(__('admin.hours.fields.closes_at'))
-                                    ->seconds(false)
+                                    ->options(self::timeOptions())
+                                    ->searchable()
+                                    ->native(false)
                                     ->visible(fn (Get $get): bool => (bool) $get('is_open'))
                                     ->required(fn (Get $get): bool => (bool) $get('is_open')),
                             ])
@@ -270,6 +276,23 @@ class ManageCentreHours extends Page
                 $weekday->value => __('admin.hours.weekdays.'.$weekday->value),
             ])
             ->all();
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private static function timeOptions(): array
+    {
+        $locale = AdminLocale::current();
+        $options = [];
+        $cursor = CarbonImmutable::parse('00:00:00', Clock::displayTimezone());
+
+        for ($step = 0; $step < 96; $step++) {
+            $options[$cursor->format('H:i')] = DisplayTime::format($cursor, $locale);
+            $cursor = $cursor->addMinutes(15);
+        }
+
+        return $options;
     }
 
     private static function formatTime(mixed $value): ?string

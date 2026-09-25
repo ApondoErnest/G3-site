@@ -24,6 +24,11 @@ class CentrePolicy
         return $this->viewAny($user);
     }
 
+    public function create(User $user): bool
+    {
+        return $user->hasRole(['super_admin', 'operations_admin']);
+    }
+
     public function update(User $user, Centre $centre): bool
     {
         if ($user->hasRole(['super_admin', 'operations_admin'])) {

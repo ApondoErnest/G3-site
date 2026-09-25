@@ -12,25 +12,49 @@ final class ResolvePageSeo
 {
     public function __invoke(ContentPage $page): ?PageSeoEntry
     {
-        /** @var PageSeoEntry|null $entry */
-        $entry = Cache::remember(
-            CacheKeys::pageSeo($page->value),
-            CacheKeys::contentTtlSeconds(),
-            function () use ($page): ?PageSeoEntry {
-                $seo = PageSeo::query()->find($page->value);
+        $key = CacheKeys::pageSeo($page->value);
+        $cached = Cache::get($key);
 
-                if ($seo === null) {
-                    return null;
-                }
+        if (is_object($cached)) {
+            Cache::forget($key);
+            $cached = null;
+        }
 
-                return new PageSeoEntry(
-                    page: $seo->page,
-                    seoTitle: $seo->seo_title,
-                    seoDescription: $seo->seo_description,
-                );
-            },
+        if (! is_array($cached)) {
+            /** @var array{page: string, seo_title: array<string, string>, seo_description: array<string, string>}|null $cached */
+            $cached = Cache::remember(
+                $key,
+                CacheKeys::contentTtlSeconds(),
+                fn (): ?array => $this->payload($page),
+            );
+        }
+
+        if (! is_array($cached)) {
+            return null;
+        }
+
+        return new PageSeoEntry(
+            page: ContentPage::from($cached['page']),
+            seoTitle: $cached['seo_title'],
+            seoDescription: $cached['seo_description'],
         );
+    }
 
-        return $entry;
+    /**
+     * @return array{page: string, seo_title: array<string, string>, seo_description: array<string, string>}|null
+     */
+    private function payload(ContentPage $page): ?array
+    {
+        $seo = PageSeo::query()->find($page->value);
+
+        if ($seo === null) {
+            return null;
+        }
+
+        return [
+            'page' => $seo->page->value,
+            'seo_title' => $seo->seo_title,
+            'seo_description' => $seo->seo_description,
+        ];
     }
 }

@@ -112,6 +112,77 @@ test('content editor cannot transition appointments FR-AD-03', function () {
     )))->toThrow(AuthorizationException::class);
 });
 
+test('under review can request a modification and then confirm BR-APPT-003', function () {
+    $requestId = insertAppointmentRequest([
+        'centre_id' => centreId('ecole-de-police'),
+        'status' => 'under_review',
+    ]);
+    $user = receptionUserForCentre(centreId('ecole-de-police'));
+
+    app(TransitionAppointmentStatus::class)(new TransitionAppointmentStatusData(
+        appointmentId: $requestId,
+        toStatus: AppointmentStatus::ModificationRequested,
+        actor: $user,
+    ));
+    $appointment = app(TransitionAppointmentStatus::class)(new TransitionAppointmentStatusData(
+        appointmentId: $requestId,
+        toStatus: AppointmentStatus::Confirmed,
+        actor: $user,
+    ));
+
+    expect($appointment->status)->toBe(AppointmentStatus::Confirmed)
+        ->and($appointment->finalized_at)->toBeNull()
+        ->and(DB::table('appointment_status_histories')->where('appointment_request_id', $requestId)->orderBy('id')->pluck('status')->all())
+        ->toBe(['modification_requested', 'confirmed']);
+});
+
+test('confirmed appointment can be cancelled', function () {
+    $requestId = insertAppointmentRequest([
+        'centre_id' => centreId('ecole-de-police'),
+        'status' => 'confirmed',
+    ]);
+    $user = receptionUserForCentre(centreId('ecole-de-police'));
+
+    $appointment = app(TransitionAppointmentStatus::class)(new TransitionAppointmentStatusData(
+        appointmentId: $requestId,
+        toStatus: AppointmentStatus::Cancelled,
+        actor: $user,
+    ));
+
+    expect($appointment->status)->toBe(AppointmentStatus::Cancelled)
+        ->and($appointment->finalized_at)->not->toBeNull();
+});
+
+test('under review to completed is rejected and leaves the status unchanged', function () {
+    $requestId = insertAppointmentRequest([
+        'centre_id' => centreId('ecole-de-police'),
+        'status' => 'under_review',
+    ]);
+    $user = receptionUserForCentre(centreId('ecole-de-police'));
+
+    expect(fn () => app(TransitionAppointmentStatus::class)(new TransitionAppointmentStatusData(
+        appointmentId: $requestId,
+        toStatus: AppointmentStatus::Completed,
+        actor: $user,
+    )))->toThrow(InvalidAppointmentTransitionException::class);
+
+    expect(AppointmentRequest::query()->find($requestId)?->status)->toBe(AppointmentStatus::UnderReview)
+        ->and(DB::table('appointment_status_histories')->where('appointment_request_id', $requestId)->count())->toBe(0);
+});
+
+test('reception officer cannot transition an appointment at another centre', function () {
+    $requestId = insertAppointmentRequest(['centre_id' => centreId('ecole-de-police')]);
+    $user = receptionUserForCentre(centreId('nomayos'));
+
+    expect(fn () => app(TransitionAppointmentStatus::class)(new TransitionAppointmentStatusData(
+        appointmentId: $requestId,
+        toStatus: AppointmentStatus::UnderReview,
+        actor: $user,
+    )))->toThrow(AuthorizationException::class);
+
+    expect(AppointmentRequest::query()->find($requestId)?->status)->toBe(AppointmentStatus::Received);
+});
+
 test('transition dispatches AppointmentStatusChanged event', function () {
     $requestId = insertAppointmentRequest(['centre_id' => centreId('ecole-de-police')]);
     $user = receptionUserForCentre(centreId('ecole-de-police'));

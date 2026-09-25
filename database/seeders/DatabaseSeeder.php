@@ -9,5 +9,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(BaselineCentresSeeder::class);
+        $this->call(OfficialTariffsSeeder::class);
+        $this->call(PublicAdminBaselineSeeder::class);
+        $this->call(IngestRealMediaSeeder::class);
     }
 }

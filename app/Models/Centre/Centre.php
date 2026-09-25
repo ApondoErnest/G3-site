@@ -2,16 +2,19 @@
 
 namespace App\Models\Centre;
 
-use App\Domain\Enums\CentreCode;
 use App\Domain\Enums\CentreStatus;
 use App\Domain\Enums\Locale;
 use App\Models\Catalogue\Service;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Centre extends Model
+class Centre extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $fillable = [
         'code',
         'name',
@@ -34,7 +37,6 @@ class Centre extends Model
     protected function casts(): array
     {
         return [
-            'code' => CentreCode::class,
             'name' => 'array',
             'address' => 'array',
             'landmark' => 'array',
@@ -43,6 +45,12 @@ class Centre extends Model
             'seo_title' => 'array',
             'seo_description' => 'array',
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('centres')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp']);
     }
 
     public function phones(): HasMany

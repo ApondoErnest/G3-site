@@ -40,6 +40,22 @@
     :focus-visible {
         @apply outline-2 outline-offset-2 outline-g3-royal;
     }
+
+    .g3-honeypot {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+
+    .g3-form-status {
+        @apply rounded-lg border border-g3-success/30 bg-g3-wall px-4 py-3 text-sm font-semibold text-g3-success;
+    }
+
+    .g3-form-alert {
+        @apply rounded-lg border border-g3-error/30 bg-white px-4 py-3 text-sm font-semibold text-g3-error;
+    }
 }
 
 @layer components {
@@ -427,7 +443,7 @@
     }
 
     .g3-site-footer__social a {
-        @apply inline-flex h-7 w-7 items-center justify-center text-g3-blue-deep transition hover:text-g3-orange;
+        @apply inline-flex h-11 w-11 items-center justify-center text-g3-blue-deep transition hover:text-g3-orange;
     }
 
     .g3-site-footer__social svg {
@@ -1009,6 +1025,15 @@
         @apply block text-2xl font-extrabold leading-tight text-g3-success;
     }
 
+    .g3-centres-live__status--closed .g3-centres-live__status-icon {
+        @apply bg-g3-error;
+        box-shadow: 0 12px 24px rgb(217 45 32 / 22%);
+    }
+
+    .g3-centres-live__status--closed strong {
+        @apply text-g3-error;
+    }
+
     .g3-centres-live__status span:last-child {
         @apply mt-1 block text-lg font-semibold leading-tight text-emerald-700/75;
     }
@@ -1228,8 +1253,16 @@
         @apply mt-2 inline-flex max-w-full items-center gap-2 rounded-full bg-emerald-100 px-3 py-1.5 text-sm font-bold leading-tight text-g3-success;
     }
 
-    .g3-contact-centres__status img {
-        @apply h-4 w-4 shrink-0;
+    .g3-contact-centres__status-dot {
+        @apply h-2.5 w-2.5 shrink-0 rounded-full bg-g3-success;
+    }
+
+    .g3-contact-centres__status--closed {
+        @apply bg-g3-error/10 text-g3-error;
+    }
+
+    .g3-contact-centres__status--closed .g3-contact-centres__status-dot {
+        @apply bg-g3-error;
     }
 
     .g3-contact-centres__status span {
@@ -1431,7 +1464,7 @@
     }
 
     .g3-contact-message__form {
-        @apply rounded-lg border border-g3-border bg-white p-5 shadow-sm;
+        @apply relative rounded-lg border border-g3-border bg-white p-5 shadow-sm;
         box-shadow: 0 16px 38px rgb(11 47 91 / 8%);
     }
 
@@ -1449,13 +1482,28 @@
     }
 
     .g3-contact-message__fields abbr {
-        @apply text-g3-orange no-underline;
+        @apply text-g3-error no-underline;
     }
 
     .g3-contact-message__fields input,
     .g3-contact-message__fields select,
     .g3-contact-message__fields textarea {
         @apply min-h-11 w-full rounded-md border border-g3-border bg-white px-4 text-sm font-semibold text-g3-blue-deep shadow-sm transition placeholder:text-g3-muted/58 focus:border-g3-royal focus:outline-none focus:ring-2 focus:ring-g3-royal/15;
+    }
+
+    .g3-contact-message__fields input[aria-invalid="true"],
+    .g3-contact-message__fields select[aria-invalid="true"],
+    .g3-contact-message__fields textarea[aria-invalid="true"] {
+        @apply border-g3-error focus:border-g3-error focus:ring-g3-error/15;
+    }
+
+    .g3-contact-message__error {
+        @apply text-sm font-semibold text-g3-error;
+    }
+
+    .g3-contact-message__form .g3-form-status,
+    .g3-contact-message__form .g3-form-alert {
+        @apply mb-4;
     }
 
     .g3-contact-message__fields select {
@@ -1484,7 +1532,7 @@
     }
 
     .g3-contact-message__submit {
-        @apply mt-3 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-md bg-g3-royal px-6 font-display text-base font-extrabold text-white shadow-md transition hover:bg-g3-blue-deep focus-visible:outline-g3-royal;
+        @apply mt-3 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-md bg-g3-royal px-6 font-display text-base font-extrabold text-white shadow-md transition hover:bg-g3-blue-deep focus-visible:outline-g3-royal disabled:cursor-wait disabled:opacity-70;
     }
 
     .g3-contact-message__submit img {
@@ -1752,8 +1800,12 @@
         @apply whitespace-nowrap text-g3-success;
     }
 
+    .g3-home-hero__live-item--closed .g3-home-hero__centre-icon {
+        @apply border-g3-error;
+    }
+
     .g3-home-hero__centre-status--closed {
-        @apply text-g3-muted;
+        @apply text-g3-error;
     }
 
     .g3-home-start {
@@ -2144,6 +2196,15 @@
         box-shadow: 0 0 0 5px rgb(22 134 83 / 12%);
     }
 
+    .g3-home-centres__status--closed {
+        @apply border-g3-error/15 text-g3-error;
+    }
+
+    .g3-home-centres__status--closed .g3-home-centres__status-dot {
+        @apply bg-g3-error;
+        box-shadow: 0 0 0 5px rgb(217 45 32 / 12%);
+    }
+
     .g3-home-centres__body {
         @apply flex-1 px-8 pb-6 pt-10;
     }
@@ -2157,7 +2218,7 @@
     }
 
     .g3-home-centres__title-row a {
-        @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-g3-royal transition hover:bg-g3-blue-soft focus-visible:outline-g3-royal;
+        @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-g3-royal transition hover:bg-g3-blue-soft focus-visible:outline-g3-royal;
     }
 
     .g3-home-centres__title-row svg {
@@ -2187,6 +2248,14 @@
 
     .g3-home-centres__details dd span {
         @apply font-extrabold text-g3-success;
+    }
+
+    .g3-home-centres__hours {
+        @apply grid gap-1;
+    }
+
+    .g3-home-centres__hours p {
+        @apply flex flex-wrap items-baseline gap-x-2;
     }
 
     .g3-home-centres__details dd strong {
@@ -2991,7 +3060,7 @@
     }
 
     .g3-site-footer__chip {
-        @apply min-h-10 gap-2 px-4 text-xs;
+        @apply min-h-11 gap-2 px-4 text-xs;
     }
 
     .g3-site-footer__chip svg {
@@ -3148,10 +3217,20 @@
     }
 
     .g3-centre-hero__dot {
-        @apply h-3 w-3 rounded-full bg-white/55 transition hover:bg-white focus-visible:outline-white;
+        @apply relative inline-flex h-11 w-11 items-center justify-center bg-transparent p-0 focus-visible:outline-white;
     }
 
-    .g3-centre-hero__dot--active {
+    .g3-centre-hero__dot::before {
+        content: '';
+        @apply h-3 w-3 rounded-full bg-white/55 transition;
+    }
+
+    .g3-centre-hero__dot:hover::before,
+    .g3-centre-hero__dot:focus-visible::before {
+        @apply bg-white;
+    }
+
+    .g3-centre-hero__dot--active::before {
         @apply w-7 bg-white;
     }
 
@@ -3203,6 +3282,20 @@
 
     .g3-centre-hero__status span:last-child {
         @apply mt-1 inline-flex items-center gap-2 text-sm font-semibold leading-tight text-emerald-800/70;
+    }
+
+    .g3-centre-hero__status--closed {
+        @apply bg-red-50;
+    }
+
+    .g3-centre-hero__status--closed .g3-centre-hero__status-icon {
+        @apply bg-g3-error;
+        box-shadow: 0 0 0 9px rgb(217 45 32 / 10%);
+    }
+
+    .g3-centre-hero__status--closed strong,
+    .g3-centre-hero__status--closed span:last-child {
+        @apply text-g3-error;
     }
 
     .g3-centre-hero__status svg {
@@ -6409,6 +6502,14 @@
         @apply h-3 w-3 rounded-full bg-emerald-500;
     }
 
+    .g3-tariff-passport__fact li span.g3-tariff-passport__centre-status--closed {
+        @apply text-g3-error;
+    }
+
+    .g3-tariff-passport__fact li span.g3-tariff-passport__centre-status--closed::before {
+        @apply bg-g3-error;
+    }
+
     .g3-tariff-passport__price {
         @apply grid content-center gap-3 px-7 py-6;
     }
@@ -6960,6 +7061,14 @@
         grid-template-columns: 1.5rem minmax(0, 1fr);
     }
 
+    .g3-express-pass__centre-copy span.g3-express-pass__centre-status {
+        @apply text-g3-success;
+    }
+
+    .g3-express-pass__centre-copy span.g3-express-pass__centre-status--closed {
+        @apply text-g3-error;
+    }
+
     .g3-express-pass__centre-copy img {
         @apply h-5 w-5;
     }
@@ -6993,7 +7102,7 @@
     }
 
     .g3-express-field__control {
-        @apply grid min-h-16 overflow-hidden rounded-lg border border-g3-border bg-white;
+        @apply grid min-h-16 overflow-hidden rounded-lg border border-g3-border bg-white transition focus-within:border-g3-royal focus-within:ring-2 focus-within:ring-g3-royal/15;
         grid-template-columns: 4rem minmax(0, 1fr) 3rem;
     }
 
@@ -7012,6 +7121,18 @@
     .g3-express-field__control input,
     .g3-express-field__control select {
         @apply min-w-0 appearance-none bg-transparent px-4 font-display text-lg font-bold text-g3-blue-deep outline-none placeholder:text-g3-blue-deep/35;
+    }
+
+    .g3-express-field__control:has([aria-invalid="true"]) {
+        @apply border-g3-error focus-within:border-g3-error focus-within:ring-g3-error/15;
+    }
+
+    .g3-express-field__error {
+        @apply text-sm font-semibold text-g3-error;
+    }
+
+    .g3-form-banner {
+        @apply col-span-2;
     }
 
     .g3-appointment-date {
@@ -7527,7 +7648,7 @@
     }
 
     .g3-express-period button {
-        @apply min-h-10 px-1.5;
+        @apply min-h-11 px-1.5;
         grid-template-columns: minmax(0, 1fr);
         font-size: 0.6875rem;
         line-height: 1.1;
@@ -7759,7 +7880,7 @@
     }
 
     .g3-appointment-hub__mode-button {
-        @apply min-h-10 gap-1.5 rounded-md px-2 text-xs;
+        @apply min-h-11 gap-1.5 rounded-md px-2 text-xs;
     }
 
     .g3-appointment-hub__mode-button img {
@@ -7919,7 +8040,7 @@
     }
 
     .g3-express-period button {
-        @apply min-h-10;
+        @apply min-h-11;
     }
 
     .g3-express-summary {
@@ -7988,6 +8109,7 @@
         @apply mb-4 flex flex-col gap-3;
     }
 
+    .g3-road-section-header h1,
     .g3-road-section-header h2 {
         @apply max-w-4xl font-display text-3xl font-bold leading-tight text-g3-blue-deep;
     }
@@ -8284,6 +8406,7 @@
         @apply py-7;
     }
 
+    .g3-road-section-header h1,
     .g3-road-section-header h2 {
         @apply text-2xl;
     }
@@ -8475,7 +8598,7 @@
 
     .g3-contact-message__fields input,
     .g3-contact-message__fields select {
-        @apply min-h-10;
+        @apply min-h-11;
     }
 
     .g3-contact-message__fields textarea {
@@ -8733,7 +8856,7 @@
 
     .g3-contact-message__fields input,
     .g3-contact-message__fields select {
-        @apply min-h-10;
+        @apply min-h-11;
     }
 
     .g3-contact-message__fields textarea {

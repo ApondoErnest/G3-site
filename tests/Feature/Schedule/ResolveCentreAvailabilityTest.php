@@ -53,6 +53,18 @@ test('monday 06:59 both closed and 07:00 both open per BR-TIME-002', function ()
         ->and($nomayosOpen->isOpenNow)->toBeTrue();
 });
 
+test('sunday 10:00 both centres open until 15:00 per BR-CENT-001', function () {
+    $at = freezeDisplayTime('2026-09-06 10:00:00');
+
+    $ecole = app(ResolveCentreAvailability::class)->snapshot(centreId('ecole-de-police'), $at);
+    $nomayos = app(ResolveCentreAvailability::class)->snapshot(centreId('nomayos'), $at);
+
+    expect($ecole->isOpenNow)->toBeTrue()
+        ->and($ecole->nextCloseAt?->format('H:i'))->toBe('15:00')
+        ->and($nomayos->isOpenNow)->toBeTrue()
+        ->and($nomayos->nextCloseAt?->format('H:i'))->toBe('15:00');
+});
+
 test('sunday 15:00 both closed with next open monday 07:00', function () {
     $at = freezeDisplayTime('2026-09-06 15:00:00');
 
@@ -98,8 +110,13 @@ test('exception closed all day makes centre unbookable BR-CENT-002', function ()
     $resolver = app(ResolveCentreAvailability::class);
     $date = CarbonImmutable::parse('2026-09-09', 'Africa/Douala');
 
+    $at = freezeDisplayTime('2026-09-09 10:00:00');
+    $snapshot = $resolver->snapshot(centreId('ecole-de-police'), $at);
+
     expect($resolver->isBookableOnDate(centreId('ecole-de-police'), $date, PreferredPeriod::Any))
-        ->toBeFalse();
+        ->toBeFalse()
+        ->and($snapshot->isOpenNow)->toBeFalse()
+        ->and($snapshot->reason['fr'] ?? null)->toBe('Fermeture exceptionnelle');
 });
 
 test('exception 07:00-15:00 overrides wednesday weekly hours', function () {

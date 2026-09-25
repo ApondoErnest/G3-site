@@ -116,3 +116,63 @@ test('mark reviewed and publish workflow via livewire', function (): void {
 
     expect($version->refresh()->status->value)->toBe('published');
 });
+
+test('saving a published tariff changes one category amount and keeps the other', function (): void {
+    $user = createAdminUser('operations_admin');
+    $firstCategoryId = insertVehicleCategory(['code' => 'vp']);
+    $secondCategoryId = insertVehicleCategory(['code' => 'pl']);
+    $centreId = centreId('ecole-de-police');
+    $versionId = insertTariffVersion([
+        'label' => '2026-official',
+        'status' => 'published',
+        'effective_from' => '2026-01-01',
+        'published_at' => now(),
+    ]);
+    insertTariffItem([
+        'tariff_version_id' => $versionId,
+        'vehicle_category_id' => $firstCategoryId,
+        'amount_xaf' => 25000,
+        'sort_order' => 1,
+    ]);
+    insertTariffItem([
+        'tariff_version_id' => $versionId,
+        'vehicle_category_id' => $secondCategoryId,
+        'amount_xaf' => 45000,
+        'sort_order' => 2,
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(EditTariffVersion::class, ['record' => $versionId])
+        ->fillForm([
+            'tariff_items' => [
+                [
+                    'vehicle_category_id' => $firstCategoryId,
+                    'service_id' => null,
+                    'amount_xaf' => 28000,
+                    'centres' => [$centreId],
+                    'validity_notes' => ['fr' => '09 mois', 'en' => '09 months'],
+                    'sort_order' => 1,
+                ],
+                [
+                    'vehicle_category_id' => $secondCategoryId,
+                    'service_id' => null,
+                    'amount_xaf' => 45000,
+                    'centres' => [$centreId],
+                    'validity_notes' => ['fr' => '', 'en' => ''],
+                    'sort_order' => 2,
+                ],
+            ],
+        ])
+        ->call('save')
+        ->assertHasNoFormErrors();
+
+    $version = TariffVersion::query()->findOrFail($versionId);
+
+    expect($version->status->value)->toBe('published')
+        ->and($version->label)->toBe('2026-official')
+        ->and($version->items()->orderBy('sort_order')->pluck('amount_xaf')->all())->toBe([28000, 45000])
+        ->and($version->items()->orderBy('sort_order')->pluck('validity_notes')->all())->toBe([
+            ['fr' => '09 mois', 'en' => '09 months'],
+            null,
+        ]);
+});

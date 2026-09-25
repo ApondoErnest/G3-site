@@ -159,6 +159,150 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCounter();
     });
 
+    document.querySelectorAll('[data-contact-form]').forEach((form) => {
+        const status = form.querySelector('[data-contact-status]');
+        const alertBox = form.querySelector('[data-contact-alert]');
+        const submitButton = form.querySelector('[data-contact-submit]');
+        const fields = ['name', 'phone', 'email', 'centre', 'subject', 'message'];
+
+        const clearFieldErrors = () => {
+            fields.forEach((name) => {
+                const input = form.querySelector(`[name="${name}"]`);
+                const error = form.querySelector(`[data-contact-error="${name}"]`);
+
+                input?.removeAttribute('aria-invalid');
+
+                if (error) {
+                    error.hidden = true;
+                    error.textContent = '';
+                }
+            });
+
+            if (alertBox) {
+                alertBox.hidden = true;
+                const paragraph = alertBox.querySelector('p');
+
+                if (paragraph) {
+                    paragraph.textContent = '';
+                }
+            }
+        };
+
+        const showFieldError = (name, message) => {
+            const input = form.querySelector(`[name="${name}"]`);
+            const error = form.querySelector(`[data-contact-error="${name}"]`);
+
+            input?.setAttribute('aria-invalid', 'true');
+
+            if (error) {
+                error.hidden = false;
+                error.textContent = message;
+            }
+        };
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            clearFieldErrors();
+
+            if (status) {
+                status.hidden = true;
+                status.textContent = '';
+            }
+
+            let invalid = false;
+
+            fields.forEach((name) => {
+                const input = form.querySelector(`[name="${name}"]`);
+
+                if (! input) {
+                    return;
+                }
+
+                const value = input.value.trim();
+                const empty = value === '';
+                const invalidEmail = input.type === 'email' && value !== '' && ! input.checkValidity();
+
+                if (! empty && ! invalidEmail) {
+                    return;
+                }
+
+                invalid = true;
+                showFieldError(name, invalidEmail ? input.dataset.invalidMessage : input.dataset.requiredMessage);
+            });
+
+            if (invalid) {
+                form.querySelector('[aria-invalid="true"]')?.focus();
+
+                return;
+            }
+
+            if (submitButton) {
+                submitButton.disabled = true;
+            }
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: new FormData(form),
+                });
+
+                const payload = await response.json().catch(() => ({}));
+
+                if (! response.ok) {
+                    const errors = payload.errors ?? {};
+
+                    Object.entries(errors).forEach(([name, fieldMessages]) => {
+                        const message = Array.isArray(fieldMessages) ? fieldMessages[0] : fieldMessages;
+
+                        if (form.querySelector(`[data-contact-error="${name}"]`)) {
+                            showFieldError(name, message);
+
+                            return;
+                        }
+
+                        if (alertBox) {
+                            alertBox.hidden = false;
+                            const paragraph = alertBox.querySelector('p');
+
+                            if (paragraph) {
+                                paragraph.textContent = message;
+                            }
+                        }
+                    });
+
+                    form.querySelector('[aria-invalid="true"]')?.focus();
+
+                    return;
+                }
+
+                form.reset();
+                form.querySelector('[data-contact-message-text]')?.dispatchEvent(new Event('input'));
+
+                if (status) {
+                    status.hidden = false;
+                    status.textContent = payload.message ?? '';
+                }
+            } catch {
+                if (alertBox) {
+                    alertBox.hidden = false;
+                    const paragraph = alertBox.querySelector('p');
+
+                    if (paragraph) {
+                        paragraph.textContent = submitButton?.dataset.formError ?? '';
+                    }
+                }
+            } finally {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                }
+            }
+        });
+    });
+
     document.querySelectorAll('[data-centre-hero-carousel]').forEach((carousel) => {
         const slides = Array.from(carousel.querySelectorAll('[data-centre-hero-slide]'));
         const dots = Array.from(carousel.querySelectorAll('[data-centre-hero-dot]'));
@@ -435,6 +579,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const panels = Array.from(section.querySelectorAll('[data-appointment-panel]'));
         const benefits = section.querySelector('[data-appointment-benefits]');
         const centreButtons = Array.from(section.querySelectorAll('[data-appointment-centre]'));
+        const centreIdInput = section.querySelector('[data-appointment-centre-id]');
+        const categoryIdInput = section.querySelector('[data-appointment-category-id]');
+        const periodInput = section.querySelector('[data-appointment-period-value]');
         const periodButtons = Array.from(section.querySelectorAll('[data-appointment-period]'));
         const serviceSelect = section.querySelector('[data-appointment-service]');
         const categorySelect = section.querySelector('[data-appointment-category]');
@@ -447,6 +594,210 @@ document.addEventListener('DOMContentLoaded', () => {
         if (! modeTabs.length || ! panels.length) {
             return;
         }
+
+        section.querySelectorAll('[data-appointment-form]').forEach((form) => {
+            const status = form.querySelector('[data-form-status]');
+            const statusMessage = form.querySelector('[data-form-status-message]');
+            const statusReference = form.querySelector('[data-form-status-reference]');
+            const statusDetail = form.querySelector('[data-form-status-detail]');
+            const alertBox = form.querySelector('[data-form-alert]');
+            const alertMessage = form.querySelector('[data-form-alert-message]');
+            const submitButton = form.querySelector('[type="submit"]');
+
+            const visibleControl = (name) => {
+                if (name === 'preferred_date') {
+                    return form.querySelector('[data-appointment-date-trigger]');
+                }
+
+                if (name === 'vehicle_category_id') {
+                    return form.querySelector('[name="vehicle_category"]');
+                }
+
+                return form.querySelector(`[name="${name}"]`);
+            };
+
+            const clearField = (name) => {
+                form.querySelector(`[name="${name}"]`)?.removeAttribute('aria-invalid');
+                visibleControl(name)?.removeAttribute('aria-invalid');
+                const error = form.querySelector(`[data-field-error="${name}"]`);
+
+                if (error) {
+                    error.hidden = true;
+                    error.textContent = '';
+                }
+            };
+
+            const showFieldError = (name, message) => {
+                const error = form.querySelector(`[data-field-error="${name}"]`);
+
+                form.querySelector(`[name="${name}"]`)?.setAttribute('aria-invalid', 'true');
+                visibleControl(name)?.setAttribute('aria-invalid', 'true');
+
+                if (error) {
+                    error.hidden = false;
+                    error.textContent = message;
+
+                    return;
+                }
+
+                if (alertBox && alertMessage) {
+                    alertBox.hidden = false;
+                    alertMessage.textContent = message;
+                }
+            };
+
+            form.addEventListener('input', (event) => {
+                if (event.target?.name) {
+                    clearField(event.target.name);
+                }
+            });
+
+            form.addEventListener('change', (event) => {
+                if (event.target?.name) {
+                    clearField(event.target.name);
+                }
+            });
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                form.querySelectorAll('[data-field-error]').forEach((error) => clearField(error.dataset.fieldError));
+
+                if (status) {
+                    status.hidden = true;
+                }
+
+                if (alertBox) {
+                    alertBox.hidden = true;
+                }
+
+                let invalid = false;
+
+                form.querySelectorAll('[data-required-message]').forEach((input) => {
+                    const value = input.value.trim();
+                    const selectedDisabled = input instanceof HTMLSelectElement && input.selectedOptions?.[0]?.disabled;
+
+                    if (value !== '' && ! selectedDisabled) {
+                        return;
+                    }
+
+                    invalid = true;
+                    showFieldError(input.name, input.dataset.requiredMessage ?? '');
+                });
+
+                const email = form.querySelector('[data-invalid-message]');
+
+                if (email && email.value.trim() !== '' && ! email.checkValidity()) {
+                    invalid = true;
+                    showFieldError(email.name, email.dataset.invalidMessage ?? '');
+                }
+
+                if (invalid) {
+                    form.querySelector('[aria-invalid="true"]')?.focus();
+
+                    return;
+                }
+
+                if (submitButton) {
+                    submitButton.disabled = true;
+                }
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                        body: new FormData(form),
+                    });
+                    const payload = await response.json().catch(() => ({}));
+
+                    if (! response.ok) {
+                        const errors = payload.errors ?? {};
+
+                        Object.entries(errors).forEach(([name, fieldMessages]) => {
+                            const message = Array.isArray(fieldMessages) ? fieldMessages[0] : fieldMessages;
+
+                            showFieldError(name, message);
+                        });
+
+                        if (Object.keys(errors).length === 0 && alertBox && alertMessage) {
+                            alertBox.hidden = false;
+                            alertMessage.textContent = payload.message || submitButton?.dataset.formError || '';
+                        }
+
+                        form.querySelector('[aria-invalid="true"]')?.focus();
+
+                        return;
+                    }
+
+                    if (status && statusMessage) {
+                        status.hidden = false;
+                        statusMessage.textContent = payload.message ?? '';
+                    }
+
+                    if (statusReference) {
+                        statusReference.textContent = payload.reference ?? '';
+                    }
+
+                    if (statusDetail) {
+                        statusDetail.textContent = payload.status
+                            ? ` — ${payload.status} — ${payload.centre ?? ''}`
+                            : '';
+                    }
+
+                    form.reset();
+
+                    if (form.classList.contains('g3-express-pass__form')) {
+                        form.querySelector('[data-appointment-date-picker]')?.dispatchEvent(new Event('appointment-date-clear'));
+
+                        const centreId = centreIdInput?.value ?? '';
+
+                        centreButtons.forEach((button) => {
+                            const isActive = button.dataset.centreId === centreId;
+
+                            button.classList.toggle('g3-express-pass__centre--active', isActive);
+                            button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                        });
+
+                        if (summaryCentre) {
+                            summaryCentre.textContent = centreButtons.find((button) => button.dataset.centreId === centreId)?.dataset.centreLabel ?? '';
+                        }
+
+                        const period = periodInput?.value ?? 'any';
+
+                        periodButtons.forEach((button) => {
+                            const isActive = button.dataset.period === period;
+
+                            button.classList.toggle('g3-express-period__active', isActive);
+                            button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                        });
+
+                        syncCategoryId();
+                        syncServiceOptions();
+                        updateSummary();
+
+                        const trackingReference = section.querySelector('[name="request_reference"]');
+
+                        if (trackingReference && payload.reference) {
+                            trackingReference.value = payload.reference;
+                        }
+                    }
+
+                    status?.scrollIntoView({ block: 'nearest' });
+                } catch {
+                    if (alertBox && alertMessage) {
+                        alertBox.hidden = false;
+                        alertMessage.textContent = submitButton?.dataset.formError ?? '';
+                    }
+                } finally {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                    }
+                }
+            });
+        });
 
         const setMode = (target) => {
             modeTabs.forEach((tab) => {
@@ -567,19 +918,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 selectedDate = date;
                 picker.dataset.selectedDate = selectedValue;
-                valueInput.setAttribute('value', selectedValue);
-                valueInput.defaultValue = selectedValue;
-
-                try {
-                    valueInput.value = selectedValue;
-                } catch {
-                    // Some browser automation layers expose hidden input values as read-only.
-                }
+                valueInput.value = selectedValue;
 
                 display.textContent = displayFormatter.format(date).replace('.', '');
                 trigger.classList.add('g3-appointment-date__trigger--selected');
+                valueInput.dispatchEvent(new Event('input', { bubbles: true }));
                 closeCalendar();
             };
+
+            picker.addEventListener('appointment-date-clear', () => {
+                selectedDate = null;
+                visibleMonth = startOfMonth(minimumDate);
+                delete picker.dataset.selectedDate;
+                valueInput.value = '';
+                display.textContent = picker.dataset.emptyLabel ?? '';
+                trigger.classList.remove('g3-appointment-date__trigger--selected');
+                renderCalendar();
+            });
 
             const renderCalendar = () => {
                 const monthStart = startOfMonth(visibleMonth);
@@ -691,6 +1046,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (summaryCentre) {
                     summaryCentre.textContent = button.dataset.centreLabel ?? '';
                 }
+
+                if (centreIdInput) {
+                    centreIdInput.value = button.dataset.centreId ?? '';
+                }
+
+                syncServiceOptions();
+                updateSummary();
             });
         });
 
@@ -702,11 +1064,55 @@ document.addEventListener('DOMContentLoaded', () => {
                     periodButton.classList.toggle('g3-express-period__active', isActive);
                     periodButton.setAttribute('aria-pressed', isActive ? 'true' : 'false');
                 });
+
+                if (periodInput) {
+                    periodInput.value = button.dataset.period ?? 'any';
+                }
             });
         });
 
+        const syncCategoryId = () => {
+            if (categoryIdInput && categorySelect) {
+                categoryIdInput.value = categorySelect.selectedOptions?.[0]?.dataset.categoryId ?? '';
+            }
+        };
+
+        const listedIds = (value) => (value ?? '').split(',').filter(Boolean);
+
+        const syncServiceOptions = () => {
+            if (! serviceSelect) {
+                return;
+            }
+
+            const centreId = String(centreIdInput?.value ?? '');
+            const categoryId = String(categoryIdInput?.value ?? '');
+            const options = Array.from(serviceSelect.options);
+
+            options.forEach((option) => {
+                const offered = listedIds(option.dataset.centreIds).includes(centreId)
+                    && listedIds(option.dataset.categoryIds).includes(categoryId);
+
+                option.hidden = ! offered;
+                option.disabled = ! offered;
+            });
+
+            if (serviceSelect.selectedOptions?.[0]?.disabled) {
+                const available = options.find((option) => ! option.disabled);
+
+                if (available) {
+                    serviceSelect.value = available.value;
+                }
+            }
+        };
+
         serviceSelect?.addEventListener('change', updateSummary);
-        categorySelect?.addEventListener('change', updateSummary);
+        categorySelect?.addEventListener('change', () => {
+            syncCategoryId();
+            syncServiceOptions();
+            updateSummary();
+        });
+        syncCategoryId();
+        syncServiceOptions();
 
         setMode(modeTabs.find((tab) => tab.getAttribute('aria-selected') === 'true')?.dataset.appointmentTarget ?? modeTabs[0].dataset.appointmentTarget);
         updateSummary();

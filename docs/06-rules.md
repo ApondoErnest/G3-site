@@ -41,7 +41,7 @@ Hours in [01-baseline.md](01-baseline.md) are the operational values; this file 
 **BR-TRACK-003** Generic error only (no existence leak).  
 **BR-TARIFF-001** Public = published and effective.  
 **BR-TARIFF-002** Integer XAF, grouped FCFA display.  
-**BR-TARIFF-003** Archive, never destroy, never silently edit published history.  
+**BR-TARIFF-003** Archive, never destroy. A published version's lines can change so only some categories get a new amount. Publishing a new version that covers the whole list archives the previous published version.  
 **BR-TARIFF-004** Item only at linked centres (and service if scoped).  
 **BR-TARIFF-005** draft → reviewed → published → archived; publish needs elevated permission.
 

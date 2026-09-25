@@ -2,6 +2,7 @@
     use App\Support\PublicNavigation;
 
     $isFrench = $locale === 'fr';
+    $translated = fn (?array $value, string $fallback = ''): string => $value[$locale] ?? $value['fr'] ?? $value['en'] ?? $fallback;
 
     $overview = [
         'overline' => $isFrench ? 'Votre service, en un coup d’œil' : 'Your service, at a glance',
@@ -114,6 +115,42 @@
             'vehicles' => $isFrench ? 'Poids lourds, camions, semi-remorques' : 'Heavy goods vehicles, trucks, semi-trailers',
         ],
     ];
+    $serviceVehicles = [
+        'periodic-technical-inspection' => $isFrench ? 'Tous types de véhicules' : 'All vehicle types',
+        're-inspection' => $isFrench ? 'Tous types de véhicules' : 'All vehicle types',
+        'light-vehicle-inspection' => $isFrench ? 'Véhicules légers' : 'Light vehicles',
+        'utility-vehicle-inspection' => $isFrench ? 'Fourgonnettes, pick-up, utilitaires' : 'Vans, pick-ups, utility vehicles',
+        'taxi-transport-inspection' => $isFrench ? 'Taxis, bus, autocars' : 'Taxis, buses, coaches',
+        'heavy-vehicle-inspection' => $isFrench ? 'Poids lourds, camions, semi-remorques' : 'Heavy goods vehicles, trucks, semi-trailers',
+    ];
+    $serviceIconFallbacks = collect($servicePortfolio)
+        ->mapWithKeys(fn (array $service): array => [$service['title'] => $service['icon']])
+        ->all();
+    $centreNamesById = collect($publicCentres ?? [])
+        ->mapWithKeys(fn ($centre): array => [$centre->id => $centre->shortName])
+        ->all();
+    $servicePortfolioFromRecords = collect($publishedServices ?? [])
+        ->map(function ($service) use ($centreNamesById, $isFrench, $serviceIconFallbacks, $serviceVehicles, $translated): array {
+            $title = $translated($service->title, $service->code);
+            $centreNames = collect($service->centreIds)
+                ->map(fn (int $centreId): ?string => $centreNamesById[$centreId] ?? null)
+                ->filter()
+                ->values()
+                ->all();
+
+            return [
+                'icon' => $service->icon ?: ($serviceIconFallbacks[$title] ?? 'service-periodic.svg'),
+                'title' => $title,
+                'description' => $translated($service->summary, ''),
+                'vehicles' => $serviceVehicles[$service->code] ?? ($isFrench ? 'Selon catégorie' : 'By category'),
+                'centres' => $centreNames === [] ? 'École de Police · Nomayos' : implode(' · ', $centreNames),
+            ];
+        })
+        ->all();
+
+    if ($servicePortfolioFromRecords !== []) {
+        $servicePortfolio = $servicePortfolioFromRecords;
+    }
 
     $proofSection = [
         'overline' => $isFrench ? 'Moyens & exigence' : 'Resources & standards',
@@ -239,7 +276,7 @@
                             <dl class="g3-services-list__meta">
                                 <div>
                                     <dt>{{ $isFrench ? 'Centres' : 'Centres' }}</dt>
-                                    <dd>École de Police · Nomayos</dd>
+                                    <dd>{{ $service['centres'] ?? 'École de Police · Nomayos' }}</dd>
                                 </div>
                                 <div>
                                     <dt>{{ $isFrench ? 'Véhicules' : 'Vehicles' }}</dt>

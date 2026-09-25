@@ -301,6 +301,56 @@ return [
         ],
     ],
 
+    'contacts' => [
+        'navigation' => 'Contact messages',
+        'model' => 'Contact message',
+        'sections' => [
+            'summary' => 'Summary',
+            'sender' => 'Sender',
+            'message' => 'Message',
+            'notes' => 'Internal notes',
+            'add_note' => 'Add internal note',
+        ],
+        'fields' => [
+            'name' => 'Name',
+            'subject' => 'Subject',
+            'centre' => 'Centre',
+            'status' => 'Status',
+            'intent' => 'Intent',
+            'locale' => 'Language',
+            'created_at' => 'Received at',
+            'resolved_at' => 'Resolved at',
+            'phone' => 'Phone',
+            'email' => 'Email',
+            'message' => 'Message',
+            'note_at' => 'Date',
+            'note_author' => 'Author',
+            'note_body' => 'Note',
+        ],
+        'intents' => [
+            'appointment' => 'Appointment',
+            'centre' => 'Centre',
+            'tariffs' => 'Fees',
+            'assistance' => 'Assistance',
+        ],
+        'transitions' => [
+            'in_progress' => 'Mark in progress',
+            'resolved' => 'Mark resolved',
+        ],
+        'actions' => [
+            'save_note' => 'Save note',
+        ],
+        'notifications' => [
+            'transitioned' => 'Status updated',
+            'invalid_transition' => 'This status change is not allowed',
+            'note_saved' => 'Internal note saved',
+        ],
+        'empty' => [
+            'centre' => 'No centre specified',
+            'notes' => 'No internal notes yet.',
+        ],
+    ],
+
     'catalogue' => [
         'services' => [
             'navigation' => 'Services',
@@ -361,6 +411,9 @@ return [
             'identity' => 'Version',
             'items' => 'Tariff lines',
         ],
+        'hints' => [
+            'published_lines' => 'Update the amount or validity of the lines that changed. The other categories stay as they are. Publish a new version when a new official tariff replaces the whole list.',
+        ],
         'fields' => [
             'label' => 'Label',
             'status' => 'Status',
@@ -370,7 +423,7 @@ return [
             'service' => 'Service',
             'amount_xaf' => 'Amount (XAF)',
             'centres' => 'Centres',
-            'validity_notes' => 'Validity notes',
+            'validity_notes' => 'Validity',
             'sort_order' => 'Sort order',
             'items_count' => 'Lines',
         ],
@@ -492,6 +545,39 @@ return [
                 'seo_description' => 'SEO description',
                 'updated_at' => 'Updated',
             ],
+        ],
+    ],
+
+    'users' => [
+        'navigation' => 'Users',
+        'model' => 'User',
+        'sections' => [
+            'account' => 'Account',
+            'access' => 'Access',
+        ],
+        'fields' => [
+            'name' => 'Name',
+            'email' => 'Email address',
+            'password' => 'Password',
+            'password_confirmation' => 'Confirm password',
+            'is_active' => 'Active account',
+            'roles' => 'Roles',
+            'centres' => 'Assigned centres',
+        ],
+        'roles' => [
+            'super_admin' => 'Super administrator',
+            'operations_admin' => 'Operations administrator',
+            'centre_manager' => 'Centre manager',
+            'reception_officer' => 'Reception officer',
+            'content_editor' => 'Content editor',
+        ],
+        'errors' => [
+            'last_super_admin' => 'Keep at least one active super administrator.',
+            'required' => 'This field is required.',
+            'email' => 'Enter a valid email address.',
+            'unique' => 'This email address is already in use.',
+            'password' => 'Use at least 12 characters, with upper and lower case letters and a number.',
+            'password_confirmation' => 'The password confirmation does not match.',
         ],
     ],
 

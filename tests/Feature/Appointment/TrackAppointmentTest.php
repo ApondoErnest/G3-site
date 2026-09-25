@@ -164,6 +164,90 @@ test('repeated failed lookups are rate limited FR-TR-05', function () {
     RateLimiter::clear('tracking-lookup:rate-limit-client');
 });
 
+test('public tracking page shows status without contact details or notes BR-TRACK-002', function () {
+    $requestId = insertAppointmentRequest([
+        'centre_id' => centreId('ecole-de-police'),
+        'public_reference' => 'G3-26-P0001',
+        'contact_phone_e164' => '+237699000111',
+        'contact_email' => 'secret@client.test',
+        'registration_display' => 'LT 999 ZZ',
+        'registration_normalized' => 'LT999ZZ',
+    ]);
+    insertAppointmentStatusHistory($requestId, [
+        'public_note' => 'PUBLIC-NOTE-SHOULD-STAY-OFF-TRACKING',
+        'actor_id' => User::factory()->create(['name' => 'Agent Secret'])->id,
+        'actor_type' => 'user',
+    ]);
+    insertAppointmentRequest([
+        'centre_id' => centreId('nomayos'),
+        'public_reference' => 'G3-26-OTHER',
+    ]);
+    DB::table('appointment_internal_notes')->insert([
+        'appointment_request_id' => $requestId,
+        'author_id' => User::factory()->create()->id,
+        'body' => 'PRIVATE-NOTE-140',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    $this->post('/fr/rendez-vous/track', [
+        'request_reference' => 'G3-26-P0001',
+        'tracking_phone' => '699000111',
+    ])->assertRedirect();
+
+    $this->get('/fr/rendez-vous')
+        ->assertOk()
+        ->assertSeeText('G3-26-P0001')
+        ->assertSeeText(__('public.security.tracking_statuses.received'))
+        ->assertSeeText('École de Police')
+        ->assertDontSee('PRIVATE-NOTE-140')
+        ->assertDontSee('PUBLIC-NOTE-SHOULD-STAY-OFF-TRACKING')
+        ->assertDontSee('secret@client.test')
+        ->assertDontSee('LT 999 ZZ')
+        ->assertDontSee('Agent Secret')
+        ->assertDontSee('G3-26-OTHER');
+});
+
+test('public tracking accepts the registration plate as the second factor BR-TRACK-001', function () {
+    insertAppointmentRequest([
+        'centre_id' => centreId('nomayos'),
+        'public_reference' => 'G3-26-P0002',
+        'registration_normalized' => 'CE1122',
+        'contact_phone_e164' => '+237699000222',
+    ]);
+
+    $this->post('/fr/rendez-vous/track', [
+        'request_reference' => 'G3-26-P0002',
+        'tracking_phone' => 'CE 1122',
+    ])->assertRedirect()->assertSessionHas('tracking_result.reference', 'G3-26-P0002');
+});
+
+test('repeated public failures keep the same generic message FR-TR-05', function () {
+    insertAppointmentRequest([
+        'centre_id' => centreId('ecole-de-police'),
+        'public_reference' => 'G3-26-P0003',
+        'contact_phone_e164' => '+237699000333',
+    ]);
+
+    for ($attempt = 0; $attempt < 10; $attempt++) {
+        $this->post('/fr/rendez-vous/track', [
+            'request_reference' => 'G3-26-P0003',
+            'tracking_phone' => '600000000',
+        ])->assertRedirect()->assertSessionHasErrors([
+            'tracking' => __('public.security.tracking_failed'),
+        ]);
+    }
+
+    $this->post('/fr/rendez-vous/track', [
+        'request_reference' => 'G3-26-P0003',
+        'tracking_phone' => '699000333',
+    ])->assertRedirect()
+        ->assertSessionHasErrors(['tracking' => __('public.security.tracking_failed')])
+        ->assertSessionMissing('tracking_result');
+
+    RateLimiter::clear('tracking-lookup:127.0.0.1');
+});
+
 test('invalid reference format returns generic failure without existence leak', function () {
     expect(fn () => trackAppointment('not-a-reference', '687187516'))
         ->toThrow(TrackingLookupFailedException::class, TrackingLookupFailedException::MESSAGE_KEY);

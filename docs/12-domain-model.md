@@ -219,7 +219,7 @@ Models may cast to/from VOs via custom Eloquent casts (`CastsAttributes`).
 | `defaultSeoTitle`, `defaultSeoDescription` | `array{fr,en}` | |
 | `socialLinks` | `array` | Optional |
 
-Media: logo/favicon via Spatie on dedicated settings media model or `GeneralSettings` holder.
+Media: logo and mark via Spatie on `BrandAsset`, collection `brand`. Centre photographs use collection `centres` (step 146).
 
 ---
 
@@ -511,12 +511,21 @@ Public site **always** applies `PublishedScope` + `ActiveScope` in use cases —
 | --- | --- | --- |
 | `home.hero` | home | hero |
 | `home.live_strip` | home | strip |
+| `home.proposition` | home | prose |
 | `about.mission` | about | prose |
 | `about.agrement` | about | callout |
+| `centres.intro` | centres | prose |
+| `centre_ecole_de_police.intro` | centre_ecole_de_police | prose |
+| `centre_nomayos.intro` | centre_nomayos | prose |
+| `services.intro` | services | prose |
 | `technical_inspection.intro` | technical_inspection | prose |
 | `technical_inspection.video` | technical_inspection | video ref |
+| `fees.intro` | fees | prose |
+| `appointment.intro` | appointment | prose |
+| `road_safety.intro` | road_safety | prose |
+| `contact.intro` | contact | prose |
 
-Full list finalized at content seed step 144; schema supports any `key` UK.
+Finalized at content seed step 144. French and English are both loaded and the blocks are published (step 145). Schema supports any `key`.
 
 ### 10.3 Road safety anchors (FR-CN-03)
 

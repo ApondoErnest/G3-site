@@ -6,6 +6,7 @@ use App\Actions\Schedule\Data\ChangeCentreWeeklyHoursData;
 use App\Models\Centre\Centre;
 use App\Models\Centre\CentreWeeklyHours;
 use App\Support\CacheKeys;
+use App\Support\PublicPageCache;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
@@ -43,5 +44,6 @@ final class ChangeCentreWeeklyHours
         });
 
         Cache::forget(CacheKeys::scheduleCentre($centre->id));
+        PublicPageCache::forgetCentres();
     }
 }

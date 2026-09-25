@@ -1,44 +1,42 @@
 @php
     use App\Support\PublicNavigation;
 
-    $centreItems = [
-        [
-            'key' => 'ecole-de-police',
-            'short_name' => __('public.centres_page.items.ecole_de_police.short_name'),
-            'title' => __('public.centres_page.items.ecole_de_police.title'),
-            'address' => __('public.centres_page.items.ecole_de_police.address'),
-            'phone' => __('public.centres_page.items.ecole_de_police.phone'),
-            'phone_href' => '+237687187516',
-            'close_time' => '20h00',
-            'weekday_hours' => __('public.centres_page.items.ecole_de_police.weekday_hours'),
-            'sunday_hours' => __('public.centres_page.items.ecole_de_police.sunday_hours'),
+    $centreAssets = [
+        'ecole-de-police' => [
             'image' => 'ecole-de-police.png',
             'image_alt' => __('public.centres_page.items.ecole_de_police.image_alt'),
             'details_url' => PublicNavigation::pageUrl('centre_ecole_de_police', $locale),
-            'appointment_url' => PublicNavigation::pageUrl('appointment', $locale).'?centre=ecole-de-police',
-            'directions_url' => 'https://www.google.com/maps/dir/?api=1&destination=3.8786152,11.5116814&travelmode=driving',
             'marker_variant' => 'orange',
             'marker_position' => 'ecole',
         ],
-        [
-            'key' => 'nomayos',
-            'short_name' => __('public.centres_page.items.nomayos.short_name'),
-            'title' => __('public.centres_page.items.nomayos.title'),
-            'address' => __('public.centres_page.items.nomayos.address'),
-            'phone' => __('public.centres_page.items.nomayos.phone'),
-            'phone_href' => '+237653100801',
-            'close_time' => '19h00',
-            'weekday_hours' => __('public.centres_page.items.nomayos.weekday_hours'),
-            'sunday_hours' => __('public.centres_page.items.nomayos.sunday_hours'),
+        'nomayos' => [
             'image' => 'nomayos.png',
             'image_alt' => __('public.centres_page.items.nomayos.image_alt'),
             'details_url' => PublicNavigation::pageUrl('centre_nomayos', $locale),
-            'appointment_url' => PublicNavigation::pageUrl('appointment', $locale).'?centre=nomayos',
-            'directions_url' => 'https://www.google.com/maps/dir/?api=1&destination=3.7902275,11.4439448&travelmode=driving',
             'marker_variant' => 'blue',
             'marker_position' => 'nomayos',
         ],
     ];
+    $centreItems = collect($publicCentres ?? [])
+        ->map(fn ($centre) => [
+            'key' => $centre->key,
+            'short_name' => $centre->shortName,
+            'title' => 'G3 Control — '.$centre->shortName,
+            'address' => $centre->displayAddress,
+            'phone' => $centre->phonesDisplayLine,
+            'phone_href' => $centre->primaryPhoneE164,
+            'weekday_hours' => $centre->weekdayHours,
+            'sunday_hours' => $centre->sundayHours,
+            'image' => $centreAssets[$centre->key]['image'] ?? 'ecole-de-police.png',
+            'image_alt' => $centreAssets[$centre->key]['image_alt'] ?? $centre->name,
+            'details_url' => $centreAssets[$centre->key]['details_url'] ?? PublicNavigation::pageUrl('centres', $locale),
+            'appointment_url' => PublicNavigation::pageUrl('appointment', $locale).'?centre='.$centre->key,
+            'directions_url' => $centre->directionsUrl,
+            'marker_variant' => $centreAssets[$centre->key]['marker_variant'] ?? 'blue',
+            'marker_position' => $centreAssets[$centre->key]['marker_position'] ?? $centre->key,
+        ])
+        ->values()
+        ->all();
 
     $standardItems = [
         [
@@ -63,7 +61,11 @@
         ],
     ];
 
-    $centresGoogleMapsUrl = 'https://www.google.com/maps/dir/?api=1&origin=3.8786152,11.5116814&destination=3.7902275,11.4439448&travelmode=driving';
+    $firstCentre = collect($publicCentres ?? [])->first();
+    $lastCentre = collect($publicCentres ?? [])->last();
+    $centresGoogleMapsUrl = $firstCentre && $lastCentre
+        ? 'https://www.google.com/maps/dir/?api=1&origin='.$firstCentre->latitude.','.$firstCentre->longitude.'&destination='.$lastCentre->latitude.','.$lastCentre->longitude.'&travelmode=driving'
+        : 'https://www.google.com/maps/search/?api=1&query=G3%20Control%20Yaound%C3%A9';
     $centresGoogleMapsEmbedUrl = 'https://maps.google.com/maps?q=Yaound%C3%A9%2C%20Cameroon&z=12&output=embed';
 @endphp
 
@@ -173,13 +175,16 @@
                                     <div class="g3-centres-live__panel-main">
                                         <h2>{{ $centre['title'] }}</h2>
 
-                                        <div class="g3-centres-live__status">
+                                        @php($liveStatus = $publicLiveStatus[$centre['key']] ?? null)
+                                        <div @class([
+                                            'g3-centres-live__status',
+                                            'g3-centres-live__status--closed' => ! ($liveStatus['isOpen'] ?? false),
+                                        ])>
                                             <span class="g3-centres-live__status-icon" aria-hidden="true">
                                                 <span></span>
                                             </span>
                                             <div>
-                                                <strong>{{ __('public.centres_page.status.open') }}</strong>
-                                                <span>{{ __('public.centres_page.status.closes_today', ['time' => $centre['close_time']]) }}</span>
+                                                <strong>{{ $liveStatus['status'] ?? __('public.centres_page.status.open') }}</strong>
                                             </div>
                                         </div>
                                     </div>

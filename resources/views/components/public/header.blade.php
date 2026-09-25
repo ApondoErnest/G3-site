@@ -118,7 +118,7 @@
             <button
                 type="button"
                 data-mobile-nav-toggle
-                class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-g3-border text-g3-blue-deep"
+                class="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-g3-border text-g3-blue-deep"
             >
                 <span class="sr-only">{{ __('public.utility.menu_close') }}</span>
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">

@@ -51,7 +51,7 @@ If zero rows → `EffectiveTariffResult::empty()` → UI empty state [FR-TA-09](
 | --- | :---: | :---: |
 | `draft` | hidden | editable |
 | `reviewed` | hidden | ready to publish |
-| `published` | visible if effective | read-only items |
+| `published` | visible if effective | lines editable; label and dates locked |
 | `archived` | hidden | read-only audit |
 
 Draft/reviewed invisible publicly ([07-acceptance.md](07-acceptance.md) § Tariffs).
@@ -78,7 +78,7 @@ Each `tariff_items` row:
 
 **Amount:** integer XAF → `MoneyXaf` VO → display `25 000 FCFA` grouped [BR-TARIFF-002](06-rules.md).
 
-**Notes:** `validity_notes` JSON `{fr,en}` rendered on matrix footnotes.
+**Notes:** `validity_notes` JSON `{fr,en}` is the inspection validity shown for that category on the public fees page.
 
 ---
 
@@ -90,7 +90,8 @@ Each `tariff_items` row:
 | Homepage finder | Calls `findPrice` — no duplicate SQL |
 | Appointment handoff | Prefill category + centre from finder context [FR-TA-06](04-requirements.md) |
 | Publish transactional | Archive prior + publish new one commit [BR-TARIFF-003](06-rules.md) |
-| No silent edit of published | Items immutable once published; new version required |
+| Partial category change | Edit lines on the published version; unchanged categories keep their amount |
+| Full official replacement | New version, then publish, which archives the previous published version |
 
 ---
 
@@ -105,7 +106,7 @@ draft ──MarkTariffVersionReviewed──► reviewed ──PublishTariffVersi
 | Step | Use case | Preconditions |
 | --- | --- | --- |
 | Create draft | `CreateTariffVersionDraft` | unique label |
-| Edit items | `UpdateTariffVersionItems` | status draft or reviewed |
+| Edit items | `UpdateTariffVersionItems` | status draft, reviewed, or published |
 | Review | `MarkTariffVersionReviewed` | ≥1 item, valid dates |
 | Publish | `PublishTariffVersion` | status reviewed, ops/super role |
 

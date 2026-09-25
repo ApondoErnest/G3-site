@@ -13,6 +13,7 @@ use App\Data\Admin\DashboardStats;
 use App\Data\Admin\DashboardTariffSummary;
 use App\Domain\Enums\AppointmentStatus;
 use App\Domain\Enums\ContactStatus;
+use App\Domain\Enums\Locale;
 use App\Domain\Schedule\CentreAvailabilitySnapshot;
 use App\Models\Appointment\AppointmentRequest;
 use App\Models\Centre\Centre;
@@ -23,6 +24,7 @@ use App\Models\User;
 use App\Support\AdminLabels;
 use App\Support\AdminLocale;
 use App\Support\Clock;
+use App\Support\DisplayTime;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -384,7 +386,7 @@ final class ResolveDashboardData
                 $closeAt = $snapshots[$centre->id]?->nextCloseAt;
 
                 return $closeAt !== null
-                    ? $centre->translatedName(AdminLocale::current()).' '.$closeAt->format('H:i')
+                    ? $centre->translatedName(AdminLocale::current()).' '.$this->formatAdminClock($closeAt)
                     : null;
             })
             ->filter()
@@ -452,14 +454,16 @@ final class ResolveDashboardData
 
         if ($snapshot?->isOpenNow && $snapshot->nextCloseAt !== null) {
             return __('admin.dashboard.centres.closing_at', [
-                'time' => $snapshot->nextCloseAt->format('H:i'),
+                'time' => $this->formatAdminClock($snapshot->nextCloseAt),
                 'weekly' => $weekly,
             ]);
         }
 
         if ($snapshot?->nextOpenAt !== null) {
+            $opensAt = $snapshot->nextOpenAt->timezone(Clock::displayTimezone());
+
             return __('admin.dashboard.centres.next_opening_at', [
-                'when' => $snapshot->nextOpenAt->locale(AdminLocale::current()->value)->isoFormat('ddd HH:mm'),
+                'when' => $opensAt->locale(AdminLocale::current()->value)->isoFormat('ddd').' '.$this->formatAdminClock($opensAt),
                 'weekly' => $weekly,
             ]);
         }
@@ -477,13 +481,26 @@ final class ResolveDashboardData
             return __('admin.dashboard.centres.hours_undefined');
         }
 
-        $opensAt = substr((string) $openDays->first()->opens_at, 0, 5);
-        $closesAt = substr((string) $openDays->max('closes_at'), 0, 5);
+        $opensAt = $this->formatAdminClock((string) $openDays->first()->opens_at);
+        $closesAt = $this->formatAdminClock((string) $openDays->max('closes_at'));
 
         $weekdays = $openDays->pluck('weekday')->map(fn ($day) => $day->value)->all();
         $dayRange = $this->formatWeekdayRange($weekdays);
 
         return $dayRange.' '.$opensAt.'–'.$closesAt;
+    }
+
+    private function formatAdminClock(CarbonImmutable|string $time): string
+    {
+        if (AdminLocale::current() === Locale::En) {
+            return DisplayTime::format($time, Locale::En);
+        }
+
+        if ($time instanceof CarbonImmutable) {
+            return $time->timezone(Clock::displayTimezone())->format('H:i');
+        }
+
+        return substr($time, 0, 5);
     }
 
     /**

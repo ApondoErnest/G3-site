@@ -301,6 +301,56 @@ return [
         ],
     ],
 
+    'contacts' => [
+        'navigation' => 'Messages de contact',
+        'model' => 'Message de contact',
+        'sections' => [
+            'summary' => 'Résumé',
+            'sender' => 'Expéditeur',
+            'message' => 'Message',
+            'notes' => 'Notes internes',
+            'add_note' => 'Ajouter une note interne',
+        ],
+        'fields' => [
+            'name' => 'Nom',
+            'subject' => 'Objet',
+            'centre' => 'Centre',
+            'status' => 'Statut',
+            'intent' => 'Intention',
+            'locale' => 'Langue',
+            'created_at' => 'Reçu le',
+            'resolved_at' => 'Résolu le',
+            'phone' => 'Téléphone',
+            'email' => 'E-mail',
+            'message' => 'Message',
+            'note_at' => 'Date',
+            'note_author' => 'Auteur',
+            'note_body' => 'Note',
+        ],
+        'intents' => [
+            'appointment' => 'Rendez-vous',
+            'centre' => 'Centre',
+            'tariffs' => 'Tarifs',
+            'assistance' => 'Assistance',
+        ],
+        'transitions' => [
+            'in_progress' => 'Passer en traitement',
+            'resolved' => 'Marquer résolu',
+        ],
+        'actions' => [
+            'save_note' => 'Enregistrer la note',
+        ],
+        'notifications' => [
+            'transitioned' => 'Statut mis à jour',
+            'invalid_transition' => 'Ce changement de statut n\'est pas autorisé',
+            'note_saved' => 'Note interne enregistrée',
+        ],
+        'empty' => [
+            'centre' => 'Aucun centre précisé',
+            'notes' => 'Aucune note interne pour le moment.',
+        ],
+    ],
+
     'catalogue' => [
         'services' => [
             'navigation' => 'Services',
@@ -361,6 +411,9 @@ return [
             'identity' => 'Version',
             'items' => 'Lignes tarifaires',
         ],
+        'hints' => [
+            'published_lines' => 'Modifiez le montant ou la validité des lignes concernées. Les autres catégories restent inchangées. Publiez une nouvelle version lorsqu’un nouveau tarif officiel remplace toute la liste.',
+        ],
         'fields' => [
             'label' => 'Libellé',
             'status' => 'Statut',
@@ -370,7 +423,7 @@ return [
             'service' => 'Service',
             'amount_xaf' => 'Montant (XAF)',
             'centres' => 'Centres',
-            'validity_notes' => 'Notes de validité',
+            'validity_notes' => 'Validité',
             'sort_order' => 'Ordre',
             'items_count' => 'Lignes',
         ],
@@ -492,6 +545,39 @@ return [
                 'seo_description' => 'Description SEO',
                 'updated_at' => 'Mis à jour',
             ],
+        ],
+    ],
+
+    'users' => [
+        'navigation' => 'Utilisateurs',
+        'model' => 'Utilisateur',
+        'sections' => [
+            'account' => 'Compte',
+            'access' => 'Accès',
+        ],
+        'fields' => [
+            'name' => 'Nom',
+            'email' => 'Adresse e-mail',
+            'password' => 'Mot de passe',
+            'password_confirmation' => 'Confirmer le mot de passe',
+            'is_active' => 'Compte actif',
+            'roles' => 'Rôles',
+            'centres' => 'Centres assignés',
+        ],
+        'roles' => [
+            'super_admin' => 'Super administrateur',
+            'operations_admin' => 'Administrateur des opérations',
+            'centre_manager' => 'Responsable de centre',
+            'reception_officer' => 'Agent d\'accueil',
+            'content_editor' => 'Éditeur de contenu',
+        ],
+        'errors' => [
+            'last_super_admin' => 'Conservez au moins un super administrateur actif.',
+            'required' => 'Ce champ est obligatoire.',
+            'email' => 'Indiquez une adresse e-mail valide.',
+            'unique' => 'Cette adresse e-mail est déjà utilisée.',
+            'password' => 'Utilisez au moins 12 caractères, avec des majuscules, des minuscules et un chiffre.',
+            'password_confirmation' => 'La confirmation du mot de passe ne correspond pas.',
         ],
     ],
 

@@ -6,6 +6,7 @@ use App\Actions\Tariff\Data\PublishTariffVersionData;
 use App\Domain\Enums\TariffVersionStatus;
 use App\Models\Tariff\TariffVersion;
 use App\Support\CacheKeys;
+use App\Support\PublicPageCache;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Cache;
@@ -74,6 +75,7 @@ final class PublishTariffVersion
 
         for ($date = $start; $date->lessThanOrEqualTo($end); $date = $date->addDay()) {
             Cache::forget(CacheKeys::tariffEffective($date->toDateString()));
+            PublicPageCache::forgetTariffsForDate($date->toDateString());
         }
     }
 }

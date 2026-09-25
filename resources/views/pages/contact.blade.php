@@ -1,111 +1,58 @@
 @php
-    $isFrench = $locale === 'fr';
     $assetRoot = 'images/contact';
 
-    $copy = [
-        'overline' => $isFrench ? 'Nos centres' : 'Our centres',
-        'title' => $isFrench
-            ? 'Deux centres à Yaoundé. Un accès direct à votre équipe.'
-            : 'Two centres in Yaoundé. Direct access to your team.',
-        'lead' => $isFrench
-            ? 'Sélectionnez un centre pour voir les détails et la carte.'
-            : 'Select a centre to view details and the map.',
-        'map_tab' => $isFrench ? 'Carte' : 'Map',
-        'list_tab' => $isFrench ? 'Liste' : 'List',
-        'status' => $isFrench ? 'Ouvert actuellement' : 'Open now',
-        'closes' => $isFrench ? 'Ferme à :time' : 'Closes at :time',
-        'weekday' => $isFrench ? 'Lundi - Samedi : :hours' : 'Monday - Saturday: :hours',
-        'sunday' => $isFrench ? 'Dimanche : :hours' : 'Sunday: :hours',
-        'holidays' => $isFrench ? 'Ouvert les jours fériés' : 'Open on public holidays',
-        'map_title' => $isFrench ? 'Carte Google Maps des centres G3 Control à Yaoundé' : 'Google Maps view of G3 Control centres in Yaoundé',
-        'map_note_title' => $isFrench ? 'Carte Google interactive' : 'Interactive Google map',
-        'map_note' => $isFrench
-            ? 'Utilisez la carte pour explorer les repères Google des centres G3 Control.'
-            : 'Use the map to explore Google markers for the G3 Control centres.',
-        'centres_label' => $isFrench ? 'Centres G3 Control' : 'G3 Control centres',
-        'details_label' => $isFrench ? 'Détails du centre' : 'Centre details',
-    ];
+    $copy = trans('public.contact_page.centres');
+    $assetCopy = trans('public.contact_page.assets');
 
-    $centres = [
-        [
-            'key' => 'ecole-de-police',
-            'brand' => 'G3 Control',
-            'title' => $isFrench ? 'École de Police' : 'École de Police',
-            'address' => $isFrench ? 'Descente ancien Texaco, École de Police, Yaoundé' : 'Former Texaco descent, École de Police, Yaoundé',
-            'phone' => '687 187 516',
-            'close_time' => '20h00',
-            'weekday_hours' => $isFrench ? '07h00 - 20h00' : '07:00 - 20:00',
-            'sunday_hours' => $isFrench ? '07h00 - 15h00' : '07:00 - 15:00',
-            'coordinates' => '3.8786152, 11.5116814',
+    $centreAssets = [
+        'ecole-de-police' => [
             'image' => 'ecole-de-police.png',
-            'alt' => $isFrench ? 'Façade du centre G3 Control École de Police' : 'Facade of the G3 Control École de Police centre',
+            'alt' => $assetCopy['ecole_de_police_alt'],
             'variant' => 'blue',
         ],
-        [
-            'key' => 'nomayos',
-            'brand' => 'G3 Control',
-            'title' => 'Nomayos',
-            'address' => $isFrench ? 'Carrefour Nomayos, Yaoundé' : 'Nomayos junction, Yaoundé',
-            'phone' => '653 100 801 / 692 242 143',
-            'close_time' => '19h00',
-            'weekday_hours' => $isFrench ? '07h00 - 19h00' : '07:00 - 19:00',
-            'sunday_hours' => $isFrench ? '07h00 - 15h00' : '07:00 - 15:00',
-            'coordinates' => '3.7902275, 11.4439448',
+        'nomayos' => [
             'image' => 'nomayos.png',
-            'alt' => $isFrench ? 'Entrée du centre G3 Control Nomayos' : 'Entrance of the G3 Control Nomayos centre',
+            'alt' => $assetCopy['nomayos_alt'],
             'variant' => 'orange',
         ],
     ];
+    $centres = collect($publicCentres ?? [])
+        ->map(fn ($centre) => [
+            'key' => $centre->key,
+            'brand' => 'G3 Control',
+            'title' => $centre->shortName,
+            'address' => $centre->displayAddress,
+            'phone' => $centre->phonesDisplayLine,
+            'is_open' => (bool) (($publicLiveStatus ?? [])[$centre->key]['isOpen'] ?? true),
+            'status_line' => ($publicLiveStatus ?? [])[$centre->key]['status']
+                ?? ($copy['status'].' · '.str_replace(':time', (string) $centre->closeTime, $copy['closes'])),
+            'weekday_hours' => $centre->weekdayHours,
+            'sunday_hours' => $centre->sundayHours,
+            'coordinates' => $centre->coordinates,
+            'image' => $centreAssets[$centre->key]['image'] ?? 'ecole-de-police.png',
+            'alt' => $centreAssets[$centre->key]['alt'] ?? $centre->name,
+            'variant' => $centreAssets[$centre->key]['variant'] ?? 'blue',
+        ])
+        ->values()
+        ->all();
 
-    $mapEmbedUrl = 'https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&ll=3.834421,11.477813&z=12&output=embed';
+    $latitudeAverage = collect($publicCentres ?? [])->avg(fn ($centre) => $centre->latitude);
+    $longitudeAverage = collect($publicCentres ?? [])->avg(fn ($centre) => $centre->longitude);
+    $mapEmbedUrl = $latitudeAverage && $longitudeAverage
+        ? 'https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&ll='.$latitudeAverage.','.$longitudeAverage.'&z=12&output=embed'
+        : 'https://maps.google.com/maps?q=G3%20Control%20Yaound%C3%A9&z=12&output=embed';
     $appointmentUrl = \App\Support\PublicNavigation::pageUrl('appointment', $locale);
     $feesUrl = \App\Support\PublicNavigation::pageUrl('fees', $locale);
 
-    $messageCopy = [
-        'overline' => $isFrench ? 'Écrivez-nous' : 'Write to us',
-        'title' => $isFrench ? 'Une question particulière ? Écrivez-nous.' : 'A specific question? Write to us.',
-        'lead' => $isFrench
-            ? 'Votre demande ne concerne ni un rendez-vous ni un itinéraire ? Envoyez-nous votre message en précisant le centre concerné.'
-            : 'Your request is not about an appointment or directions? Send us your message and specify the relevant centre.',
-        'appointment_card_title' => $isFrench ? 'Besoin d’un rendez-vous ?' : 'Need an appointment?',
-        'appointment_card_body' => $isFrench ? 'Accédez directement à notre plateforme de rendez-vous.' : 'Go directly to our appointment platform.',
-        'appointment_card_cta' => $isFrench ? 'Prendre rendez-vous' : 'Book an appointment',
-        'fees_card_title' => $isFrench ? 'Consulter les tarifs' : 'View fees',
-        'fees_card_body' => $isFrench ? 'Retrouvez la grille tarifaire officielle de G3 Control.' : 'Find the official G3 Control fee schedule.',
-        'fees_card_cta' => $isFrench ? 'Voir les tarifs' : 'View fees',
-        'name' => $isFrench ? 'Nom et prénom' : 'Full name',
-        'name_placeholder' => $isFrench ? 'Votre nom complet' : 'Your full name',
-        'phone' => $isFrench ? 'Téléphone / WhatsApp' : 'Phone / WhatsApp',
-        'phone_placeholder' => '6XX XXX XXX',
-        'email' => $isFrench ? 'Adresse e-mail' : 'Email address',
-        'email_placeholder' => 'votre@email.com',
-        'centre' => $isFrench ? 'Centre concerné' : 'Relevant centre',
-        'centre_placeholder' => $isFrench ? 'Sélectionner un centre' : 'Select a centre',
-        'subject' => $isFrench ? 'Objet de votre demande' : 'Subject of your request',
-        'subject_placeholder' => $isFrench ? 'Sélectionner un sujet' : 'Select a subject',
-        'message' => $isFrench ? 'Votre message' : 'Your message',
-        'message_placeholder' => $isFrench ? 'Décrivez votre demande en quelques mots...' : 'Describe your request in a few words...',
-        'submit' => $isFrench ? 'Envoyer mon message' : 'Send my message',
-        'required' => $isFrench ? 'obligatoire' : 'required',
-        'support_title' => $isFrench ? 'Nous sommes à votre écoute' : 'We are listening',
-        'support_body' => $isFrench
-            ? 'Notre équipe vous répond dans les meilleurs délais par le moyen de contact approprié.'
-            : 'Our team will respond as soon as possible through the appropriate contact channel.',
-        'email_value' => 'g3sarl1@gmail.com',
-        'mailbox' => 'BP 12775 Yaoundé',
-        'hours_title' => $isFrench ? 'Nos centres' : 'Our centres',
-        'hours_weekday' => $isFrench ? 'Lundi - Samedi : 07h00 - 20h00' : 'Monday - Saturday: 07:00 - 20:00',
-        'hours_sunday' => $isFrench ? 'Dimanche: 07h00 - 15h00' : 'Sunday: 07:00 - 15:00',
-        'hours_holidays' => $isFrench ? 'Ouverts les jours fériés' : 'Open on public holidays',
-        'approval' => $isFrench ? 'Agrément N°0291 depuis 2020' : 'Approval N°0291 since 2020',
-    ];
+    $messageCopy = trans('public.contact_page.message');
+    $messageCopy['email_value'] = $publicCompany->email;
+    $messageCopy['mailbox'] = $publicCompany->postalAddress;
+    $messageCopy['approval'] = __('public.contact_page.message.approval', [
+        'number' => $publicCompany->agrementLabel,
+        'year' => $publicCompany->agrementYear,
+    ]);
 
-    $messageSubjects = [
-        $isFrench ? 'Information générale' : 'General information',
-        $isFrench ? 'Question sur un centre' : 'Centre question',
-        $isFrench ? 'Document ou préparation' : 'Document or preparation',
-        $isFrench ? 'Autre demande' : 'Other request',
-    ];
+    $messageSubjects = trans('public.contact_page.subjects');
 @endphp
 
 @extends('layouts.public')
@@ -158,9 +105,12 @@
                                 <span>{{ $centre['brand'] }}</span>
                                 <h2>{{ $centre['title'] }}</h2>
 
-                                <p class="g3-contact-centres__status">
-                                    <img src="{{ asset($assetRoot.'/icon-status.svg') }}" alt="" aria-hidden="true">
-                                    <span>{{ $copy['status'] }} · {{ str_replace(':time', $centre['close_time'], $copy['closes']) }}</span>
+                                <p @class([
+                                    'g3-contact-centres__status',
+                                    'g3-contact-centres__status--closed' => ! $centre['is_open'],
+                                ])>
+                                    <span class="g3-contact-centres__status-dot" aria-hidden="true"></span>
+                                    <span>{{ $centre['status_line'] }}</span>
                                 </p>
 
                                 <dl class="g3-contact-centres__details" aria-label="{{ $copy['details_label'] }}">
@@ -263,55 +213,72 @@
                 </div>
             </div>
 
-            <form class="g3-contact-message__form" aria-label="{{ $messageCopy['title'] }}">
+            <form class="g3-contact-message__form" method="POST" action="{{ route($locale.'.contact.submit') }}" aria-label="{{ $messageCopy['title'] }}" data-contact-form novalidate>
+                @csrf
+                <div class="g3-honeypot" aria-hidden="true">
+                    <label for="contact-website">Website</label>
+                    <input id="contact-website" type="text" name="website" tabindex="-1" autocomplete="off" value="">
+                </div>
+
+                <p class="g3-form-status" role="status" data-contact-status @unless (session('contact_received')) hidden @endunless>{{ session('contact_received') }}</p>
+
+                <div class="g3-form-alert" role="alert" data-contact-alert @unless ($errors->has('form')) hidden @endunless>
+                    <p>{{ $errors->first('form') }}</p>
+                </div>
                 <div class="g3-contact-message__fields">
                     <label>
                         <span>{{ $messageCopy['name'] }} <abbr title="{{ $messageCopy['required'] }}">*</abbr></span>
-                        <input type="text" name="name" autocomplete="name" placeholder="{{ $messageCopy['name_placeholder'] }}" required>
+                        <input id="contact-name" type="text" name="name" autocomplete="name" placeholder="{{ $messageCopy['name_placeholder'] }}" value="{{ old('name') }}" aria-describedby="contact-name-error" data-required-message="{{ $messageCopy['errors']['name'] }}" @if ($errors->has('name')) aria-invalid="true" @endif required>
+                        <p id="contact-name-error" class="g3-contact-message__error" data-contact-error="name" @unless ($errors->has('name')) hidden @endunless>{{ $errors->first('name') }}</p>
                     </label>
 
                     <label>
                         <span>{{ $messageCopy['phone'] }} <abbr title="{{ $messageCopy['required'] }}">*</abbr></span>
-                        <input type="tel" name="phone" autocomplete="tel" placeholder="{{ $messageCopy['phone_placeholder'] }}" required>
+                        <input id="contact-phone" type="tel" name="phone" autocomplete="tel" placeholder="{{ $messageCopy['phone_placeholder'] }}" value="{{ old('phone') }}" aria-describedby="contact-phone-error" data-required-message="{{ $messageCopy['errors']['phone'] }}" @if ($errors->has('phone')) aria-invalid="true" @endif required>
+                        <p id="contact-phone-error" class="g3-contact-message__error" data-contact-error="phone" @unless ($errors->has('phone')) hidden @endunless>{{ $errors->first('phone') }}</p>
                     </label>
 
                     <label>
-                        <span>{{ $messageCopy['email'] }}</span>
-                        <input type="email" name="email" autocomplete="email" placeholder="{{ $messageCopy['email_placeholder'] }}">
+                        <span>{{ $messageCopy['email'] }} <abbr title="{{ $messageCopy['required'] }}">*</abbr></span>
+                        <input id="contact-email" type="email" name="email" autocomplete="email" placeholder="{{ $messageCopy['email_placeholder'] }}" value="{{ old('email') }}" aria-describedby="contact-email-error" data-required-message="{{ $messageCopy['errors']['email'] }}" data-invalid-message="{{ $messageCopy['errors']['email'] }}" @if ($errors->has('email')) aria-invalid="true" @endif required>
+                        <p id="contact-email-error" class="g3-contact-message__error" data-contact-error="email" @unless ($errors->has('email')) hidden @endunless>{{ $errors->first('email') }}</p>
                     </label>
 
                     <label>
                         <span>{{ $messageCopy['centre'] }} <abbr title="{{ $messageCopy['required'] }}">*</abbr></span>
                         <span class="g3-contact-message__select">
-                            <select name="centre" required>
+                            <select id="contact-centre" name="centre" aria-describedby="contact-centre-error" data-required-message="{{ $messageCopy['errors']['centre'] }}" @if ($errors->has('centre')) aria-invalid="true" @endif required>
                                 <option value="">{{ $messageCopy['centre_placeholder'] }}</option>
                                 @foreach ($centres as $centre)
-                                    <option value="{{ $centre['key'] }}">{{ $centre['title'] }}</option>
+                                    <option value="{{ $centre['key'] }}" @selected(old('centre') === $centre['key'])>{{ $centre['title'] }}</option>
                                 @endforeach
                             </select>
                         </span>
+                        <p id="contact-centre-error" class="g3-contact-message__error" data-contact-error="centre" @unless ($errors->has('centre')) hidden @endunless>{{ $errors->first('centre') }}</p>
                     </label>
 
                     <label class="g3-contact-message__field--wide">
                         <span>{{ $messageCopy['subject'] }} <abbr title="{{ $messageCopy['required'] }}">*</abbr></span>
                         <span class="g3-contact-message__select">
-                            <select name="subject" required>
+                            <select id="contact-subject" name="subject" aria-describedby="contact-subject-error" data-required-message="{{ $messageCopy['errors']['subject'] }}" @if ($errors->has('subject')) aria-invalid="true" @endif required>
                                 <option value="">{{ $messageCopy['subject_placeholder'] }}</option>
                                 @foreach ($messageSubjects as $subject)
-                                    <option value="{{ \Illuminate\Support\Str::slug($subject) }}">{{ $subject }}</option>
+                                    <option value="{{ \Illuminate\Support\Str::slug($subject) }}" @selected(old('subject') === \Illuminate\Support\Str::slug($subject))>{{ $subject }}</option>
                                 @endforeach
                             </select>
                         </span>
+                        <p id="contact-subject-error" class="g3-contact-message__error" data-contact-error="subject" @unless ($errors->has('subject')) hidden @endunless>{{ $errors->first('subject') }}</p>
                     </label>
 
                     <label class="g3-contact-message__field--wide">
                         <span>{{ $messageCopy['message'] }} <abbr title="{{ $messageCopy['required'] }}">*</abbr></span>
-                        <textarea name="message" maxlength="1000" placeholder="{{ $messageCopy['message_placeholder'] }}" required data-contact-message-text></textarea>
+                        <textarea id="contact-message" name="message" maxlength="1000" placeholder="{{ $messageCopy['message_placeholder'] }}" aria-describedby="contact-message-error" data-contact-message-text data-required-message="{{ $messageCopy['errors']['message'] }}" @if ($errors->has('message')) aria-invalid="true" @endif required>{{ old('message') }}</textarea>
                         <span class="g3-contact-message__counter" data-contact-message-count>0/1000</span>
+                        <p id="contact-message-error" class="g3-contact-message__error" data-contact-error="message" @unless ($errors->has('message')) hidden @endunless>{{ $errors->first('message') }}</p>
                     </label>
                 </div>
 
-                <button type="button" class="g3-contact-message__submit">
+                <button type="submit" class="g3-contact-message__submit" data-contact-submit data-form-error="{{ $messageCopy['errors']['form'] }}">
                     <img src="{{ asset($assetRoot.'/icon-send.svg') }}" alt="" aria-hidden="true">
                     <span>{{ $messageCopy['submit'] }}</span>
                 </button>
@@ -335,20 +302,15 @@
                         <dt><img src="{{ asset($assetRoot.'/icon-pin.svg') }}" alt="" aria-hidden="true"></dt>
                         <dd>{{ $messageCopy['mailbox'] }}</dd>
                     </div>
-                    <div>
-                        <dt><img src="{{ asset($assetRoot.'/icon-phone.svg') }}" alt="" aria-hidden="true"></dt>
-                        <dd>
-                            <strong>École de Police</strong>
-                            <span>687 187 516</span>
-                        </dd>
-                    </div>
-                    <div>
-                        <dt><img src="{{ asset($assetRoot.'/icon-phone.svg') }}" alt="" aria-hidden="true"></dt>
-                        <dd>
-                            <strong>Nomayos</strong>
-                            <span>653 100 801 / 692 242 143</span>
-                        </dd>
-                    </div>
+                    @foreach ($centres as $centre)
+                        <div>
+                            <dt><img src="{{ asset($assetRoot.'/icon-phone.svg') }}" alt="" aria-hidden="true"></dt>
+                            <dd>
+                                <strong>{{ $centre['title'] }}</strong>
+                                <span>{{ $centre['phone'] }}</span>
+                            </dd>
+                        </div>
+                    @endforeach
                     <div>
                         <dt><img src="{{ asset($assetRoot.'/icon-clock.svg') }}" alt="" aria-hidden="true"></dt>
                         <dd>

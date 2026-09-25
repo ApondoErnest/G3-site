@@ -6,7 +6,11 @@ use App\Actions\Tariff\Data\UpdateTariffVersionItemsData;
 use App\Domain\Enums\TariffVersionStatus;
 use App\Models\Tariff\TariffItem;
 use App\Models\Tariff\TariffVersion;
+use App\Support\CacheKeys;
+use App\Support\Clock;
+use App\Support\PublicPageCache;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
@@ -16,8 +20,8 @@ final class UpdateTariffVersionItems
     {
         $version = TariffVersion::query()->findOrFail($data->tariffVersionId);
 
-        if (! in_array($version->status, [TariffVersionStatus::Draft, TariffVersionStatus::Reviewed], true)) {
-            throw new AuthorizationException('Published or archived tariff versions cannot be edited.');
+        if ($version->status === TariffVersionStatus::Archived) {
+            throw new AuthorizationException('Archived tariff versions cannot be edited.');
         }
 
         foreach ($data->items as $item) {
@@ -47,5 +51,10 @@ final class UpdateTariffVersionItems
                 $item->centres()->sync($itemData->centreIds);
             }
         });
+
+        if ($version->status === TariffVersionStatus::Published) {
+            Cache::forget(CacheKeys::tariffMatrix($version->id));
+            PublicPageCache::forgetTariffsForDate(Clock::nowDisplay()->toDateString());
+        }
     }
 }

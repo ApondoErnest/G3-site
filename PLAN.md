@@ -82,10 +82,10 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 | | |
 | --- | --- |
-| Active phase | **VII — Public experience** |
-| Complete | Steps 1–129 |
-| **Active step** | **130** — Data integration |
-| Pending | Steps 130–182 · Phases VIII–X |
+| Active phase | **IX — Containerisation** |
+| Complete | Steps 1–150 |
+| **Active step** | **151** — Container architecture |
+| Pending | Steps 151–182 · Phases IX–X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -309,33 +309,33 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 ### Integration & compliance
 
-- [ ] **130** · ← active · Data integration · No hardcoded hours, phones, or prices
-- [ ] **131** · Localisation audit · FR/EN parity and glossary consistency
-- [ ] **132** · SEO · Canonical, hreflang, sitemap · `/admin` disallowed in robots
-- [ ] **133** · Accessibility review
-- [ ] **134** · Security review · CSRF, throttling, honeypot, tracking privacy
-- [ ] **135** · Performance review
-- [ ] **136** · **Gate — integration accepted**
+- [x] **130** · Data integration · Public centre hours, phones, coordinates, company contact details, and tariff amounts now render from database/settings-backed public resolvers with resolver-level public fallbacks rather than Blade/lang literals
+- [x] **131** · Localisation audit · FR/EN language-file parity, placeholder parity, English glossary guard, and contact-page copy moved into locale files
+- [x] **132** · SEO · Canonical, hreflang, sitemap · `/admin` disallowed in robots
+- [x] **133** · Accessibility review · One heading per public page, labelled embeds, 44px controls, visible form focus
+- [x] **134** · Security review · Contact and tracking forms post with CSRF; honeypot stores nothing; rate limits return a generic message; tracking failures stay identical and omit internal notes
+- [x] **135** · Performance review · Public pages load only the catalogues they render; centres, tariffs, the header phone, and live open status are cached; the homepage preloads its hero and does not embed video
+- [x] **136** · **Gate — integration accepted** · Steps 130–135 verified · 63 tests, 2154 assertions · Accepted 2026-09-24
 
 ### Automated tests
 
-- [ ] **137** · Pest — live status (`docs/07-acceptance.md`)
-- [ ] **138** · Pest — tariff lifecycle
-- [ ] **139** · Pest — appointment transitions
-- [ ] **140** · Pest — tracking privacy
-- [ ] **141** · Pest — Livewire request flow
-- [ ] **142** · Pest — Filament authorisation
-- [ ] **143** · **Gate — test suite accepted**
+- [x] **137** · Pest — live status (`docs/07-acceptance.md`) · Homepage, centre pages, and appointment step 1 share the domain snapshot, including Sunday hours and exceptional-closure messages
+- [x] **138** · Pest — tariff lifecycle · Draft and reviewed stay off the public fees page; publishing archives the previous version without deleting it; a rejected publish leaves the current version in place; fees and appointment show the same grouped price; an empty catalogue shows the unpublished state; the fees link prefills centre and category
+- [x] **139** · Pest — appointment transitions · Received cannot jump to completed; under review can request a modification and then confirm; confirmed can be cancelled; a rejected transition leaves the status unchanged; a reception officer cannot change another centre's request
+- [x] **140** · Pest — tracking privacy · A matching lookup shows the status without phone, email, plate, notes, staff names, or other requests; a plate works as the second factor; repeated failures stay on the same generic message
+- [x] **141** · Pest — Livewire request flow · A public request is stored once as received, with the received confirmation; French and English validation stay on their URLs; an exceptional closure and a service from another centre are rejected
+- [x] **142** · Pest — Filament authorisation · A centre manager cannot change another centre's hours or publish a tariff; a content editor cannot open appointments; a reception officer cannot open users or edit a centre
+- [x] **143** · **Gate — test suite accepted** · Steps 137–142 verified · 364 tests, 3443 assertions · Accepted 2026-09-25
+- [x] **144** · French content load · Ready French copy seeded on the content-block keys · English left incomplete and unpublished · Accepted 2026-09-25
 
 ### Content & UAT
 
-- [ ] **144** · French content load
-- [ ] **145** · English content load
-- [ ] **146** · Media ingestion · Real G3 assets only
-- [ ] **147** · Factual audit · Baseline accuracy · No invented tariffs
-- [ ] **148** · Local UAT with G3 stakeholders
-- [ ] **149** · End-to-end validation · Request → confirm → track
-- [ ] **150** · **Gate — local core stable**
+- [x] **145** · English content load · English copy added to the content blocks and published with the French copy · Accepted 2026-09-25
+- [x] **146** · Media ingestion · G3 logo, mark, and École de Police and Nomayos photographs stored in the media library · Stock, icons, and the inspection video left out · Accepted 2026-09-25
+- [x] **147** · Factual audit · Company, centres, hours, phones, and the seven official fees match the baseline · No invented price on the public fees page · Accepted 2026-09-25
+- [x] **148** · Local UAT · Local walkthrough of home, fees, English fees, appointment, and contact · Contact cards now use the same live open/closed status as the rest of the site · Accepted 2026-09-25
+- [x] **149** · End-to-end validation · A public request is stored as received, confirmed by a reception officer, then tracked with the confirmed status and without the name, email, plate, or phone · Accepted 2026-09-25
+- [x] **150** · **Gate — local core stable** · Steps 130–149 verified · 368 tests, 3700 assertions · Accepted 2026-09-25
 
 ---
 
@@ -344,7 +344,7 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 **Purpose:** Reproducible deployment environment matching local core.  
 **Opens:** Gate 150 · **Gate:** 159 · **Prohibited:** VPS until Gate 159
 
-- [ ] **151** · Container architecture → [`docs/12-docker.md`](docs/12-docker.md)
+- [ ] **151** · ← active · Container architecture → [`docs/12-docker.md`](docs/12-docker.md)
 - [ ] **152** · **Gate — container design accepted**
 - [ ] **153** · Application container
 - [ ] **154** · MySQL container

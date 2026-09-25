@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Centre\Centres\Pages;
 
 use App\Filament\Resources\Centre\Centres\CentreResource;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListCentres extends ListRecords
@@ -11,6 +12,8 @@ class ListCentres extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [];
+        return [
+            CreateAction::make(),
+        ];
     }
 }

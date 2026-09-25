@@ -1,18 +1,17 @@
-@php
-    use App\Support\PublicNavigation;
-
-    $pageTitle = PublicNavigation::pageTitle($page);
-    $metaTitle = $pageTitle.' · '.$company->display_name;
-    $metaDescription = $company->defaultSeoDescriptionFor($locale);
-@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', $locale) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ $metaDescription }}">
+    <meta name="description" content="{{ $pageMeta->description }}">
 
-    <title>{{ $metaTitle }}</title>
+    <title>{{ $pageMeta->title }}</title>
+
+    <link rel="canonical" href="{{ $pageMeta->canonical }}">
+    @foreach ($pageMeta->alternates as $language => $href)
+        <link rel="alternate" hreflang="{{ $language }}" href="{{ $href }}">
+    @endforeach
+    <link rel="alternate" hreflang="x-default" href="{{ $pageMeta->defaultLocaleUrl }}">
 
     <link rel="icon" href="{{ asset('images/reusable/favicon.png') }}" type="image/png">
 

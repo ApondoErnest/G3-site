@@ -2,6 +2,10 @@
     use App\Support\PublicNavigation;
 
     $isFrench = $locale === 'fr';
+    $centre = ($publicCentres ?? [])['ecole-de-police'] ?? null;
+    $live = ($publicLiveStatus ?? [])['ecole-de-police'] ?? null;
+    $liveStatus = $live['status'] ?? null;
+    $isOpen = (bool) ($live['isOpen'] ?? false);
 
     $copy = [
         'overline' => $isFrench ? 'G3 Control — École de Police' : 'G3 Control — École de Police',
@@ -9,19 +13,19 @@
         'lead' => $isFrench
             ? 'Retrouvez notre centre à la descente ancien Texaco, École de Police, pour votre visite technique automobile, avec une ouverture 7j/7 et des horaires adaptés.'
             : 'Visit our centre at the former Texaco descent, École de Police, for your vehicle technical inspection, with 7-day opening and practical hours.',
-        'status_title' => $isFrench ? 'Ouvert actuellement' : 'Open now',
-        'status_detail' => $isFrench ? 'Ferme aujourd’hui à 20h00' : 'Closes today at 20:00',
+        'status_title' => $liveStatus ?? ($isFrench ? 'Horaires à confirmer' : 'Hours to confirm'),
+        'status_detail' => '',
         'location_label' => $isFrench ? 'Localisation' : 'Location',
-        'location' => $isFrench ? 'Descente ancien Texaco, École de Police, Yaoundé' : 'Former Texaco descent, École de Police, Yaoundé',
+        'location' => $centre?->displayAddress ?? '',
         'phone_label' => $isFrench ? 'Téléphone' : 'Phone',
-        'phone' => '687 187 516',
+        'phone' => $centre?->phonesDisplayLine ?? '',
         'hours_label' => $isFrench ? 'Horaires d’ouverture' : 'Opening hours',
         'weekday_label' => $isFrench ? 'Lundi – Samedi' : 'Monday – Saturday',
-        'weekday_hours' => $isFrench ? '07h00 – 20h00' : '07:00 – 20:00',
+        'weekday_hours' => $centre?->weekdayHours ?? '',
         'sunday_label' => $isFrench ? 'Dimanche' : 'Sunday',
-        'sunday_hours' => $isFrench ? '07h00 – 15h00' : '07:00 – 15:00',
+        'sunday_hours' => $centre?->sundayHours ?? '',
         'holiday_label' => $isFrench ? 'Jours fériés' : 'Public holidays',
-        'holiday_hours' => $isFrench ? 'Ouvert' : 'Open',
+        'holiday_hours' => $centre?->holidayHours ?? '',
         'appointment' => $isFrench ? 'Prendre rendez-vous' : 'Book an appointment',
         'approval' => $isFrench ? 'G3 Control · Agrément N°0291 depuis 2020' : 'G3 Control · Approval No. 0291 since 2020',
         'carousel_label' => $isFrench ? 'Photos du centre École de Police' : 'École de Police centre photos',
@@ -150,7 +154,10 @@
 
                 <p class="g3-centre-hero__lead">{{ $copy['lead'] }}</p>
 
-                <div class="g3-centre-hero__status">
+                <div @class([
+                    'g3-centre-hero__status',
+                    'g3-centre-hero__status--closed' => ! $isOpen,
+                ])>
                     <span class="g3-centre-hero__status-icon" aria-hidden="true">
                         <span></span>
                     </span>

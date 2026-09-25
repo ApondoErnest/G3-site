@@ -70,8 +70,8 @@ Verified in `tests/Feature/Admin/Admin*Test.php` and `AdminPolicyTest.php`.
 
 | Item | Owner | Notes |
 | --- | --- | --- |
-| Contact inbox Filament resource | Dev · post-116 | Domain actions exist; not in steps 108–115 scope |
-| User/role management UI | Dev · post-116 | Policies exist; System nav placeholder |
+| Contact inbox Filament resource | Done | Operations list, view, status transitions, and internal notes |
+| User/role management UI | Done | Super administrator assigns the five roles and centre scope |
 | Company settings admin page | Dev · post-116 | `UpdateCompanySettings` action exists |
 | Spatie `LogsActivity` on models | Dev · post-116 | Audit table exists; trait wiring deferred |
 | Equipment centre management | Dev · post-116 | Table exists; Filament resource deferred |

@@ -13,10 +13,10 @@ A single Laravel application delivers the public website and the secure operatio
 
 | | |
 | --- | --- |
-| Phase | **VII — Public experience** |
-| Progress | Steps 1–129 complete |
-| Active step | **130** — Data integration |
-| Pending | Steps 130–182 · Phases VIII–X |
+| Phase | **IX — Containerisation** |
+| Progress | Steps 1–150 complete |
+| Active step | **151** — Container architecture |
+| Pending | Steps 151–182 · Phases IX–X |
 
 Delivery is **strictly sequential**: specification → environment → application shell → design → database design → backend design → database build → backend build → admin → public frontend → QA → Docker → production.
 
@@ -31,8 +31,8 @@ Delivery is **strictly sequential**: specification → environment → applicati
 | Backend build | VI · 107 | **Complete** |
 | Administration UI | VI · 116 | **Complete** |
 | Public frontend | VII · 117–129 | **Complete** |
-| Quality assurance | VIII · 130 | **Active** |
-| Containerisation | IX · 151 | Locked |
+| Quality assurance | VIII · 150 | **Complete** |
+| Containerisation | IX · 151 | **Active** |
 | Production | X · 160 | Locked |
 
 Mark the active step complete in [PLAN.md](PLAN.md) before advancing.
@@ -56,4 +56,4 @@ Operational facts (hours, phones, agrément) are maintained in the baseline only
 
 ## Developer guide
 
-Installation, local run, test, and deployment instructions will be added when Phases II–III and IX–X reach their respective gates. They are intentionally absent until the application exists.
+The local application exists. Phases II–VIII are complete, and Phase IX is in progress at step 151. Production deployment instructions wait for Phase X.

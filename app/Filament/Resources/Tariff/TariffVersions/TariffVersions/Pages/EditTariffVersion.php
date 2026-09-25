@@ -137,7 +137,13 @@ class EditTariffVersion extends EditRecord
                     'effective_from' => $data['effective_from'],
                     'effective_until' => filled($data['effective_until'] ?? null) ? $data['effective_until'] : null,
                 ]);
+            }
 
+            if (in_array($record->status, [
+                TariffVersionStatus::Draft,
+                TariffVersionStatus::Reviewed,
+                TariffVersionStatus::Published,
+            ], true)) {
                 app(UpdateTariffVersionItems::class)(new UpdateTariffVersionItemsData(
                     tariffVersionId: $record->id,
                     items: self::mapTariffItems($data['tariff_items'] ?? []),

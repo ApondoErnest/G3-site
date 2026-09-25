@@ -33,7 +33,9 @@ final class AvailabilityEngine
             );
         }
 
-        $todayWindows = $this->openWindowsForDate($centre, $at->startOfDay(), $exceptions);
+        $today = $at->startOfDay();
+        $todayException = $this->resolveExceptionForDate($centre, $today, $exceptions);
+        $todayWindows = $this->openWindowsForDate($centre, $today, $exceptions);
         $isOpenNow = $this->isInstantOpen($todayWindows, $at);
 
         $nextCloseAt = null;
@@ -53,6 +55,9 @@ final class AvailabilityEngine
             isOpenNow: $isOpenNow,
             nextCloseAt: $nextCloseAt,
             nextOpenAt: $nextOpenAt,
+            reason: $todayException !== null && ! $todayException->is_open && is_array($todayException->reason)
+                ? $todayException->reason
+                : null,
         );
     }
 

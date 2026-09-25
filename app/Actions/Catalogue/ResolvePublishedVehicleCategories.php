@@ -5,7 +5,6 @@ namespace App\Actions\Catalogue;
 use App\Actions\Catalogue\Data\PublishedVehicleCategoryEntry;
 use App\Models\Catalogue\VehicleCategory;
 use App\Support\CacheKeys;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 final class ResolvePublishedVehicleCategories
@@ -15,25 +14,33 @@ final class ResolvePublishedVehicleCategories
      */
     public function __invoke(): array
     {
-        /** @var Collection<int, VehicleCategory> $categories */
+        /** @var list<array{id: int, code: string, label: array{fr: string, en: string}, examples: array{fr: string, en: string}|null, description: array{fr: string, en: string}|null}> $categories */
         $categories = Cache::remember(
             CacheKeys::catalogueCategories(),
             CacheKeys::catalogueTtlSeconds(),
             fn () => VehicleCategory::query()
                 ->published()
                 ->ordered()
-                ->get(),
+                ->get()
+                ->map(fn (VehicleCategory $category): array => [
+                    'id' => $category->id,
+                    'code' => $category->code,
+                    'label' => $category->label,
+                    'examples' => $category->examples,
+                    'description' => $category->description,
+                ])
+                ->values()
+                ->all(),
         );
 
-        return $categories
-            ->map(fn (VehicleCategory $category) => new PublishedVehicleCategoryEntry(
-                id: $category->id,
-                code: $category->code,
-                label: $category->label,
-                examples: $category->examples,
-                description: $category->description,
+        return collect($categories)
+            ->map(fn (array $category): PublishedVehicleCategoryEntry => new PublishedVehicleCategoryEntry(
+                id: $category['id'],
+                code: $category['code'],
+                label: $category['label'],
+                examples: $category['examples'],
+                description: $category['description'],
             ))
-            ->values()
             ->all();
     }
 }

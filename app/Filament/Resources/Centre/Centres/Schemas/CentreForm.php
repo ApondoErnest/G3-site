@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Centre\Centres\Schemas;
 
 use App\Domain\Enums\CentreStatus;
+use App\Models\Centre\Centre;
 use App\Support\AdminLocale;
 use App\Support\Filament\AdminForm;
 use Filament\Forms\Components\Select;
@@ -21,8 +22,12 @@ class CentreForm
                     ->schema([
                         TextInput::make('code')
                             ->label(__('admin.centres.fields.code'))
-                            ->disabled()
-                            ->dehydrated(false),
+                            ->disabled(fn (string $operation): bool => $operation === 'edit')
+                            ->dehydrated(fn (string $operation): bool => $operation === 'create')
+                            ->required(fn (string $operation): bool => $operation === 'create')
+                            ->unique(Centre::class, 'code', ignoreRecord: true)
+                            ->regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/')
+                            ->maxLength(64),
                         AdminForm::bilingualText('name', __('admin.centres.fields.name')),
                         AdminForm::bilingualText('address', __('admin.centres.fields.address')),
                         AdminForm::bilingualText('landmark', __('admin.centres.fields.landmark')),

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
+use InvalidArgumentException;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 final class CreateAppointmentRequest
@@ -52,7 +53,7 @@ final class CreateAppointmentRequest
 
         if ($centre === null || $centre->status !== CentreStatus::Active) {
             throw ValidationException::withMessages([
-                'centreId' => ['The selected centre is not available.'],
+                'centre_id' => [__('public.security.appointment_unavailable')],
             ]);
         }
 
@@ -62,7 +63,7 @@ final class CreateAppointmentRequest
             $data->vehicleCategoryId,
         )) {
             throw ValidationException::withMessages([
-                'serviceId' => ['The selected service is not available at this centre for the vehicle category.'],
+                'service_id' => [__('public.security.appointment_unavailable')],
             ]);
         }
 
@@ -72,12 +73,24 @@ final class CreateAppointmentRequest
             $data->preferredPeriod,
         )) {
             throw ValidationException::withMessages([
-                'preferredDate' => ['The preferred time is outside this centre\'s opening hours.'],
+                'preferred_date' => [__('public.security.appointment_outside_hours')],
             ]);
         }
 
-        $plate = RegistrationPlate::fromInput($data->registration);
-        $phone = PhoneNumber::fromInput($data->contactPhone);
+        try {
+            $plate = RegistrationPlate::fromInput($data->registration);
+            $phone = PhoneNumber::fromInput($data->contactPhone);
+        } catch (InvalidArgumentException $exception) {
+            $field = str_contains($exception->getMessage(), 'Phone') ? 'phone' : 'registration';
+
+            throw ValidationException::withMessages([
+                $field => [__(
+                    $field === 'phone'
+                        ? 'public.security.appointment_phone'
+                        : 'public.security.appointment_required',
+                )],
+            ]);
+        }
 
         $appointment = DB::transaction(function () use ($data, $centre, $plate, $phone): AppointmentRequest {
             $draft = new AppointmentRequest([

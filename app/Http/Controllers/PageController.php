@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Catalogue\ResolvePublishedServices;
+use App\Actions\Catalogue\ResolvePublishedVehicleCategories;
+use App\Actions\Centre\ResolvePublicCentres;
+use App\Actions\Company\ResolvePublicCompanyProfile;
 use App\Actions\Schedule\ResolveAllCentresAvailability;
+use App\Actions\Seo\ResolvePublicPageMeta;
+use App\Actions\Tariff\ResolvePublicTariffCatalogue;
 use App\Domain\Enums\Locale;
 use App\Models\Centre\Centre;
+use App\Support\DisplayTime;
 use App\Support\PublicNavigation;
 use Carbon\CarbonImmutable;
 use Illuminate\View\View;
@@ -13,65 +20,112 @@ class PageController extends Controller
 {
     public function __construct(
         private ResolveAllCentresAvailability $resolveAllCentresAvailability,
+        private ResolvePublishedServices $resolvePublishedServices,
+        private ResolvePublishedVehicleCategories $resolvePublishedVehicleCategories,
+        private ResolvePublicCentres $resolvePublicCentres,
+        private ResolvePublicCompanyProfile $resolvePublicCompanyProfile,
+        private ResolvePublicPageMeta $resolvePublicPageMeta,
+        private ResolvePublicTariffCatalogue $resolvePublicTariffCatalogue,
     ) {}
 
     public function __invoke(string $page): View
     {
         $locale = app()->getLocale();
+        $publicLocale = Locale::fromString($locale);
         $view = view()->exists("pages.{$page}") ? "pages.{$page}" : 'pages.shell';
+        $liveStatus = $this->needsLiveStatus($page)
+            ? $this->liveStatus($publicLocale)
+            : [];
 
         return view($view, [
             'page' => $page,
             'locale' => $locale,
             'pageTitle' => PublicNavigation::pageTitle($page),
-            'homeHeroCentres' => $page === 'home'
-                ? $this->homeHeroCentres(Locale::from($locale))
+            'pageMeta' => ($this->resolvePublicPageMeta)($page, $publicLocale),
+            'publicCentres' => $this->needsCentres($page)
+                ? ($this->resolvePublicCentres)($publicLocale)
                 : [],
+            'publicCompany' => $page === 'contact'
+                ? ($this->resolvePublicCompanyProfile)($publicLocale)
+                : null,
+            'publishedServices' => in_array($page, ['services', 'appointment'], true)
+                ? ($this->resolvePublishedServices)()
+                : [],
+            'publishedVehicleCategories' => $page === 'appointment'
+                ? ($this->resolvePublishedVehicleCategories)()
+                : [],
+            'publicTariffCatalogue' => $this->needsTariff($page)
+                ? ($this->resolvePublicTariffCatalogue)($publicLocale)
+                : null,
+            'homeHeroCentres' => $page === 'home' ? array_values($liveStatus) : [],
+            'publicLiveStatus' => $liveStatus,
+            'appointmentHandoff' => $page === 'appointment' ? [
+                'centre' => request()->string('centre')->toString(),
+                'category' => request()->string('category')->toString(),
+            ] : null,
         ]);
     }
 
+    private function needsLiveStatus(string $page): bool
+    {
+        return in_array($page, [
+            'home',
+            'centres',
+            'centre_ecole_de_police',
+            'centre_nomayos',
+            'fees',
+            'appointment',
+            'contact',
+        ], true);
+    }
+
+    private function needsCentres(string $page): bool
+    {
+        return in_array($page, [
+            'home',
+            'centres',
+            'centre_ecole_de_police',
+            'centre_nomayos',
+            'services',
+            'appointment',
+            'contact',
+        ], true);
+    }
+
+    private function needsTariff(string $page): bool
+    {
+        return in_array($page, ['fees', 'appointment'], true);
+    }
+
     /**
-     * @return list<array{name: string, status: string, isOpen: bool}>
+     * @return array<string, array{name: string, status: string, isOpen: bool}>
      */
-    private function homeHeroCentres(Locale $locale): array
+    private function liveStatus(Locale $locale): array
     {
         $centres = Centre::query()
             ->active()
-            ->with('weeklyHours')
             ->orderBy('sort_order')
-            ->limit(2)
             ->get();
 
-        if ($centres->isEmpty()) {
-            return [
-                [
-                    'name' => __('public.centres.ecole_de_police'),
-                    'status' => __('public.home.hero.live.open_until', ['time' => '20h00']),
-                    'isOpen' => true,
-                ],
-                [
-                    'name' => __('public.centres.nomayos'),
-                    'status' => __('public.home.hero.live.open_until', ['time' => '19h00']),
-                    'isOpen' => true,
-                ],
+        $snapshots = ($this->resolveAllCentresAvailability)();
+        $statuses = [];
+
+        foreach ($centres as $centre) {
+            $snapshot = $snapshots[$centre->id] ?? null;
+            $isOpen = $snapshot?->isOpenNow ?? false;
+            $reason = $snapshot?->reason[$locale->value] ?? $snapshot?->reason['fr'] ?? null;
+            $statusTime = $isOpen ? $snapshot?->nextCloseAt : $snapshot?->nextOpenAt;
+
+            $statuses[(string) $centre->code] = [
+                'name' => $centre->translatedName($locale),
+                'status' => filled($reason) && ! $isOpen
+                    ? (string) $reason
+                    : $this->homeHeroCentreStatus($isOpen, $statusTime),
+                'isOpen' => $isOpen,
             ];
         }
 
-        $snapshots = ($this->resolveAllCentresAvailability)();
-
-        return $centres
-            ->map(function (Centre $centre) use ($locale, $snapshots): array {
-                $snapshot = $snapshots[$centre->id] ?? null;
-                $isOpen = $snapshot?->isOpenNow ?? false;
-                $statusTime = $isOpen ? $snapshot?->nextCloseAt : $snapshot?->nextOpenAt;
-
-                return [
-                    'name' => $centre->translatedName($locale),
-                    'status' => $this->homeHeroCentreStatus($isOpen, $statusTime),
-                    'isOpen' => $isOpen,
-                ];
-            })
-            ->all();
+        return $statuses;
     }
 
     private function homeHeroCentreStatus(bool $isOpen, ?CarbonImmutable $statusTime): string
@@ -93,6 +147,6 @@ class PageController extends Controller
 
     private function formatHeroTime(CarbonImmutable $time): string
     {
-        return $time->format('H\hi');
+        return DisplayTime::format($time);
     }
 }
