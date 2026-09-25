@@ -17,8 +17,8 @@ Modular **Laravel 13** monolith: one repo, one DB, one deploy. Public + `/admin`
 | Admin | Filament 5, native icons |
 | Public icons | Lucide; custom SVGs for benches/testers |
 | Data | MySQL 9.6 · amended from 8.4 at Phase II step 16 |
-| Later | Redis, queue, scheduler |
-| Build / prod | Vite · Nginx+PHP-FPM · Docker after Gate 150 |
+| Later | Redis, queue, scheduler · [12-docker.md](12-docker.md) |
+| Build / prod | Vite · Nginx+PHP-FPM · container layout in [12-docker.md](12-docker.md) |
 | VCS / tests | GitHub · Pest, Pint, Larastan |
 | Packages | Spatie media, translatable, permission, activity log, settings |
 

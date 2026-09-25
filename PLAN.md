@@ -82,10 +82,10 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 | | |
 | --- | --- |
-| Active phase | **IX — Containerisation** |
-| Complete | Steps 1–150 |
-| **Active step** | **151** — Container architecture |
-| Pending | Steps 151–182 · Phases IX–X |
+| Active phase | **X — Production & operations** |
+| Complete | Steps 1–159 |
+| **Active step** | **160** — Provision VPS |
+| Pending | Steps 160–182 · Phase X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -344,15 +344,15 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 **Purpose:** Reproducible deployment environment matching local core.  
 **Opens:** Gate 150 · **Gate:** 159 · **Prohibited:** VPS until Gate 159
 
-- [ ] **151** · ← active · Container architecture → [`docs/12-docker.md`](docs/12-docker.md)
-- [ ] **152** · **Gate — container design accepted**
-- [ ] **153** · Application container
-- [ ] **154** · MySQL container
-- [ ] **155** · Redis container
-- [ ] **156** · Nginx + PHP-FPM
-- [ ] **157** · Queue worker and scheduler
-- [ ] **158** · Parity verification · Pest suite passes in containers
-- [ ] **159** · **Gate — containerisation accepted**
+- [x] **151** · Container architecture → [`docs/12-docker.md`](docs/12-docker.md) · One image, nginx, php-fpm, MySQL 9.6, Redis cache, database queue, scheduler
+- [x] **152** · **Gate — container design accepted** · [`docs/12-docker.md`](docs/12-docker.md) accepted · Steps 153–158 may begin · Accepted 2026-09-25
+- [x] **153** · Application container · `g3-control:runtime` and `g3-control:test` images · one-shot `migrate` command · PHP 8.5.11 · Laravel 13.30.1
+- [x] **154** · MySQL container · `mysql:9.6` on the `g3` network · database `g3_control` · volume `mysql-data` keeps the migrated tables · port 3306 unpublished
+- [x] **155** · Redis container · `redis:7-alpine` on the `g3` network · cache only · no volume · port 6379 unpublished
+- [x] **156** · Nginx + PHP-FPM · nginx on host port 8082 · `/up` returns 200 · `/` redirects to `/fr/accueil`
+- [x] **157** · Queue worker and scheduler · `queue:work database` drained the jobs table · one `schedule:work` replica
+- [x] **158** · Parity verification · Pest suite in `g3-control:test` · 368 tests, 3700 assertions
+- [x] **159** · **Gate — containerisation accepted** · Steps 153–158 verified · Pest in `g3-control:test` · 368 tests, 3700 assertions · Accepted 2026-09-25
 
 ---
 
@@ -363,7 +363,7 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 ### Infrastructure
 
-- [ ] **160** · Provision VPS
+- [ ] **160** · ← active · Provision VPS
 - [ ] **161** · Production environment configuration
 - [ ] **162** · DNS
 - [ ] **163** · Reverse proxy

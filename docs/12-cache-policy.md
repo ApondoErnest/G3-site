@@ -132,7 +132,7 @@ Compute **open now** from cached schedule + `Clock::nowDisplay()` — do not cac
 | --- | --- | --- |
 | Local dev | `file` | `.env` `CACHE_STORE=file` |
 | Tests | `array` | `phpunit.xml` |
-| Production Docker | `redis` | Phase IX · step 151+ |
+| Production Docker | `redis` | [12-docker.md](12-docker.md) |
 
 ---
 

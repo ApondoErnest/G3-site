@@ -13,10 +13,10 @@ A single Laravel application delivers the public website and the secure operatio
 
 | | |
 | --- | --- |
-| Phase | **IX — Containerisation** |
-| Progress | Steps 1–150 complete |
-| Active step | **151** — Container architecture |
-| Pending | Steps 151–182 · Phases IX–X |
+| Phase | **X — Production & operations** |
+| Progress | Steps 1–159 complete |
+| Active step | **160** — Provision VPS |
+| Pending | Steps 160–182 · Phase X |
 
 Delivery is **strictly sequential**: specification → environment → application shell → design → database design → backend design → database build → backend build → admin → public frontend → QA → Docker → production.
 
@@ -32,8 +32,8 @@ Delivery is **strictly sequential**: specification → environment → applicati
 | Administration UI | VI · 116 | **Complete** |
 | Public frontend | VII · 117–129 | **Complete** |
 | Quality assurance | VIII · 150 | **Complete** |
-| Containerisation | IX · 151 | **Active** |
-| Production | X · 160 | Locked |
+| Containerisation | IX · 159 | **Complete** |
+| Production | X · 160 | **Active** |
 
 Mark the active step complete in [PLAN.md](PLAN.md) before advancing.
 
@@ -56,4 +56,4 @@ Operational facts (hours, phones, agrément) are maintained in the baseline only
 
 ## Developer guide
 
-The local application exists. Phases II–VIII are complete, and Phase IX is in progress at step 151. Production deployment instructions wait for Phase X.
+The local application exists. Phases II–IX are complete. The Pest suite passes in `g3-control:test` with 368 tests and 3700 assertions. Nginx publishes host port 8082. The queue worker and one scheduler are running. MySQL 9.6 keeps `g3_control` on the `mysql-data` volume. Redis is cache only and keeps no data. Production deployment starts at step 160.
