@@ -20,6 +20,8 @@ class CompanySettings extends Settings
 
     public string $email;
 
+    public ?string $secondary_email;
+
     public string $postal_address;
 
     public array $default_seo_title;
@@ -31,6 +33,20 @@ class CompanySettings extends Settings
     public static function group(): string
     {
         return 'company';
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function contactEmails(): array
+    {
+        $emails = [$this->email];
+
+        if (filled($this->secondary_email) && $this->secondary_email !== $this->email) {
+            $emails[] = $this->secondary_email;
+        }
+
+        return $emails;
     }
 
     public function sloganFor(string $locale): string

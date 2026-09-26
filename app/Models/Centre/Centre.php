@@ -23,6 +23,7 @@ class Centre extends Model implements HasMedia
         'latitude',
         'longitude',
         'email',
+        'secondary_email',
         'postal_code',
         'status',
         'sort_order',
@@ -51,6 +52,20 @@ class Centre extends Model implements HasMedia
     {
         $this->addMediaCollection('centres')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp']);
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function contactEmails(): array
+    {
+        $emails = [$this->email];
+
+        if (filled($this->secondary_email) && $this->secondary_email !== $this->email) {
+            $emails[] = $this->secondary_email;
+        }
+
+        return $emails;
     }
 
     public function phones(): HasMany

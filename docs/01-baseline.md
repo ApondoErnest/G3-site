@@ -17,7 +17,7 @@ Single source for operational and brand facts. Change only via [03-scope.md](03-
 | Slogan FR | Sécurité. Simplicité. Confiance. |
 | Slogan EN | Safety. Simplicity. Trust. |
 | Agrément | N°0291 since 2020 — **company-wide** |
-| Email | g3sarl1@gmail.com |
+| Email | g3sarl1@gmail.com, admin@g3control.com |
 | Postal | BP 12775 Yaoundé |
 | Languages | French default (`/` → `/fr/accueil`) + English |
 | Proposition | Deux centres. 7 jours sur 7. Une même exigence de sécurité. |
@@ -28,7 +28,7 @@ Single source for operational and brand facts. Change only via [03-scope.md](03-
 | --- | --- | --- |
 | Landmark | Descente ancien Texaco, École de Police | Carrefour Nomayos |
 | Phones | 687 187 516 | 653 100 801, 692 242 143 |
-| Email / BP | g3sarl1@gmail.com / 12775 Yaoundé | same |
+| Email / BP | g3sarl1@gmail.com, admin@g3control.com / 12775 Yaoundé | same |
 | GPS | 3.8786152, 11.5116814 | 3.7902275, 11.4439448 |
 | Mon–Sat | 07:00–20:00 | 07:00–19:00 |
 | Sunday | 07:00–15:00 | 07:00–15:00 |

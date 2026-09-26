@@ -25,6 +25,7 @@ final class UpdateCompanySettings
         $this->settings->agrement_number = $data->agrementNumber;
         $this->settings->agrement_year = $data->agrementYear;
         $this->settings->email = $data->email;
+        $this->settings->secondary_email = $data->secondaryEmail;
         $this->settings->postal_address = $data->postalAddress;
         $this->settings->default_seo_title = $data->defaultSeoTitle->toArray();
         $this->settings->default_seo_description = $data->defaultSeoDescription->toArray();

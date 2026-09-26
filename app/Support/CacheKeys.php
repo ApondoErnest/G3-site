@@ -89,7 +89,7 @@ final class CacheKeys
 
     public static function publicCentres(string $locale): string
     {
-        return "public:centres:v2:{$locale}";
+        return "public:centres:v3:{$locale}";
     }
 
     public static function publicPhone(): string

@@ -138,6 +138,7 @@ return [
             'address' => 'Address',
             'landmark' => 'Landmark',
             'email' => 'Email',
+            'secondary_email' => 'Additional email',
             'postal_code' => 'Postal code',
             'latitude' => 'Latitude',
             'longitude' => 'Longitude',

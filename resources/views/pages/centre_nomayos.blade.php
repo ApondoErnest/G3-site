@@ -19,6 +19,8 @@
         'location' => $centre?->displayAddress ?? '',
         'phone_label' => $isFrench ? 'Téléphones' : 'Phones',
         'phones' => $centre?->phonesDisplay ?? [],
+        'email_label' => $isFrench ? 'E-mail' : 'Email',
+        'emails' => $centre?->emails ?? [],
         'hours_label' => $isFrench ? 'Horaires d’ouverture' : 'Opening hours',
         'weekday_label' => $isFrench ? 'Lundi – Samedi' : 'Monday – Saturday',
         'weekday_hours' => $centre?->weekdayHours ?? '',
@@ -201,6 +203,23 @@
                             @endforeach
                         </div>
                     </div>
+
+                    @if ($copy['emails'] !== [])
+                        <div class="g3-centre-hero__fact">
+                            <span class="g3-centre-hero__fact-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4 7 8 6 8-6"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <strong>{{ $copy['email_label'] }}</strong>
+                                @foreach ($copy['emails'] as $email)
+                                    <a href="mailto:{{ $email }}">{{ $email }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="g3-centre-hero__fact g3-centre-hero__fact--wide">
                         <span class="g3-centre-hero__fact-icon" aria-hidden="true">

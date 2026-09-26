@@ -15,6 +15,7 @@ test('resolve public company profile returns baseline facts FR-CO-03', function 
         ->and($profile->agrementLabel)->toBe('N°0291')
         ->and($profile->agrementYear)->toBe(2020)
         ->and($profile->email)->toBe('g3sarl1@gmail.com')
+        ->and($profile->emails)->toBe(['g3sarl1@gmail.com', 'admin@g3control.com'])
         ->and($profile->postalAddress)->toBe('BP 12775 Yaoundé')
         ->and($profile->defaultSeoTitle)->toBe('G3 Control — Visite technique à Yaoundé')
         ->and($profile->defaultSeoDescription)->toBe('Deux centres. 7 jours sur 7. Une même exigence de sécurité.')

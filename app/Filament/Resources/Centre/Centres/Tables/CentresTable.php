@@ -25,6 +25,8 @@ class CentresTable
                     ->searchable(),
                 TextColumn::make('email')
                     ->label(__('admin.centres.fields.email')),
+                TextColumn::make('secondary_email')
+                    ->label(__('admin.centres.fields.secondary_email')),
                 TextColumn::make('status')
                     ->label(__('admin.centres.fields.status'))
                     ->badge()

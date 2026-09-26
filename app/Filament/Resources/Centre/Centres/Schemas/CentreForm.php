@@ -35,6 +35,9 @@ class CentreForm
                             ->label(__('admin.centres.fields.email'))
                             ->email()
                             ->required(),
+                        TextInput::make('secondary_email')
+                            ->label(__('admin.centres.fields.secondary_email'))
+                            ->email(),
                         TextInput::make('postal_code')
                             ->label(__('admin.centres.fields.postal_code')),
                     ])

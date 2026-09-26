@@ -23,6 +23,7 @@ test('seeded company centres and official fees match the locked baseline', funct
         ->and($company->agrement_number)->toBe('0291')
         ->and($company->agrement_year)->toBe(2020)
         ->and($company->email)->toBe('g3sarl1@gmail.com')
+        ->and($company->secondary_email)->toBe('admin@g3control.com')
         ->and($company->postal_address)->toBe('BP 12775 Yaoundé')
         ->and(DB::table('centres')->count())->toBe(2);
 
@@ -51,6 +52,9 @@ test('seeded company centres and official fees match the locked baseline', funct
     expect((float) $ecole->latitude)->toBe(3.8786152)
         ->and((float) $ecole->longitude)->toBe(11.5116814)
         ->and($ecole->email)->toBe('g3sarl1@gmail.com')
+        ->and($ecole->secondary_email)->toBe('admin@g3control.com')
+        ->and($nomayos->email)->toBe('g3sarl1@gmail.com')
+        ->and($nomayos->secondary_email)->toBe('admin@g3control.com')
         ->and((bool) $ecole->holiday_default_open)->toBeTrue()
         ->and((float) $nomayos->latitude)->toBe(3.7902275)
         ->and((float) $nomayos->longitude)->toBe(11.4439448)

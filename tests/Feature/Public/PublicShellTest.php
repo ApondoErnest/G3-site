@@ -432,6 +432,7 @@ test('shell includes company contact details from settings', function () {
     $this->get('/fr/accueil')
         ->assertOk()
         ->assertSee($settings->email, escape: false)
+        ->assertSee($settings->secondary_email, escape: false)
         ->assertSee($settings->agrementLabel(), escape: false);
 });
 
@@ -473,6 +474,8 @@ test('public centre and tariff pages render operational data from records', func
     $this->get('/fr/contact')
         ->assertOk()
         ->assertSeeText('699 111 222')
+        ->assertSeeText('g3sarl1@gmail.com')
+        ->assertSeeText('admin@g3control.com')
         ->assertSeeText('07h00 - 18h30')
         ->assertSeeText(__('public.home.hero.live.open_until', ['time' => '20h00'], 'fr'))
         ->assertDontSee('g3-contact-centres__status--closed', false);
@@ -484,6 +487,16 @@ test('public centre and tariff pages render operational data from records', func
         ->assertDontSeeText('Ouvert actuellement')
         ->assertSeeText(__('public.home.hero.live.opens_at', ['time' => '07h00'], 'fr'))
         ->assertSee('g3-contact-centres__status--closed', false);
+
+    $this->get('/fr/centres/ecole-de-police')
+        ->assertOk()
+        ->assertSeeText('g3sarl1@gmail.com')
+        ->assertSeeText('admin@g3control.com');
+
+    $this->get('/fr/centres/nomayos')
+        ->assertOk()
+        ->assertSeeText('g3sarl1@gmail.com')
+        ->assertSeeText('admin@g3control.com');
 
     $this->get('/fr/tarifs')
         ->assertOk()

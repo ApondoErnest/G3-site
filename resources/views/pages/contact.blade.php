@@ -45,7 +45,7 @@
     $feesUrl = \App\Support\PublicNavigation::pageUrl('fees', $locale);
 
     $messageCopy = trans('public.contact_page.message');
-    $messageCopy['email_value'] = $publicCompany->email;
+    $messageCopy['email_values'] = $publicCompany->emails;
     $messageCopy['mailbox'] = $publicCompany->postalAddress;
     $messageCopy['approval'] = __('public.contact_page.message.approval', [
         'number' => $publicCompany->agrementLabel,
@@ -296,7 +296,11 @@
                 <dl class="g3-contact-message__support-list">
                     <div>
                         <dt><img src="{{ asset($assetRoot.'/icon-mail.svg') }}" alt="" aria-hidden="true"></dt>
-                        <dd><a href="mailto:{{ $messageCopy['email_value'] }}">{{ $messageCopy['email_value'] }}</a></dd>
+                        <dd>
+                            @foreach ($messageCopy['email_values'] as $email)
+                                <a href="mailto:{{ $email }}">{{ $email }}</a>
+                            @endforeach
+                        </dd>
                     </div>
                     <div>
                         <dt><img src="{{ asset($assetRoot.'/icon-pin.svg') }}" alt="" aria-hidden="true"></dt>

@@ -7,6 +7,7 @@ final readonly class PublicCentreEntry
     /**
      * @param  list<string>  $phonesDisplay
      * @param  list<string>  $phonesE164
+     * @param  list<string>  $emails
      */
     public function __construct(
         public int $id,
@@ -21,6 +22,7 @@ final readonly class PublicCentreEntry
         public string $phonesDisplayLine,
         public array $phonesDisplay,
         public array $phonesE164,
+        public array $emails,
         public string $weekdayHours,
         public string $sundayHours,
         public ?string $closeTime,

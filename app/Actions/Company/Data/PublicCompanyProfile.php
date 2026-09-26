@@ -17,6 +17,8 @@ final readonly class PublicCompanyProfile
         public string $agrementLabel,
         public int $agrementYear,
         public string $email,
+        /** @var list<string> */
+        public array $emails,
         public string $postalAddress,
         public string $defaultSeoTitle,
         public string $defaultSeoDescription,
@@ -32,6 +34,7 @@ final readonly class PublicCompanyProfile
             agrementLabel: $settings->agrementLabel(),
             agrementYear: $settings->agrement_year,
             email: $settings->email,
+            emails: $settings->contactEmails(),
             postalAddress: $settings->postal_address,
             defaultSeoTitle: $settings->defaultSeoTitleFor($locale->value),
             defaultSeoDescription: $settings->defaultSeoDescriptionFor($locale->value),

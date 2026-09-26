@@ -16,6 +16,7 @@ final readonly class UpdateCompanySettingsData
         public string $agrementNumber,
         public int $agrementYear,
         public string $email,
+        public ?string $secondaryEmail,
         public string $postalAddress,
         public TranslatableCopy $defaultSeoTitle,
         public TranslatableCopy $defaultSeoDescription,

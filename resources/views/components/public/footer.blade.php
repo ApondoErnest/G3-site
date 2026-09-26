@@ -85,13 +85,15 @@
                         </a>
                     @endif
 
-                    <a href="mailto:{{ $company->email }}" class="g3-site-footer__contact-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m4 7 8 6 8-6"/>
-                        </svg>
-                        <span>{{ $company->email }}</span>
-                    </a>
+                    @foreach ($company->contactEmails() as $email)
+                        <a href="mailto:{{ $email }}" class="g3-site-footer__contact-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4 7 8 6 8-6"/>
+                            </svg>
+                            <span>{{ $email }}</span>
+                        </a>
+                    @endforeach
                 </div>
 
                 <a href="{{ PublicNavigation::pageUrl('appointment', $locale) }}" class="g3-site-footer__cta">

@@ -34,7 +34,7 @@ Caching strategy for G3 Control V1. **Catalogues cacheable; tracking never cache
 | Content blocks (published) | `content:block:{key}` | 1h | Block publish |
 | Operational alerts active | `alerts:active` | **60s** | Alert CRUD |
 | Live “open now” strip | `availability:all:{Y-m-d-H-i}` | **60s** | Schedule change |
-| Public centre cards | `public:centres:v2:{locale}` | 1h | Centre, phone, or weekly-hours save |
+| Public centre cards | `public:centres:v3:{locale}` | 1h | Centre, phone, or weekly-hours save |
 | Public fee catalogue | `public:tariff:{locale}:{Y-m-d}` | 1h | Tariff publish or published line edit |
 | Header phone | `public:phone:primary` | 1h | Centre or phone save |
 

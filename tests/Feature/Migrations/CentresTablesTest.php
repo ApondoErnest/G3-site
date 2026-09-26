@@ -20,6 +20,7 @@ test('centres tables exist with expected columns per docs/11-erd.md', function (
         'latitude',
         'longitude',
         'email',
+        'secondary_email',
         'postal_code',
         'status',
         'sort_order',

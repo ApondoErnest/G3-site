@@ -13,6 +13,8 @@ test('company settings loads baseline defaults from docs/01-baseline.md', functi
         ->and($settings->agrement_number)->toBe('0291')
         ->and($settings->agrement_year)->toBe(2020)
         ->and($settings->email)->toBe('g3sarl1@gmail.com')
+        ->and($settings->secondary_email)->toBe('admin@g3control.com')
+        ->and($settings->contactEmails())->toBe(['g3sarl1@gmail.com', 'admin@g3control.com'])
         ->and($settings->postal_address)->toBe('BP 12775 Yaoundé')
         ->and($settings->slogan)->toBe([
             'fr' => 'Sécurité. Simplicité. Confiance.',

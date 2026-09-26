@@ -124,6 +124,7 @@ class BaselineCentresSeeder extends Seeder
             'latitude' => $latitude,
             'longitude' => $longitude,
             'email' => 'g3sarl1@gmail.com',
+            'secondary_email' => 'admin@g3control.com',
             'postal_code' => '12775 Yaoundé',
             'status' => 'active',
             'sort_order' => $sortOrder,

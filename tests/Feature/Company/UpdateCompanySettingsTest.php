@@ -23,6 +23,7 @@ function companySettingsPayload(array $overrides = []): UpdateCompanySettingsDat
         agrementNumber: $overrides['agrementNumber'] ?? '0291',
         agrementYear: $overrides['agrementYear'] ?? 2020,
         email: $overrides['email'] ?? 'g3sarl1@gmail.com',
+        secondaryEmail: $overrides['secondaryEmail'] ?? 'admin@g3control.com',
         postalAddress: $overrides['postalAddress'] ?? 'BP 12775 Yaoundé',
         defaultSeoTitle: $overrides['defaultSeoTitle'] ?? new TranslatableCopy(
             fr: 'G3 Control — Visite technique à Yaoundé',
