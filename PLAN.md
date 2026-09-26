@@ -83,9 +83,9 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 | | |
 | --- | --- |
 | Active phase | **X — Production & operations** |
-| Complete | Steps 1–159 |
-| **Active step** | **160** — Provision VPS |
-| Pending | Steps 160–182 · Phase X |
+| Complete | Steps 1–164 |
+| **Active step** | **165** — Deployment pipeline |
+| Pending | Steps 165–182 · Phase X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -363,12 +363,12 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 ### Infrastructure
 
-- [ ] **160** · ← active · Provision VPS
-- [ ] **161** · Production environment configuration
-- [ ] **162** · DNS
-- [ ] **163** · Reverse proxy
-- [ ] **164** · TLS / HTTPS
-- [ ] **165** · Deployment pipeline
+- [x] **160** · Provision VPS · Hostinger `89.117.37.202` (`srv1867313`) · Ubuntu 24.04.4 · Docker 29.7.1 · Compose v5.3.1 · 185G disk free · about 13Gi RAM available · host nginx already on 80 and 443 · port 8082 free beside `cashflow-summary` and `gs-autobilan` · Accepted 2026-09-26
+- [x] **161** · Production environment configuration · `/var/www/g3-control/.env.docker` mode 600 · `APP_ENV=production` · `APP_DEBUG=false` · `APP_URL=https://g3control.com` · Redis cache · database queue and sessions · stderr logs · SMTP `smtp.hostinger.com:465` from `admin@g3control.com` · MFA required · stack not started · Accepted 2026-09-26
+- [x] **162** · DNS · `g3control.com` and `www` A records resolve to `89.117.37.202` · `www` remains a CNAME to the apex · MX and SPF unchanged · Accepted 2026-09-26
+- [x] **163** · Reverse proxy · host nginx `/etc/nginx/sites-available/g3control.com` forwards `g3control.com` and `www` on port 80 to `127.0.0.1:8082` · upstream not running yet · other sites unchanged · Accepted 2026-09-26
+- [x] **164** · TLS / HTTPS · Let’s Encrypt certificate for `g3control.com` and `www.g3control.com` · expires 2026-12-25 · port 80 redirects to HTTPS · port 443 reaches nginx · renewal dry-run succeeded · Accepted 2026-09-26
+- [ ] **165** · ← active · Deployment pipeline
 - [ ] **166** · Production migration
 - [ ] **167** · Production seed · Settings, centres, hours
 - [ ] **168** · Smoke test

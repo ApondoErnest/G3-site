@@ -185,4 +185,4 @@ Phase X still owns the VPS, the public TLS endpoint in front of nginx, the produ
 - [x] Pest runs in a test stage on sqlite, as `phpunit.xml` already does
 - [x] VPS, TLS, the production domain, and the SMTP provider stay outside this phase
 
-**Next:** Phase X · step **160** — Provision VPS.
+**Next:** Phase X · step **165** — Deployment pipeline. Step **164** accepted 2026-09-26: Let’s Encrypt certificate for `g3control.com` and `www.g3control.com`.

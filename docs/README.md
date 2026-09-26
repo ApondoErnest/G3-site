@@ -53,6 +53,11 @@ Read and approve in this order. Each document builds on the previous.
 | 117–129 | Blade / Livewire pages · **Steps 118–128 Accueil + À propos + Nos centres + École de Police + Nomayos + Services + Visite technique + Tarifs + Rendez-vous & Suivi + Sécurité routière + Contact ✓** · **Gate 129 ✓ 2026-09-24** | Public frontend |
 | 130–150 | Quality assurance · **Steps 130–136 ✓** · **Step 137 Pest — live status ✓** · **Step 138 Pest — tariff lifecycle ✓** · **Step 139 Pest — appointment transitions ✓** · **Step 140 Pest — tracking privacy ✓** · **Step 141 Pest — Livewire request flow ✓** · **Step 142 Pest — Filament authorisation ✓** · **Gate 143 ✓ 2026-09-25** · **Step 144 French content load ✓** · **Step 145 English content load ✓** · **Step 146 Media ingestion ✓** · **Step 147 Factual audit ✓** · **Step 148 Local UAT ✓** · **Step 149 End-to-end validation ✓** · **Gate 150 ✓ 2026-09-25** · 368 tests, 3700 assertions | Integration, compliance, UAT |
 | 151–159 | Containerisation · **Step 151 Container architecture ✓** → [`12-docker.md`](12-docker.md) · **Gate 152 ✓ 2026-09-25** · **Step 153 Application container ✓** · **Step 154 MySQL container ✓** · **Step 155 Redis container ✓** · **Step 156 Nginx + PHP-FPM ✓** · **Step 157 Queue worker and scheduler ✓** · **Step 158 Parity verification ✓** · **Gate 159 ✓ 2026-09-25** | Docker after Gate 150 |
+| 160 | VPS provisioned · Hostinger `89.117.37.202` · Ubuntu 24.04.4 · Docker 29.7.1 · **Accepted 2026-09-26** | Production host |
+| 161 | Production environment · `/var/www/g3-control/.env.docker` · **Accepted 2026-09-26** | Production configuration |
+| 162 | DNS · `g3control.com` and `www` → `89.117.37.202` · **Accepted 2026-09-26** | Public names |
+| 163 | Reverse proxy · host nginx to `127.0.0.1:8082` · **Accepted 2026-09-26** | Public HTTP |
+| 164 | TLS · Let’s Encrypt for `g3control.com` and `www` · expires 2026-12-25 · **Accepted 2026-09-26** | Public HTTPS |
 | 177 | [`13-launch.md`](13-launch.md) | Go-live checklist |
 
 ---

@@ -14,9 +14,9 @@ A single Laravel application delivers the public website and the secure operatio
 | | |
 | --- | --- |
 | Phase | **X — Production & operations** |
-| Progress | Steps 1–159 complete |
-| Active step | **160** — Provision VPS |
-| Pending | Steps 160–182 · Phase X |
+| Progress | Steps 1–164 complete |
+| Active step | **165** — Deployment pipeline |
+| Pending | Steps 165–182 · Phase X |
 
 Delivery is **strictly sequential**: specification → environment → application shell → design → database design → backend design → database build → backend build → admin → public frontend → QA → Docker → production.
 
@@ -33,7 +33,7 @@ Delivery is **strictly sequential**: specification → environment → applicati
 | Public frontend | VII · 117–129 | **Complete** |
 | Quality assurance | VIII · 150 | **Complete** |
 | Containerisation | IX · 159 | **Complete** |
-| Production | X · 160 | **Active** |
+| Production | X · 165 | **Active** |
 
 Mark the active step complete in [PLAN.md](PLAN.md) before advancing.
 
@@ -56,4 +56,4 @@ Operational facts (hours, phones, agrément) are maintained in the baseline only
 
 ## Developer guide
 
-The local application exists. Phases II–IX are complete. The Pest suite passes in `g3-control:test` with 368 tests and 3700 assertions. Nginx publishes host port 8082. The queue worker and one scheduler are running. MySQL 9.6 keeps `g3_control` on the `mysql-data` volume. Redis is cache only and keeps no data. Production deployment starts at step 160.
+The local application exists. Phases II–IX are complete. The Pest suite passes in `g3-control:test` with 368 tests and 3700 assertions. Nginx publishes host port 8082. The queue worker and one scheduler are running. MySQL 9.6 keeps `g3_control` on the `mysql-data` volume. Redis is cache only and keeps no data. The production host is the existing Hostinger VPS at `89.117.37.202`. Its environment file is `/var/www/g3-control/.env.docker`. `g3control.com` resolves to that host. Host nginx forwards HTTPS to `127.0.0.1:8082`. The deployment pipeline starts at step 165.
