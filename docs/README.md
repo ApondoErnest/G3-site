@@ -58,6 +58,10 @@ Read and approve in this order. Each document builds on the previous.
 | 162 | DNS · `g3control.com` and `www` → `89.117.37.202` · **Accepted 2026-09-26** | Public names |
 | 163 | Reverse proxy · host nginx to `127.0.0.1:8082` · **Accepted 2026-09-26** | Public HTTP |
 | 164 | TLS · Let’s Encrypt for `g3control.com` and `www` · expires 2026-12-25 · **Accepted 2026-09-26** | Public HTTPS |
+| 165 | Deployment pipeline · clone `main` and `./docker/deploy.sh` · **Accepted 2026-09-26** | Repeatable deploy |
+| 166 | Production migration · `https://g3control.com/up` returns 200 · **Accepted 2026-09-26** | Database schema |
+| 167 | Production seed · centres, hours, official fees, media · **Accepted 2026-09-26** | Baseline data |
+| 168 | Smoke test · public pages and `/admin/login` · **Accepted 2026-09-26** | Live site |
 | 177 | [`13-launch.md`](13-launch.md) | Go-live checklist |
 
 ---

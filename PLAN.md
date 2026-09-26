@@ -83,9 +83,9 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 | | |
 | --- | --- |
 | Active phase | **X — Production & operations** |
-| Complete | Steps 1–164 |
-| **Active step** | **165** — Deployment pipeline |
-| Pending | Steps 165–182 · Phase X |
+| Complete | Steps 1–168 |
+| **Active step** | **169** — On-server backups |
+| Pending | Steps 169–182 · Phase X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -368,14 +368,14 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 - [x] **162** · DNS · `g3control.com` and `www` A records resolve to `89.117.37.202` · `www` remains a CNAME to the apex · MX and SPF unchanged · Accepted 2026-09-26
 - [x] **163** · Reverse proxy · host nginx `/etc/nginx/sites-available/g3control.com` forwards `g3control.com` and `www` on port 80 to `127.0.0.1:8082` · upstream not running yet · other sites unchanged · Accepted 2026-09-26
 - [x] **164** · TLS / HTTPS · Let’s Encrypt certificate for `g3control.com` and `www.g3control.com` · expires 2026-12-25 · port 80 redirects to HTTPS · port 443 reaches nginx · renewal dry-run succeeded · Accepted 2026-09-26
-- [ ] **165** · ← active · Deployment pipeline
-- [ ] **166** · Production migration
-- [ ] **167** · Production seed · Settings, centres, hours
-- [ ] **168** · Smoke test
+- [x] **165** · Deployment pipeline · `main` cloned to `/var/www/g3-control` · `./docker/deploy.sh` built `g3-control:runtime` · stack not started · Accepted 2026-09-26
+- [x] **166** · Production migration · `migrate` exited 0 · no pending migrations · `https://g3control.com/up` returns 200 · nginx stays on `127.0.0.1:8082` · Accepted 2026-09-26
+- [x] **167** · Production seed · Two centres, 14 weekly-hour rows, both email addresses, seven official fees, 20 media files · Accepted 2026-09-26
+- [x] **168** · Smoke test · French and English home, fees, centres, contact, and appointment return 200 · Both emails, agrément 0291, and official fees are present · `/admin/login` returns 200 · Accepted 2026-09-26
 
 ### Resilience
 
-- [ ] **169** · On-server backups
+- [ ] **169** · ← active · On-server backups
 - [ ] **170** · Off-server backup replication
 - [ ] **171** · Restore drill · Verified recovery, not configuration only
 - [ ] **172** · Uptime and error monitoring

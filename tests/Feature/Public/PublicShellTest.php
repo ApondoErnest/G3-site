@@ -26,6 +26,30 @@ test('french shell renders navigation footer and locale switcher', function () {
         ->assertSeeText(__('public.footer.contact_heading', [], 'fr'));
 });
 
+test('public assets follow the forwarded scheme', function () {
+    $https = $this->withServerVariables(['REMOTE_ADDR' => '10.0.0.2', 'HTTPS' => 'off'])
+        ->withHeaders([
+            'X-Forwarded-Proto' => 'https',
+            'X-Forwarded-For' => '203.0.113.5',
+        ])
+        ->get('http://g3control.com/fr/accueil');
+
+    $https->assertOk()
+        ->assertSee('https://g3control.com/build/assets/', escape: false)
+        ->assertDontSee('http://g3control.com/build/assets/', escape: false);
+
+    $http = $this->withServerVariables(['REMOTE_ADDR' => '10.0.0.2', 'HTTPS' => 'off'])
+        ->withHeaders([
+            'X-Forwarded-Proto' => 'http',
+            'X-Forwarded-For' => '203.0.113.5',
+        ])
+        ->get('http://g3control.com/fr/accueil');
+
+    $http->assertOk()
+        ->assertSee('http://g3control.com/build/assets/', escape: false)
+        ->assertDontSee('https://g3control.com/build/assets/', escape: false);
+});
+
 test('english shell renders translated navigation', function () {
     $response = $this->get('/en/home');
 
