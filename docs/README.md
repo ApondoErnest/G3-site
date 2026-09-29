@@ -62,7 +62,15 @@ Read and approve in this order. Each document builds on the previous.
 | 166 | Production migration · `https://g3control.com/up` returns 200 · **Accepted 2026-09-26** | Database schema |
 | 167 | Production seed · centres, hours, official fees, media · **Accepted 2026-09-26** | Baseline data |
 | 168 | Smoke test · public pages and `/admin/login` · **Accepted 2026-09-26** | Live site |
-| 177 | [`13-launch.md`](13-launch.md) | Go-live checklist |
+| 169 | On-server backups · daily database, media, and public files · **Accepted 2026-09-29** | Local recovery copy |
+| 170 | Off-server backup copy · Mac pull daily at 13:00 Africa/Douala · **Accepted 2026-09-29** | Operator Mac |
+| 171 | Restore drill · backup imported into a throwaway database · **Accepted 2026-09-29** | Recovery proved |
+| 172 | Uptime and error monitoring · every 5 minutes · **Accepted 2026-09-29** | Alerts |
+| 173 | Log rotation · container logs 10 MB × 5 · host logs weekly · **Accepted 2026-09-29** | Disk |
+| 174 | Security audit · HTTPS, hidden secrets, unpublished databases · **Accepted 2026-09-29** | Production exposure |
+| 175 | Production factual audit · baseline facts match · Re-inspection approved · **Accepted 2026-09-29** | Live facts |
+| 176 | Accessibility and performance audit · hero image 2.6 MB PNG · **Accepted 2026-09-29** | Live pages |
+| 177 | Go-live approved · `https://g3control.com` · **Accepted 2026-09-29** | Ownership decision |
 
 ---
 

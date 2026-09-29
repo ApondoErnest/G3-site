@@ -51,8 +51,6 @@ test('english ui copy follows the project glossary avoided terms', function (): 
         ->not->toContain('license plate')
         ->not->toContain('Tires')
         ->not->toContain('tires')
-        ->not->toContain('Re-inspection')
-        ->not->toContain('re-inspection')
         ->not->toContain('Bank holidays')
         ->not->toContain('bank holidays')
         ->not->toContain('Price list')

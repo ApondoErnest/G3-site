@@ -14,9 +14,9 @@ A single Laravel application delivers the public website and the secure operatio
 | | |
 | --- | --- |
 | Phase | **X — Production & operations** |
-| Progress | Steps 1–168 complete |
-| Active step | **169** — On-server backups |
-| Pending | Steps 169–182 · Phase X |
+| Progress | Steps 1–177 complete |
+| Active step | **178** — Public launch |
+| Pending | Steps 178–182 · Phase X |
 
 Delivery is **strictly sequential**: specification → environment → application shell → design → database design → backend design → database build → backend build → admin → public frontend → QA → Docker → production.
 
@@ -33,7 +33,7 @@ Delivery is **strictly sequential**: specification → environment → applicati
 | Public frontend | VII · 117–129 | **Complete** |
 | Quality assurance | VIII · 150 | **Complete** |
 | Containerisation | IX · 159 | **Complete** |
-| Production | X · 169 | **Active** |
+| Production | X · 177 | **Complete** |
 
 Mark the active step complete in [PLAN.md](PLAN.md) before advancing.
 
@@ -56,4 +56,4 @@ Operational facts (hours, phones, agrément) are maintained in the baseline only
 
 ## Developer guide
 
-The local application exists. Phases II–IX are complete. The Pest suite passes in `g3-control:test` with 368 tests and 3700 assertions. Nginx publishes host port 8082. The queue worker and one scheduler are running. MySQL 9.6 keeps `g3_control` on the `mysql-data` volume. Redis is cache only and keeps no data. The production host is the existing Hostinger VPS at `89.117.37.202`. Its environment file is `/var/www/g3-control/.env.docker`. `g3control.com` resolves to that host. Host nginx forwards HTTPS to `127.0.0.1:8082`. The production tree is `/var/www/g3-control` on `main`. The database is migrated and seeded. The public smoke test passed. On-server backups start at step 169.
+The local application exists. Phases II–IX are complete. The Pest suite passes in `g3-control:test` with 368 tests and 3700 assertions. Nginx publishes host port 8082. The queue worker and one scheduler are running. MySQL 9.6 keeps `g3_control` on the `mysql-data` volume. Redis is cache only and keeps no data. The production host is the existing Hostinger VPS at `89.117.37.202`. Its environment file is `/var/www/g3-control/.env.docker`. `g3control.com` resolves to that host. Host nginx forwards HTTPS to `127.0.0.1:8082`. The production tree is `/var/www/g3-control` on `main`. The database is migrated and seeded. The public smoke test passed. A daily on-server backup at 01:00 UTC keeps 14 days of the database, media, public files, and environment file. The operator Mac pulls that copy at 13:00 Africa/Douala. A restore drill imported that backup into a throwaway database and removed it. An uptime check runs every 5 minutes and emails `aernestngonge@gmail.com` on failure. Container logs are capped at 10 MB × 5, and the host monitor and backup logs rotate weekly. The production security audit passed, with MFA left off by choice and no HSTS header. The production factual audit matched the locked baseline, and Re-inspection is the approved English term for contre-visite. The accessibility and performance audit passed. Go-live was approved on 2026-09-29. Admin sign-in stays without an authenticator code, the site sends no HSTS header, the homepage hero remains a 2.6 MB PNG, and retention stays at the proposed 24, 12, and 24 months. Public launch is step 178.

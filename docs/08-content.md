@@ -61,7 +61,7 @@ No “MOT”. UI labels via PHP lang files; codes stay snake_case ([09-architect
 | FR | EN | Avoid |
 | --- | --- | --- |
 | Visite technique | Technical inspection | MOT as title |
-| Contre-visite | Counter-visit | |
+| Contre-visite | Re-inspection | Counter-visit |
 | Centre | Inspection centre | Garage |
 | Agrément | Approval (with number) | License |
 | Tarif (page) | Fees | Price list as H1 |

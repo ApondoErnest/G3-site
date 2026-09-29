@@ -83,9 +83,9 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 | | |
 | --- | --- |
 | Active phase | **X — Production & operations** |
-| Complete | Steps 1–168 |
-| **Active step** | **169** — On-server backups |
-| Pending | Steps 169–182 · Phase X |
+| Complete | Steps 1–176 |
+| **Active step** | **177** — Go-live approved |
+| Pending | Steps 177–182 · Phase X |
 
 **Hard locks:** Laravel → Phase III (step 24) · Docker → Phase IX (step 150) · VPS → Phase X (step 159)
 
@@ -375,22 +375,22 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 ### Resilience
 
-- [ ] **169** · ← active · On-server backups
-- [ ] **170** · Off-server backup replication
-- [ ] **171** · Restore drill · Verified recovery, not configuration only
-- [ ] **172** · Uptime and error monitoring
-- [ ] **173** · Log rotation
+- [x] **169** · On-server backups · `/usr/local/sbin/g3-control-backup` · daily 01:00 UTC · 14 days · dump of 44 tables plus `app-storage`, `public-files`, and `.env.docker` · `/up` 200 · other sites unchanged · Accepted 2026-09-29
+- [x] **170** · Off-server backup replication · copy on the operator Mac at `~/Backups/g3-control` · checksums match the VPS · Mac pull daily at 13:00 Africa/Douala · server backup stays at 01:00 UTC · `/up` 200 · Accepted 2026-09-29
+- [x] **171** · Restore drill · Throwaway `g3-restore-drill` imported the 2026-09-29 backup · 44 tables, both centres, both emails, 14 hour rows, official fees, 20 media files, logo, and CSS · container removed · live containers unchanged · `/up` 200 · Accepted 2026-09-29
+- [x] **172** · Uptime and error monitoring · `/usr/local/sbin/g3-control-monitor` every 5 minutes · public `/up`, containers, queue, scheduler, failed jobs, recent errors, and disk · alerts to `aernestngonge@gmail.com` · test mail accepted · `/up` 200 · other sites unchanged · Accepted 2026-09-29
+- [x] **173** · Log rotation · container logs `json-file` 10 MB × 5 · host logs weekly, 8 copies, `copytruncate` · monitor log rotated to `.1` · host nginx rotation already present · `/up` 200 · other sites unchanged · Accepted 2026-09-29
 
 ### Pre-launch audit
 
-- [ ] **174** · Security audit
-- [ ] **175** · Production factual audit
-- [ ] **176** · Accessibility and performance audit
-- [ ] **177** · **Gate — go-live approved** · Includes steps 170–171
+- [x] **174** · Security audit · HTTPS redirect, TLS, frame and nosniff headers, hidden env and git paths, robots disallow `/admin`, sitemap omits admin, secure cookies, production debug off, database user `g3`, env file mode 600 and untracked · MySQL and Redis have no host listener · 404 page hides the stack · MFA remains off by choice · HSTS header absent · `/up` 200 · other sites unchanged · Accepted 2026-09-29
+- [x] **175** · Production factual audit · Company name, both slogans, agrément 0291 / 2020, both emails, BP 12775 Yaoundé, both GPS points, phones, hours, and the seven official fees match the baseline · English uses Re-inspection for contre-visite · `/up` 200 · Accepted 2026-09-29
+- [x] **176** · Accessibility and performance audit · Language, skip link, one heading, image text, form labels, visible focus, and touch size pass · Homepage has no autoplaying video · Inspection video has controls · Public script is small · Stylesheet is 452 KB · Homepage hero `hero-5.png` is 2.6 MB and not WebP · `/up` 200 · Accepted 2026-09-29
+- [x] **177** · **Gate — go-live approved** · Includes steps 170–171 · `https://g3control.com` is the live site · MFA stays off by choice · no HSTS header · homepage hero `hero-5.png` remains a 2.6 MB PNG · retention stays the proposed 24, 12, and 24 months · Accepted 2026-09-29
 
 ### Launch & handover
 
-- [ ] **178** · Public launch
+- [ ] **178** · ← active · Public launch
 - [ ] **179** · Post-launch monitoring · 72 hours
 - [ ] **180** · Operational handover · Named owners and procedures
 - [ ] **181** · First monthly review
