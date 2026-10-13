@@ -2,11 +2,11 @@
     use App\Support\PublicNavigation;
 
     $heroSlides = [
-        'hero-1.png',
-        'hero-2.png',
-        'hero-3.png',
-        'hero-4.png',
-        'hero-5.png',
+        'hero-1.webp',
+        'hero-2.webp',
+        'hero-3.webp',
+        'hero-4.webp',
+        'hero-5.webp',
     ];
 
     $heroValues = [
@@ -265,16 +265,20 @@
 
 @section('content')
     <section class="g3-home-hero" aria-labelledby="home-hero-title">
-        <div class="g3-home-hero__carousel" aria-hidden="true">
+        <div class="g3-home-hero__carousel" aria-hidden="true" data-home-hero-carousel>
             @foreach ($heroSlides as $slide)
                 <img
-                    src="{{ asset('images/homepage/'.$slide) }}"
+                    @if ($loop->first)
+                        src="{{ asset('images/homepage/'.$slide) }}"
+                    @else
+                        data-src="{{ asset('images/homepage/'.$slide) }}"
+                    @endif
                     alt=""
-                    class="g3-home-hero__slide"
-                    style="--slide-index: {{ $loop->index }}"
+                    @class(['g3-home-hero__slide', 'g3-home-hero__slide--active' => $loop->first])
+                    data-home-hero-slide
                     width="1971"
                     height="798"
-                    @if ($loop->first) fetchpriority="high" @else loading="lazy" decoding="async" @endif
+                    @if ($loop->first) fetchpriority="high" @else decoding="async" @endif
                 >
                 @if ($loop->first)
                     @push('head')

@@ -63,9 +63,21 @@ test('french home renders the hero carousel', function () {
 
     $response->assertOk()
         ->assertSee('g3-home-hero', escape: false)
-        ->assertSee('images/homepage/hero-1.png', escape: false)
+        ->assertSee('images/homepage/hero-1.webp', escape: false)
         ->assertSeeText(__('public.home.hero.title', [], 'fr'))
         ->assertSeeText(__('public.home.hero.live.title', [], 'fr'));
+});
+
+test('home hero requests only the first slide with the page', function () {
+    $response = $this->get('/fr/accueil');
+
+    $response->assertOk()
+        ->assertSee(' src="'.asset('images/homepage/hero-1.webp').'"', escape: false);
+
+    foreach (['hero-2.webp', 'hero-3.webp', 'hero-4.webp', 'hero-5.webp'] as $slide) {
+        $response->assertSee('data-src="'.asset('images/homepage/'.$slide).'"', escape: false)
+            ->assertDontSee(' src="'.asset('images/homepage/'.$slide).'"', escape: false);
+    }
 });
 
 test('french home renders the quick start section', function () {

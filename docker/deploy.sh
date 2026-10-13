@@ -23,4 +23,11 @@ if docker network inspect g3 >/dev/null 2>&1; then
     fi
 fi
 
+if docker volume inspect g3-control_public-files >/dev/null 2>&1; then
+    docker run --rm --user root --entrypoint sh \
+        -v g3-control_public-files:/public-files \
+        g3-control:runtime \
+        -c 'rm -rf /public-files/build && cp -a /var/www/html/public/. /public-files/'
+fi
+
 docker compose up -d

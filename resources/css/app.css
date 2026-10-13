@@ -1660,9 +1660,15 @@
     }
 
     .g3-home-hero__slide {
-        @apply h-full w-full object-cover opacity-0;
-        animation: g3-home-hero-fade 25s linear infinite;
-        animation-delay: calc(var(--slide-index) * 5s);
+        @apply h-full w-full object-cover opacity-0 transition-opacity duration-1000 ease-in-out;
+    }
+
+    .g3-home-hero__slide--previous {
+        @apply z-0 opacity-100;
+    }
+
+    .g3-home-hero__slide--active {
+        @apply z-10 opacity-100;
     }
 
     .g3-home-hero__scrim {
@@ -2432,26 +2438,6 @@
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-    }
-
-    .g3-home-hero__slide:first-child {
-        @apply opacity-100;
-    }
-}
-
-@keyframes g3-home-hero-fade {
-    0%,
-    16% {
-        opacity: 1;
-    }
-
-    20%,
-    96% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
     }
 }
 

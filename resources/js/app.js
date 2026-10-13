@@ -303,6 +303,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.querySelectorAll('[data-home-hero-carousel]').forEach((carousel) => {
+        const slides = Array.from(carousel.querySelectorAll('[data-home-hero-slide]'));
+        const slideDuration = 5000;
+        const fadeDuration = 1000;
+
+        if (slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
+        let activeIndex = 0;
+
+        const whenLoaded = (slide) => {
+            if (! slide.getAttribute('src') && slide.dataset.src) {
+                slide.src = slide.dataset.src;
+            }
+
+            return slide.decode().then(() => true, () => slide.complete && slide.naturalWidth > 0);
+        };
+
+        const showNextLoadedSlide = async () => {
+            for (let offset = 1; offset < slides.length; offset++) {
+                const nextIndex = (activeIndex + offset) % slides.length;
+
+                if (await whenLoaded(slides[nextIndex])) {
+                    const previous = slides[activeIndex];
+
+                    previous.classList.add('g3-home-hero__slide--previous');
+                    previous.classList.remove('g3-home-hero__slide--active');
+                    slides[nextIndex].classList.add('g3-home-hero__slide--active');
+                    window.setTimeout(() => previous.classList.remove('g3-home-hero__slide--previous'), fadeDuration);
+                    activeIndex = nextIndex;
+
+                    break;
+                }
+            }
+
+            whenLoaded(slides[(activeIndex + 1) % slides.length]);
+            window.setTimeout(showNextLoadedSlide, slideDuration);
+        };
+
+        whenLoaded(slides[0]).then(() => {
+            whenLoaded(slides[1]);
+            window.setTimeout(showNextLoadedSlide, slideDuration);
+        });
+    });
+
     document.querySelectorAll('[data-centre-hero-carousel]').forEach((carousel) => {
         const slides = Array.from(carousel.querySelectorAll('[data-centre-hero-slide]'));
         const dots = Array.from(carousel.querySelectorAll('[data-centre-hero-dot]'));
