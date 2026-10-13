@@ -6,12 +6,12 @@
 
     $centreAssets = [
         'ecole-de-police' => [
-            'image' => 'ecole-de-police.png',
+            'image' => 'ecole-de-police.webp',
             'alt' => $assetCopy['ecole_de_police_alt'],
             'variant' => 'blue',
         ],
         'nomayos' => [
-            'image' => 'nomayos.png',
+            'image' => 'nomayos.webp',
             'alt' => $assetCopy['nomayos_alt'],
             'variant' => 'orange',
         ],
@@ -29,7 +29,7 @@
             'weekday_hours' => $centre->weekdayHours,
             'sunday_hours' => $centre->sundayHours,
             'coordinates' => $centre->coordinates,
-            'image' => $centreAssets[$centre->key]['image'] ?? 'ecole-de-police.png',
+            'image' => $centreAssets[$centre->key]['image'] ?? 'ecole-de-police.webp',
             'alt' => $centreAssets[$centre->key]['alt'] ?? $centre->name,
             'variant' => $centreAssets[$centre->key]['variant'] ?? 'blue',
         ])

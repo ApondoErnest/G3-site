@@ -156,62 +156,62 @@
         [
             'title' => __('public.home.equipment.items.brakes.title'),
             'body' => __('public.home.equipment.items.brakes.body'),
-            'image' => 'brakes.png',
+            'image' => 'brakes.webp',
         ],
         [
             'title' => __('public.home.equipment.items.suspension.title'),
             'body' => __('public.home.equipment.items.suspension.body'),
-            'image' => 'suspension.png',
+            'image' => 'suspension.webp',
         ],
         [
             'title' => __('public.home.equipment.items.ripage.title'),
             'body' => __('public.home.equipment.items.ripage.body'),
-            'image' => 'ripage.png',
+            'image' => 'ripage.webp',
         ],
         [
             'title' => __('public.home.equipment.items.headlamp.title'),
             'body' => __('public.home.equipment.items.headlamp.body'),
-            'image' => 'headlamp-tester.png',
+            'image' => 'headlamp-tester.webp',
         ],
         [
             'title' => __('public.home.equipment.items.gas.title'),
             'body' => __('public.home.equipment.items.gas.body'),
-            'image' => 'gas-analyser.png',
+            'image' => 'gas-analyser.webp',
         ],
         [
             'title' => __('public.home.equipment.items.plays.title'),
             'body' => __('public.home.equipment.items.plays.body'),
-            'image' => 'plays.png',
+            'image' => 'plays.webp',
         ],
         [
             'title' => __('public.home.equipment.items.pit.title'),
             'body' => __('public.home.equipment.items.pit.body'),
-            'image' => 'pit.png',
+            'image' => 'pit.webp',
         ],
         [
             'title' => __('public.home.equipment.items.sonometre.title'),
             'body' => __('public.home.equipment.items.sonometre.body'),
-            'image' => 'sonometre.png',
+            'image' => 'sonometre.webp',
         ],
         [
             'title' => __('public.home.equipment.items.air_compressor.title'),
             'body' => __('public.home.equipment.items.air_compressor.body'),
-            'image' => 'air-compressor.png',
+            'image' => 'air-compressor.webp',
         ],
         [
             'title' => __('public.home.equipment.items.opacimeter.title'),
             'body' => __('public.home.equipment.items.opacimeter.body'),
-            'image' => 'opacimeter.png',
+            'image' => 'opacimeter.webp',
         ],
     ];
 
     $centreAssets = [
         'ecole-de-police' => [
-            'image' => 'ecole-de-police.png',
+            'image' => 'ecole-de-police.webp',
             'url' => PublicNavigation::pageUrl('centre_ecole_de_police', $locale),
         ],
         'nomayos' => [
-            'image' => 'nomayos.png',
+            'image' => 'nomayos.webp',
             'url' => PublicNavigation::pageUrl('centre_nomayos', $locale),
         ],
     ];
@@ -226,7 +226,7 @@
             'status' => ($publicLiveStatus ?? [])[$centre->key]['status'] ?? __('public.home.hero.live.closed'),
             'phone' => $centre->phonesDisplayLine,
             'phone_href' => $centre->primaryPhoneE164,
-            'image' => $centreAssets[$centre->key]['image'] ?? 'ecole-de-police.png',
+            'image' => $centreAssets[$centre->key]['image'] ?? 'ecole-de-police.webp',
             'url' => $centreAssets[$centre->key]['url'] ?? PublicNavigation::pageUrl('centres', $locale),
         ])
         ->values()
@@ -446,7 +446,7 @@
     <section class="g3-home-control" aria-labelledby="home-control-title" data-home-control>
         <div class="g3-home-control__media" aria-hidden="true">
             <img
-                src="{{ asset('images/homepage/g3-control.png') }}"
+                src="{{ asset('images/homepage/g3-control.webp') }}"
                 alt=""
                 class="g3-home-control__image"
                 loading="lazy"
@@ -703,7 +703,7 @@
     <section class="g3-home-road-safety" aria-labelledby="home-road-safety-title">
         <div class="g3-home-road-safety__media" aria-hidden="true">
             <img
-                src="{{ asset('images/homepage/securite-routiere.png') }}"
+                src="{{ asset('images/homepage/securite-routiere.webp') }}"
                 alt=""
                 width="1448"
                 height="1086"

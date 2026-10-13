@@ -55,7 +55,7 @@
             'selector' => $isFrench ? 'Voiture particulière' : 'Private car',
             'title' => $isFrench ? 'Catégorie B' : 'Category B',
             'label' => $isFrench ? 'Véhicule de tourisme' : 'Passenger vehicle',
-            'image' => 'light-vehicle.png',
+            'image' => 'light-vehicle.webp',
             'examples' => $isFrench
                 ? 'Voitures particulières, berlines, SUV, 4x4 à usage privé.'
                 : 'Private cars, sedans, SUVs and private-use 4x4 vehicles.',
@@ -71,7 +71,7 @@
             'selector' => $isFrench ? 'Taxi / Auto-école' : 'Taxi / Driving school',
             'title' => $isFrench ? 'Catégorie A' : 'Category A',
             'label' => $isFrench ? 'Taxi / Auto-école' : 'Taxi / Driving school',
-            'image' => 'taxi.png',
+            'image' => 'taxi.webp',
             'examples' => $isFrench
                 ? 'Taxis, véhicules d’auto-école et véhicules assimilés.'
                 : 'Taxis, driving-school vehicles and similar vehicles.',
@@ -87,7 +87,7 @@
             'selector' => $isFrench ? 'Utilitaire' : 'Utility vehicle',
             'title' => $isFrench ? 'Catégorie B1' : 'Category B1',
             'label' => $isFrench ? 'Pickup 3,5 T / Véhicule utilitaire léger' : '3.5 T pickup / Light utility vehicle',
-            'image' => 'pickup.png',
+            'image' => 'pickup.webp',
             'examples' => $isFrench
                 ? 'Pickup 3,5 T, fourgonnettes et véhicules utilitaires légers.'
                 : '3.5 T pickups, vans and light utility vehicles.',
@@ -103,7 +103,7 @@
             'selector' => $isFrench ? 'Mini-bus' : 'Minibus',
             'title' => $isFrench ? 'Catégorie C < 3,5T' : 'Category C < 3.5T',
             'label' => $isFrench ? 'Mini-bus' : 'Minibus',
-            'image' => 'mini bus.png',
+            'image' => 'mini bus.webp',
             'examples' => $isFrench
                 ? 'Mini-bus et transport de personnes de moins de 3,5 T.'
                 : 'Minibuses and passenger transport vehicles under 3.5 T.',
@@ -119,7 +119,7 @@
             'selector' => $isFrench ? 'Grand bus' : 'Large bus',
             'title' => $isFrench ? 'Catégorie C' : 'Category C',
             'label' => $isFrench ? 'Grand bus / Coaster' : 'Large bus / Coaster',
-            'image' => 'large bus.png',
+            'image' => 'large bus.webp',
             'examples' => $isFrench
                 ? 'Grands bus, coaster et véhicules de transport de personnes.'
                 : 'Large buses, coasters and passenger transport vehicles.',
@@ -135,7 +135,7 @@
             'selector' => $isFrench ? 'Poids lourd' : 'Heavy vehicle',
             'title' => $isFrench ? 'Catégorie D' : 'Category D',
             'label' => $isFrench ? 'Poids lourd' : 'Heavy vehicle',
-            'image' => 'heavy vehicle.png',
+            'image' => 'heavy vehicle.webp',
             'examples' => $isFrench
                 ? 'Camions, tracteurs, semi-remorques et utilitaires lourds.'
                 : 'Trucks, tractors, semi-trailers and heavy utility vehicles.',
@@ -151,7 +151,7 @@
             'selector' => $isFrench ? 'Autre catégorie' : 'Other category',
             'title' => $isFrench ? 'Catégorie D' : 'Category D',
             'label' => $isFrench ? 'Autres engins' : 'Other machinery',
-            'image' => 'other-machinery.png',
+            'image' => 'other-machinery.webp',
             'examples' => $isFrench
                 ? 'Engins spéciaux et véhicules ne relevant pas des profils courants.'
                 : 'Special machinery and vehicles outside the common profiles.',
@@ -307,7 +307,7 @@
                                 <span>{{ $copy['yourTariff'] }}</span>
                                 <h2>{{ $profile['title'] }}</h2>
                                 <p>{{ $profile['label'] }}</p>
-                                <img src="{{ asset('images/tariffs/'.$profile['image']) }}" alt="">
+                                <img src="{{ asset('images/tariffs/'.$profile['image']) }}" alt="" loading="lazy" decoding="async">
                             </div>
 
                             <div class="g3-tariff-passport__details">

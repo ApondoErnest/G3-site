@@ -21,7 +21,7 @@
             'summary' => $isFrench
                 ? 'Je rassemble les documents et je prépare mon véhicule.'
                 : 'I gather the documents and prepare my vehicle.',
-            'image' => 'preparation.png',
+            'image' => 'preparation.webp',
             'eyebrow' => $isFrench ? '01 · Préparation' : '01 · Preparation',
             'title' => $isFrench
                 ? 'Un contrôle serein commence par une bonne préparation.'
@@ -54,7 +54,7 @@
             'summary' => $isFrench
                 ? 'Vérification des documents et enregistrement du véhicule.'
                 : 'Document checks and vehicle registration.',
-            'image' => 'reception.png',
+            'image' => 'reception.webp',
             'eyebrow' => $isFrench ? '02 · Accueil & identification' : '02 · Reception & identification',
             'title' => $isFrench
                 ? 'Un accueil structuré permet un enregistrement fiable du véhicule.'
@@ -87,7 +87,7 @@
             'summary' => $isFrench
                 ? 'Ligne de contrôle et mesures techniques.'
                 : 'Inspection lane and technical measurements.',
-            'image' => 'passge sur la ligne.png',
+            'image' => 'passge sur la ligne.webp',
             'eyebrow' => $isFrench ? '03 · Contrôle' : '03 · Inspection',
             'title' => $isFrench
                 ? 'Des mesures précises et un contrôle complet.'
@@ -126,7 +126,7 @@
             'summary' => $isFrench
                 ? 'Traitement des données et observations.'
                 : 'Data processing and observations.',
-            'image' => 'results-analyses.png',
+            'image' => 'results-analyses.webp',
             'eyebrow' => $isFrench ? '04 · Analyse des résultats' : '04 · Results analysis',
             'title' => $isFrench
                 ? 'Des données analysées avec rigueur.'
@@ -165,7 +165,7 @@
             'summary' => $isFrench
                 ? 'Votre résultat et les prochaines étapes.'
                 : 'Your result and next steps.',
-            'image' => 'restitution et suite.png',
+            'image' => 'restitution et suite.webp',
             'eyebrow' => $isFrench ? '05 · Résultat & suite' : '05 · Result & next steps',
             'title' => $isFrench
                 ? 'Votre résultat vous est remis avec des explications claires.'
@@ -684,6 +684,7 @@
                                 src="{{ asset('images/technical-inspection/'.$step['image']) }}"
                                 alt=""
                                 aria-hidden="true"
+                                @if (! $isActive) loading="lazy" decoding="async" @endif
                             >
                         </figure>
 
@@ -798,7 +799,7 @@
 
                 <figure class="g3-control-explorer__media">
                     <img
-                        src="{{ asset('images/technical-inspection/control-points.png') }}"
+                        src="{{ asset('images/technical-inspection/control-points.webp') }}"
                         alt=""
                         aria-hidden="true"
                     >

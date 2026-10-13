@@ -36,10 +36,10 @@
     ];
 
     $slides = [
-        ['image' => 'eco-1.png', 'alt' => $isFrench ? 'Façade du centre G3 Control École de Police' : 'Facade of the G3 Control École de Police centre'],
-        ['image' => 'eco-2.png', 'alt' => $isFrench ? 'Vue extérieure du centre G3 Control École de Police' : 'Exterior view of the G3 Control École de Police centre'],
-        ['image' => 'eco-3.png', 'alt' => $isFrench ? 'Zone d’accueil du centre G3 Control École de Police' : 'Reception area of the G3 Control École de Police centre'],
-        ['image' => 'eco-4.png', 'alt' => $isFrench ? 'Équipements du centre G3 Control École de Police' : 'Equipment at the G3 Control École de Police centre'],
+        ['image' => 'eco-1.webp', 'alt' => $isFrench ? 'Façade du centre G3 Control École de Police' : 'Facade of the G3 Control École de Police centre'],
+        ['image' => 'eco-2.webp', 'alt' => $isFrench ? 'Vue extérieure du centre G3 Control École de Police' : 'Exterior view of the G3 Control École de Police centre'],
+        ['image' => 'eco-3.webp', 'alt' => $isFrench ? 'Zone d’accueil du centre G3 Control École de Police' : 'Reception area of the G3 Control École de Police centre'],
+        ['image' => 'eco-4.webp', 'alt' => $isFrench ? 'Équipements du centre G3 Control École de Police' : 'Equipment at the G3 Control École de Police centre'],
     ];
 
     $preparationCopy = [

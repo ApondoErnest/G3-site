@@ -107,8 +107,8 @@
     ];
 
     $centreAssets = [
-        'ecole-de-police' => 'ecole-de-police.png',
-        'nomayos' => 'nomayos.png',
+        'ecole-de-police' => 'ecole-de-police.webp',
+        'nomayos' => 'nomayos.webp',
     ];
     $requestedCentre = $appointmentHandoff['centre'] ?? '';
     $centreKeys = collect($publicCentres ?? [])->map(fn ($centre) => $centre->key);
@@ -124,7 +124,7 @@
             'hours' => ($isFrench ? 'Lun. - Sam. ' : 'Mon. - Sat. ').$centre->weekdayHours,
             'sunday' => ($isFrench ? 'Dim. ' : 'Sun. ').$centre->sundayHours,
             'id' => $centre->id,
-            'image' => $centreAssets[$centre->key] ?? 'ecole-de-police.png',
+            'image' => $centreAssets[$centre->key] ?? 'ecole-de-police.webp',
             'active' => filled(old('centre_id'))
                 ? (string) $centre->id === (string) old('centre_id')
                 : ($centreKeys->contains($requestedCentre)

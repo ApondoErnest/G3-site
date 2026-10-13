@@ -18,11 +18,11 @@
             class="g3-public-header__logo"
         >
             <img
-                src="{{ asset('images/reusable/site-logo.png') }}"
+                src="{{ asset('images/reusable/site-logo.webp') }}"
                 alt="{{ $company->display_name ?? __('public.brand') }}"
                 class="g3-public-header__logo-img"
-                width="2172"
-                height="724"
+                width="600"
+                height="200"
             >
         </a>
 
@@ -109,11 +109,11 @@
 
         <div class="flex items-center justify-between border-b border-g3-border px-4 py-4">
             <img
-                src="{{ asset('images/reusable/site-logo.png') }}"
+                src="{{ asset('images/reusable/site-logo.webp') }}"
                 alt="{{ $company->display_name ?? __('public.brand') }}"
                 class="h-10 w-auto"
-                width="2172"
-                height="724"
+                width="600"
+                height="200"
             >
             <button
                 type="button"

@@ -3,14 +3,14 @@
 
     $centreAssets = [
         'ecole-de-police' => [
-            'image' => 'ecole-de-police.png',
+            'image' => 'ecole-de-police.webp',
             'image_alt' => __('public.centres_page.items.ecole_de_police.image_alt'),
             'details_url' => PublicNavigation::pageUrl('centre_ecole_de_police', $locale),
             'marker_variant' => 'orange',
             'marker_position' => 'ecole',
         ],
         'nomayos' => [
-            'image' => 'nomayos.png',
+            'image' => 'nomayos.webp',
             'image_alt' => __('public.centres_page.items.nomayos.image_alt'),
             'details_url' => PublicNavigation::pageUrl('centre_nomayos', $locale),
             'marker_variant' => 'blue',
@@ -27,7 +27,7 @@
             'phone_href' => $centre->primaryPhoneE164,
             'weekday_hours' => $centre->weekdayHours,
             'sunday_hours' => $centre->sundayHours,
-            'image' => $centreAssets[$centre->key]['image'] ?? 'ecole-de-police.png',
+            'image' => $centreAssets[$centre->key]['image'] ?? 'ecole-de-police.webp',
             'image_alt' => $centreAssets[$centre->key]['image_alt'] ?? $centre->name,
             'details_url' => $centreAssets[$centre->key]['details_url'] ?? PublicNavigation::pageUrl('centres', $locale),
             'appointment_url' => PublicNavigation::pageUrl('appointment', $locale).'?centre='.$centre->key,
@@ -280,7 +280,7 @@
 
     <section
         class="g3-centres-standard"
-        style="--g3-centres-standard-logo: url('{{ asset('images/reusable/site-logo.png') }}')"
+        style="--g3-centres-standard-logo: url('{{ asset('images/reusable/site-logo.webp') }}')"
         aria-labelledby="centres-standard-title"
     >
         <div class="g3-centres-standard__inner">

@@ -83,7 +83,7 @@
                 'details' => $isFrench
                     ? 'Si le freinage devient inhabituel, si le véhicule tire d’un côté ou si les pneus présentent une usure anormale, faites vérifier le véhicule avant de poursuivre un trajet exigeant.'
                     : 'If braking feels unusual, the vehicle pulls to one side or tyres show abnormal wear, have the vehicle checked before continuing a demanding journey.',
-                'image' => 'essentials/1.png',
+                'image' => 'essentials/1.webp',
                 'alt' => $isFrench ? 'Pneu de véhicule vu de près' : 'Close-up of a vehicle tyre',
             ],
             [
@@ -99,7 +99,7 @@
                 'details' => $isFrench
                     ? 'Contrôlez les feux, les clignotants, la visibilité à travers les vitrages et l’état des balais d’essuie-glace, surtout avant la pluie ou un départ de nuit.'
                     : 'Check lights, indicators, visibility through the glass and wiper condition, especially before rain or night driving.',
-                'image' => 'essentials/2.png',
+                'image' => 'essentials/2.webp',
                 'alt' => $isFrench ? 'Optique de phare de voiture' : 'Car headlight lens',
             ],
             [
@@ -115,7 +115,7 @@
                 'details' => $isFrench
                     ? 'Un voyant, une vibration ou un bruit nouveau ne doit pas être interprété à distance. Notez le contexte et demandez un diagnostic adapté.'
                     : 'A warning light, new vibration or noise should not be interpreted remotely. Note the context and seek the right diagnosis.',
-                'image' => 'essentials/3.png',
+                'image' => 'essentials/3.webp',
                 'alt' => $isFrench ? 'Voyant moteur allumé sur un tableau de bord' : 'Engine warning light on a dashboard',
             ],
             [
@@ -131,7 +131,7 @@
                 'details' => $isFrench
                     ? 'Avant le départ, vérifiez que les équipements utiles sont présents, accessibles et adaptés au trajet prévu.'
                     : 'Before departure, check that useful equipment is present, accessible and suited to the journey.',
-                'image' => 'essentials/4.png',
+                'image' => 'essentials/4.webp',
                 'alt' => $isFrench ? 'Triangle de sécurité sur la chaussée' : 'Warning triangle on the road',
             ],
         ],
@@ -149,7 +149,7 @@
                 'details' => $isFrench
                     ? 'Sous la pluie, la profondeur des sculptures, la pression mesurée et la souplesse des gestes ont un impact direct sur la stabilité.'
                     : 'In rain, tread depth, measured pressure and smooth inputs directly affect stability.',
-                'image' => 'rain/1.png',
+                'image' => 'rain/1.webp',
                 'alt' => $isFrench ? 'Roue de voiture sur route mouillée' : 'Car wheel on a wet road',
             ],
             [
@@ -165,7 +165,7 @@
                 'details' => $isFrench
                     ? 'Nettoyez les vitrages, remplacez les balais fatigués et utilisez l’éclairage adapté dès que la route devient moins lisible.'
                     : 'Clean the glass, replace tired wipers and use suitable lighting as soon as the road becomes harder to read.',
-                'image' => 'rain/2.png',
+                'image' => 'rain/2.webp',
                 'alt' => $isFrench ? 'Essuie-glace sur pare-brise mouillé' : 'Wiper on a wet windscreen',
             ],
             [
@@ -181,7 +181,7 @@
                 'details' => $isFrench
                     ? 'Si le véhicule flotte ou répond moins bien, réduisez progressivement votre vitesse et évitez les gestes brusques.'
                     : 'If the vehicle feels light or responds less clearly, reduce speed progressively and avoid sudden inputs.',
-                'image' => 'rain/3.png',
+                'image' => 'rain/3.webp',
                 'alt' => $isFrench ? 'Pneu projetant de l’eau sur une route mouillée' : 'Tyre spraying water on a wet road',
             ],
             [
@@ -197,7 +197,7 @@
                 'details' => $isFrench
                     ? 'La pluie demande plus d’anticipation : laissez de l’espace, rendez vos intentions lisibles et reportez un trajet si les conditions deviennent dangereuses.'
                     : 'Rain calls for more anticipation: leave room, make your intentions clear and postpone a journey if conditions become dangerous.',
-                'image' => 'rain/4.png',
+                'image' => 'rain/4.webp',
                 'alt' => $isFrench ? 'Véhicules roulant sous une forte pluie' : 'Vehicles driving in heavy rain',
             ],
         ],
@@ -215,7 +215,7 @@
                 'details' => $isFrench
                     ? 'Un éclairage insuffisant ou mal réglé peut masquer un danger ou gêner les autres usagers. Faites corriger un défaut avant de rouler de nuit.'
                     : 'Insufficient or poorly aimed lighting can hide danger or disturb other road users. Correct faults before night driving.',
-                'image' => 'night/1.png',
+                'image' => 'night/1.webp',
                 'alt' => $isFrench ? 'Phare allumé d’un véhicule de nuit' : 'Vehicle headlight lit at night',
             ],
             [
@@ -231,7 +231,7 @@
                 'details' => $isFrench
                     ? 'Un vitrage propre, des rétroviseurs bien réglés et une gestion de l’éblouissement améliorent la lecture de la route.'
                     : 'Clean glass, correctly adjusted mirrors and glare management improve road reading.',
-                'image' => 'night/2.png',
+                'image' => 'night/2.webp',
                 'alt' => $isFrench ? 'Vue de route nocturne depuis l’habitacle' : 'Night road view from inside a car',
             ],
             [
@@ -247,7 +247,7 @@
                 'details' => $isFrench
                     ? 'Si la fatigue apparaît, la bonne action est de s’arrêter dans un endroit sûr. Les réflexes diminuent avant que le conducteur ne s’en rende compte.'
                     : 'If fatigue appears, the right action is to stop somewhere safe. Reactions slow before the driver fully notices.',
-                'image' => 'night/3.png',
+                'image' => 'night/3.webp',
                 'alt' => $isFrench ? 'Voitures circulant sur une route de nuit' : 'Cars driving on a road at night',
             ],
             [
@@ -263,7 +263,7 @@
                 'details' => $isFrench
                     ? 'Réduire l’allure permet de retrouver du temps de réaction lorsque la perception des obstacles devient moins évidente.'
                     : 'Reducing speed gives you more reaction time when obstacles become harder to perceive.',
-                'image' => 'night/4.png',
+                'image' => 'night/4.webp',
                 'alt' => $isFrench ? 'Panneau de signalisation visible sur une route de nuit' : 'Road sign visible on a road at night',
             ],
         ],
@@ -281,7 +281,7 @@
                 'details' => $isFrench
                     ? 'Avant un trajet prolongé, l’usure visible ne suffit pas : mesurez aussi la pression selon les recommandations du véhicule.'
                     : 'Before a long journey, visible wear is not enough: also measure pressure according to the vehicle recommendations.',
-                'image' => 'long-distance/1.png',
+                'image' => 'long-distance/1.webp',
                 'alt' => $isFrench ? 'Pneu de véhicule avant un long trajet' : 'Vehicle tyre before a long journey',
             ],
             [
@@ -297,7 +297,7 @@
                 'details' => $isFrench
                     ? 'Un long trajet multiplie les contextes : pluie, poussière, nuit ou circulation dense. La visibilité doit rester constante.'
                     : 'A long journey multiplies contexts: rain, dust, night or dense traffic. Visibility must stay consistent.',
-                'image' => 'long-distance/2.png',
+                'image' => 'long-distance/2.webp',
                 'alt' => $isFrench ? 'Phare de voiture avant un départ' : 'Car headlight before departure',
             ],
             [
@@ -313,7 +313,7 @@
                 'details' => $isFrench
                     ? 'Répartissez la charge, fixez les objets lourds et évitez d’obstruer la visibilité arrière.'
                     : 'Distribute the load, secure heavy objects and avoid blocking rear visibility.',
-                'image' => 'long-distance/3.png',
+                'image' => 'long-distance/3.webp',
                 'alt' => $isFrench ? 'Bagages rangés dans un coffre de voiture' : 'Luggage arranged in a car boot',
             ],
             [
@@ -329,7 +329,7 @@
                 'details' => $isFrench
                     ? 'Préparez aussi le conducteur : pauses, hydratation, documents utiles et itinéraire lisible réduisent les imprévus.'
                     : 'Prepare the driver too: breaks, hydration, useful documents and a clear route reduce surprises.',
-                'image' => 'long-distance/4.png',
+                'image' => 'long-distance/4.webp',
                 'alt' => $isFrench ? 'Route dégagée pour un long trajet' : 'Open road for a long journey',
             ],
         ],
@@ -422,7 +422,7 @@
                             </div>
 
                             <figure class="g3-road-card__media">
-                                <img src="{{ asset($assetRoot.'/'.$card['image']) }}" alt="{{ $card['alt'] }}">
+                                <img src="{{ asset($assetRoot.'/'.$card['image']) }}" alt="{{ $card['alt'] }}" loading="lazy" decoding="async">
                                 <span aria-hidden="true">
                                     <img src="{{ asset($assetRoot.'/icon-arrow.svg') }}" alt="">
                                 </span>

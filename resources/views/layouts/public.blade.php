@@ -13,7 +13,8 @@
     @endforeach
     <link rel="alternate" hreflang="x-default" href="{{ $pageMeta->defaultLocaleUrl }}">
 
-    <link rel="icon" href="{{ asset('images/reusable/favicon.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/reusable/favicon-32.png') }}" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="{{ asset('images/reusable/apple-touch-icon.png') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head')

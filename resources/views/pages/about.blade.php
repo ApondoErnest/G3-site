@@ -204,7 +204,7 @@
         <div class="g3-about-requirements__inner">
             <div class="g3-about-requirements__image">
                 <img
-                    src="{{ asset('images/about/technical-requirements.png') }}"
+                    src="{{ asset('images/about/technical-requirements.webp') }}"
                     alt="{{ __('public.about.requirements.image_alt') }}"
                     loading="lazy"
                 >
@@ -235,7 +235,7 @@
 
     <section
         class="g3-about-values"
-        style="--g3-about-values-logo: url('{{ asset('images/reusable/site-logo.png') }}')"
+        style="--g3-about-values-logo: url('{{ asset('images/reusable/site-logo.webp') }}')"
         aria-labelledby="about-values-title"
     >
         <div class="g3-about-values__inner">
@@ -289,7 +289,7 @@
 
             <div class="g3-about-team__image">
                 <img
-                    src="{{ asset('images/about/technicians.png') }}"
+                    src="{{ asset('images/about/technicians.webp') }}"
                     alt="{{ __('public.about.team.image_alt') }}"
                     loading="lazy"
                 >

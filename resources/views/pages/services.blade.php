@@ -304,9 +304,11 @@
             <div class="g3-services-proof" aria-labelledby="services-proof-title">
                 <figure class="g3-services-proof__media">
                     <img
-                        src="{{ asset('images/services/eco-4.png') }}"
+                        src="{{ asset('images/services/eco-4.webp') }}"
                         alt="{{ $proofSection['image_alt'] }}"
                         class="g3-services-proof__image"
+                        loading="lazy"
+                        decoding="async"
                     >
                 </figure>
 

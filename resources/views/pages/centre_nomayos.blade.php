@@ -36,11 +36,11 @@
     ];
 
     $slides = [
-        ['image' => 'nom-1.png', 'alt' => $isFrench ? 'Façade du centre G3 Control Nomayos' : 'Facade of the G3 Control Nomayos centre'],
-        ['image' => 'nom-2.png', 'alt' => $isFrench ? 'Vue extérieure du centre G3 Control Nomayos' : 'Exterior view of the G3 Control Nomayos centre'],
-        ['image' => 'nom-3.png', 'alt' => $isFrench ? 'Zone d’accueil du centre G3 Control Nomayos' : 'Reception area of the G3 Control Nomayos centre'],
-        ['image' => 'nom-4.png', 'alt' => $isFrench ? 'Équipements du centre G3 Control Nomayos' : 'Equipment at the G3 Control Nomayos centre'],
-        ['image' => 'nom-5.png', 'alt' => $isFrench ? 'Aire de contrôle du centre G3 Control Nomayos' : 'Inspection bay at the G3 Control Nomayos centre'],
+        ['image' => 'nom-1.webp', 'alt' => $isFrench ? 'Façade du centre G3 Control Nomayos' : 'Facade of the G3 Control Nomayos centre'],
+        ['image' => 'nom-2.webp', 'alt' => $isFrench ? 'Vue extérieure du centre G3 Control Nomayos' : 'Exterior view of the G3 Control Nomayos centre'],
+        ['image' => 'nom-3.webp', 'alt' => $isFrench ? 'Zone d’accueil du centre G3 Control Nomayos' : 'Reception area of the G3 Control Nomayos centre'],
+        ['image' => 'nom-4.webp', 'alt' => $isFrench ? 'Équipements du centre G3 Control Nomayos' : 'Equipment at the G3 Control Nomayos centre'],
+        ['image' => 'nom-5.webp', 'alt' => $isFrench ? 'Aire de contrôle du centre G3 Control Nomayos' : 'Inspection bay at the G3 Control Nomayos centre'],
     ];
 
     $preparationCopy = [

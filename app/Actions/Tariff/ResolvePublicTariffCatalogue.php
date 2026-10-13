@@ -167,13 +167,13 @@ final class ResolvePublicTariffCatalogue
     private function imageFor(string $categoryCode): string
     {
         return match (Str::lower($categoryCode)) {
-            'a' => 'taxi.png',
-            'b' => 'light-vehicle.png',
-            'b1' => 'pickup.png',
-            'c', 'c-bus' => 'large bus.png',
-            'c-mini', 'c < 3,5t', 'c < 3.5t' => 'mini bus.png',
-            'd', 'd-heavy' => 'heavy vehicle.png',
-            default => 'other-machinery.png',
+            'a' => 'taxi.webp',
+            'b' => 'light-vehicle.webp',
+            'b1' => 'pickup.webp',
+            'c', 'c-bus' => 'large bus.webp',
+            'c-mini', 'c < 3,5t', 'c < 3.5t' => 'mini bus.webp',
+            'd', 'd-heavy' => 'heavy vehicle.webp',
+            default => 'other-machinery.webp',
         };
     }
 }

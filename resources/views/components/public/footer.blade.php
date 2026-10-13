@@ -28,22 +28,22 @@
 <footer class="g3-site-footer">
     <div class="g3-site-footer__shell">
         <img
-            src="{{ asset('images/reusable/site-logo.png') }}"
+            src="{{ asset('images/reusable/site-logo.webp') }}"
             alt=""
             class="g3-site-footer__watermark"
-            width="2172"
-            height="724"
+            width="600"
+            height="200"
             aria-hidden="true"
         >
 
         <div class="g3-site-footer__main">
             <section class="g3-site-footer__brand" aria-labelledby="g3-footer-brand">
                 <img
-                    src="{{ asset('images/reusable/site-logo.png') }}"
+                    src="{{ asset('images/reusable/site-logo.webp') }}"
                     alt="{{ $company->display_name ?? __('public.brand') }}"
                     class="g3-site-footer__logo"
-                    width="2172"
-                    height="724"
+                    width="600"
+                    height="200"
                 >
                 <p id="g3-footer-brand" class="g3-site-footer__tagline">
                     {{ __('public.footer.tagline') }}
