@@ -63,9 +63,9 @@ Read and approve in this order. Each document builds on the previous.
 | 167 | Production seed · centres, hours, official fees, media · **Accepted 2026-09-26** | Baseline data |
 | 168 | Smoke test · public pages and `/admin/login` · **Accepted 2026-09-26** | Live site |
 | 169 | On-server backups · daily database, media, and public files · **Accepted 2026-09-29** | Local recovery copy |
-| 170 | Off-server backup copy · Mac pull daily at 13:00 Africa/Douala · **Accepted 2026-09-29** | Operator Mac |
+| 170 | Off-server backup copy · Mac pull daily at 13:00 and 18:00 Africa/Douala · **Accepted 2026-09-29** | Operator Mac |
 | 171 | Restore drill · backup imported into a throwaway database · **Accepted 2026-09-29** | Recovery proved |
-| 172 | Uptime and error monitoring · every 5 minutes · **Accepted 2026-09-29** | Alerts |
+| 172 | Uptime and error monitoring · every 5 minutes · Healthchecks.io watches backup, monitor, and Mac pull · **Accepted 2026-09-29** | Alerts |
 | 173 | Log rotation · container logs 10 MB × 5 · host logs weekly · **Accepted 2026-09-29** | Disk |
 | 174 | Security audit · HTTPS, hidden secrets, unpublished databases · **Accepted 2026-09-29** | Production exposure |
 | 175 | Production factual audit · baseline facts match · Re-inspection approved · **Accepted 2026-09-29** | Live facts |

@@ -375,10 +375,10 @@ A **gate** is a sign-off step. The next phase remains closed until its gate is `
 
 ### Resilience
 
-- [x] **169** · On-server backups · `/usr/local/sbin/g3-control-backup` · daily 01:00 UTC · 14 days · dump of 44 tables plus `app-storage`, `public-files`, and `.env.docker` · `/up` 200 · other sites unchanged · Accepted 2026-09-29
-- [x] **170** · Off-server backup replication · copy on the operator Mac at `~/Backups/g3-control` · checksums match the VPS · Mac pull daily at 13:00 Africa/Douala · server backup stays at 01:00 UTC · `/up` 200 · Accepted 2026-09-29
+- [x] **169** · On-server backups · `/usr/local/sbin/g3-control-backup` · daily 01:00 Africa/Douala (00:00 UTC) · 14 days · dump of 44 tables plus `app-storage`, `public-files`, and `.env.docker` · `/up` 200 · other sites unchanged · Accepted 2026-09-29
+- [x] **170** · Off-server backup replication · copy on the operator Mac at `~/Backups/g3-control` · checksums match the VPS · Mac pull daily at 13:00 Africa/Douala · server backup stays at 01:00 Africa/Douala (00:00 UTC) · `/up` 200 · Accepted 2026-09-29 · 2026-10-13: the pull runs from a LaunchAgent at 13:00, with a fallback run at 18:00, and the backup key can only list, stream, and checksum backups
 - [x] **171** · Restore drill · Throwaway `g3-restore-drill` imported the 2026-09-29 backup · 44 tables, both centres, both emails, 14 hour rows, official fees, 20 media files, logo, and CSS · container removed · live containers unchanged · `/up` 200 · Accepted 2026-09-29
-- [x] **172** · Uptime and error monitoring · `/usr/local/sbin/g3-control-monitor` every 5 minutes · public `/up`, containers, queue, scheduler, failed jobs, recent errors, and disk · alerts to `aernestngonge@gmail.com` · test mail accepted · `/up` 200 · other sites unchanged · Accepted 2026-09-29
+- [x] **172** · Uptime and error monitoring · `/usr/local/sbin/g3-control-monitor` every 5 minutes · public `/up`, containers, queue, scheduler, failed jobs, recent errors, and disk · alerts to `aernestngonge@gmail.com` · test mail accepted · `/up` 200 · other sites unchanged · Accepted 2026-09-29 · 2026-10-13: Healthchecks.io watches the server backup, the monitor, and the Mac pull, and alerts when any of them fails or stops running
 - [x] **173** · Log rotation · container logs `json-file` 10 MB × 5 · host logs weekly, 8 copies, `copytruncate` · monitor log rotated to `.1` · host nginx rotation already present · `/up` 200 · other sites unchanged · Accepted 2026-09-29
 
 ### Pre-launch audit
