@@ -31,3 +31,4 @@ if docker volume inspect g3-control_public-files >/dev/null 2>&1; then
 fi
 
 docker compose up -d
+docker compose exec -T nginx nginx -s reload

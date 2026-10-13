@@ -110,7 +110,7 @@ MySQL database name remains `g3_control`, charset `utf8mb4`. The application con
 
 `migrate` runs `php artisan migrate --force` once per deploy and then exits. `app`, `worker`, and `scheduler` start after that exit code is 0. Boot does not seed. Baseline and admin seeds stay explicit commands.
 
-Public files already in `public/images/` ship inside the image. `public/` itself is the `public-files` volume shared by `app` and nginx, and Docker fills that volume from the image only once. `./docker/deploy.sh --up` therefore copies the new image's `public/` into the volume before it restarts the stack, so a new Vite build or new images reach nginx. Spatie media on the `local` disk and anything under `storage/app/public` live on `app-storage`, so the worker and php-fpm see the same files.
+Public files already in `public/images/` ship inside the image. `public/` itself is the `public-files` volume shared by `app` and nginx, and Docker fills that volume from the image only once. `./docker/deploy.sh --up` therefore copies the new image's `public/` into the volume before it restarts the stack, so a new Vite build or new images reach nginx. Nginx looks up the `app` address only when it starts, and a deploy that recreates `app` can give it a new address while nginx keeps running. The script therefore reloads nginx after `docker compose up -d`; without that reload every page returns 502. Spatie media on the `local` disk and anything under `storage/app/public` live on `app-storage`, so the worker and php-fpm see the same files.
 
 Redis runs with persistence disabled (`--save "" --appendonly no`) and is not published to the host.
 
